@@ -1,0 +1,8 @@
+{
+  "nav": {
+    "export": "export"
+  },
+  "config":{
+    "searchConfig":"search config item"
+  }
+}

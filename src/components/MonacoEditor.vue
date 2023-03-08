@@ -1,0 +1,158 @@
+<template>
+  <div ref="codeEditBox" class="codeEditBox"></div>
+</template>
+​
+<script setup lang="ts">
+import { onBeforeUnmount, onMounted, ref, watch, getCurrentInstance } from 'vue'
+import * as monaco from 'monaco-editor'
+// import { parse, modify, applyEdits, format } from 'jsonc-parser'
+// import { compare, applyOperation, applyPatch } from 'fast-json-patch'
+import useThemeStore from '../store/theme'
+import useDataStore from '../store'
+// import { parse, assign, stringify } from 'comment-json'
+
+export interface Props {
+  modelValue?: string
+  language: string
+  theme: 'vs' | 'vs-dark' | 'hc-black'
+  options?: Record<string, any>
+  width?: string
+  height?: string
+}
+const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted'])
+const props = defineProps<Props>()
+const themeStore = useThemeStore()
+const dataStore = useDataStore()
+let editor: monaco.editor.IStandaloneCodeEditor | null = null
+const codeEditBox = ref()
+const init = () => {
+  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+    validate: true,
+    enableSchemaRequest: true,
+    allowComments: false,
+    schemas: [
+      {
+        // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
+        fileMatch: ['*'],
+        uri: 'http://json.schemastore.org/tsconfig'
+      }
+    ]
+  })
+  // 定义主题
+  monaco.editor.defineTheme('darkTheme', {
+    base: 'vs-dark',
+    inherit: true,
+    rules: [],
+    colors: {
+      'editor.background': '#101014'
+    }
+  })
+  monaco.editor.defineTheme('lightTheme', {
+    base: 'vs',
+    inherit: true,
+    rules: [],
+    colors: {
+      'editor.background': '#ffffff'
+    }
+  })
+  editor = monaco.editor.create(codeEditBox.value, {
+    value: props.modelValue,
+    language: props.language,
+    theme: themeStore.isDark ? 'darkTheme' : 'lightTheme',
+    fontSize: 14,
+    lineHeight: 22,
+    automaticLayout: false,
+    tabSize: 2,
+    domReadOnly: true,
+    scrollbar: {
+      verticalScrollbarSize: 8,
+      horizontalScrollbarSize: 8
+    },
+    minimap: {
+      enabled: false
+    },
+    ...props.options
+  })
+  // 监听值的变化
+  editor.onDidChangeModelContent(() => {
+    const value = editor!.getValue() //给父组件实时返回最新文本
+    dataStore.config = value
+    emit('update:modelValue', value)
+    emit('change', value)
+  })
+  emit('editor-mounted', editor)
+  // sync value
+  dataStore.config = props.modelValue || ''
+}
+watch(
+  () => props.modelValue,
+  (newValue) => {
+    if (editor) {
+      let value = editor.getValue()
+      if (newValue !== value) {
+        const model = editor.getModel()
+        const position = editor.getPosition()
+        // let numberRegexp = /\d+/gs
+        // const formatAction = editor.getAction('editor.action.formatDocument')
+        // const oldValueObj = parse(value)
+        // const newValueObj = parse(newValue!)
+        // const patch = compare(oldValueObj, newValueObj)
+        // patch.forEach(({ path, value: _newValue }: any) => {
+        //   let pathArr = path.split('/').filter((path: string) => {
+        //     return path && !numberRegexp.test(path)
+        //   })
+        //   console.log(pathArr)
+        //   value = applyEdits(value, modify(value, pathArr, store.rawConfig[pathArr.join('/')], {}))
+        // })
+        // const formatPatch = format(value, undefined, {
+        //   tabSize: 2
+        // })
+        // model && model.setValue(applyEdits(value, formatPatch))
+        model && model.setValue(newValue as string)
+
+        // formatAction && formatAction.run()
+        position && editor.setPosition(position)
+      }
+    }
+  }
+)
+watch(
+  () => props.options,
+  (newValue) => {
+    editor!.updateOptions(newValue || {})
+  },
+  { deep: true }
+)
+watch(
+  () => props.language,
+  (newValue) => {
+    monaco.editor.setModelLanguage(editor!.getModel()!, newValue)
+  }
+)
+watch(
+  () => themeStore.isDark,
+  (isDark) => {
+    monaco.editor.setTheme(isDark ? 'darkTheme' : 'lightTheme')
+  }
+)
+onBeforeUnmount(() => editor!.dispose())
+onMounted(init)
+</script>
+
+<script lang="ts">
+export default {
+  name: 'MonacoEditor'
+}
+</script>
+
+<style scoped>
+.codeEditBox {
+  width: v-bind(width);
+  height: v-bind(height);
+}
+:deep(.monaco-editor .margin),
+:deep(.monaco-editor-background) {
+  transition: background-color 0.3s var(--n-bezier), background-color 0.3s var(--n-bezier),
+    box-shadow 0.3s var(--n-bezier), border-color 0.3s var(--n-bezier);
+}
+</style>
