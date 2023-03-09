@@ -1,50 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
-  "allOf": [
-    {
-      "$ref": "#/definitions/compilerOptionsDefinition"
-    },
-    {
-      "$ref": "#/definitions/compileOnSaveDefinition"
-    },
-    {
-      "$ref": "#/definitions/typeAcquisitionDefinition"
-    },
-    {
-      "$ref": "#/definitions/extendsDefinition"
-    },
-    {
-      "$ref": "#/definitions/watchOptionsDefinition"
-    },
-    {
-      "$ref": "#/definitions/buildOptionsDefinition"
-    },
-    {
-      "$ref": "#/definitions/tsNodeDefinition"
-    },
-    {
-      "anyOf": [
-        {
-          "$ref": "#/definitions/filesDefinition"
-        },
-        {
-          "$ref": "#/definitions/excludeDefinition"
-        },
-        {
-          "$ref": "#/definitions/includeDefinition"
-        },
-        {
-          "$ref": "#/definitions/referencesDefinition"
-        }
-      ]
-    }
-  ],
   "definitions": {
-    "//": {
-      "explainer": "https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#overview",
-      "reference": "https://www.typescriptlang.org/tsconfig",
-      "reference metadata": "https://github.com/microsoft/TypeScript-Website/blob/v2/packages/tsconfig-reference/scripts/tsconfigRules.ts"
-    },
     "filesDefinition": {
       "properties": {
         "files": {
@@ -106,6 +61,25 @@
               "type": "array"
             }
           ]
+        }
+      }
+    },
+    "referencesDefinition": {
+      "properties": {
+        "references": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "Referenced projects. Requires TypeScript version 3.0 or later.",
+          "items": {
+            "type": "object",
+            "description": "Project reference.",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "Path to referenced tsconfig or to folder containing tsconfig."
+              }
+            }
+          }
         }
       }
     },
@@ -308,13 +282,7 @@
             },
             "jsx": {
               "description": "Specify what JSX code is generated.",
-              "enum": [
-                "preserve",
-                "react",
-                "react-jsx",
-                "react-jsxdev",
-                "react-native"
-              ]
+              "enum": ["preserve", "react", "react-jsx", "react-jsxdev", "react-native"]
             },
             "reactNamespace": {
               "description": "Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.",
@@ -1078,25 +1046,6 @@
               "uniqueItems": true,
               "items": {
                 "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "referencesDefinition": {
-      "properties": {
-        "references": {
-          "type": "array",
-          "uniqueItems": true,
-          "description": "Referenced projects. Requires TypeScript version 3.0 or later.",
-          "items": {
-            "type": "object",
-            "description": "Project reference.",
-            "properties": {
-              "path": {
-                "type": "string",
-                "description": "Path to referenced tsconfig or to folder containing tsconfig."
               }
             }
           }

@@ -32,7 +32,6 @@ specifiers:
   vitest: ^0.29.1
   vue: ^3.2.47
   vue-i18n: ^9.2.2
-  vue-multipane: ^0.9.5
   vue-router: ^4.1.6
   vue-tsc: ^1.2.0
 
@@ -51,7 +50,6 @@ dependencies:
   strip-json-comments: 5.0.0
   vue: 3.2.47
   vue-i18n: 9.2.2_vue@3.2.47
-  vue-multipane: 0.9.5
   vue-router: 4.1.6_vue@3.2.47
 
 devDependencies:
@@ -3460,11 +3458,6 @@ packages:
       '@intlify/vue-devtools': 9.2.2
       '@vue/devtools-api': 6.5.0
       vue: 3.2.47
-    dev: false
-
-  /vue-multipane/0.9.5:
-    resolution: {integrity: sha512-4sr6POXY82VMzprQWGNMzTIBGGYEi7nG0uGQb6AYr8o0ngIsYCDPh/gmgms8NVsZzG28b7kn3tQhKP27cbbLdw==}
-    engines: {node: '>=6.0.0'}
     dev: false
 
   /vue-router/4.1.6_vue@3.2.47:

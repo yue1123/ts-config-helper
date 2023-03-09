@@ -3,7 +3,7 @@
     "filesDefinition": {
       "properties": {
         "files": {
-          "description": "If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. When a 'files' property is specified, only those files and those specified by 'include' are included.",
+          "description": "如果在 tsconfig.json 文件中没有指定 'files' 或 'include' 属性，则编译器默认包括包含目录和子目录中的所有文件，除了 'exclude' 属性指定的文件。当指定 'files' 属性时，只包括该属性指定的文件和 'include' 属性指定的文件。",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -15,7 +15,7 @@
     "excludeDefinition": {
       "properties": {
         "exclude": {
-          "description": "Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later.",
+          "description": "指定要从编译中排除的文件列表。'exclude' 属性仅影响通过 'include' 属性包含的文件，而不影响 'files' 属性。全局模式需要 TypeScript 2.0 或更高版本。",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -27,7 +27,7 @@
     "includeDefinition": {
       "properties": {
         "include": {
-          "description": "Specifies a list of glob patterns that match files to be included in compilation. If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. Requires TypeScript version 2.0 or later.",
+          "description": "指定与编译中包括的文件匹配的全局模式列表。如果在 tsconfig.json 文件中没有指定 'files' 或 'include' 属性，则编译器默认包括包含目录和子目录中的所有文件，除了 'exclude' 属性指定的文件。需要 TypeScript 2.0 或更高版本。",
           "type": "array",
           "uniqueItems": true,
           "items": {
@@ -39,7 +39,7 @@
     "compileOnSaveDefinition": {
       "properties": {
         "compileOnSave": {
-          "description": "Enable Compile-on-Save for this project.",
+          "description": "启用此项目的编译时保存功能。",
           "type": "boolean"
         }
       }
@@ -47,7 +47,7 @@
     "extendsDefinition": {
       "properties": {
         "extends": {
-          "description": "Path to base configuration file to inherit from (requires TypeScript version 2.1 or later), or array of base files, with the rightmost files having the greater priority (requires TypeScript version 5.0 or later).",
+          "description": "指向基础配置文件的路径以继承（需要TypeScript版本2.1或更高版本），或者基础文件数组，最右边的文件具有更高的优先级（需要TypeScript版本5.0或更高版本）。",
           "oneOf": [
             {
               "default": "",
@@ -64,44 +64,63 @@
         }
       }
     },
+    "referencesDefinition": {
+      "properties": {
+        "references": {
+          "type": "array",
+          "uniqueItems": true,
+          "description": "引用的项目。需要 TypeScript 版本 3.0 或更高。",
+          "items": {
+            "type": "object",
+            "description": "项目引用。",
+            "properties": {
+              "path": {
+                "type": "string",
+                "description": "指向被引用的 tsconfig 文件或包含 tsconfig 文件的文件夹路径。"
+              }
+            }
+          }
+        }
+      }
+    },
     "buildOptionsDefinition": {
       "properties": {
         "buildOptions": {
           "properties": {
             "dry": {
-              "description": "~",
+              "description": "跑模拟构建，不生成任何实际文件。",
               "type": "boolean",
               "default": false
             },
             "force": {
-              "description": "Build all projects, including those that appear to be up to date",
+              "description": "编译所有项目，包括那些看似已经是最新的。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Build all projects, including those that appear to be up to date\n\nSee more: https://www.typescriptlang.org/tsconfig#force"
+              "markdownDescription": "编译所有项目，包括那些看似已经是最新的。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#force"
             },
             "verbose": {
-              "description": "Enable verbose logging",
+              "description": "启用详细日志记录。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable verbose logging\n\nSee more: https://www.typescriptlang.org/tsconfig#verbose"
+              "markdownDescription": "启用详细日志记录。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#verbose"
             },
             "incremental": {
-              "description": "Save .tsbuildinfo files to allow for incremental compilation of projects.",
+              "description": "保存.tsbuildinfo文件，允许对项目进行增量编译。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Save .tsbuildinfo files to allow for incremental compilation of projects.\n\nSee more: https://www.typescriptlang.org/tsconfig#incremental"
+              "markdownDescription": "保存.tsbuildinfo文件，允许对项目进行增量编译。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#incremental"
             },
             "assumeChangesOnlyAffectDirectDependencies": {
-              "description": "Have recompiles in projects that use `incremental` and `watch` mode assume that changes within a file will only affect files directly depending on it.",
+              "description": "在使用“incremental”和“watch”模式的项目中，重新编译时假定文件中的更改只会影响直接依赖它的文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Have recompiles in projects that use `incremental` and `watch` mode assume that changes within a file will only affect files directly depending on it.\n\nSee more: https://www.typescriptlang.org/tsconfig#assumeChangesOnlyAffectDirectDependencies"
+              "markdownDescription": "在使用“incremental”和“watch”模式的项目中，重新编译时假定文件中的更改只会影响直接依赖它的文件。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#assumeChangesOnlyAffectDirectDependencies"
             },
             "traceResolution": {
-              "description": "Log paths used during the `moduleResolution` process.",
+              "description": "记录在“moduleResolution”过程中使用的路径。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Log paths used during the `moduleResolution` process.\n\nSee more: https://www.typescriptlang.org/tsconfig#traceResolution"
+              "markdownDescription": "记录在“moduleResolution”过程中使用的路径。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#traceResolution"
             }
           }
         }
@@ -111,49 +130,49 @@
       "properties": {
         "watchOptions": {
           "type": "object",
-          "description": "Settings for the watch mode in TypeScript.",
+          "description": "TypeScript 中监视模式的设置。",
           "properties": {
             "force": {
               "description": "~",
               "type": "string"
             },
             "watchFile": {
-              "description": "Specify how the TypeScript watch mode works.",
+              "description": "指定 TypeScript 监视模式的工作方式。",
               "type": "string",
-              "markdownDescription": "Specify how the TypeScript watch mode works.\n\nSee more: https://www.typescriptlang.org/tsconfig#watchFile"
+              "markdownDescription": "指定 TypeScript 监视模式的工作方式。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#watchFile"
             },
             "watchDirectory": {
-              "description": "Specify how directories are watched on systems that lack recursive file-watching functionality.",
+              "description": "指定在缺少递归文件监视功能的系统上如何监视目录。",
               "type": "string",
-              "markdownDescription": "Specify how directories are watched on systems that lack recursive file-watching functionality.\n\nSee more: https://www.typescriptlang.org/tsconfig#watchDirectory"
+              "markdownDescription": "指定在缺少递归文件监视功能的系统上如何监视目录。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#watchDirectory"
             },
             "fallbackPolling": {
-              "description": "Specify what approach the watcher should use if the system runs out of native file watchers.",
+              "description": "指定如果系统的原生文件监视器用尽了应该使用什么方法。",
               "type": "string",
-              "markdownDescription": "Specify what approach the watcher should use if the system runs out of native file watchers.\n\nSee more: https://www.typescriptlang.org/tsconfig#fallbackPolling"
+              "markdownDescription": "指定如果系统的原生文件监视器用尽了应该使用什么方法。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#fallbackPolling"
             },
             "synchronousWatchDirectory": {
-              "description": "Synchronously call callbacks and update the state of directory watchers on platforms that don`t support recursive watching natively.",
+              "description": "在不支持本地递归监视的平台上同步调用回调并更新目录监视器的状态。",
               "type": "boolean",
-              "markdownDescription": "Synchronously call callbacks and update the state of directory watchers on platforms that don`t support recursive watching natively.\n\nSee more: https://www.typescriptlang.org/tsconfig#synchronousWatchDirectory"
+              "markdownDescription": "在不支持本地递归监视的平台上同步调用回调并更新目录监视器的状态。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#synchronousWatchDirectory"
             },
             "excludeFiles": {
-              "description": "Remove a list of files from the watch mode's processing.",
+              "description": "从监视模式的处理中删除一组文件。",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
               },
-              "markdownDescription": "Remove a list of files from the watch mode's processing.\n\nSee more: https://www.typescriptlang.org/tsconfig#excludeFiles"
+              "markdownDescription": "从监视模式的处理中删除一组文件。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#excludeFiles"
             },
             "excludeDirectories": {
-              "description": "Remove a list of directories from the watch process.",
+              "description": "从监视过程中删除一组目录。",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
               },
-              "markdownDescription": "Remove a list of directories from the watch process.\n\nSee more: https://www.typescriptlang.org/tsconfig#excludeDirectories"
+              "markdownDescription": "从监视过程中删除一组目录。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#excludeDirectories"
             }
           }
         }
@@ -163,151 +182,145 @@
       "properties": {
         "compilerOptions": {
           "type": "object",
-          "description": "Instructs the TypeScript compiler how to compile .ts files.",
+          "description": "指示TypeScript编译器如何编译.ts文件。",
           "properties": {
             "allowArbitraryExtensions": {
-              "description": "Enable importing files with any extension, provided a declaration file is present.",
+              "description": "启用导入任何扩展名的文件，前提是有声明文件存在。",
               "type": "boolean",
-              "markdownDescription": "Enable importing files with any extension, provided a declaration file is present.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions"
+              "markdownDescription": "启用导入任何扩展名的文件，前提是有声明文件存在。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions"
             },
             "allowImportingTsExtensions": {
-              "description": "Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set.",
+              "description": "允许导入包含TypeScript文件扩展名。需要设置'--moduleResolution bundler'和'--noEmit'或'--emitDeclarationOnly'。",
               "type": "boolean",
-              "markdownDescription": "Allow imports to include TypeScript file extensions. Requires '--moduleResolution bundler' and either '--noEmit' or '--emitDeclarationOnly' to be set.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions"
+              "markdownDescription": "允许导入包含TypeScript文件扩展名。需要设置'--moduleResolution bundler'和'--noEmit'或'--emitDeclarationOnly'。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions"
             },
             "charset": {
-              "description": "No longer supported. In early versions, manually set the text encoding for reading files.",
+              "description": "不再支持。在早期版本中，手动设置用于读取文件的文本编码。",
               "type": "string",
-              "markdownDescription": "No longer supported. In early versions, manually set the text encoding for reading files.\n\nSee more: https://www.typescriptlang.org/tsconfig#charset"
+              "markdownDescription": "不再支持。在早期版本中，手动设置用于读取文件的文本编码。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#charset"
             },
             "composite": {
-              "description": "Enable constraints that allow a TypeScript project to be used with project references.",
+              "description": "启用约束，允许将TypeScript项目与项目引用一起使用。",
               "type": "boolean",
               "default": true,
-              "markdownDescription": "Enable constraints that allow a TypeScript project to be used with project references.\n\nSee more: https://www.typescriptlang.org/tsconfig#composite"
+              "markdownDescription": "启用约束，允许将TypeScript项目与项目引用一起使用。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#composite"
             },
             "customConditions": {
-              "description": "Conditions to set in addition to the resolver-specific defaults when resolving imports.",
+              "description": "在解析导入时设置除解析器特定默认值之外的条件。",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
               },
-              "markdownDescription": "Conditions to set in addition to the resolver-specific defaults when resolving imports.\n\nSee more: https://www.typescriptlang.org/tsconfig#customConditions"
+              "markdownDescription": "在解析导入时设置除解析器特定默认值之外的条件。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#customConditions"
             },
             "declaration": {
-              "description": "Generate .d.ts files from TypeScript and JavaScript files in your project.",
+              "description": "从项目中的TypeScript和JavaScript文件生成.d.ts文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Generate .d.ts files from TypeScript and JavaScript files in your project.\n\nSee more: https://www.typescriptlang.org/tsconfig#declaration"
+              "markdownDescription": "从项目中的TypeScript和JavaScript文件生成.d.ts文件。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#declaration"
             },
             "declarationDir": {
-              "description": "Specify the output directory for generated declaration files.",
+              "description": "指定生成的声明文件的输出目录。",
               "type": ["string", "null"],
-              "markdownDescription": "Specify the output directory for generated declaration files.\n\nSee more: https://www.typescriptlang.org/tsconfig#declarationDir"
+              "markdownDescription": "指定生成的声明文件的输出目录。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#declarationDir"
             },
             "diagnostics": {
-              "description": "Output compiler performance information after building.",
+              "description": "编译完成后输出编译器性能信息。",
               "type": "boolean",
-              "markdownDescription": "Output compiler performance information after building.\n\nSee more: https://www.typescriptlang.org/tsconfig#diagnostics"
+              "markdownDescription": "编译完成后输出编译器性能信息。\n\nSee more: https://www.typescriptlang.org/tsconfig#diagnostics"
             },
             "disableReferencedProjectLoad": {
-              "description": "Reduce the number of projects loaded automatically by TypeScript.",
+              "description": "减少 TypeScript 自动加载的项目数量。",
               "type": "boolean",
-              "markdownDescription": "Reduce the number of projects loaded automatically by TypeScript.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableReferencedProjectLoad"
+              "markdownDescription": "减少 TypeScript 自动加载的项目数量。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#disableReferencedProjectLoad"
             },
             "noPropertyAccessFromIndexSignature": {
-              "description": "Enforces using indexed accessors for keys declared using an indexed type",
+              "description": "强制使用索引访问器来访问使用索引类型声明的键。",
               "type": "boolean",
-              "markdownDescription": "Enforces using indexed accessors for keys declared using an indexed type\n\nSee more: https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature"
+              "markdownDescription": "强制使用索引访问器来访问使用索引类型声明的键。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature"
             },
             "emitBOM": {
-              "description": "Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.",
+              "description": "在输出文件开头生成 UTF-8 字节顺序标记 (BOM)。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.\n\nSee more: https://www.typescriptlang.org/tsconfig#emitBOM"
+              "markdownDescription": "在输出文件开头生成 UTF-8 字节顺序标记 (BOM)。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#emitBOM"
             },
             "emitDeclarationOnly": {
-              "description": "Only output d.ts files and not JavaScript files.",
+              "description": "仅输出 d.ts 文件而不是 JavaScript 文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Only output d.ts files and not JavaScript files.\n\nSee more: https://www.typescriptlang.org/tsconfig#emitDeclarationOnly"
+              "markdownDescription": "仅输出 d.ts 文件而不是 JavaScript 文件。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#emitDeclarationOnly"
             },
             "exactOptionalPropertyTypes": {
-              "description": "Differentiate between undefined and not present when type checking",
+              "description": "在类型检查时区分未定义和未出现的情况。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Differentiate between undefined and not present when type checking\n\nSee more: https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes"
+              "markdownDescription": "在类型检查时区分未定义和未出现的情况。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes"
             },
             "incremental": {
-              "description": "Enable incremental compilation. Requires TypeScript version 3.4 or later.",
+              "description": "启用增量编译。需要 TypeScript 版本 3.4 或更高版本。",
               "type": "boolean"
             },
             "tsBuildInfoFile": {
-              "description": "Specify the folder for .tsbuildinfo incremental compilation files.",
+              "description": "指定 .tsbuildinfo 增量编译文件的文件夹。",
               "default": ".tsbuildinfo",
               "type": "string",
-              "markdownDescription": "Specify the folder for .tsbuildinfo incremental compilation files.\n\nSee more: https://www.typescriptlang.org/tsconfig#tsBuildInfoFile"
+              "markdownDescription": "指定 .tsbuildinfo 增量编译文件的文件夹。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#tsBuildInfoFile"
             },
             "inlineSourceMap": {
-              "description": "Include sourcemap files inside the emitted JavaScript.",
+              "description": "将源映射文件包含在输出的 JavaScript 中。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Include sourcemap files inside the emitted JavaScript.\n\nSee more: https://www.typescriptlang.org/tsconfig#inlineSourceMap"
+              "markdownDescription": "将源映射文件包含在输出的 JavaScript 中。\n\n\n\nSee more: https://www.typescriptlang.org/tsconfig#inlineSourceMap"
             },
             "inlineSources": {
-              "description": "Include source code in the sourcemaps inside the emitted JavaScript.",
+              "description": "在生成的 JavaScript 文件中，将源代码包含在 sourcemaps 中。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Include source code in the sourcemaps inside the emitted JavaScript.\n\nSee more: https://www.typescriptlang.org/tsconfig#inlineSources"
+              "markdownDescription": "在生成的 JavaScript 文件中，将源代码包含在 sourcemaps 中。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#inlineSources"
             },
             "jsx": {
-              "description": "Specify what JSX code is generated.",
-              "enum": [
-                "preserve",
-                "react",
-                "react-jsx",
-                "react-jsxdev",
-                "react-native"
-              ]
+              "description": "指定生成的 JSX 代码。",
+              "enum": ["preserve", "react", "react-jsx", "react-jsxdev", "react-native"]
             },
             "reactNamespace": {
-              "description": "Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.",
+              "description": "指定在 react JSX 生成时调用 createElement 的对象。",
               "type": "string",
               "default": "React",
-              "markdownDescription": "Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.\n\nSee more: https://www.typescriptlang.org/tsconfig#reactNamespace"
+              "markdownDescription": "指定在 react JSX 生成时调用 createElement 的对象。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#reactNamespace"
             },
             "jsxFactory": {
-              "description": "Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'",
+              "description": "指定在目标为 React JSX 生成时使用的 JSX 工厂函数，例如 'React.createElement' 或 'h'。",
               "type": "string",
               "default": "React.createElement",
-              "markdownDescription": "Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'\n\nSee more: https://www.typescriptlang.org/tsconfig#jsxFactory"
+              "markdownDescription": "指定在目标为 React JSX 生成时使用的 JSX 工厂函数，例如 'React.createElement' 或 'h'\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#jsxFactory"
             },
             "jsxFragmentFactory": {
-              "description": "Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'.",
+              "description": "指定在目标为 React JSX 生成时用于片段的 JSX 片段引用，例如 'React.Fragment' 或 'Fragment'。",
               "type": "string",
               "default": "React.Fragment",
-              "markdownDescription": "Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'.\n\nSee more: https://www.typescriptlang.org/tsconfig#jsxFragmentFactory"
+              "markdownDescription": "指定在目标为 React JSX 生成时用于片段的 JSX 片段引用，例如 'React.Fragment' 或 'Fragment'。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#jsxFragmentFactory"
             },
             "jsxImportSource": {
-              "description": "Specify module specifier used to import the JSX factory functions when using `jsx: react-jsx`.",
+              "description": "指定在使用 jsx: react-jsx 时用于导入 JSX 工厂函数的模块指定符。",
               "type": "string",
               "default": "react",
-              "markdownDescription": "Specify module specifier used to import the JSX factory functions when using `jsx: react-jsx`.\n\nSee more: https://www.typescriptlang.org/tsconfig#jsxImportSource"
+              "markdownDescription": "指定在使用 jsx: react-jsx 时用于导入 JSX 工厂函数的模块指定符。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#jsxImportSource"
             },
             "listFiles": {
-              "description": "Print all of the files read during the compilation.",
+              "description": "打印编译过程中读取的所有文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Print all of the files read during the compilation.\n\nSee more: https://www.typescriptlang.org/tsconfig#listFiles"
+              "markdownDescription": "打印编译过程中读取的所有文件。\n\n查看更多：https://www.typescriptlang.org/tsconfig#listFiles"
             },
             "mapRoot": {
-              "description": "Specify the location where debugger should locate map files instead of generated locations.",
+              "description": "指定调试器应查找映射文件的位置，而不是生成的位置。",
               "type": "string",
-              "markdownDescription": "Specify the location where debugger should locate map files instead of generated locations.\n\nSee more: https://www.typescriptlang.org/tsconfig#mapRoot"
+              "markdownDescription": "指定调试器应查找映射文件的位置，而不是生成的位置。\n\n查看更多：https://www.typescriptlang.org/tsconfig#mapRoot"
             },
             "module": {
-              "description": "Specify what module code is generated.",
+              "description": "指定生成的模块代码。",
               "type": "string",
               "anyOf": [
                 {
@@ -333,7 +346,7 @@
               "markdownDescription": "Specify what module code is generated.\n\nSee more: https://www.typescriptlang.org/tsconfig#module"
             },
             "moduleResolution": {
-              "description": "Specify how TypeScript looks up a file from a given module specifier.",
+              "description": "指定 TypeScript 如何查找给定模块说明符的文件。",
               "type": "string",
               "anyOf": [
                 {
@@ -344,10 +357,10 @@
                 }
               ],
               "default": "classic",
-              "markdownDescription": "Specify how TypeScript looks up a file from a given module specifier.\n\nSee more: https://www.typescriptlang.org/tsconfig#moduleResolution"
+              "markdownDescription": "指定 TypeScript 如何查找给定模块说明符的文件。\n\n更多信息：https://www.typescriptlang.org/tsconfig#moduleResolution"
             },
             "newLine": {
-              "description": "Set the newline character for emitting files.",
+              "description": "设置发射文件的换行符。",
               "type": "string",
               "anyOf": [
                 {
@@ -357,164 +370,164 @@
                   "pattern": "^(CRLF|LF|crlf|lf)$"
                 }
               ],
-              "markdownDescription": "Set the newline character for emitting files.\n\nSee more: https://www.typescriptlang.org/tsconfig#newLine"
+              "markdownDescription": "设置发射文件的换行符。\n\n更多信息：https://www.typescriptlang.org/tsconfig#newLine"
             },
             "noEmit": {
-              "description": "Disable emitting file from a compilation.",
+              "description": "禁用编译时从文件中发射任何内容。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable emitting file from a compilation.\n\nSee more: https://www.typescriptlang.org/tsconfig#noEmit"
+              "markdownDescription": "禁用编译时从文件中发射任何内容。\n\n更多信息：https://www.typescriptlang.org/tsconfig#noEmit"
             },
             "noEmitHelpers": {
-              "description": "Disable generating custom helper functions like `__extends` in compiled output.",
+              "description": "禁用生成自定义帮助函数（如 __extends）的编译输出。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable generating custom helper functions like `__extends` in compiled output.\n\nSee more: https://www.typescriptlang.org/tsconfig#noEmitHelpers"
+              "markdownDescription": "禁用生成自定义帮助函数（如 __extends）的编译输出。\n\n更多信息：https://www.typescriptlang.org/tsconfig#noEmitHelpers"
             },
             "noEmitOnError": {
-              "description": "Disable emitting files if any type checking errors are reported.",
+              "description": "如果有任何类型检查错误报告，则禁用发射文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable emitting files if any type checking errors are reported.\n\nSee more: https://www.typescriptlang.org/tsconfig#noEmitOnError"
+              "markdownDescription": "如果有任何类型检查错误报告，则禁用发射文件。\n\n更多信息：https://www.typescriptlang.org/tsconfig#noEmitOnError"
             },
             "noImplicitAny": {
-              "description": "Enable error reporting for expressions and declarations with an implied `any` type..",
+              "description": "对具有隐含的 any 类型的表达式和声明启用错误报告。",
               "type": "boolean",
-              "markdownDescription": "Enable error reporting for expressions and declarations with an implied `any` type..\n\nSee more: https://www.typescriptlang.org/tsconfig#noImplicitAny"
+              "markdownDescription": "对具有隐含的 any 类型的表达式和声明启用错误报告。\n\n更多信息：https://www.typescriptlang.org/tsconfig#noImplicitAny"
             },
             "noImplicitThis": {
-              "description": "Enable error reporting when `this` is given the type `any`.",
+              "description": "当 this 被赋予 any 类型时启用错误报告。",
               "type": "boolean",
-              "markdownDescription": "Enable error reporting when `this` is given the type `any`.\n\nSee more: https://www.typescriptlang.org/tsconfig#noImplicitThis"
+              "markdownDescription": "当 this 被赋予 any 类型时启用错误报告。\n\n更多信息：https://www.typescriptlang.org/tsconfig#noImplicitThis"
             },
             "noUnusedLocals": {
-              "description": "Enable error reporting when a local variables aren't read.",
+              "description": "启用错误报告，当局部变量未被读取时",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable error reporting when a local variables aren't read.\n\nSee more: https://www.typescriptlang.org/tsconfig#noUnusedLocals"
+              "markdownDescription": "启用错误报告，当局部变量未被读取时\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#noUnusedLocals"
             },
             "noUnusedParameters": {
-              "description": "Raise an error when a function parameter isn't read",
+              "description": "当函数参数未被读取时引发错误",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Raise an error when a function parameter isn't read\n\nSee more: https://www.typescriptlang.org/tsconfig#noUnusedParameters"
+              "markdownDescription": "当函数参数未被读取时引发错误\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#noUnusedParameters"
             },
             "noLib": {
-              "description": "Disable including any library files, including the default lib.d.ts.",
+              "description": "禁用包括默认 lib.d.ts 在内的所有库文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable including any library files, including the default lib.d.ts.\n\nSee more: https://www.typescriptlang.org/tsconfig#noLib"
+              "markdownDescription": "禁用包括默认 lib.d.ts 在内的所有库文件。\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#noLib"
             },
             "noResolve": {
-              "description": "Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project.",
+              "description": "不允许 import、require 或 <reference> 扩展 TypeScript 应添加到项目中的文件数。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project.\n\nSee more: https://www.typescriptlang.org/tsconfig#noResolve"
+              "markdownDescription": "不允许 import、require 或 <reference> 扩展 TypeScript 应添加到项目中的文件数。\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#noResolve"
             },
             "noStrictGenericChecks": {
-              "description": "Disable strict checking of generic signatures in function types.",
+              "description": "禁用在函数类型中对泛型签名的严格检查。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable strict checking of generic signatures in function types.\n\nSee more: https://www.typescriptlang.org/tsconfig#noStrictGenericChecks"
+              "markdownDescription": "禁用在函数类型中对泛型签名的严格检查。\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#noStrictGenericChecks"
             },
             "skipDefaultLibCheck": {
-              "description": "Skip type checking .d.ts files that are included with TypeScript.",
+              "description": "跳过对 TypeScript 所包含的 .d.ts 文件进行类型检查。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Skip type checking .d.ts files that are included with TypeScript.\n\nSee more: https://www.typescriptlang.org/tsconfig#skipDefaultLibCheck"
+              "markdownDescription": "跳过对 TypeScript 所包含的 .d.ts 文件进行类型检查。\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#skipDefaultLibCheck"
             },
             "skipLibCheck": {
-              "description": "Skip type checking all .d.ts files.",
+              "description": "跳过对所有 .d.ts 文件进行类型检查。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Skip type checking all .d.ts files.\n\nSee more: https://www.typescriptlang.org/tsconfig#skipLibCheck"
+              "markdownDescription": "跳过对所有 .d.ts 文件进行类型检查。\n\n更多信息请参见: https://www.typescriptlang.org/tsconfig#skipLibCheck"
             },
             "outFile": {
-              "description": "Specify a file that bundles all outputs into one JavaScript file. If `declaration` is true, also designates a file that bundles all .d.ts output.",
+              "description": "指定将所有输出捆绑到一个 JavaScript 文件中的文件。如果 declaration 为 true，也指定将所有 .d.ts 输出捆绑到一个文件中。",
               "type": "string",
               "markdownDescription": "Specify a file that bundles all outputs into one JavaScript file. If `declaration` is true, also designates a file that bundles all .d.ts output.\n\nSee more: https://www.typescriptlang.org/tsconfig#outFile"
             },
             "outDir": {
-              "description": "Specify an output folder for all emitted files.",
+              "description": "指定所有生成的文件的输出文件夹。",
               "type": "string",
-              "markdownDescription": "Specify an output folder for all emitted files.\n\nSee more: https://www.typescriptlang.org/tsconfig#outDir"
+              "markdownDescription": "指定所有生成的文件的输出文件夹。\n\n查看更多：https://www.typescriptlang.org/tsconfig#outDir"
             },
             "preserveConstEnums": {
-              "description": "Disable erasing `const enum` declarations in generated code.",
+              "description": "禁止在生成的代码中擦除 const enum 声明。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable erasing `const enum` declarations in generated code.\n\nSee more: https://www.typescriptlang.org/tsconfig#preserveConstEnums"
+              "markdownDescription": "禁止在生成的代码中擦除 const enum 声明。\n\n查看更多：https://www.typescriptlang.org/tsconfig#preserveConstEnums"
             },
             "preserveSymlinks": {
-              "description": "Disable resolving symlinks to their realpath. This correlates to the same flag in node.",
+              "description": "禁止将符号链接解析为其真实路径。这与 node 中的相同标志相关。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable resolving symlinks to their realpath. This correlates to the same flag in node.\n\nSee more: https://www.typescriptlang.org/tsconfig#preserveSymlinks"
+              "markdownDescription": "禁止将符号链接解析为其真实路径。这与 node 中的相同标志相关。\n\n查看更多：https://www.typescriptlang.org/tsconfig#preserveSymlinks"
             },
             "preserveValueImports": {
-              "description": "Preserve unused imported values in the JavaScript output that would otherwise be removed",
+              "description": "在 JavaScript 输出中保留未使用的导入值，否则这些值将被删除。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Preserve unused imported values in the JavaScript output that would otherwise be removed\n\nSee more: https://www.typescriptlang.org/tsconfig#preserveValueImports"
+              "markdownDescription": "在 JavaScript 输出中保留未使用的导入值，否则这些值将被删除。\n\n查看更多：https://www.typescriptlang.org/tsconfig#preserveValueImports"
             },
             "preserveWatchOutput": {
-              "description": "Disable wiping the console in watch mode",
+              "description": "在监视模式下禁止清除控制台。",
               "type": "boolean",
-              "markdownDescription": "Disable wiping the console in watch mode\n\nSee more: https://www.typescriptlang.org/tsconfig#preserveWatchOutput"
+              "markdownDescription": "在监视模式下禁止清除控制台。\n\n查看更多：https://www.typescriptlang.org/tsconfig#preserveWatchOutput"
             },
             "pretty": {
-              "description": "Enable color and formatting in output to make compiler errors easier to read",
+              "description": "启用输出中的颜色和格式，使编译器错误更容易阅读。",
               "type": "boolean",
               "default": true,
-              "markdownDescription": "Enable color and formatting in output to make compiler errors easier to read\n\nSee more: https://www.typescriptlang.org/tsconfig#pretty"
+              "markdownDescription": "启用输出中的颜色和格式，使编译器错误更容易阅读。\n\n查看更多：https://www.typescriptlang.org/tsconfig#pretty"
             },
             "removeComments": {
-              "description": "Disable emitting comments.",
+              "description": "禁用生成注释。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable emitting comments.\n\nSee more: https://www.typescriptlang.org/tsconfig#removeComments"
+              "markdownDescription": "禁用生成注释。\n\n查看更多：https://www.typescriptlang.org/tsconfig#removeComments"
             },
             "rootDir": {
-              "description": "Specify the root folder within your source files.",
+              "description": "指定源文件中的根文件夹。",
               "type": "string",
-              "markdownDescription": "Specify the root folder within your source files.\n\nSee more: https://www.typescriptlang.org/tsconfig#rootDir"
+              "markdownDescription": "指定源文件中的根文件夹。\n\n查看更多：https://www.typescriptlang.org/tsconfig#rootDir"
             },
             "isolatedModules": {
-              "description": "Ensure that each file can be safely transpiled without relying on other imports.",
+              "description": "确保每个文件都可以安全地进行转译而不依赖其他导入。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Ensure that each file can be safely transpiled without relying on other imports.\n\nSee more: https://www.typescriptlang.org/tsconfig#isolatedModules"
+              "markdownDescription": "确保每个文件都可以安全地进行转译而不依赖其他导入。\n\n查看更多：https://www.typescriptlang.org/tsconfig#isolatedModules"
             },
             "sourceMap": {
-              "description": "Create source map files for emitted JavaScript files.",
+              "description": "为生成的 JavaScript 文件创建源映射文件。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Create source map files for emitted JavaScript files.\n\nSee more: https://www.typescriptlang.org/tsconfig#sourceMap"
+              "markdownDescription": "为生成的 JavaScript 文件创建源映射文件。\n\n查看更多：https://www.typescriptlang.org/tsconfig#sourceMap"
             },
             "sourceRoot": {
-              "description": "Specify the root path for debuggers to find the reference source code.",
+              "description": "指定调试器查找引用源代码的根路径。",
               "type": "string",
-              "markdownDescription": "Specify the root path for debuggers to find the reference source code.\n\nSee more: https://www.typescriptlang.org/tsconfig#sourceRoot"
+              "markdownDescription": "指定调试器查找引用源代码的根路径。\n\n查看更多：https://www.typescriptlang.org/tsconfig#sourceRoot"
             },
             "suppressExcessPropertyErrors": {
-              "description": "Disable reporting of excess property errors during the creation of object literals.",
+              "description": "在创建对象字面量时禁止报告超量属性错误。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable reporting of excess property errors during the creation of object literals.\n\nSee more: https://www.typescriptlang.org/tsconfig#suppressExcessPropertyErrors"
+              "markdownDescription": "在创建对象字面量时禁止报告超量属性错误。\n\n查看更多：https://www.typescriptlang.org/tsconfig#suppressExcessPropertyErrors"
             },
             "suppressImplicitAnyIndexErrors": {
-              "description": "Suppress `noImplicitAny` errors when indexing objects that lack index signatures.",
+              "description": "当索引对象缺少索引签名时，抑制 noImplicitAny 错误。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Suppress `noImplicitAny` errors when indexing objects that lack index signatures.\n\nSee more: https://www.typescriptlang.org/tsconfig#suppressImplicitAnyIndexErrors"
+              "markdownDescription": "当索引对象缺少索引签名时，抑制 noImplicitAny 错误。\n\n查看更多：https://www.typescriptlang.org/tsconfig#suppressImplicitAnyIndexErrors"
             },
             "stripInternal": {
-              "description": "Disable emitting declarations that have `@internal` in their JSDoc comments.",
+              "description": "禁用在其 JSDoc 注释中有 @internal 的声明的生成。",
               "type": "boolean",
-              "markdownDescription": "Disable emitting declarations that have `@internal` in their JSDoc comments.\n\nSee more: https://www.typescriptlang.org/tsconfig#stripInternal"
+              "markdownDescription": "禁用在其 JSDoc 注释中有 @internal 的声明的生成。\n\n查看更多：https://www.typescriptlang.org/tsconfig#stripInternal"
             },
             "target": {
-              "description": "Set the JavaScript language version for emitted JavaScript and include compatible library declarations.",
+              "description": "设置生成的 JavaScript 的 JavaScript 语言版本并包括兼容的库声明。",
               "type": "string",
               "default": "ES3",
               "anyOf": [
@@ -542,17 +555,17 @@
               "markdownDescription": "Set the JavaScript language version for emitted JavaScript and include compatible library declarations.\n\nSee more: https://www.typescriptlang.org/tsconfig#target"
             },
             "useUnknownInCatchVariables": {
-              "description": "Default catch clause variables as `unknown` instead of `any`.",
+              "description": "默认将 catch 子句变量设为 unknown 而非 any。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Default catch clause variables as `unknown` instead of `any`.\n\nSee more: https://www.typescriptlang.org/tsconfig#useUnknownInCatchVariables"
+              "markdownDescription": "默认将 catch 子句变量设为 unknown 而非 any。\n\n查看更多：https://www.typescriptlang.org/tsconfig#useUnknownInCatchVariables"
             },
             "watch": {
-              "description": "Watch input files.",
+              "description": "监视输入文件。",
               "type": "boolean"
             },
             "fallbackPolling": {
-              "description": "Specify the polling strategy to use when the system runs out of or doesn't support native file watchers. Requires TypeScript version 3.8 or later.",
+              "description": "在系统耗尽或不支持本地文件监视器时，指定使用的轮询策略。要求 TypeScript 版本在 3.8 或之后。",
               "enum": [
                 "fixedPollingInterval",
                 "priorityPollingInterval",
@@ -564,7 +577,7 @@
               ]
             },
             "watchDirectory": {
-              "description": "Specify the strategy for watching directories under systems that lack recursive file-watching functionality. Requires TypeScript version 3.8 or later.",
+              "description": "指定在缺少递归文件监视功能的系统下监视目录的策略。要求 TypeScript 版本在 3.8 或之后。",
               "enum": [
                 "useFsEvents",
                 "fixedPollingInterval",
@@ -574,7 +587,7 @@
               "default": "useFsEvents"
             },
             "watchFile": {
-              "description": "Specify the strategy for watching individual files. Requires TypeScript version 3.8 or later.",
+              "description": "指定监视单个文件的策略。需要 TypeScript 版本 3.8 或更高版本。",
               "enum": [
                 "fixedPollingInterval",
                 "priorityPollingInterval",
@@ -586,161 +599,161 @@
               "default": "useFsEvents"
             },
             "experimentalDecorators": {
-              "description": "Enable experimental support for TC39 stage 2 draft decorators.",
+              "description": "启用 TC39 阶段 2 草案修饰器的实验性支持。",
               "type": "boolean",
-              "markdownDescription": "Enable experimental support for TC39 stage 2 draft decorators.\n\nSee more: https://www.typescriptlang.org/tsconfig#experimentalDecorators"
+              "markdownDescription": "启用 TC39 阶段 2 草案修饰器的实验性支持。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#experimentalDecorators"
             },
             "emitDecoratorMetadata": {
-              "description": "Emit design-type metadata for decorated declarations in source files.",
+              "description": "在源文件中为装饰的声明发出设计类型元数据。",
               "type": "boolean",
-              "markdownDescription": "Emit design-type metadata for decorated declarations in source files.\n\nSee more: https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata"
+              "markdownDescription": "在源文件中为装饰的声明发出设计类型元数据。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata"
             },
             "allowUnusedLabels": {
-              "description": "Disable error reporting for unused labels.",
+              "description": "禁用未使用标签的错误报告。",
               "type": "boolean",
-              "markdownDescription": "Disable error reporting for unused labels.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowUnusedLabels"
+              "markdownDescription": "禁用未使用标签的错误报告。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#allowUnusedLabels"
             },
             "noImplicitReturns": {
-              "description": "Enable error reporting for codepaths that do not explicitly return in a function.",
+              "description": "在函数中启用未明确返回的代码路径的错误报告。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable error reporting for codepaths that do not explicitly return in a function.\n\nSee more: https://www.typescriptlang.org/tsconfig#noImplicitReturns"
+              "markdownDescription": "在函数中启用未明确返回的代码路径的错误报告。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#noImplicitReturns"
             },
             "noUncheckedIndexedAccess": {
-              "description": "Add `undefined` to a type when accessed using an index.",
+              "description": "使用索引访问时将 undefined 添加到类型中。",
               "type": "boolean",
-              "markdownDescription": "Add `undefined` to a type when accessed using an index.\n\nSee more: https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess"
+              "markdownDescription": "使用索引访问时将 undefined 添加到类型中。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess"
             },
             "noFallthroughCasesInSwitch": {
-              "description": "Enable error reporting for fallthrough cases in switch statements.",
+              "description": "启用 switch 语句中的 case 穿透的错误报告。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable error reporting for fallthrough cases in switch statements.\n\nSee more: https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch"
+              "markdownDescription": "启用 switch 语句中的 case 穿透的错误报告。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch"
             },
             "noImplicitOverride": {
-              "description": "Ensure overriding members in derived classes are marked with an override modifier.",
+              "description": "确保派生类中的重写成员标记有 override 修饰符。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Ensure overriding members in derived classes are marked with an override modifier.\n\nSee more: https://www.typescriptlang.org/tsconfig#noImplicitOverride"
+              "markdownDescription": "确保派生类中的重写成员标记有 override 修饰符。\n\n查看更多信息：https://www.typescriptlang.org/tsconfig#noImplicitOverride"
             },
             "allowUnreachableCode": {
-              "description": "Disable error reporting for unreachable code.",
+              "description": "禁用对于无法到达的代码的错误报告。",
               "type": "boolean",
-              "markdownDescription": "Disable error reporting for unreachable code.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowUnreachableCode"
+              "markdownDescription": "禁用对于无法到达的代码的错误报告。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#allowUnreachableCode"
             },
             "forceConsistentCasingInFileNames": {
-              "description": "Ensure that casing is correct in imports.",
+              "description": "确保导入时的大小写正确。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Ensure that casing is correct in imports.\n\nSee more: https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames"
+              "markdownDescription": "确保导入时的大小写正确。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames"
             },
             "generateCpuProfile": {
-              "description": "Emit a v8 CPU profile of the compiler run for debugging.",
+              "description": "生成一个用于调试的 v8 CPU 分析报告。",
               "type": "string",
               "default": "profile.cpuprofile",
-              "markdownDescription": "Emit a v8 CPU profile of the compiler run for debugging.\n\nSee more: https://www.typescriptlang.org/tsconfig#generateCpuProfile"
+              "markdownDescription": "生成一个用于调试的 v8 CPU 分析报告。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#generateCpuProfile"
             },
             "baseUrl": {
-              "description": "Specify the base directory to resolve non-relative module names.",
+              "description": "指定用于解析非相对模块名称的基本目录。",
               "type": "string",
-              "markdownDescription": "Specify the base directory to resolve non-relative module names.\n\nSee more: https://www.typescriptlang.org/tsconfig#baseUrl"
+              "markdownDescription": "指定用于解析非相对模块名称的基本目录。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#baseUrl"
             },
             "paths": {
-              "description": "Specify a set of entries that re-map imports to additional lookup locations.",
+              "description": "指定一组将导入重新映射到其他查找位置的条目。",
               "type": "object",
               "additionalProperties": {
                 "type": "array",
                 "uniqueItems": true,
                 "items": {
                   "type": "string",
-                  "description": "Path mapping to be computed relative to baseUrl option."
+                  "description": "要计算的路径映射相对于 baseUrl 选项。"
                 }
               },
-              "markdownDescription": "Specify a set of entries that re-map imports to additional lookup locations.\n\nSee more: https://www.typescriptlang.org/tsconfig#paths"
+              "markdownDescription": "指定一组将导入重新映射到其他查找位置的条目。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#paths"
             },
             "plugins": {
-              "description": "Specify a list of language service plugins to include.",
+              "description": "指定要包含的一组语言服务插件。",
               "type": "array",
               "items": {
                 "type": "object",
                 "properties": {
                   "name": {
-                    "description": "Plugin name.",
+                    "description": "插件名称。",
                     "type": "string"
                   }
                 }
               },
-              "markdownDescription": "Specify a list of language service plugins to include.\n\nSee more: https://www.typescriptlang.org/tsconfig#plugins"
+              "markdownDescription": "指定要包含的一组语言服务插件。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#plugins"
             },
             "rootDirs": {
-              "description": "Allow multiple folders to be treated as one when resolving modules.",
+              "description": "允许将多个文件夹视为一个文件夹来解析模块。",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
               },
-              "markdownDescription": "Allow multiple folders to be treated as one when resolving modules.\n\nSee more: https://www.typescriptlang.org/tsconfig#rootDirs"
+              "markdownDescription": "允许将多个文件夹视为一个文件夹来解析模块。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#rootDirs"
             },
             "typeRoots": {
-              "description": "Specify multiple folders that act like `./node_modules/@types`.",
+              "description": "指定多个文件夹，作为类似于 ./node_modules/@types 的路径。",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
               },
-              "markdownDescription": "Specify multiple folders that act like `./node_modules/@types`.\n\nSee more: https://www.typescriptlang.org/tsconfig#typeRoots"
+              "markdownDescription": "指定多个文件夹，作为类似于 ./node_modules/@types 的路径。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#typeRoots"
             },
             "types": {
-              "description": "Specify type package names to be included without being referenced in a source file.",
+              "description": "指定要包含的类型包名称，而无需在源文件中引用。",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
               },
-              "markdownDescription": "Specify type package names to be included without being referenced in a source file.\n\nSee more: https://www.typescriptlang.org/tsconfig#types"
+              "markdownDescription": "指定要包含的类型包名称，而无需在源文件中引用。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#types"
             },
             "traceResolution": {
-              "description": "Enable tracing of the name resolution process. Requires TypeScript version 2.0 or later.",
+              "description": "启用名称解析过程的跟踪。要求 TypeScript 版本 2.0 或更高。",
               "type": "boolean",
               "default": false
             },
             "allowJs": {
-              "description": "Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files.",
+              "description": "允许 JavaScript 文件成为您的程序的一部分。使用 checkJS 选项从这些文件中获取错误。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowJs"
+              "markdownDescription": "允许 JavaScript 文件成为您的程序的一部分。使用 checkJS 选项从这些文件中获取错误。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#allowJs"
             },
             "noErrorTruncation": {
-              "description": "Disable truncating types in error messages.",
+              "description": "禁用错误消息中类型的截断。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable truncating types in error messages.\n\nSee more: https://www.typescriptlang.org/tsconfig#noErrorTruncation"
+              "markdownDescription": "禁用错误消息中类型的截断。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#noErrorTruncation"
             },
             "allowSyntheticDefaultImports": {
-              "description": "Allow 'import x from y' when a module doesn't have a default export.",
+              "description": "允许在模块没有默认导出时使用 import x from y。",
               "type": "boolean",
-              "markdownDescription": "Allow 'import x from y' when a module doesn't have a default export.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports"
+              "markdownDescription": "允许在模块没有默认导出时使用 import x from y。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports"
             },
             "noImplicitUseStrict": {
-              "description": "Disable adding 'use strict' directives in emitted JavaScript files.",
+              "description": "禁止在生成的 JavaScript 文件中添加 'use strict' 指令。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Disable adding 'use strict' directives in emitted JavaScript files.\n\nSee more: https://www.typescriptlang.org/tsconfig#noImplicitUseStrict"
+              "markdownDescription": "禁止在生成的 JavaScript 文件中添加 'use strict' 指令。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#noImplicitUseStrict"
             },
             "listEmittedFiles": {
-              "description": "Print the names of emitted files after a compilation.",
+              "description": "在编译后打印生成的文件名称。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Print the names of emitted files after a compilation.\n\nSee more: https://www.typescriptlang.org/tsconfig#listEmittedFiles"
+              "markdownDescription": "在编译后打印生成的文件名称。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#listEmittedFiles"
             },
             "disableSizeLimit": {
-              "description": "Remove the 20mb cap on total source code size for JavaScript files in the TypeScript language server.",
+              "description": "取消 TypeScript 语言服务器对 JavaScript 文件总源代码大小的 20MB 限制。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Remove the 20mb cap on total source code size for JavaScript files in the TypeScript language server.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSizeLimit"
+              "markdownDescription": "取消 TypeScript 语言服务器对 JavaScript 文件总源代码大小的 20MB 限制。\n\n了解更多：https://www.typescriptlang.org/tsconfig#disableSizeLimit"
             },
             "lib": {
-              "description": "Specify a set of bundled library declaration files that describe the target runtime environment.",
+              "description": "指定一组捆绑的库声明文件，描述目标运行时环境。",
               "type": "array",
               "uniqueItems": true,
               "items": {
@@ -860,147 +873,147 @@
               "markdownDescription": "Specify a set of bundled library declaration files that describe the target runtime environment.\n\nSee more: https://www.typescriptlang.org/tsconfig#lib"
             },
             "moduleDetection": {
-              "description": "Specify how TypeScript determine a file as module.",
+              "description": "指定 TypeScript 如何判断文件是否为模块。",
               "enum": ["auto", "legacy", "force"]
             },
             "strictNullChecks": {
-              "description": "When type checking, take into account `null` and `undefined`.",
+              "description": "在类型检查时，考虑 null 和 undefined。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "When type checking, take into account `null` and `undefined`.\n\nSee more: https://www.typescriptlang.org/tsconfig#strictNullChecks"
+              "markdownDescription": "在类型检查时，考虑 null 和 undefined。\n\n详见：https://www.typescriptlang.org/tsconfig#strictNullChecks"
             },
             "maxNodeModuleJsDepth": {
-              "description": "Specify the maximum folder depth used for checking JavaScript files from `node_modules`. Only applicable with `allowJs`.",
+              "description": "指定用于从 node_modules 检查 JavaScript 文件的最大文件夹深度。仅适用于 allowJs。",
               "type": "number",
               "default": 0,
-              "markdownDescription": "Specify the maximum folder depth used for checking JavaScript files from `node_modules`. Only applicable with `allowJs`.\n\nSee more: https://www.typescriptlang.org/tsconfig#maxNodeModuleJsDepth"
+              "markdownDescription": "指定用于从 node_modules 检查 JavaScript 文件的最大文件夹深度。仅适用于 allowJs。\n\n详见：https://www.typescriptlang.org/tsconfig#maxNodeModuleJsDepth"
             },
             "importHelpers": {
-              "description": "Allow importing helper functions from tslib once per project, instead of including them per-file.",
+              "description": "允许一次在整个项目中从 tslib 导入辅助函数，而不是在每个文件中都包含它们。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Allow importing helper functions from tslib once per project, instead of including them per-file.\n\nSee more: https://www.typescriptlang.org/tsconfig#importHelpers"
+              "markdownDescription": "允许一次在整个项目中从 tslib 导入辅助函数，而不是在每个文件中都包含它们。\n\n详见：https://www.typescriptlang.org/tsconfig#importHelpers"
             },
             "importsNotUsedAsValues": {
-              "description": "Specify emit/checking behavior for imports that are only used for types.",
+              "description": "指定仅用于类型的导入的发出/检查行为。",
               "default": "remove",
               "enum": ["remove", "preserve", "error"]
             },
             "alwaysStrict": {
-              "description": "Ensure 'use strict' is always emitted.",
+              "description": "始终发出 use strict。",
               "type": "boolean",
-              "markdownDescription": "Ensure 'use strict' is always emitted.\n\nSee more: https://www.typescriptlang.org/tsconfig#alwaysStrict"
+              "markdownDescription": "始终发出 use strict。\n\n详见：https://www.typescriptlang.org/tsconfig#alwaysStrict"
             },
             "strict": {
-              "description": "Enable all strict type checking options.",
+              "description": "启用所有严格的类型检查选项。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable all strict type checking options.\n\nSee more: https://www.typescriptlang.org/tsconfig#strict"
+              "markdownDescription": "启用所有严格的类型检查选项。\n\n详见：https://www.typescriptlang.org/tsconfig#strict"
             },
             "strictBindCallApply": {
-              "description": "Check that the arguments for `bind`, `call`, and `apply` methods match the original function.",
+              "description": "检查 bind、call 和 apply 方法的参数是否与原始函数匹配。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Check that the arguments for `bind`, `call`, and `apply` methods match the original function.\n\nSee more: https://www.typescriptlang.org/tsconfig#strictBindCallApply"
+              "markdownDescription": "检查 bind、call 和 apply 方法的参数是否与原始函数匹配。\n\n详见：https://www.typescriptlang.org/tsconfig#strictBindCallApply"
             },
             "downlevelIteration": {
-              "description": "Emit more compliant, but verbose and less performant JavaScript for iteration.",
+              "description": "发出更符合规范但更冗长且不那么高效的迭代 JavaScript。",
               "type": "boolean",
               "default": false,
               "markdownDescription": "Emit more compliant, but verbose and less performant JavaScript for iteration.\n\nSee more: https://www.typescriptlang.org/tsconfig#downlevelIteration"
             },
             "checkJs": {
-              "description": "Enable error reporting in type-checked JavaScript files.",
+              "description": "启用在类型检查的 JavaScript 文件中的错误报告。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable error reporting in type-checked JavaScript files.\n\nSee more: https://www.typescriptlang.org/tsconfig#checkJs"
+              "markdownDescription": "启用在类型检查的 JavaScript 文件中的错误报告。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#checkJs"
             },
             "strictFunctionTypes": {
-              "description": "When assigning functions, check to ensure parameters and the return values are subtype-compatible.",
+              "description": "在分配函数时，检查参数和返回值是否是子类型兼容。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "When assigning functions, check to ensure parameters and the return values are subtype-compatible.\n\nSee more: https://www.typescriptlang.org/tsconfig#strictFunctionTypes"
+              "markdownDescription": "在分配函数时，检查参数和返回值是否是子类型兼容。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#strictFunctionTypes"
             },
             "strictPropertyInitialization": {
-              "description": "Check for class properties that are declared but not set in the constructor.",
+              "description": "检查在类中声明但未在构造函数中设置的类属性。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Check for class properties that are declared but not set in the constructor.\n\nSee more: https://www.typescriptlang.org/tsconfig#strictPropertyInitialization"
+              "markdownDescription": "检查在类中声明但未在构造函数中设置的类属性。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#strictPropertyInitialization"
             },
             "esModuleInterop": {
-              "description": "Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility.",
+              "description": "生成附加的 JavaScript 以简化对 CommonJS 模块的导入支持。这启用了类型兼容性的 allowSyntheticDefaultImports。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility.\n\nSee more: https://www.typescriptlang.org/tsconfig#esModuleInterop"
+              "markdownDescription": "生成附加的 JavaScript 以简化对 CommonJS 模块的导入支持。这启用了类型兼容性的 allowSyntheticDefaultImports。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#esModuleInterop"
             },
             "allowUmdGlobalAccess": {
-              "description": "Allow accessing UMD globals from modules.",
+              "description": "允许从模块中访问 UMD 全局变量。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Allow accessing UMD globals from modules.\n\nSee more: https://www.typescriptlang.org/tsconfig#allowUmdGlobalAccess"
+              "markdownDescription": "允许从模块中访问 UMD 全局变量。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#allowUmdGlobalAccess"
             },
             "keyofStringsOnly": {
-              "description": "Make keyof only return strings instead of string, numbers or symbols. Legacy option.",
+              "description": "使 keyof 仅返回字符串而不是字符串、数字或符号。旧版选项。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Make keyof only return strings instead of string, numbers or symbols. Legacy option.\n\nSee more: https://www.typescriptlang.org/tsconfig#keyofStringsOnly"
+              "markdownDescription": "使 keyof 仅返回字符串而不是字符串、数字或符号。旧版选项。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#keyofStringsOnly"
             },
             "useDefineForClassFields": {
-              "description": "Emit ECMAScript-standard-compliant class fields.",
+              "description": "生成符合 ECMAScript 标准的类字段。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Emit ECMAScript-standard-compliant class fields.\n\nSee more: https://www.typescriptlang.org/tsconfig#useDefineForClassFields"
+              "markdownDescription": "生成符合 ECMAScript 标准的类字段。\n\n更多信息请参见：https://www.typescriptlang.org/tsconfig#useDefineForClassFields"
             },
             "declarationMap": {
-              "description": "Create sourcemaps for d.ts files.",
+              "description": "为 d.ts 文件创建源映射。",
               "type": "boolean",
               "default": false,
               "markdownDescription": "Create sourcemaps for d.ts files.\n\nSee more: https://www.typescriptlang.org/tsconfig#declarationMap"
             },
             "resolveJsonModule": {
-              "description": "Enable importing .json files",
+              "description": "启用导入 .json 文件",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Enable importing .json files\n\nSee more: https://www.typescriptlang.org/tsconfig#resolveJsonModule"
+              "markdownDescription": "启用导入 .json 文件\n\n了解更多信息：https://www.typescriptlang.org/tsconfig#resolveJsonModule"
             },
             "resolvePackageJsonExports": {
-              "description": "Use the package.json 'exports' field when resolving package imports.",
+              "description": "在解析包引用时使用 package.json 的 'exports' 字段。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Use the package.json 'exports' field when resolving package imports.\n\nSee more: https://www.typescriptlang.org/tsconfig#resolvePackageJsonExports"
+              "markdownDescription": "在解析包引用时使用 package.json 的 'exports' 字段。\n\n了解更多信息：https://www.typescriptlang.org/tsconfig#resolvePackageJsonExports"
             },
             "resolvePackageJsonImports": {
-              "description": "Use the package.json 'imports' field when resolving imports.",
+              "description": "在解析导入时使用 package.json 的 'imports' 字段。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Use the package.json 'imports' field when resolving imports.\n\nSee more: https://www.typescriptlang.org/tsconfig#resolvePackageJsonImports"
+              "markdownDescription": "在解析导入时使用 package.json 的 'imports' 字段。\n\n了解更多信息：https://www.typescriptlang.org/tsconfig#resolvePackageJsonImports"
             },
             "assumeChangesOnlyAffectDirectDependencies": {
-              "description": "Have recompiles in '--incremental' and '--watch' assume that changes within a file will only affect files directly depending on it. Requires TypeScript version 3.8 or later.",
+              "description": "在 '--incremental' 和 '--watch' 重新编译时，假定文件内的更改只会影响直接依赖该文件的文件。要求 TypeScript 版本 3.8 或更高。",
               "type": "boolean"
             },
             "extendedDiagnostics": {
-              "description": "Output more detailed compiler performance information after building.",
+              "description": "在构建后输出更详细的编译器性能信息。",
               "type": "boolean",
               "default": false,
-              "markdownDescription": "Output more detailed compiler performance information after building.\n\nSee more: https://www.typescriptlang.org/tsconfig#extendedDiagnostics"
+              "markdownDescription": "在构建后输出更详细的编译器性能信息。\n\n了解更多信息：https://www.typescriptlang.org/tsconfig#extendedDiagnostics"
             },
             "listFilesOnly": {
-              "description": "Print names of files that are part of the compilation and then stop processing.",
+              "description": "打印编译中的文件名称，然后停止处理。",
               "type": "boolean"
             },
             "disableSourceOfProjectReferenceRedirect": {
-              "description": "Disable preferring source files instead of declaration files when referencing composite projects",
+              "description": "禁用对组合项目的引用时优先使用源文件而不是声明文件。",
               "type": "boolean",
-              "markdownDescription": "Disable preferring source files instead of declaration files when referencing composite projects\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSourceOfProjectReferenceRedirect"
+              "markdownDescription": "禁用对组合项目的引用时优先使用源文件而不是声明文件。\n\n了解更多信息：https://www.typescriptlang.org/tsconfig#disableSourceOfProjectReferenceRedirect"
             },
             "disableSolutionSearching": {
-              "description": "Opt a project out of multi-project reference checking when editing.",
+              "description": "在编辑时将项目从多项目引用检查中排除。",
               "type": "boolean",
               "markdownDescription": "Opt a project out of multi-project reference checking when editing.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSolutionSearching"
             },
             "verbatimModuleSyntax": {
-              "description": "Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting.",
+              "description": "不要转换或省略未标记为仅类型的任何导入或导出，确保它们按照“module”设置的输出文件格式编写。",
               "type": "boolean",
               "markdownDescription": "Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting.\n\nSee more: https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax"
             }
@@ -1012,15 +1025,15 @@
       "properties": {
         "typeAcquisition": {
           "type": "object",
-          "description": "Auto type (.d.ts) acquisition options for this project. Requires TypeScript version 2.1 or later.",
+          "description": "此项目的自动类型 (.d.ts) 获取选项。需要 TypeScript 2.1 或更高版本。",
           "properties": {
             "enable": {
-              "description": "Enable auto type acquisition",
+              "description": "启用自动类型获取",
               "type": "boolean",
               "default": false
             },
             "include": {
-              "description": "Specifies a list of type declarations to be included in auto type acquisition. Ex. [\"jquery\", \"lodash\"]",
+              "description": "指定要包含在自动类型获取中的类型声明列表。例如 [\"jquery\", \"lodash\"]",
               "type": "array",
               "uniqueItems": true,
               "items": {
@@ -1028,30 +1041,11 @@
               }
             },
             "exclude": {
-              "description": "Specifies a list of type declarations to be excluded from auto type acquisition. Ex. [\"jquery\", \"lodash\"]",
+              "description": "指定要从自动类型获取中排除的类型声明列表。例如 [\"jquery\", \"lodash\"]",
               "type": "array",
               "uniqueItems": true,
               "items": {
                 "type": "string"
-              }
-            }
-          }
-        }
-      }
-    },
-    "referencesDefinition": {
-      "properties": {
-        "references": {
-          "type": "array",
-          "uniqueItems": true,
-          "description": "Referenced projects. Requires TypeScript version 3.0 or later.",
-          "items": {
-            "type": "object",
-            "description": "Project reference.",
-            "properties": {
-              "path": {
-                "type": "string",
-                "description": "Path to referenced tsconfig or to folder containing tsconfig."
               }
             }
           }
@@ -1068,12 +1062,12 @@
           "properties": {
             "compiler": {
               "default": "typescript",
-              "description": "Specify a custom TypeScript compiler.",
+              "description": "指定自定义的 TypeScript 编译器。",
               "type": "string"
             },
             "compilerHost": {
               "default": false,
-              "description": "Use TypeScript's compiler host API instead of the language service API.",
+              "description": "使用 TypeScript 的编译器主机 API 而不是语言服务 API。",
               "type": "boolean"
             },
             "compilerOptions": {
@@ -1083,47 +1077,47 @@
                   "$ref": "#/definitions/compilerOptionsDefinition/properties/compilerOptions"
                 }
               ],
-              "description": "JSON object to merge with TypeScript `compilerOptions`.",
+              "description": "与 TypeScript compilerOptions 合并的 JSON 对象。",
               "properties": {},
               "type": "object"
             },
             "emit": {
               "default": false,
-              "description": "Emit output files into `.ts-node` directory.",
+              "description": "将输出文件发射到 .ts-node 目录。",
               "type": "boolean"
             },
             "esm": {
-              "description": "Enable native ESM support.\n\nFor details, see https://typestrong.org/ts-node/docs/imports#native-ecmascript-modules",
+              "description": "启用原生 ESM 支持。\n\n详情请参见 https://typestrong.org/ts-node/docs/imports#native-ecmascript-modules",
               "type": "boolean"
             },
             "experimentalReplAwait": {
-              "description": "Allows the usage of top level await in REPL.\n\nUses node's implementation which accomplishes this with an AST syntax transformation.\n\nEnabled by default when tsconfig target is es2018 or above. Set to false to disable.\n\n**Note**: setting to `true` when tsconfig target is too low will throw an Error.  Leave as `undefined`\nto get default, automatic behavior.",
+              "description": "允许在 REPL 中使用顶级 await。\n\n使用 node 的实现，它通过 AST 语法转换实现这一点。\n\n当 tsconfig 的 target 为 es2018 或更高版本时默认启用。将其设置为 false 以禁用。\n\n注意: 将其设置为 true，当 tsconfig 的 target 太低时会抛出错误。将其留空以获取默认的自动行为。",
               "type": "boolean"
             },
             "experimentalResolver": {
-              "description": "Enable experimental features that re-map imports and require calls to support:\n`baseUrl`, `paths`, `rootDirs`, `.js` to `.ts` file extension mappings,\n`outDir` to `rootDir` mappings for composite projects and monorepos.\n\nFor details, see https://github.com/TypeStrong/ts-node/issues/1514",
+              "description": "启用实验性功能以重新映射导入和 require 调用以支持:\nbaseUrl、paths、rootDirs、.js 到 .ts 文件扩展名映射，\n用于组合项目和单体仓库的 outDir 到 rootDir 的映射。\n\n详情请参见 https://github.com/TypeStrong/ts-node/issues/1514",
               "type": "boolean"
             },
             "experimentalSpecifierResolution": {
-              "description": "Like node's `--experimental-specifier-resolution`, , but can also be set in your `tsconfig.json` for convenience.\n\nFor details, see https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#customizing-esm-specifier-resolution-algorithm",
+              "description": "类似于 node 的 --experimental-specifier-resolution，但也可以在你的 tsconfig.json 中设置以方便使用。\n\n详情请参见 https://nodejs.org/dist/latest-v18.x/docs/api/esm.html#customizing-esm-specifier-resolution-algorithm",
               "enum": ["explicit", "node"],
               "type": "string"
             },
             "files": {
               "default": false,
-              "description": "Load \"files\" and \"include\" from `tsconfig.json` on startup.\n\nDefault is to override `tsconfig.json` \"files\" and \"include\" to only include the entrypoint script.",
+              "description": "在启动时从 tsconfig.json 加载 \"files\" 和 \"include\"。\n\n默认值是覆盖 tsconfig.json 的 \"files\" 和 \"include\"，只包括入口脚本。",
               "type": "boolean"
             },
             "ignore": {
               "default": ["(?:^|/)node_modules/"],
-              "description": "Paths which should not be compiled.\n\nEach string in the array is converted to a regular expression via `new RegExp()` and tested against source paths prior to compilation.\n\nSource paths are normalized to posix-style separators, relative to the directory containing `tsconfig.json` or to cwd if no `tsconfig.json` is loaded.\n\nDefault is to ignore all node_modules subdirectories.",
+              "description": "不应编译的路径。\n\n数组中的每个字符串都会通过 new RegExp() 转换为正则表达式，并在编译之前针对源路径进行测试。\n\n源路径相对于包含 tsconfig.json 的目录或 cwd（如果未加载 tsconfig.json）进行标准化处理，使用 posix 样式分隔符。\n\n默认情况下，忽略所有 node_modules 的子目录。",
               "items": {
                 "type": "string"
               },
               "type": "array"
             },
             "ignoreDiagnostics": {
-              "description": "Ignore TypeScript warnings by diagnostic code.",
+              "description": "按诊断代码忽略 TypeScript 警告。",
               "items": {
                 "type": ["string", "number"]
               },
@@ -1131,25 +1125,25 @@
             },
             "logError": {
               "default": false,
-              "description": "Logs TypeScript errors to stderr instead of throwing exceptions.",
+              "description": "将 TypeScript 错误记录到 stderr 而不是抛出异常。",
               "type": "boolean"
             },
             "moduleTypes": {
               "$ref": "#/definitions/tsNodeModuleTypes",
-              "description": "Override certain paths to be compiled and executed as CommonJS or ECMAScript modules.\nWhen overridden, the tsconfig \"module\" and package.json \"type\" fields are overridden, and\nthe file extension is ignored.\nThis is useful if you cannot use .mts, .cts, .mjs, or .cjs file extensions;\nit achieves the same effect.\n\nEach key is a glob pattern following the same rules as tsconfig's \"include\" array.\nWhen multiple patterns match the same file, the last pattern takes precedence.\n\n`cjs` overrides matches files to compile and execute as CommonJS.\n`esm` overrides matches files to compile and execute as native ECMAScript modules.\n`package` overrides either of the above to default behavior, which obeys package.json \"type\" and\ntsconfig.json \"module\" options."
+              "description": "覆盖某些路径，以作为 CommonJS 或 ECMAScript 模块进行编译和执行。\n当被覆盖时，tsconfig 的 \"module\" 和 package.json 的 \"type\" 字段被覆盖，文件扩展名被忽略。\n如果您无法使用 .mts、.cts、.mjs 或 .cjs 文件扩展名，则此功能很有用；\n它可以实现相同的效果。\n\n每个键都是一个 glob 模式，遵循与 tsconfig 的 \"include\" 数组相同的规则。\n当多个模式匹配同一文件时，最后一个模式优先。\n\ncjs 会覆盖匹配文件以将其编译和执行为 CommonJS。\nesm 会覆盖匹配文件以将其编译和执行为原生 ECMAScript 模块。\npackage 会覆盖上述任一行为，以遵守 package.json 的 \"type\" 和\n tsconfig.json 的 \"module\" 选项的默认行为。"
             },
             "preferTsExts": {
               "default": false,
-              "description": "Re-order file extensions so that TypeScript imports are preferred.\n\nFor example, when both `index.js` and `index.ts` exist, enabling this option causes `require('./index')` to resolve to `index.ts` instead of `index.js`",
+              "description": "重新排序文件扩展名，使 TypeScript 导入文件优先。\n\n例如，当 index.js 和 index.ts 都存在时，启用此选项会导致 require('./index') 解析为 index.ts 而不是 index.js。",
               "type": "boolean"
             },
             "pretty": {
               "default": false,
-              "description": "Use pretty diagnostic formatter.",
+              "description": "使用漂亮的诊断格式化程序。",
               "type": "boolean"
             },
             "require": {
-              "description": "Modules to require, like node's `--require` flag.\n\nIf specified in `tsconfig.json`, the modules will be resolved relative to the `tsconfig.json` file.\n\nIf specified programmatically, each input string should be pre-resolved to an absolute path for\nbest results.",
+              "description": "需要引入的模块，类似于 Node 的 --require 标志。\n\n如果在 tsconfig.json 中指定，则会相对于 tsconfig.json 文件解析模块。\n\n如果以编程方式指定，则每个输入字符串应预先解析为绝对路径以获得最佳结果。",
               "items": {
                 "type": "string"
               },
@@ -1157,25 +1151,25 @@
             },
             "scope": {
               "default": false,
-              "description": "Scope compiler to files within `scopeDir`.",
+              "description": "将编译器限定为 scopeDir 中的文件。",
               "type": "boolean"
             },
             "scopeDir": {
-              "default": "First of: `tsconfig.json` \"rootDir\" if specified, directory containing `tsconfig.json`, or cwd if no `tsconfig.json` is loaded.",
+              "default": "优先级：如果指定了 tsconfig.json 的 rootDir，则为 rootDir；否则为包含 tsconfig.json 的目录；如果没有加载 tsconfig.json，则为 cwd。",
               "type": "string"
             },
             "skipIgnore": {
               "default": false,
-              "description": "Skip ignore check, so that compilation will be attempted for all files with matching extensions.",
+              "description": "跳过忽略检查，以便尝试编译所有具有匹配扩展名的文件。",
               "type": "boolean"
             },
             "swc": {
-              "description": "Transpile with swc instead of the TypeScript compiler, and skip typechecking.\n\nEquivalent to setting both `transpileOnly: true` and `transpiler: 'ts-node/transpilers/swc'`\n\nFor complete instructions: https://typestrong.org/ts-node/docs/transpilers",
+              "description": "使用 swc 转译而不是 TypeScript 编译器，并跳过类型检查。\n\n相当于同时设置 transpileOnly: true 和 transpiler: 'ts-node/transpilers/swc'。\n\n有关完整说明，请访问：https://typestrong.org/ts-node/docs/transpilers",
               "type": "boolean"
             },
             "transpileOnly": {
               "default": false,
-              "description": "Use TypeScript's faster `transpileModule`.",
+              "description": "使用 TypeScript 更快的 transpileModule。",
               "type": "boolean"
             },
             "transpiler": {
@@ -1183,12 +1177,14 @@
                 {
                   "items": [
                     {
-                      "type": "string"
+                      "type": "string",
+                      "description": "指定用于 transpileOnly 的自定义转换器"
                     },
                     {
                       "additionalProperties": true,
                       "properties": {},
-                      "type": "object"
+                      "type": "object",
+                      "description": "指定用于 transpileOnly 的自定义转换器"
                     }
                   ],
                   "maxItems": 2,
@@ -1196,14 +1192,15 @@
                   "type": "array"
                 },
                 {
-                  "type": "string"
+                  "type": "string",
+                  "description": "指定用于 transpileOnly 的自定义转换器"
                 }
               ],
-              "description": "Specify a custom transpiler for use with transpileOnly"
+              "description": "指定用于 transpileOnly 的自定义转换器"
             },
             "typeCheck": {
               "default": true,
-              "description": "**DEPRECATED** Specify type-check is enabled (e.g. `transpileOnly == false`).",
+              "description": "已废弃，指定类型检查是否启用（例如 transpileOnly == false）",
               "type": "boolean"
             }
           },

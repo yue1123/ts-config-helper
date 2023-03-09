@@ -1,7 +1,7 @@
 <template>
   <NCheckboxGroup
     v-model:value="store.selectedKeys"
-    :style="{ paddingLeft: `${props.level * 18}px` }"
+    :style="{ paddingLeft: `${props.level >= 1 ? 18 : 0}px` }"
     @update:value="handleChange"
   >
     <template v-for="(item, i) in props.data">

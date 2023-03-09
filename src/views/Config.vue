@@ -3,11 +3,13 @@
     <NLayoutSider
       collapse-mode="transform"
       :collapsed-width="0"
-      :width="450"
+      :width="430"
       show-trigger="bar"
       content-style="padding:15px 24px;"
       bordered
       :native-scrollbar="false"
+      :on-after-enter="handleResize"
+      :on-after-leave="handleResize"
     >
       <NSpace vertical>
         <NInput :placeholder="$t('config.searchConfig')"></NInput>
@@ -40,21 +42,26 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, shallowRef } from 'vue'
+import { onMounted, ref, watchEffect, shallowRef } from 'vue'
 import { NLayout, NLayoutSider, NSpace, NLayoutContent, NInput, NScrollbar } from 'naive-ui'
 import { useEventListener } from '@hooks'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { BIconDownload } from 'bootstrap-icons-vue'
 import { parse, stripComments } from 'jsonc-parser'
 import useStore from '../store/index'
 import { getValueByPath, parsePath, flatObjDeep, debounce } from '../utils'
-import tsconfigSchema from '../schema/tsconfig'
+import tsconfigSchema from '../schema/_tsconfig.json'
+import tsconfigZhCNSchema from '../schema/_tsconfig.zh.json'
 import Property from './Property.vue'
 import MyCheckbox from './Checkbox.vue'
 import MonacoEditor from '../components/MonacoEditor.vue'
 import type { Options } from '../types'
+import { currentLang } from '@i18n'
 
+const schemaMap = {
+  'en-US': tsconfigSchema,
+  zh_cn: tsconfigZhCNSchema
+}
 const language = ref('json')
 const store = useStore()
 const monacoEditor = ref<typeof MonacoEditor>()
@@ -85,16 +92,18 @@ function getOptions(rawData: any, keys: string[]): Options[] {
     }
   })
 }
-
-const allDefinitions: Record<string, any> = tsconfigSchema.definitions
-const options = shallowRef(
-  Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
+const options = shallowRef()
+watchEffect(() => {
+  let schema = schemaMap[currentLang.value]
+  if (!schema) return
+  const allDefinitions: Record<string, any> = schema.definitions
+  options.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
     if (allDefinitions[key].properties) {
       _values.push.apply(_values, getOptions(allDefinitions[key].properties, []))
     }
     return _values
   }, [])
-)
+})
 
 // user paste code
 function handleChange(value: string) {
@@ -110,8 +119,9 @@ function handleChange(value: string) {
 }
 
 const handleResize = debounce(() => {
+  console.log(12123123)
   monacoEditor.value?.resize()
-}, 100)
+}, (1000 / 60) * 5)
 
 onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>
