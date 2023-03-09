@@ -11,3 +11,30 @@ html {
   max-height: 100vh;
   overflow: hidden;
 }
+
+.splitpanes__splitter {
+  width: 1px !important;
+  background-color: var(--vt-c-divider-dark-2) !important;
+  border: none !important;
+  position: relative;
+  overflow: visible;
+  transition: background-color 0.3s;
+}
+.splitpanes__splitter:hover{
+  background-color: transparent !important;
+}
+.splitpanes__splitter:hover::after {
+  opacity: 1;
+}
+.splitpanes__splitter::after {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 100%;
+  background: var(--vt-c-divider-dark-2);
+  position: absolute;
+  left: -2.5px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 99;
+}

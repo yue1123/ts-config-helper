@@ -24,6 +24,7 @@ specifiers:
   npm-run-all: ^4.1.5
   pinia: ^2.0.32
   prettier: ^2.8.4
+  splitpanes: ^3.1.5
   start-server-and-test: ^2.0.0
   strip-json-comments: ^5.0.0
   typescript: ~4.8.4
@@ -31,6 +32,7 @@ specifiers:
   vitest: ^0.29.1
   vue: ^3.2.47
   vue-i18n: ^9.2.2
+  vue-multipane: ^0.9.5
   vue-router: ^4.1.6
   vue-tsc: ^1.2.0
 
@@ -45,9 +47,11 @@ dependencies:
   monaco-editor: 0.36.1
   naive-ui: 2.34.3_vue@3.2.47
   pinia: 2.0.32_7h6e7cvei2rsgyre2mq4fyhehq
+  splitpanes: 3.1.5
   strip-json-comments: 5.0.0
   vue: 3.2.47
   vue-i18n: 9.2.2_vue@3.2.47
+  vue-multipane: 0.9.5
   vue-router: 4.1.6_vue@3.2.47
 
 devDependencies:
@@ -3001,6 +3005,10 @@ packages:
       through: 2.3.8
     dev: true
 
+  /splitpanes/3.1.5:
+    resolution: {integrity: sha512-r3Mq2ITFQ5a2VXLOy4/Sb2Ptp7OfEO8YIbhVJqJXoFc9hc5nTXXkCvtVDjIGbvC0vdE7tse+xTM9BMjsszP6bw==}
+    dev: false
+
   /stackback/0.0.2:
     resolution: {integrity: sha512-1XMJE5fQo1jGH6Y/7ebnwPOBEkIEnT4QF32d5R1+VXdXveM0IBMJt8zfaxX1P3QhVwrYe+576+jkANtSS2mBbw==}
     dev: true
@@ -3452,6 +3460,11 @@ packages:
       '@intlify/vue-devtools': 9.2.2
       '@vue/devtools-api': 6.5.0
       vue: 3.2.47
+    dev: false
+
+  /vue-multipane/0.9.5:
+    resolution: {integrity: sha512-4sr6POXY82VMzprQWGNMzTIBGGYEi7nG0uGQb6AYr8o0ngIsYCDPh/gmgms8NVsZzG28b7kn3tQhKP27cbbLdw==}
+    engines: {node: '>=6.0.0'}
     dev: false
 
   /vue-router/4.1.6_vue@3.2.47:

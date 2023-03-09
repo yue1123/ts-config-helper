@@ -14,42 +14,41 @@
         <MyCheckbox :level="0" :data="options" />
       </NSpace>
     </NLayoutSider>
-    <NLayoutContent style="width: 50%">
-      <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
-        <Property :level="1" :definition="options"></Property>
-      </NScrollbar>
-    </NLayoutContent>
-    <NLayoutContent style="width: 50%; border-left: 1px solid var(--vt-c-divider-dark-2)">
-      <MonacoEditor
-        :model-value="JSON.stringify(store.previewConfig, null, 2)"
-        :language="language"
-        width="100%"
-        height="calc(100vh - 64px)"
-        theme="vs-dark"
-        @change="handleChange"
-      ></MonacoEditor>
-    </NLayoutContent>
+    <Splitpanes @resize="handleResize" :dblClickSplitter="false">
+      <Pane style="min-width: 240px">
+        <NLayoutContent>
+          <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
+            <Property :level="1" :definition="options"></Property>
+          </NScrollbar>
+        </NLayoutContent>
+      </Pane>
+      <Pane style="min-width: 240px">
+        <NLayoutContent>
+          <MonacoEditor
+            ref="monacoEditor"
+            :model-value="JSON.stringify(store.previewConfig, null, 2)"
+            :language="language"
+            width="100%"
+            height="calc(100vh - 64px)"
+            theme="vs-dark"
+            @change="handleChange"
+          ></MonacoEditor>
+        </NLayoutContent>
+      </Pane>
+    </Splitpanes>
   </NLayout>
 </template>
 
 <script lang="ts" setup>
-import { ref, shallowRef } from 'vue'
-import {
-  NH2,
-  NLayout,
-  NButton,
-  NLayoutHeader,
-  NLayoutSider,
-  NSpace,
-  NLayoutContent,
-  NCode,
-  NInput,
-  NScrollbar
-} from 'naive-ui'
+import { onMounted, ref, shallowRef } from 'vue'
+import { NLayout, NLayoutSider, NSpace, NLayoutContent, NInput, NScrollbar } from 'naive-ui'
+import { useEventListener } from '@hooks'
+import { Splitpanes, Pane } from 'splitpanes'
+import 'splitpanes/dist/splitpanes.css'
 import { BIconDownload } from 'bootstrap-icons-vue'
 import { parse, stripComments } from 'jsonc-parser'
 import useStore from '../store/index'
-import { getValueByPath, parsePath, flatObjDeep } from '../utils'
+import { getValueByPath, parsePath, flatObjDeep, debounce } from '../utils'
 import tsconfigSchema from '../schema/tsconfig'
 import Property from './Property.vue'
 import MyCheckbox from './Checkbox.vue'
@@ -58,6 +57,7 @@ import type { Options } from '../types'
 
 const language = ref('json')
 const store = useStore()
+const monacoEditor = ref<typeof MonacoEditor>()
 
 function getOptions(rawData: any, keys: string[]): Options[] {
   let tempKeys = [...keys]
@@ -108,4 +108,10 @@ function handleChange(value: string) {
     // console.log(error)
   }
 }
+
+const handleResize = debounce(() => {
+  monacoEditor.value?.resize()
+}, 100)
+
+onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>

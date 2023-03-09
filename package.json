@@ -24,9 +24,11 @@
     "monaco-editor": "^0.36.1",
     "naive-ui": "^2.34.3",
     "pinia": "^2.0.32",
+    "splitpanes": "^3.1.5",
     "strip-json-comments": "^5.0.0",
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
+    "vue-multipane": "^0.9.5",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {

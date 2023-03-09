@@ -3,7 +3,7 @@
 </template>
 ​
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch, getCurrentInstance } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch, defineExpose,getCurrentInstance } from 'vue'
 import * as monaco from 'monaco-editor'
 // import { parse, modify, applyEdits, format } from 'jsonc-parser'
 // import { compare, applyOperation, applyPatch } from 'fast-json-patch'
@@ -123,12 +123,12 @@ watch(
   },
   { deep: true }
 )
-watch(
-  () => props.language,
-  (newValue) => {
-    monaco.editor.setModelLanguage(editor!.getModel()!, newValue)
-  }
-)
+// watch(
+//   () => props.language,
+//   (newValue) => {
+//     monaco.editor.setModelLanguage(editor!.getModel()!, newValue)
+//   }
+// )
 watch(
   () => themeStore.isDark,
   (isDark) => {
@@ -137,6 +137,15 @@ watch(
 )
 onBeforeUnmount(() => editor!.dispose())
 onMounted(init)
+
+function resize(){
+  if(!editor) return
+  editor.layout()
+}
+
+defineExpose({
+  resize
+})
 </script>
 
 <script lang="ts">
