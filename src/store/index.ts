@@ -13,58 +13,9 @@ export default defineStore('data', {
   state: (): State => {
     return {
       config: '',
-      selectedKeys: [
-        'compilerOptions/target',
-        'compilerOptions/useDefineForClassFields',
-        'compilerOptions/module',
-        'compilerOptions/moduleResolution',
-        'compilerOptions/strict',
-        'compilerOptions/jsx',
-        'compilerOptions/sourceMap',
-        'compilerOptions/resolveJsonModule',
-        'compilerOptions/esModuleInterop',
-        'compilerOptions/declaration',
-        'compilerOptions/declarationDir',
-        'compilerOptions/emitDeclarationOnly',
-        'compilerOptions/skipLibCheck',
-        'compilerOptions/lib',
-        'compilerOptions/types',
-        'compilerOptions/suppressImplicitAnyIndexErrors',
-        'compilerOptions/baseUrl',
-        'include',
-        'exclude'
-      ],
+      selectedKeys: [],
       // TODO: json 支持注释
-      rawConfig: {
-        'compilerOptions/target': 'ES2016',
-        'compilerOptions/useDefineForClassFields': true,
-        'compilerOptions/module': 'esnext',
-        'compilerOptions/moduleResolution': 'node',
-        'compilerOptions/strict': true,
-        'compilerOptions/jsx': 'react-jsx',
-        'compilerOptions/sourceMap': true,
-        'compilerOptions/resolveJsonModule': true,
-        'compilerOptions/esModuleInterop': true,
-        'compilerOptions/declaration': true,
-        'compilerOptions/declarationDir': './es',
-        'compilerOptions/emitDeclarationOnly': true,
-        'compilerOptions/skipLibCheck': true,
-        'compilerOptions/lib': ['ESNext', 'dom', 'ESNext.Promise'],
-        'compilerOptions/types': ['node', 'vite/client'],
-        'compilerOptions/suppressImplicitAnyIndexErrors': true,
-        'compilerOptions/baseUrl': '.',
-        include: [
-          'packages/index.ts',
-          'packages/hooks/*.ts',
-          'packages/utils/*.ts',
-          'packages/components/**/*.vue',
-          'packages/components/**/*.ts',
-          'types/*.d.ts',
-          'types/**/*.d.ts',
-          'packages/env.d.ts'
-        ],
-        exclude: ['node_modules', 'es', 'dist']
-      }
+      rawConfig: {}
     }
   },
   getters: {
@@ -74,7 +25,8 @@ export default defineStore('data', {
       Object.keys(rawConfig).forEach((key) => initValueByPath(obj, key, rawConfig[key]))
       return Object.keys(obj).length ? obj : undefined
     }
-  }
+  },
+  persist: true
 })
 
 // export function watchChange({ store }: PiniaPluginContext) {

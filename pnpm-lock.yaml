@@ -23,6 +23,7 @@ specifiers:
   naive-ui: ^2.34.3
   npm-run-all: ^4.1.5
   pinia: ^2.0.32
+  pinia-plugin-persistedstate: ^3.1.0
   prettier: ^2.8.4
   splitpanes: ^3.1.5
   start-server-and-test: ^2.0.0
@@ -46,6 +47,7 @@ dependencies:
   monaco-editor: 0.36.1
   naive-ui: 2.34.3_vue@3.2.47
   pinia: 2.0.32_7h6e7cvei2rsgyre2mq4fyhehq
+  pinia-plugin-persistedstate: 3.1.0_pinia@2.0.32
   splitpanes: 3.1.5
   strip-json-comments: 5.0.0
   vue: 3.2.47
@@ -2676,6 +2678,14 @@ packages:
     resolution: {integrity: sha512-C3FsVNH1udSEX48gGX1xfvwTWfsYWj5U+8/uK15BGzIGrKoUpghX8hWZwa/OFnakBiiVNmBvemTJR5mcy7iPcg==}
     engines: {node: '>=4'}
     dev: true
+
+  /pinia-plugin-persistedstate/3.1.0_pinia@2.0.32:
+    resolution: {integrity: sha512-8UN+vYMEPBdgNLwceY08mi5olI0wkYaEb8b6hD6xW7SnBRuPydWHlEhZvUWgNb/ibuf4PvufpvtS+dmhYjJQOw==}
+    peerDependencies:
+      pinia: ^2.0.0
+    dependencies:
+      pinia: 2.0.32_7h6e7cvei2rsgyre2mq4fyhehq
+    dev: false
 
   /pinia/2.0.32_7h6e7cvei2rsgyre2mq4fyhehq:
     resolution: {integrity: sha512-8Tw4OrpCSJ028UUyp0gYPP/wyjigLoEceuO/x1G+FlHVf73337e5vLm4uDmrRIoBG1hvaed/eSHnrCFjOc4nkA==}
