@@ -1,5 +1,50 @@
 {
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "allOf": [
+    {
+      "$ref": "#/definitions/compilerOptionsDefinition"
+    },
+    {
+      "$ref": "#/definitions/compileOnSaveDefinition"
+    },
+    {
+      "$ref": "#/definitions/typeAcquisitionDefinition"
+    },
+    {
+      "$ref": "#/definitions/extendsDefinition"
+    },
+    {
+      "$ref": "#/definitions/watchOptionsDefinition"
+    },
+    {
+      "$ref": "#/definitions/buildOptionsDefinition"
+    },
+    {
+      "$ref": "#/definitions/tsNodeDefinition"
+    },
+    {
+      "anyOf": [
+        {
+          "$ref": "#/definitions/filesDefinition"
+        },
+        {
+          "$ref": "#/definitions/excludeDefinition"
+        },
+        {
+          "$ref": "#/definitions/includeDefinition"
+        },
+        {
+          "$ref": "#/definitions/referencesDefinition"
+        }
+      ]
+    }
+  ],
   "definitions": {
+    "//": {
+      "explainer": "https://www.typescriptlang.org/docs/handbook/tsconfig-json.html#overview",
+      "reference": "https://www.typescriptlang.org/tsconfig",
+      "reference metadata": "https://github.com/microsoft/TypeScript-Website/blob/v2/packages/tsconfig-reference/scripts/tsconfigRules.ts"
+    },
     "filesDefinition": {
       "properties": {
         "files": {

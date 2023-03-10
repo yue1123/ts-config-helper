@@ -6,7 +6,9 @@
         :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
         ># {{ property.label }}</component
       >
-      <div style="color: #999; margin-bottom: 10px">{{ property.description }}</div>
+      <div v-if="settingStore.showDescription" style="color: #999; margin-bottom: 10px">
+        {{ property.description }}
+      </div>
       <template key="array" v-if="getInputType(property) === 'array'">
         <div type="array" class="array_property-container">
           <NDynamicTags
@@ -101,6 +103,7 @@ import {
 
 import { enumToOptions, getInputType } from '../utils'
 import useStore from '../store/index'
+import useSettingStore from '../store/setting'
 import type { Options } from '../types'
 import { type Component, h } from 'vue'
 
@@ -118,6 +121,7 @@ const levelTitleMap: Record<number, Component> = {
 }
 
 const store = useStore()
+const settingStore = useSettingStore()
 const message = useMessage()
 const props = defineProps<Props>()
 

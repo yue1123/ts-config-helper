@@ -3,14 +3,25 @@
 </template>
 ​
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch, defineExpose,getCurrentInstance } from 'vue'
+import {
+  onBeforeUnmount,
+  onMounted,
+  ref,
+  watch,
+  defineExpose,
+  getCurrentInstance,
+  watchEffect
+} from 'vue'
 import * as monaco from 'monaco-editor'
 // import { parse, modify, applyEdits, format } from 'jsonc-parser'
 // import { compare, applyOperation, applyPatch } from 'fast-json-patch'
 import useThemeStore from '../store/theme'
 import useDataStore from '../store'
-// import { parse, assign, stringify } from 'comment-json'
+import useSettingStore from '../store/setting'
 
+// import { parse, assign, stringify } from 'comment-json'
+import es from '../schema/_tsconfig.json?url'
+import zh from '../schema/_tsconfig.zh.json?url'
 export interface Props {
   modelValue?: string
   language: string
@@ -18,26 +29,20 @@ export interface Props {
   options?: Record<string, any>
   width?: string
   height?: string
+  local: 'zh_cn' | 'en-US'
+}
+const schemaJsonMap = {
+  'en-US': es,
+  zh_cn: zh
 }
 const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted'])
 const props = defineProps<Props>()
 const themeStore = useThemeStore()
+const settingStore = useSettingStore()
 const dataStore = useDataStore()
 let editor: monaco.editor.IStandaloneCodeEditor | null = null
 const codeEditBox = ref()
 const init = () => {
-  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-    validate: true,
-    enableSchemaRequest: true,
-    allowComments: false,
-    schemas: [
-      {
-        // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
-        fileMatch: ['*'],
-        uri: 'http://json.schemastore.org/tsconfig'
-      }
-    ]
-  })
   // 定义主题
   monaco.editor.defineTheme('darkTheme', {
     base: 'vs-dark',
@@ -55,21 +60,24 @@ const init = () => {
       'editor.background': '#ffffff'
     }
   })
+  const { tabSize, fontSize, lineHeight, minimap, lineNumbers } = settingStore.editor
   editor = monaco.editor.create(codeEditBox.value, {
     value: props.modelValue,
     language: props.language,
     theme: themeStore.isDark ? 'darkTheme' : 'lightTheme',
-    fontSize: 14,
-    lineHeight: 22,
     automaticLayout: false,
-    tabSize: 2,
     domReadOnly: true,
     scrollbar: {
       verticalScrollbarSize: 8,
       horizontalScrollbarSize: 8
     },
+    fontSize,
+    lineHeight,
+    tabSize,
+    insertSpaces: true,
+    lineNumbers: lineNumbers ? 'on' : 'off',
     minimap: {
-      enabled: false
+      enabled: minimap
     },
     ...props.options
   })
@@ -84,6 +92,37 @@ const init = () => {
   // sync value
   dataStore.config = props.modelValue || ''
 }
+
+watchEffect(() => {
+  const { tabSize, fontSize, lineHeight, minimap, lineNumbers } = settingStore.editor
+  if (!editor) return
+  editor.updateOptions({
+    fontSize,
+    lineHeight,
+    tabSize,
+    lineNumbers: lineNumbers ? 'on' : 'off',
+    minimap: {
+      enabled: minimap
+    }
+  })
+})
+watchEffect(() => {
+  let url = schemaJsonMap[props.local]
+  if (!url) return
+  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+    validate: true,
+    enableSchemaRequest: true,
+    allowComments: false,
+    schemas: [
+      {
+        // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
+        fileMatch: ['*'],
+        uri: new URL(url, import.meta.url).href
+      }
+    ]
+  })
+})
+
 watch(
   () => props.modelValue,
   (newValue) => {
@@ -138,8 +177,8 @@ watch(
 onBeforeUnmount(() => editor!.dispose())
 onMounted(init)
 
-function resize(){
-  if(!editor) return
+function resize() {
+  if (!editor) return
   editor.layout()
 }
 

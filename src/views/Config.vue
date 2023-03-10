@@ -27,8 +27,9 @@
       <Pane style="min-width: 240px">
         <NLayoutContent>
           <MonacoEditor
+            :local="currentLang"
             ref="monacoEditor"
-            :model-value="JSON.stringify(store.previewConfig, null, 2)"
+            :model-value="JSON.stringify(store.previewConfig, null, settingStore.editor.tabSize)"
             :language="language"
             width="100%"
             height="calc(100vh - 64px)"
@@ -49,6 +50,7 @@ import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import { parse, stripComments } from 'jsonc-parser'
 import useStore from '../store/index'
+import useSettingStore from '../store/setting'
 import { getValueByPath, parsePath, flatObjDeep, debounce } from '../utils'
 import tsconfigSchema from '../schema/_tsconfig.json'
 import tsconfigZhCNSchema from '../schema/_tsconfig.zh.json'
@@ -64,6 +66,8 @@ const schemaMap = {
 }
 const language = ref('json')
 const store = useStore()
+const settingStore = useSettingStore()
+
 const monacoEditor = ref<typeof MonacoEditor>()
 
 function getOptions(rawData: any, keys: string[]): Options[] {
@@ -97,6 +101,7 @@ watchEffect(() => {
   let schema = schemaMap[currentLang.value]
   if (!schema) return
   const allDefinitions: Record<string, any> = schema.definitions
+  Reflect.deleteProperty(allDefinitions, '//')
   options.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
     if (allDefinitions[key].properties) {
       _values.push.apply(_values, getOptions(allDefinitions[key].properties, []))
@@ -124,7 +129,6 @@ function handleChange(value: string) {
 }
 
 const handleResize = debounce(() => {
-  console.log(12123123)
   monacoEditor.value?.resize()
 }, (1000 / 60) * 5)
 

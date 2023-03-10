@@ -13,7 +13,7 @@
               <NButton @click="handleExport" strong secondary>
                 <template #icon> <BIconDownload /> </template>{{ $t('nav.export') }}</NButton
               >
-              <ThemeButton @themeChange="handleChangeTheme" />
+              <ThemeButton />
               <NDropdown
                 placement="bottom-start"
                 trigger="click"
@@ -38,15 +38,17 @@
         :mask-closable="false"
         class="custom-card"
         preset="card"
-        :style="{ width: '50%' }"
+        :style="{ width: '600px' }"
         title="设置"
         size="huge"
         :bordered="false"
       >
-        <template #header-extra> 关闭 </template>
-        内容
+        <Setting ref="setting" />
         <template #footer>
-          <NButton @click="showSetting = false" strong secondary> 应用 </NButton>
+          <NSpace :justify="'end'">
+            <NButton type="primary" secondary @click="handleSaveSetting" strong> 应用 </NButton>
+            <NButton @click="showSetting = false" strong secondary> 确定 </NButton>
+          </NSpace>
         </template>
       </NModal>
     </NMessageProvider>
@@ -54,7 +56,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, shallowRef } from 'vue'
+import { computed, ref, shallowRef, watchEffect } from 'vue'
 import {
   NConfigProvider,
   NMessageProvider,
@@ -75,11 +77,14 @@ import ThemeButton from './components/ThemeButton.vue'
 import hljs from 'highlight.js/lib/core'
 import json from 'highlight.js/lib/languages/json'
 import Config from './views/Config.vue'
+import Setting from './views/Setting.vue'
 import useStore from './store'
+import useThemeStore from './store/theme'
 
 hljs.registerLanguage('json', json)
 const currentTheme = shallowRef(darkTheme)
 const store = useStore()
+const themeStore = useThemeStore()
 
 const lang = computed(() => {
   return Object.keys(SUPPORT_LOCALES).map((l) => {
@@ -90,14 +95,13 @@ const lang = computed(() => {
     }
   })
 })
-console.log(lang)
 function handleSelectLanguage(lang: SUPPORT_LOCALES) {
   setI18nLanguage(lang)
 }
 function handleChangeTheme(isDark: boolean) {
   currentTheme.value = isDark ? darkTheme : lightTheme
 }
-
+watchEffect(() => handleChangeTheme(themeStore.isDark))
 function handleExport() {
   if (!store.previewConfig) return
   // 创建一个新的 Blob 对象
@@ -120,5 +124,9 @@ function handleExport() {
 }
 
 // setting
+const setting = ref<typeof Setting>()
 const showSetting = ref(false)
+function handleSaveSetting() {
+  setting.value?.save()
+}
 </script>
