@@ -107,14 +107,19 @@ watchEffect(() => {
 
 // user paste code
 function handleChange(value: string) {
-  try {
-    store.rawConfig = flatObjDeep(parse(value))
-    let selectedKeys = Object.keys(store.rawConfig)
-    if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-      store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
+  if (value) {
+    try {
+      store.rawConfig = flatObjDeep(parse(value))
+      let selectedKeys = Object.keys(store.rawConfig)
+      if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
+        store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
+      }
+    } catch (error) {
+      console.log(error)
     }
-  } catch (error) {
-    // console.log(error)
+  } else {
+    store.selectedKeys = []
+    store.rawConfig = {}
   }
 }
 
