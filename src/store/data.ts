@@ -1,6 +1,7 @@
 import { defineStore, type PiniaPluginContext } from 'pinia'
 import { diffArray, debounce, initValueByPath } from '../utils'
 import { compare } from 'fast-json-patch'
+import { DATA_CACHE } from '@constants'
 
 type ConfigValue = boolean | string | string[] | undefined
 interface State {
@@ -9,7 +10,7 @@ interface State {
   rawConfig: Record<string, any>
 }
 
-export default defineStore('data', {
+export default defineStore(DATA_CACHE, {
   state: (): State => {
     return {
       config: '',

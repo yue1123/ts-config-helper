@@ -102,7 +102,7 @@ import {
 } from 'naive-ui'
 
 import { enumToOptions, getInputType } from '../utils'
-import useStore from '../store/index'
+import useStore from '../store/data'
 import useSettingStore from '../store/setting'
 import type { Options } from '../types'
 import { type Component, h } from 'vue'

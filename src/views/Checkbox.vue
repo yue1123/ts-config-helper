@@ -23,7 +23,7 @@
 <script setup lang="ts">
 import { NSpace, NDivider, NCheckbox, NCollapse, NCollapseItem, NCheckboxGroup } from 'naive-ui'
 import type { Options } from '../types'
-import useStore from '../store/index'
+import useStore from '../store/data'
 import { deletePropertyByPath } from '../utils'
 
 export interface Props {

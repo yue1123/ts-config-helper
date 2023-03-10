@@ -16,7 +16,7 @@ import * as monaco from 'monaco-editor'
 // import { parse, modify, applyEdits, format } from 'jsonc-parser'
 // import { compare, applyOperation, applyPatch } from 'fast-json-patch'
 import useThemeStore from '../store/theme'
-import useDataStore from '../store'
+import useDataStore from '../store/data'
 import useSettingStore from '../store/setting'
 
 // import { parse, assign, stringify } from 'comment-json'

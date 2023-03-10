@@ -78,7 +78,7 @@ import hljs from 'highlight.js/lib/core'
 import json from 'highlight.js/lib/languages/json'
 import Config from './views/Config.vue'
 import Setting from './views/Setting.vue'
-import useStore from './store'
+import useStore from './store/data'
 import useThemeStore from './store/theme'
 
 hljs.registerLanguage('json', json)
