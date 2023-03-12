@@ -46,8 +46,8 @@
         <Setting ref="setting" />
         <template #footer>
           <NSpace :justify="'end'">
-            <NButton type="primary" secondary @click="handleSaveSetting" strong> 应用 </NButton>
-            <NButton @click="showSetting = false" strong secondary> 确定 </NButton>
+            <NButton type="primary" secondary @click="() => handleSaveSetting(false)" strong> 应用 </NButton>
+            <NButton @click="() => handleSaveSetting(true)" strong secondary> 确定 </NButton>
           </NSpace>
         </template>
       </NModal>
@@ -126,7 +126,8 @@ function handleExport() {
 // setting
 const setting = ref<typeof Setting>()
 const showSetting = ref(false)
-function handleSaveSetting() {
+function handleSaveSetting(saveAndClose: boolean = false) {
+  showSetting.value = !saveAndClose
   setting.value?.save()
 }
 </script>
