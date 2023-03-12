@@ -1,11 +1,19 @@
 import { resolve, join } from 'node:path'
-
+import { spaLoading } from 'vite-plugin-spa-loading'
 import { defineConfig } from 'vite'
+
 import vue from '@vitejs/plugin-vue'
 
-// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    spaLoading('svg', {
+      debounce: 0,
+      tipText: 'loading....',
+      path: './src/assets/loading.svg',
+      devEnable: true
+    })
+  ],
   resolve: {
     alias: {
       '@': resolve(__dirname, './src'),

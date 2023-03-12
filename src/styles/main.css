@@ -52,6 +52,8 @@ body {
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 99;
+  border-left: 1px solid var(--vt-c-divider-dark-2);
+  border-right: 1px solid var(--vt-c-divider-dark-2);
 }
 .splitpanes__splitter:active::after {
   background: var(--vt-c-text-dark-2) !important;

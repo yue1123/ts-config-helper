@@ -1,6 +1,6 @@
 {
   "name": "ts-config-helper",
-  "version": "0.0.0",
+  "version": "1.0.0-beta.1",
   "private": true,
   "description": "针对 ts 配置太复杂，配置项不知道啥意思，文档又太零散，帮助学习和配置 tsconfig.json",
   "scripts": {
@@ -32,6 +32,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "vite-plugin-spa-loading": "^1.0.3",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^21.1.0",
     "@types/node": "^18.14.2",
