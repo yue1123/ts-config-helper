@@ -4,5 +4,19 @@
   },
   "config": {
     "searchConfig": "搜索配置项"
+  },
+  "emptyTips": "请在右侧勾选配置项或左侧输入tsconfig.json配置",
+  "setting": {
+    "title": "设置",
+    "general": "常规",
+    "editor": "编辑器",
+    "showDescription": "显示配置描述",
+    "editorSetting": {
+      "tabSize": "Tab大小",
+      "fontSize": "字体大小",
+      "lineHeight": "行高",
+      "minimap": "显示小地图",
+      "lineNumbers": "显示代码行号"
+    }
   }
 }

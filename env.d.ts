@@ -11,7 +11,7 @@ declare module 'splitpanes' {
 }
 
 // i18n translate key
-declare module '@intlify/message-resolver' {
+declare module '@intlify/core-base' {
   import I18nStore from '@i18n/locale/zh_cn.json'
 
   export type PickupPathKey<

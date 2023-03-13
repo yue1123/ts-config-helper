@@ -12,7 +12,7 @@
       :on-after-leave="handleResize"
     >
       <NSpace vertical>
-        <NInput :placeholder="$t('config.searchConfig')"></NInput>
+        <!-- <NInput :placeholder="$t('config.searchConfig')"></NInput> -->
         <MyCheckbox :level="0" :data="options" />
       </NSpace>
     </NLayoutSider>
@@ -20,6 +20,9 @@
       <Pane style="min-width: 240px">
         <NLayoutContent>
           <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
+            <template v-if="!store.selectedKeys.length">
+              <div class="tipText">{{ $t('emptyTips') }}</div>
+            </template>
             <Property :level="1" :definition="options"></Property>
           </NScrollbar>
         </NLayoutContent>
@@ -44,7 +47,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watchEffect, shallowRef } from 'vue'
-import { NLayout, NLayoutSider, NSpace, NLayoutContent, NInput, NScrollbar } from 'naive-ui'
+import { NLayout, NLayoutSider, NSpace, NLayoutContent, NInput, NScrollbar, NTag } from 'naive-ui'
 import { useEventListener } from '@hooks'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
@@ -134,3 +137,10 @@ const handleResize = debounce(() => {
 
 onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>
+
+<style scoped>
+.tipText {
+  color: var(--vt-c-divider-dark-2);
+  text-align: center;
+}
+</style>

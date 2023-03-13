@@ -19,7 +19,7 @@ export default defineConfig({
       '@': resolve(__dirname, './src'),
       '@themeVars': resolve(__dirname, './src/styles/theme.module.scss'),
       '@layout': resolve(__dirname, './src/layout'),
-      '@pages': resolve(__dirname, './src/pages'),
+      '@views': resolve(__dirname, './src/views'),
       '@components': join(__dirname, 'src/components/'),
       '@i18n': join(__dirname, 'src/i18n/'),
       '@utils': join(__dirname, 'src/utils/'),

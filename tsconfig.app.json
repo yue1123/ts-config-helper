@@ -11,7 +11,7 @@
       "@*": ["src/*"],
       "@styles": ["src/styles/*"],
       "@layout": ["src/layout/*"],
-      "@pages": ["src/pages/*"],
+      "@views": ["src/views/*"],
       "@router": ["src/router/*"],
       "@components/*": ["src/components/*"],
       "@utils/*": ["src/utils/*"],

@@ -2,7 +2,21 @@
   "nav": {
     "export": "export"
   },
-  "config":{
-    "searchConfig":"search config item"
+  "config": {
+    "searchConfig": "search config item"
+  },
+  "emptyTips": "Please check the configuration item on the right or enter the tsconfig.json configuration on the left",
+  "setting": {
+    "title": "Settings",
+    "general": "General",
+    "editor": "editor",
+    "showDescription": "Show configuration description",
+    "editorSetting": {
+      "tabSize": "Tab Size",
+      "fontSize": "Font Size",
+      "lineHeight": "Line Height",
+      "minimap": "Show minimap",
+      "lineNumbers": "Show code line numbers"
+    }
   }
 }

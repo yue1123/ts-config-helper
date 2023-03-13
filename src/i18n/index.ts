@@ -1,8 +1,9 @@
-import { nextTick, ref } from 'vue'
+import { ref } from 'vue'
 import { createI18n, type VueI18nOptions } from 'vue-i18n'
 import { SUPPORT_LOCALES } from '@constants'
 import en_US from '@i18n/locale/en-US.json'
 import zh_cn from '@i18n/locale/zh_cn.json'
+import useSettingStore from '@store/setting'
 
 // for global use
 export let i18n: any
@@ -20,6 +21,10 @@ export function setupI18n() {
 }
 
 export function setI18nLanguage(locale: SUPPORT_LOCALES) {
+  try {
+    const setting = useSettingStore()
+    if (setting.lang !== locale) setting.lang = locale
+  } catch (error) {}
   currentLang.value = locale
   if (i18n.mode === 'legacy') {
     i18n.global.locale = locale

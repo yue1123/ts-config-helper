@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { SETTING_STORAGE } from '@constants'
-
+import { SUPPORT_LOCALES } from '@constants'
+import { setI18nLanguage } from '@i18n'
 interface State {
   editor: {
     tabSize: number
@@ -10,6 +11,7 @@ interface State {
     lineNumbers: boolean
   }
   showDescription: boolean
+  lang: SUPPORT_LOCALES
 }
 
 export default defineStore(SETTING_STORAGE, {
@@ -22,8 +24,14 @@ export default defineStore(SETTING_STORAGE, {
         minimap: false,
         lineNumbers: true
       },
-      showDescription: false
+      showDescription: false,
+      lang: SUPPORT_LOCALES['zh_cn']
     }
   },
-  persist: true
+  persist: {
+    afterRestore(cacheStore) {
+      console.log(cacheStore.store.lang)
+      setI18nLanguage(cacheStore.store.lang)
+    }
+  }
 })
