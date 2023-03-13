@@ -25,7 +25,7 @@
                   <template #icon> <BIconTranslate /> </template
                 ></NButton>
               </NDropdown>
-              <NButton @click="showSetting = true" strong secondary>
+              <NButton @click="handleShowSetting" strong secondary>
                 <template #icon> <BIconGearFill /> </template
               ></NButton>
             </NSpace>
@@ -33,24 +33,7 @@
         </NLayoutHeader>
         <Config />
       </NLayout>
-      <NModal
-        v-model:show="showSetting"
-        :mask-closable="false"
-        class="custom-card"
-        preset="card"
-        :style="{ width: '600px' }"
-        title="设置"
-        size="huge"
-        :bordered="false"
-      >
-        <Setting ref="setting" />
-        <template #footer>
-          <NSpace :justify="'end'">
-            <NButton type="primary" secondary @click="() => handleSaveSetting(false)" strong> 应用 </NButton>
-            <NButton @click="() => handleSaveSetting(true)" strong secondary> 确定 </NButton>
-          </NSpace>
-        </template>
-      </NModal>
+      <Setting ref="setting" />
     </NMessageProvider>
   </NConfigProvider>
 </template>
@@ -73,13 +56,13 @@ import {
 import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
 import { setI18nLanguage, currentLang } from '@i18n'
 import { BIconDownload, BIconGearFill, BIconTranslate } from 'bootstrap-icons-vue'
-import ThemeButton from './components/ThemeButton.vue'
+import ThemeButton from '@components/ThemeButton.vue'
 import hljs from 'highlight.js/lib/core'
 import json from 'highlight.js/lib/languages/json'
-import Config from './views/Config.vue'
-import Setting from './views/Setting.vue'
-import useStore from './store/data'
-import useThemeStore from './store/theme'
+import Config from '@views/Config.vue'
+import Setting from '@views/Setting.vue'
+import useStore from '@store/data'
+import useThemeStore from '@store/theme'
 
 hljs.registerLanguage('json', json)
 const currentTheme = shallowRef(darkTheme)
@@ -125,9 +108,7 @@ function handleExport() {
 
 // setting
 const setting = ref<typeof Setting>()
-const showSetting = ref(false)
-function handleSaveSetting(saveAndClose: boolean = false) {
-  showSetting.value = !saveAndClose
-  setting.value?.save()
+function handleShowSetting() {
+  setting.value?.show()
 }
 </script>
