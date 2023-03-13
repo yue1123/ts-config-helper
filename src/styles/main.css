@@ -14,6 +14,7 @@ html {
 
 body {
   min-height: 100vh;
+  min-width: 960px;
   color: var(--color-text);
   background: var(--color-background);
   transition: color 0.5s, background-color 0.5s;
@@ -25,7 +26,6 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 
 .splitpanes__splitter {
   width: 1px !important;
@@ -52,9 +52,7 @@ body {
   opacity: 0;
   transition: opacity 0.3s;
   z-index: 99;
-  border-left: 1px solid var(--vt-c-divider-dark-2);
-  border-right: 1px solid var(--vt-c-divider-dark-2);
 }
 .splitpanes__splitter:active::after {
-  background: var(--vt-c-text-dark-2) !important;
+  background: #18a058 !important;
 }
