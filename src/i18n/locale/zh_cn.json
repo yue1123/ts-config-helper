@@ -18,5 +18,6 @@
       "minimap": "显示小地图",
       "lineNumbers": "显示代码行号"
     }
-  }
+  },
+  "about": "这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。"
 }

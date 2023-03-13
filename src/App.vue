@@ -4,11 +4,16 @@
       <NLayout style="height: 100vh">
         <NLayoutHeader style="position: sticky; top: 0; height: 64px; padding: 15px 24px" bordered>
           <NSpace justify="space-between" align="center">
-            <NSpace align="center">
-              <img width="32" height="32" src="./assets/logo.png" alt="" />
-              <NH2 style="margin-bottom: 0">Config helper</NH2>
-              <!-- <span style="font-size: 12px">Ts is good，but configure it is not good</span> -->
-            </NSpace>
+            <NTooltip placement="right" :style="{ maxWidth: '400px' }" trigger="hover">
+              <template #trigger>
+                <NSpace align="center">
+                  <img width="32" height="32" src="./assets/logo.png" alt="" />
+                  <NH2 style="margin-bottom: 0">Config helper</NH2>
+                </NSpace>
+              </template>
+              {{ $t('about') }}
+            </NTooltip>
+            <!-- <span style="font-size: 12px">Ts is good，but configure it is not good</span> -->
             <NSpace role="functional-btn" class="buttons-container">
               <NButton @click="handleExport" strong secondary>
                 <template #icon> <BIconDownload /> </template>{{ $t('nav.export') }}</NButton
@@ -28,6 +33,16 @@
               <NButton @click="handleShowSetting" strong secondary>
                 <template #icon> <BIconGearFill /> </template
               ></NButton>
+              <NButton
+                tag="a"
+                href="https://github.com/yue1123/ts-config-helper"
+                target="_blank"
+                @click="handleShowSetting"
+                strong
+                secondary
+              >
+                <template #icon> <BIconGithub /> </template
+              ></NButton>
             </NSpace>
           </NSpace>
         </NLayoutHeader>
@@ -45,17 +60,23 @@ import {
   NMessageProvider,
   darkTheme,
   lightTheme,
-  NModal,
   NH2,
   NLayout,
   NButton,
   NLayoutHeader,
   NSpace,
-  NDropdown
+  NDropdown,
+  NTooltip
 } from 'naive-ui'
 import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
 import { setI18nLanguage, currentLang } from '@i18n'
-import { BIconDownload, BIconGearFill, BIconTranslate } from 'bootstrap-icons-vue'
+import {
+  BIconDownload,
+  BIconGearFill,
+  BIconTranslate,
+  BIconGithub,
+  BIconInfo
+} from 'bootstrap-icons-vue'
 import ThemeButton from '@components/ThemeButton.vue'
 import hljs from 'highlight.js/lib/core'
 import json from 'highlight.js/lib/languages/json'
