@@ -12,7 +12,6 @@ export default defineConfig({
     VitePWA(),
     spaLoading('svg', {
       debounce: 100,
-      tipText: 'loading....',
       path: './src/assets/loading.svg',
       devEnable: true
     })
