@@ -16,11 +16,32 @@
       label-width="auto"
       require-mark-placement="right-hanging"
     >
-      <NDivider title-placement="left" dashed> {{ $t('setting.general') }} </NDivider>
+      <NDivider title-placement="left" dashed>
+        {{ $t('setting.general') }}
+      </NDivider>
+      <NFormItem :label="$t('setting.language')" path="showDescription">
+        <NDropdown
+          placement="bottom-start"
+          trigger="click"
+          size="small"
+          :options="lang"
+          @select="handleSelectLanguage"
+        >
+          <NButton strong secondary>
+            <!-- <template
+              #icon>
+              <BIconTranslate />
+            </template> -->
+            {{ SUPPORT_LOCALES_LABEL[settingCopy.lang as keyof typeof SUPPORT_LOCALES_LABEL] }}
+          </NButton>
+        </NDropdown>
+      </NFormItem>
       <NFormItem :label="$t('setting.showDescription')" path="showDescription">
         <NSwitch v-model:value="settingCopy.showDescription" />
       </NFormItem>
-      <NDivider title-placement="left" dashed> {{ $t('setting.editor') }} </NDivider>
+      <NDivider title-placement="left" dashed>
+        {{ $t('setting.editor') }}
+      </NDivider>
       <NFormItem :label="$t('setting.editorSetting.tabSize')" path="editor.tabSize">
         <NInputNumber v-model:value="settingCopy.editor.tabSize" />
       </NFormItem>
@@ -52,6 +73,7 @@
 import {
   NForm,
   NFormItem,
+  NDropdown,
   NSwitch,
   NInputNumber,
   NDivider,
@@ -59,14 +81,29 @@ import {
   NModal,
   NButton
 } from 'naive-ui'
-import { reactive, ref } from 'vue'
+import { computed, reactive, ref } from 'vue'
 import useSettingStore from '@store/setting'
+import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
+import { currentLang, setI18nLanguage } from '@i18n'
 const settingStore = useSettingStore()
 const settingCopy = reactive(JSON.parse(JSON.stringify(settingStore.$state)))
 const showSetting = ref(false)
 
 function save() {
   settingStore.$state = settingCopy
+}
+
+const lang = computed(() => {
+  return Object.keys(SUPPORT_LOCALES).map((l) => {
+    return {
+      disabled: l === currentLang.value,
+      label: SUPPORT_LOCALES_LABEL[l as keyof typeof SUPPORT_LOCALES_LABEL],
+      key: l
+    }
+  })
+})
+function handleSelectLanguage(lang: SUPPORT_LOCALES) {
+  settingCopy.lang = lang
 }
 
 defineExpose({
@@ -80,6 +117,7 @@ defineExpose({
 })
 function handleSaveSetting(saveAndClose: boolean = false) {
   showSetting.value = !saveAndClose
+  setI18nLanguage(settingCopy.lang)
   save()
 }
 </script>

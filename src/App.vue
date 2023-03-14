@@ -6,30 +6,19 @@
           <NSpace justify="space-between" align="center">
             <NTooltip placement="right" :style="{ maxWidth: '400px' }" trigger="hover">
               <template #trigger>
-                <NSpace align="center">
+                <NSpace align="end">
                   <img width="32" height="32" src="./assets/logo.png" alt="" />
                   <NH2 style="margin-bottom: 0">Config helper</NH2>
+                  <span style="font-size: 12px">{{ version }}</span>
                 </NSpace>
               </template>
               {{ $t('about') }}
             </NTooltip>
-            <!-- <span style="font-size: 12px">Ts is good，but configure it is not good</span> -->
             <NSpace role="functional-btn" class="buttons-container">
               <NButton @click="handleExport" strong secondary>
                 <template #icon> <BIconDownload /> </template>{{ $t('nav.export') }}</NButton
               >
               <ThemeButton />
-              <NDropdown
-                placement="bottom-start"
-                trigger="click"
-                size="small"
-                :options="lang"
-                @select="handleSelectLanguage"
-              >
-                <NButton strong secondary>
-                  <template #icon> <BIconTranslate /> </template
-                ></NButton>
-              </NDropdown>
               <NButton @click="handleShowSetting" strong secondary>
                 <template #icon> <BIconGearFill /> </template
               ></NButton>
@@ -37,7 +26,6 @@
                 tag="a"
                 href="https://github.com/yue1123/ts-config-helper"
                 target="_blank"
-                @click="handleShowSetting"
                 strong
                 secondary
               >
@@ -54,7 +42,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref, shallowRef, watchEffect } from 'vue'
+import { ref, shallowRef, watchEffect } from 'vue'
 import {
   NConfigProvider,
   NMessageProvider,
@@ -65,18 +53,10 @@ import {
   NButton,
   NLayoutHeader,
   NSpace,
-  NDropdown,
   NTooltip
 } from 'naive-ui'
-import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
-import { setI18nLanguage, currentLang } from '@i18n'
-import {
-  BIconDownload,
-  BIconGearFill,
-  BIconTranslate,
-  BIconGithub,
-  BIconInfo
-} from 'bootstrap-icons-vue'
+import { BIconDownload, BIconGearFill, BIconGithub } from 'bootstrap-icons-vue'
+import { version } from '@package'
 import ThemeButton from '@components/ThemeButton.vue'
 import hljs from 'highlight.js/lib/core'
 import json from 'highlight.js/lib/languages/json'
@@ -90,18 +70,6 @@ const currentTheme = shallowRef(darkTheme)
 const store = useStore()
 const themeStore = useThemeStore()
 
-const lang = computed(() => {
-  return Object.keys(SUPPORT_LOCALES).map((l) => {
-    return {
-      disabled: l === currentLang.value,
-      label: SUPPORT_LOCALES_LABEL[l as keyof typeof SUPPORT_LOCALES_LABEL],
-      key: l
-    }
-  })
-})
-function handleSelectLanguage(lang: SUPPORT_LOCALES) {
-  setI18nLanguage(lang)
-}
 function handleChangeTheme(isDark: boolean) {
   currentTheme.value = isDark ? darkTheme : lightTheme
 }

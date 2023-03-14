@@ -9,6 +9,7 @@
   "setting": {
     "title": "设置",
     "general": "常规",
+    "language": "语言",
     "editor": "编辑器",
     "showDescription": "显示配置描述",
     "editorSetting": {

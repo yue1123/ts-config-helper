@@ -34,7 +34,8 @@ export default defineConfig({
       '@hooks': join(__dirname, 'src/hooks/'),
       '@static': join(__dirname, 'src/static/'),
       '@types': join(__dirname, 'src/types/'),
-      '@plugins': join(__dirname, 'src/plugins/')
+      '@plugins': join(__dirname, 'src/plugins/'),
+      '@package': join(__dirname, './package.json')
     }
   }
 })

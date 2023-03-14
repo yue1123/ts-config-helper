@@ -9,6 +9,7 @@
   "setting": {
     "title": "Settings",
     "general": "General",
+    "language": "language",
     "editor": "editor",
     "showDescription": "Show configuration description",
     "editorSetting": {
