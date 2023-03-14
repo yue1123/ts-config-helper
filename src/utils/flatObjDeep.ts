@@ -11,7 +11,8 @@ export function flatObjDeep<T extends Record<string, any> = {}>(obj: T) {
 function flatHelper<T extends Record<string, any> = {}>(
   obj: T,
   parentKeys: string[],
-  res: Record<any, string> = {}
+  res: Record<any, string> = {},
+  parentNode: any = {}
 ) {
   let keys = Object.keys(obj)
   let currentKey
@@ -19,10 +20,11 @@ function flatHelper<T extends Record<string, any> = {}>(
     let ele = obj[currentKey]
     let keys = parentKeys.concat(currentKey)
     if (typeof ele === 'object' && !Array.isArray(ele)) {
-      res = Object.assign(res, flatHelper(ele, keys))
+      res = { ...res, ...flatHelper(ele, keys) }
+      parentNode[keys.join('.')] = ele
     } else {
-      res[keys.join('/')] = ele
+      res[keys.join('.')] = ele
     }
   }
-  return res
+  return { ...res, ...parentNode }
 }
