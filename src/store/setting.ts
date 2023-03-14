@@ -30,7 +30,6 @@ export default defineStore(SETTING_STORAGE, {
   },
   persist: {
     afterRestore(cacheStore) {
-      console.log(cacheStore.store.lang)
       setI18nLanguage(cacheStore.store.lang)
     }
   }

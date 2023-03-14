@@ -169,7 +169,6 @@ function handleArrayDataItemCheck(value: string[], property: Options) {
     const { type } = property.items
     if (Array.isArray(type) && type.includes('number')) {
       _value = value.map((item) => +item ?? item)
-      console.log(_value)
     }
   }
   store.rawConfig[property.key] = _value
