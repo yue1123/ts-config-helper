@@ -81,7 +81,7 @@ function getOptions(rawData: any, keys: string[]): Options[] {
     let ele = rawData[key]
     const refProperty = ele.allOf
       ? ele.allOf.map(({ $ref }: Record<string, any>) =>
-          getValueByPath(tsconfigSchema, parsePath($ref))
+          getValueByPath(tsconfigSchema, parsePath($ref, '/'))
         )
       : null
     if (refProperty) {
@@ -95,7 +95,7 @@ function getOptions(rawData: any, keys: string[]): Options[] {
     return {
       ...ele,
       label: key,
-      key: [...tempKeys, key].join('/'),
+      key: [...tempKeys, key].join('.'),
       children: ele.properties ? getOptions(ele.properties, tempKeys) : []
     }
   })
@@ -119,6 +119,7 @@ function handleChange(value: string) {
   if (value) {
     try {
       store.rawConfig = flatObjDeep(parse(value))
+      console.log(store.rawConfig)
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
         store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)

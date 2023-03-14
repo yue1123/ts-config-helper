@@ -1,3 +1,3 @@
-export function parsePath(path: string) {
-  return path.replace('#/', '').split('/')
+export function parsePath(path: string, splitter: string = '.') {
+  return path.replace('#/', '').split(splitter)
 }

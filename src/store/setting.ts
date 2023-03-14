@@ -24,7 +24,7 @@ export default defineStore(SETTING_STORAGE, {
         minimap: false,
         lineNumbers: true
       },
-      showDescription: false,
+      showDescription: true,
       lang: SUPPORT_LOCALES['zh_cn']
     }
   },

@@ -6,7 +6,7 @@ import { parsePath } from './parsePath'
  * @param path path
  * @param defaultValue
  * @returns target
- * @example initValueByPath({},'a/b/c', 'testValue') ==> { a: { b: { c: 'testValue' } } }
+ * @example initValueByPath({},'a.b.c', 'testValue') ==> { a: { b: { c: 'testValue' } } }
  */
 export function initValueByPath(
   target: Record<string, any>,
