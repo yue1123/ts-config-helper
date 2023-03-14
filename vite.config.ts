@@ -1,6 +1,7 @@
 import { resolve, join } from 'node:path'
 import { spaLoading } from 'vite-plugin-spa-loading'
 import { defineConfig } from 'vite'
+import { VitePWA } from 'vite-plugin-pwa'
 
 import vue from '@vitejs/plugin-vue'
 
@@ -8,8 +9,9 @@ export default defineConfig({
   base: '/ts-config-helper/',
   plugins: [
     vue(),
+    VitePWA(),
     spaLoading('svg', {
-      debounce: 0,
+      debounce: 100,
       tipText: 'loading....',
       path: './src/assets/loading.svg',
       devEnable: true
