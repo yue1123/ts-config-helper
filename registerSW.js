@@ -1,0 +1,1 @@
+if('serviceWorker' in navigator) {window.addEventListener('load', () => {navigator.serviceWorker.register('/ts-config-helper/sw.js', { scope: '/ts-config-helper/' })})}
