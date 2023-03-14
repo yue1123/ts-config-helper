@@ -1,6 +1,9 @@
 {
   "nav": {
-    "export": "export"
+    "export": "Export",
+    "theme": "Toggle theme",
+    "setting": "Setting",
+    "github": "Star me on gitHub"
   },
   "config": {
     "searchConfig": "search config item"
@@ -20,5 +23,5 @@
       "lineNumbers": "Show code line numbers"
     }
   },
-  "about":"This is a visual TypeScript configuration tool that can help you configure and learn TypeScript configuration options."
+  "about": "This is a visual TypeScript configuration tool that can help you configure and learn TypeScript configuration options."
 }

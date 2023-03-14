@@ -1,5 +1,5 @@
 <template>
-  <NConfigProvider :theme="currentTheme" :hljs="hljs">
+  <NConfigProvider :theme="currentTheme">
     <NMessageProvider>
       <NLayout style="height: 100vh">
         <NLayoutHeader style="position: sticky; top: 0; height: 64px; padding: 15px 24px" bordered>
@@ -15,22 +15,42 @@
               {{ $t('about') }}
             </NTooltip>
             <NSpace role="functional-btn" class="buttons-container">
-              <NButton @click="handleExport" strong secondary>
-                <template #icon> <BIconDownload /> </template>{{ $t('nav.export') }}</NButton
-              >
-              <ThemeButton />
-              <NButton @click="handleShowSetting" strong secondary>
-                <template #icon> <BIconGearFill /> </template
-              ></NButton>
-              <NButton
-                tag="a"
-                href="https://github.com/yue1123/ts-config-helper"
-                target="_blank"
-                strong
-                secondary
-              >
-                <template #icon> <BIconGithub /> </template
-              ></NButton>
+              <NTooltip placement="bottom" trigger="hover">
+                <template #trigger>
+                  <NButton @click="handleExport" strong secondary>
+                    <template #icon> <BIconDownload /> </template
+                  ></NButton>
+                </template>
+                <span>{{ $t('nav.export') }}</span>
+              </NTooltip>
+              <NTooltip placement="bottom" trigger="hover">
+                <template #trigger>
+                  <ThemeButton />
+                </template>
+                <span>{{ $t('nav.theme') }}</span>
+              </NTooltip>
+              <NTooltip placement="bottom" trigger="hover">
+                <template #trigger>
+                  <NButton @click="handleShowSetting" strong secondary>
+                    <template #icon> <BIconGearFill /> </template
+                  ></NButton>
+                </template>
+                <span>{{ $t('nav.setting') }}</span>
+              </NTooltip>
+              <NTooltip placement="bottom" trigger="hover">
+                <template #trigger>
+                  <NButton
+                    tag="a"
+                    href="https://github.com/yue1123/ts-config-helper"
+                    target="_blank"
+                    strong
+                    secondary
+                  >
+                    <template #icon> <BIconGithub /> </template
+                  ></NButton>
+                </template>
+                <span>{{ $t('nav.github') }}</span>
+              </NTooltip>
             </NSpace>
           </NSpace>
         </NLayoutHeader>
@@ -58,14 +78,11 @@ import {
 import { BIconDownload, BIconGearFill, BIconGithub } from 'bootstrap-icons-vue'
 import { version } from '@package'
 import ThemeButton from '@components/ThemeButton.vue'
-import hljs from 'highlight.js/lib/core'
-import json from 'highlight.js/lib/languages/json'
 import Config from '@views/Config.vue'
 import Setting from '@views/Setting.vue'
 import useStore from '@store/data'
 import useThemeStore from '@store/theme'
 
-hljs.registerLanguage('json', json)
 const currentTheme = shallowRef(darkTheme)
 const store = useStore()
 const themeStore = useThemeStore()

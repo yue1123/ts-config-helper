@@ -1,6 +1,9 @@
 {
   "nav": {
-    "export": "导出"
+    "export": "导出",
+    "theme": "切换主题",
+    "setting": "设置",
+    "github": "GitHub仓库"
   },
   "config": {
     "searchConfig": "搜索配置项"

@@ -147,7 +147,7 @@ watch(
         //   tabSize: 2
         // })
         // model && model.setValue(applyEdits(value, formatPatch))
-        model && model.setValue(newValue as string)
+        model && model.setValue(newValue as string || '')
 
         // formatAction && formatAction.run()
         position && editor.setPosition(position)

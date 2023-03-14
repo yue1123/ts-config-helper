@@ -21,6 +21,7 @@
         <NLayoutContent>
           <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
             <template v-if="!store.selectedKeys.length">
+              <div class="tipText">{{ $t('about') }}</div>
               <div class="tipText">{{ $t('emptyTips') }}</div>
             </template>
             <Property :level="1" :definition="options"></Property>
@@ -47,7 +48,7 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watchEffect, shallowRef } from 'vue'
-import { NLayout, NLayoutSider, NSpace, NLayoutContent, NInput, NScrollbar, NTag } from 'naive-ui'
+import { NLayout, NLayoutSider, NSpace, NLayoutContent, NScrollbar } from 'naive-ui'
 import { useEventListener } from '@hooks'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
