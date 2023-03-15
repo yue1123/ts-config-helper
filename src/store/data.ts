@@ -9,7 +9,6 @@ interface State {
   selectedKeys: string[]
   rawConfig: Record<string, any>
 }
-
 export default defineStore(DATA_CACHE, {
   state: (): State => {
     return {
@@ -21,9 +20,14 @@ export default defineStore(DATA_CACHE, {
   },
   getters: {
     previewConfig: (store) => {
-      const { rawConfig } = store
+      const rawConfig = store.rawConfig
       let obj = {}
-      Object.keys(rawConfig).forEach((key) => initValueByPath(obj, key, rawConfig[key]))
+      Object.keys(rawConfig).forEach((key) => {
+        let ele = rawConfig[key]
+        if (!ele.ignoreNode) {
+          initValueByPath(obj, key, ele)
+        }
+      })
       return Object.keys(obj).length ? obj : undefined
     }
   },

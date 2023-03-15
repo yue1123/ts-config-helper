@@ -102,8 +102,8 @@ function getOptions(rawData: any, keys: string[]): Options[] {
 }
 const options = shallowRef()
 watchEffect(() => {
-  let schema = schemaMap[currentLang.value]
-  if (!schema) return
+  let schema = (schemaMap as any)[currentLang.value]
+  if (!schema) schema = (schemaMap as any)['en-US']
   const allDefinitions: Record<string, any> = schema.definitions
   Reflect.deleteProperty(allDefinitions, '//')
   options.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
@@ -121,7 +121,8 @@ function handleChange(value: string) {
       store.rawConfig = flatObjDeep(parse(value))
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
+        // store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
+        store.selectedKeys = selectedKeys
       }
     } catch (error) {
       console.log(error)

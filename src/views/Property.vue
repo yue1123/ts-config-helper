@@ -1,11 +1,14 @@
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.indexOf(property.key) !== -1">
-      <component
-        style="--n-margin: 15px 0 10px 0"
+      <Component
+        style="--n-margin: 15px 0 7.5px 0"
         :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
-        ># {{ property.label }}</component
+        ># {{ property.label }}</Component
       >
+      <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
+        {{ $t('defaultValue') }}: {{ property.default }}
+      </div>
       <div v-if="settingStore.showDescription" style="color: #999; margin-bottom: 10px">
         {{ property.description }}
       </div>
@@ -23,7 +26,12 @@
       </template>
       <template key="array" v-if="getInputType(property) === 'array.object'">
         <!-- TODO: handle this case -->
-        array.object
+        <NDynamicInput
+          v-model:value="store.rawConfig[property.key]"
+          preset="pair"
+          key-placeholder="key"
+          value-placeholder="value"
+        />
       </template>
       <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
         <div type="boolean" class="boolean_property-container">
@@ -87,7 +95,6 @@
 
 <script setup lang="ts">
 import {
-  NH1,
   NH2,
   NH3,
   NH4,
@@ -98,7 +105,8 @@ import {
   NSwitch,
   NInput,
   NSelect,
-  useMessage
+  useMessage,
+  NDynamicInput
 } from 'naive-ui'
 
 import { enumToOptions, getInputType } from '../utils'

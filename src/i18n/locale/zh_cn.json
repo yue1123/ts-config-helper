@@ -1,4 +1,5 @@
 {
+  "defaultValue":"默认值",
   "nav": {
     "export": "导出",
     "theme": "切换主题",

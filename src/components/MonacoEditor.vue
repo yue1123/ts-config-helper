@@ -18,7 +18,6 @@ import * as monaco from 'monaco-editor'
 import useThemeStore from '../store/theme'
 import useDataStore from '../store/data'
 import useSettingStore from '../store/setting'
-
 // import { parse, assign, stringify } from 'comment-json'
 import es from '../schema/_tsconfig.json?url'
 import zh from '../schema/_tsconfig.zh.json?url'
@@ -29,7 +28,7 @@ export interface Props {
   options?: Record<string, any>
   width?: string
   height?: string
-  local: 'zh_cn' | 'en-US'
+  local: any
 }
 const schemaJsonMap = {
   'en-US': es,
@@ -107,8 +106,8 @@ watchEffect(() => {
   })
 })
 watchEffect(() => {
-  let url = schemaJsonMap[props.local]
-  if (!url) return
+  let url = (schemaJsonMap as any)[props.local]
+  if (!url) url = (schemaJsonMap as any)['en-US']
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
     validate: true,
     enableSchemaRequest: true,

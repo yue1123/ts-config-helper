@@ -1,0 +1,31 @@
+{
+  "defaultValue": "기본값",
+  "nav": {
+    "export": "내보내기",
+    "theme": "테마 전환",
+    "setting": "설정",
+    "github": "깃허브 저장소"
+  },
+  "config": {
+    "searchConfig": "구성 항목 검색"
+  },
+  "emptyTips": "오른쪽의 구성 항목을 확인하거나 왼쪽의 tsconfig.json 구성을 입력하십시오",
+  "setting": {
+    "title": "설정",
+    "resetDefault": "기본값으로 재설정",
+    "apply": "적용",
+    "confirm": "확인",
+    "general": "일반",
+    "language": "언어",
+    "editor": "편집자",
+    "showDescription": "구성 설명 보기",
+    "editorSetting": {
+      "tabSize": "탭 크기",
+      "fontSize": "글꼴 크기",
+      "lineHeight": "선 높이",
+      "minimap": "미니맵 보기",
+      "lineNumbers": "코드 줄 번호 표시"
+    }
+  },
+  "about": "TypeScript 구성 항목을 구성하고 배우는 데 도움이 되는 시각적 TypeScript 구성 도구입니다."
+}

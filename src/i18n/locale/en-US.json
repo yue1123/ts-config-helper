@@ -1,4 +1,5 @@
 {
+  "defaultValue":"Default",
   "nav": {
     "export": "Export",
     "theme": "Toggle theme",

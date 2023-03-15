@@ -1,0 +1,31 @@
+{
+   "defaultValue": "デフォルト値",
+   "nav": {
+     "export": "エクスポート",
+     "theme": "テーマを切り替える",
+     "setting": "設定",
+     "github": "GitHub リポジトリ"
+   },
+   "config": {
+     "searchConfig": "検索構成アイテム"
+   },
+   "emptyTips": "右側の構成項目を確認するか,左側の tsconfig.json 構成を入力してください",
+   "setting": {
+     "title": "設定",
+     "resetDefault": "デフォルトにリセット",
+     "apply": "適用する",
+     "confirm": "確認",
+     "general": "一般",
+     "language": "言語",
+     "editor": "編集者",
+     "showDescription": "設定の説明を表示",
+     "editorSetting": {
+       "tabSize": "タブサイズ",
+       "fontSize": "フォントサイズ",
+       "lineHeight": "行の高さ",
+       "minimap": "ミニマップを表示",
+       "lineNumbers": "コードの行番号を表示"
+     }
+   },
+   "about": "これは,TypeScript 構成項目の構成と学習に役立つ視覚的な TypeScript 構成ツールです。"
+}
