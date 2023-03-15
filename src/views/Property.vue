@@ -4,7 +4,7 @@
       <Component
         style="--n-margin: 15px 0 7.5px 0"
         :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
-        ># {{ property.label }}</Component
+        ># {{ property.key }}</Component
       >
       <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
         {{ $t('defaultValue') }}: {{ property.default }}
@@ -24,14 +24,10 @@
           </NDynamicTags>
         </div>
       </template>
-      <template key="array" v-if="getInputType(property) === 'array.object'">
+      <template key="array" v-if="getInputType(property) === 'keyValues'">
         <!-- TODO: handle this case -->
-        <NDynamicInput
-          v-model:value="store.rawConfig[property.key]"
-          preset="pair"
-          key-placeholder="key"
-          value-placeholder="value"
-        />
+        {{ store.rawConfig[property.key] }}====
+        <KeyValuesInput v-model:data="store.rawConfig[property.key]" key-desc="alias path" value-desc="alias target" />
       </template>
       <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
         <div type="boolean" class="boolean_property-container">
@@ -109,6 +105,7 @@ import {
   NDynamicInput
 } from 'naive-ui'
 
+import KeyValuesInput from '@components/KeyValuesInput.vue'
 import { enumToOptions, getInputType } from '../utils'
 import useStore from '../store/data'
 import useSettingStore from '../store/setting'

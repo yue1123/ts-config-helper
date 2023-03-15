@@ -13,7 +13,7 @@ export default defineStore(DATA_CACHE, {
   state: (): State => {
     return {
       config: '',
-      selectedKeys: [],
+      selectedKeys: ['compilerOptions.paths'],
       // TODO: json 支持注释
       rawConfig: {}
     }
