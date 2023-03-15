@@ -4,7 +4,7 @@ import { SUPPORT_LOCALES } from '@constants'
 import en_US from '@i18n/locale/en-US.json'
 import zh_cn from '@i18n/locale/zh_cn.json'
 import ja from '@i18n/locale/ja.json'
-import sk from '@i18n/locale/ja.json'
+import sk from '@i18n/locale/sk.json'
 import useSettingStore from '@store/setting'
 
 // for global use
