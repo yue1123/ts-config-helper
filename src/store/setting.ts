@@ -40,9 +40,11 @@ export default defineStore(SETTING_STORAGE, {
       lang: SUPPORT_LOCALES['zh_cn']
     }
   },
-  persist: {
-    afterRestore(cacheStore) {
-      setI18nLanguage(cacheStore.store.lang)
-    }
-  }
+  persist: import.meta.env.PROD
+    ? {
+        afterRestore(cacheStore) {
+          setI18nLanguage(cacheStore.store.lang)
+        }
+      }
+    : false
 })

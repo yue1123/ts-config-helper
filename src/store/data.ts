@@ -27,7 +27,7 @@ export default defineStore(DATA_CACHE, {
       return Object.keys(obj).length ? obj : undefined
     }
   },
-  persist: true
+  persist: import.meta.env.PROD
 })
 
 // export function watchChange({ store }: PiniaPluginContext) {

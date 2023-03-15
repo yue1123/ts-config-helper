@@ -10,6 +10,7 @@ type InputType =
   | 'selectAndInput'
   | 'arrayButConvertWhenSingle'
   | 'selectOrInputWithCheck'
+  | 'keyValues'
 const typeCache = new Map<string, InputType>()
 // get input type
 export function getInputType(property: Options): InputType {
@@ -43,6 +44,8 @@ function getInputTypeHelper(property: Options): InputType {
         return 'select'
       }
       return 'string'
+    } else if (type === 'object') {
+      return 'keyValues'
     }
   } else if (oneOf) {
     return 'arrayButConvertWhenSingle'
