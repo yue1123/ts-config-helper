@@ -14,6 +14,18 @@ interface State {
   lang: SUPPORT_LOCALES
 }
 
+export const DEFAULT_SETTING = {
+  editor: {
+    tabSize: 2,
+    fontSize: 14,
+    lineHeight: 22,
+    minimap: false,
+    lineNumbers: true
+  },
+  showDescription: true,
+  lang: SUPPORT_LOCALES['zh_cn']
+}
+
 export default defineStore(SETTING_STORAGE, {
   state: (): State => {
     return {

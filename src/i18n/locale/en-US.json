@@ -12,6 +12,9 @@
   "setting": {
     "title": "Settings",
     "general": "General",
+    "resetDefault": "Reset to default",
+    "apply": "Apply",
+    "confirm": "Confirm",
     "language": "language",
     "editor": "editor",
     "showDescription": "Show configuration description",

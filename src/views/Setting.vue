@@ -28,10 +28,6 @@
           @select="handleSelectLanguage"
         >
           <NButton strong secondary>
-            <!-- <template
-              #icon>
-              <BIconTranslate />
-            </template> -->
             {{ SUPPORT_LOCALES_LABEL[settingCopy.lang as keyof typeof SUPPORT_LOCALES_LABEL] }}
           </NButton>
         </NDropdown>
@@ -60,10 +56,15 @@
     </NForm>
     <template #footer>
       <NSpace :justify="'end'">
-        <NButton type="primary" secondary @click="() => handleSaveSetting(false)" strong>
-          应用
+        <NButton quaternary @click="() => resetDefaultSetting()" strong>
+          {{ $t('setting.resetDefault') }}
         </NButton>
-        <NButton @click="() => handleSaveSetting(true)" strong secondary> 确定 </NButton>
+        <NButton type="primary" @click="() => handleSaveSetting(false)" strong secondary>
+          {{ $t('setting.apply') }}
+        </NButton>
+        <NButton type="primary" @click="() => handleSaveSetting(true)" strong>
+          {{ $t('setting.confirm') }}
+        </NButton>
       </NSpace>
     </template>
   </NModal>
@@ -82,16 +83,13 @@ import {
   NButton
 } from 'naive-ui'
 import { computed, reactive, ref } from 'vue'
-import useSettingStore from '@store/setting'
+import useSettingStore, { DEFAULT_SETTING } from '@store/setting'
 import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
 import { currentLang, setI18nLanguage } from '@i18n'
+import { deepClone } from '@utils'
 const settingStore = useSettingStore()
-const settingCopy = reactive(JSON.parse(JSON.stringify(settingStore.$state)))
 const showSetting = ref(false)
-
-function save() {
-  settingStore.$state = JSON.parse(JSON.stringify(settingCopy))
-}
+let settingCopy = ref(deepClone(settingStore.$state))
 
 const lang = computed(() => {
   return Object.keys(SUPPORT_LOCALES).map((l) => {
@@ -102,10 +100,15 @@ const lang = computed(() => {
     }
   })
 })
-function handleSelectLanguage(lang: SUPPORT_LOCALES) {
-  settingCopy.lang = lang
+function resetDefaultSetting() {
+  settingCopy.value = deepClone(DEFAULT_SETTING)
 }
-
+function handleSelectLanguage(lang: SUPPORT_LOCALES) {
+  settingCopy.value.lang = lang
+}
+function save() {
+  settingStore.$state = deepClone(settingCopy.value)
+}
 defineExpose({
   show: () => {
     showSetting.value = true
@@ -117,7 +120,7 @@ defineExpose({
 })
 function handleSaveSetting(saveAndClose: boolean = false) {
   showSetting.value = !saveAndClose
-  setI18nLanguage(settingCopy.lang)
+  setI18nLanguage(settingCopy.value.lang)
   save()
 }
 </script>

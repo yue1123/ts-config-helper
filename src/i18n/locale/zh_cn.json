@@ -11,6 +11,9 @@
   "emptyTips": "请在右侧勾选配置项或左侧输入tsconfig.json配置",
   "setting": {
     "title": "设置",
+    "resetDefault": "重置为默认",
+    "apply": "应用",
+    "confirm": "确认",
     "general": "常规",
     "language": "语言",
     "editor": "编辑器",

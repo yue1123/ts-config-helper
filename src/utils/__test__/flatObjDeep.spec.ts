@@ -18,6 +18,21 @@ describe('flatObjDeep', () => {
           }
         }
       })
-    ).toEqual({ a: '1', 'b/c': 'test', 'd/e/f': 'ffff' })
+    ).toEqual({
+      a: '1',
+      b: {
+        c: 'test'
+      },
+      d: {
+        e: {
+          f: 'ffff'
+        }
+      },
+      'd.e': {
+        f: 'ffff'
+      },
+      'b.c': 'test',
+      'd.e.f': 'ffff'
+    })
   })
 })

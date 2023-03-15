@@ -119,7 +119,6 @@ function handleChange(value: string) {
   if (value) {
     try {
       store.rawConfig = flatObjDeep(parse(value))
-      console.log(store.rawConfig)
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
         store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
