@@ -90,7 +90,7 @@ const settingCopy = reactive(JSON.parse(JSON.stringify(settingStore.$state)))
 const showSetting = ref(false)
 
 function save() {
-  settingStore.$state = settingCopy
+  settingStore.$state = JSON.parse(JSON.stringify(settingCopy))
 }
 
 const lang = computed(() => {
