@@ -80,6 +80,16 @@ const init = () => {
     },
     ...props.options
   })
+  // 绑定“Ctrl+Z”键为撤销操作
+  editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyZ, function () {
+    editor?.trigger('keyboard', 'undo', null);
+  })
+
+  // 绑定“Ctrl+Y”键为重做操作
+  editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyY, function () {
+    editor?.trigger('keyboard', 'redo', null);
+  })
+
   // 监听值的变化
   editor.onDidChangeModelContent(() => {
     const value = editor!.getValue() //给父组件实时返回最新文本
@@ -146,7 +156,7 @@ watch(
         //   tabSize: 2
         // })
         // model && model.setValue(applyEdits(value, formatPatch))
-        model && model.setValue(newValue as string || '')
+        model && model.setValue((newValue as string) || '')
 
         // formatAction && formatAction.run()
         position && editor.setPosition(position)

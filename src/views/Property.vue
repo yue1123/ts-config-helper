@@ -26,7 +26,6 @@
       </template>
       <template key="array" v-if="getInputType(property) === 'keyValues'">
         <!-- TODO: handle this case -->
-        {{ store.rawConfig[property.key] }}====
         <KeyValuesInput v-model:data="store.rawConfig[property.key]" key-desc="alias path" value-desc="alias target" />
       </template>
       <template key="boolean" v-else-if="getInputType(property) === 'boolean'">

@@ -12,7 +12,7 @@ function flatHelper<T extends Record<string, any> = {}>(
   obj: T,
   parentKeys: string[],
   res: Record<any, string> = {},
-  parentNode: any = {}
+  parentNodeKey: any = []
 ) {
   let keys = Object.keys(obj)
   let currentKey
@@ -20,17 +20,11 @@ function flatHelper<T extends Record<string, any> = {}>(
     let ele = obj[currentKey]
     let keys = parentKeys.concat(currentKey)
     if (typeof ele === 'object' && !Array.isArray(ele)) {
-      res = Object.assign(res, flatHelper(ele, keys))
-      // Object.defineProperty(ele, 'ignoreNode', {
-      //   enumerable: false,
-      //   writable: false,
-      //   value: true
-      // })
-      parentNode[keys.join('.')] = ele
+      parentNodeKey.push(keys.join('.'))
+      res = Object.assign(res, flatHelper(ele, keys, {}, parentNodeKey)['res'])
     } else {
       res[keys.join('.')] = ele
     }
   }
-  return Object.assign(res, parentNode)
-  // return Object.assign(res, parentNode)
+  return { res, parentNodeKey }
 }

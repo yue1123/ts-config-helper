@@ -20,16 +20,15 @@ export default defineStore(DATA_CACHE, {
   },
   getters: {
     previewConfig: (store) => {
-      // const rawConfig = store.rawConfig
-      // let obj = {}
-      // Object.keys(rawConfig).forEach((key) => {
-      //   let ele = rawConfig[key]
-      //   if (!ele.ignoreNode) {
-      //     initValueByPath(obj, key, ele)
-      //   }
-      // })
-      // return Object.keys(obj).length ? obj : undefined
-      return store.rawConfig
+      const rawConfig = store.rawConfig
+      let obj = {}
+      Object.keys(rawConfig).forEach((key) => {
+        let ele = rawConfig[key]
+        if (!ele.ignoreNode) {
+          initValueByPath(obj, key, ele)
+        }
+      })
+      return Object.keys(obj).length ? obj : undefined
     }
   },
   persist: import.meta.env.PROD

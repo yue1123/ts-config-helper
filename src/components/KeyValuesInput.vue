@@ -6,12 +6,11 @@
     :value-placeholder="props.valueDesc"
     @update:value="handleUpdate"
   />
-  {{ props.data }}
 </template>
 
 <script lang="ts" setup>
 import { NDynamicInput } from 'naive-ui'
-import { withDefaults, ref } from 'vue'
+import { withDefaults, ref, watch } from 'vue'
 import { debounce } from '@utils'
 export interface Props {
   data: any
@@ -37,10 +36,16 @@ const handleUpdate = debounce((values: KeyValue[]) => {
       return resData
     }, [] as [string, string][]) as Iterable<string[]>
   )
-  // if (props.data?.length || Object.keys(res).length) {
-  emit('update:data', res)
-  // }
+  if (props.data?.length || Object.keys(res).length) {
+    emit('update:data', res)
+  }
 }, 300)
+watch(
+  () => props.data,
+  (newValue) => {
+    console.log(newValue)
+  }
+)
 </script>
 
 <style></style>

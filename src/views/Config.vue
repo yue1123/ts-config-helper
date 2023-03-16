@@ -118,11 +118,12 @@ watchEffect(() => {
 function handleChange(value: string) {
   if (value) {
     try {
-      store.rawConfig = flatObjDeep(parse(value))
+      const { res, parentNodeKey } = flatObjDeep(parse(value))
+      store.rawConfig = res
       let selectedKeys = Object.keys(store.rawConfig)
-      console.log(selectedKeys)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        store.selectedKeys = selectedKeys
+        store.selectedKeys = selectedKeys.concat(parentNodeKey)
+        console.log(store.selectedKeys, '==========')
       }
     } catch (error) {
       console.log(error)
