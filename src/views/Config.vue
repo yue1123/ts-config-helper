@@ -114,26 +114,20 @@ watchEffect(() => {
   }, [])
 })
 
-// user paste code
+// user paste or input code
 function handleChange(value: string) {
-  console.log(value)
   if (value) {
     try {
       store.rawConfig = flatObjDeep(parse(value))
-      console.log(store.rawConfig, '=======')
       let selectedKeys = Object.keys(store.rawConfig)
       console.log(selectedKeys)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        console.log(selectedKeys)
-        store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
-        console.log(store.selectedKeys)
-        // store.selectedKeys = selectedKeys
+        store.selectedKeys = selectedKeys
       }
     } catch (error) {
       console.log(error)
     }
   } else {
-    console.log(123)
     store.selectedKeys = []
     store.rawConfig = {}
   }

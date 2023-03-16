@@ -21,15 +21,16 @@ function flatHelper<T extends Record<string, any> = {}>(
     let keys = parentKeys.concat(currentKey)
     if (typeof ele === 'object' && !Array.isArray(ele)) {
       res = Object.assign(res, flatHelper(ele, keys))
-      Object.defineProperty(ele, 'ignoreNode', {
-        enumerable: false,
-        writable: false,
-        value: true
-      })
+      // Object.defineProperty(ele, 'ignoreNode', {
+      //   enumerable: false,
+      //   writable: false,
+      //   value: true
+      // })
       parentNode[keys.join('.')] = ele
     } else {
       res[keys.join('.')] = ele
     }
   }
   return Object.assign(res, parentNode)
+  // return Object.assign(res, parentNode)
 }
