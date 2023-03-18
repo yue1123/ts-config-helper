@@ -23,7 +23,8 @@
       "@types/*": ["src/types/*"],
       "@plugins/*": ["src/plugins/*"],
       "@i18n/*": ["src/i18n/*"],
-      "@package": ["./package.json"]
+      "@package": ["./package.json"],
+      "@schema/*": ["src/schema/*"]
     }
   }
 }

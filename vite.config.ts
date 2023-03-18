@@ -34,7 +34,8 @@ export default defineConfig({
       '@static': join(__dirname, 'src/static/'),
       '@types': join(__dirname, 'src/types/'),
       '@plugins': join(__dirname, 'src/plugins/'),
-      '@package': join(__dirname, './package.json')
+      '@package': join(__dirname, './package.json'),
+      '@schema': join(__dirname, 'src/schema/')
     }
   }
 })
