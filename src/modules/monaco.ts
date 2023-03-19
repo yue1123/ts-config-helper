@@ -1,5 +1,4 @@
 import { getCurrentInstance, onMounted } from 'vue'
-import * as monaco from 'monaco-editor'
 
 const setup = async () => {
   await Promise.all([
