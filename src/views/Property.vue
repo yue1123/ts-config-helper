@@ -51,16 +51,13 @@
           />
         </div>
       </template>
-      <!-- <template key="select.multiple" v-else-if="getInputType(property) === 'select.multiple'">
-        <div type="enum" class="enum_property-container">
-          <NSelect
-            
-            :default-value="property.default"
-            :options="enumToOptions(property.enum, key as unknown as string)"
-            v-model:value="store.rawConfig[property.key]"
-          />
-        </div>
-      </template> -->
+      <template key="select.multiple" v-else-if="getInputType(property) === 'array.object'">
+        <ObjectInput
+          :property="property"
+          :data="store.rawConfig[property.key]"
+          @update:data="(data) => (store.rawConfig[property.key] = data)"
+        ></ObjectInput>
+      </template>
       <template
         key="arrayButConvertWhenSingle"
         v-else-if="getInputType(property) === 'arrayButConvertWhenSingle'"
@@ -108,6 +105,7 @@ import {
 } from 'naive-ui'
 
 import KeyValuesInput from '@components/KeyValuesInput.vue'
+import ObjectInput from '@components/ObjectInput.vue'
 import { enumToOptions, getInputType } from '../utils'
 import useStore from '../store/data'
 import useSettingStore from '../store/setting'

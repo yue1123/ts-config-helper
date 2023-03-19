@@ -57,16 +57,3 @@ function getInputTypeHelper(property: Options): InputType {
   // default
   return 'string'
 }
-
-// function getTypeByOneOfProperty(oneOf: any) {
-//   let types = []
-//   if (Array.isArray(oneOf)) {
-//     types = oneOf.map((item) => {
-//       return item.type
-//     })
-//   }
-//   // 去重,检查是否只有一项,多项则返回异常
-//   // if(new Set())
-// }
-
-// function analyzeArrayProperty(property) {}

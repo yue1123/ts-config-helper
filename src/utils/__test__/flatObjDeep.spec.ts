@@ -7,30 +7,22 @@ import { flatObjWithDepthControl } from '../flatObjDeep'
 describe('flatObjDeep', () => {
   test('simple', () => {
     expect(
-      flatObjWithDepthControl({
-        a: '1',
-        b: {
-          c: 'test'
-        },
-        d: {
-          e: {
-            f: 'ffff'
+      flatObjWithDepthControl(
+        {
+          a: '1',
+          b: {
+            c: 'test'
+          },
+          d: {
+            e: {
+              f: 'ffff'
+            }
           }
-        }
-      })
+        },
+        () => false
+      )
     ).toEqual({
       a: '1',
-      b: {
-        c: 'test'
-      },
-      d: {
-        e: {
-          f: 'ffff'
-        }
-      },
-      'd.e': {
-        f: 'ffff'
-      },
       'b.c': 'test',
       'd.e.f': 'ffff'
     })

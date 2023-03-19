@@ -46,13 +46,15 @@ const defaultValueGetter = () => {
 const data = ref<KeyValues[]>(dataValue.length ? dataValue : [defaultValueGetter()])
 const emit = defineEmits(['update:data'])
 const handleUpdate = debounce(() => {
-  const res = Object.fromEntries(
-    data.value.reduce((resData, { key, value }) => {
-      key && value && resData.push([key, value])
-      return resData
-    }, [] as [string, string[]][]) as Iterable<string[]>
+  emit(
+    'update:data',
+    Object.fromEntries(
+      data.value.reduce((resData, { key, value }) => {
+        key && value && resData.push([key, value])
+        return resData
+      }, [] as [string, string[]][]) as Iterable<string[]>
+    )
   )
-  emit('update:data', res)
 }, 200)
 // listen data change and convert it to object key value
 watch(
