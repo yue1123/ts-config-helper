@@ -4,27 +4,31 @@
 //     : { [P in keyof T]: T[P] }
 // }[keyof T]
 // : Flatten<T>
-export function flatObjDeep<T extends Record<string, any> = {}>(obj: T) {
-  return flatHelper(obj, [])
-}
-
-function flatHelper<T extends Record<string, any> = {}>(
+export function flatObjWithDepthControl<T extends Record<string, any> = {}>(
   obj: T,
-  parentKeys: string[],
-  res: Record<any, string> = {},
-  parentNodeKey: any = []
+  isMaxFlattenDepth: (key: string) => boolean
 ) {
-  let keys = Object.keys(obj)
-  let currentKey
-  while ((currentKey = keys.shift())) {
-    let ele = obj[currentKey]
-    let keys = parentKeys.concat(currentKey)
-    if (typeof ele === 'object' && !Array.isArray(ele)) {
-      parentNodeKey.push(keys.join('.'))
-      res = Object.assign(res, flatHelper(ele, keys, {}, parentNodeKey)['res'])
-    } else {
-      res[keys.join('.')] = ele
+  function flatHelper<T extends Record<string, any> = {}>(
+    obj: T,
+    parentKeys: string[],
+    res: Record<any, any> = {}
+  ) {
+    let keys = Object.keys(obj)
+    let currentKey
+    while ((currentKey = keys.shift())) {
+      let ele = obj[currentKey]
+      let keys = parentKeys.concat(currentKey)
+      let keysString = keys.join('.')
+      if (isMaxFlattenDepth(keysString)) {
+        res[parentKeys.join('.')] = obj
+        break
+      } else if (typeof ele === 'object' && !Array.isArray(ele) && Object.keys(ele).length !== 0) {
+        res = Object.assign(res, flatHelper(ele, keys, {}))
+      } else {
+        res[keysString] = ele
+      }
     }
+    return res
   }
-  return { res, parentNodeKey }
+  return flatHelper(obj, [], {})
 }

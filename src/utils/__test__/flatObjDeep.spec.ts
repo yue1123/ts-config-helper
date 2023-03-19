@@ -1,13 +1,13 @@
 import { expect, test, describe } from 'vitest'
 
-import { flatObjDeep } from '../flatObjDeep'
+import { flatObjWithDepthControl } from '../flatObjDeep'
 
 // const a = flatObjDeep()
 
 describe('flatObjDeep', () => {
   test('simple', () => {
     expect(
-      flatObjDeep({
+      flatObjWithDepthControl({
         a: '1',
         b: {
           c: 'test'
