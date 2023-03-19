@@ -30,10 +30,11 @@
       </Pane>
       <Pane style="min-width: 240px">
         <NLayoutContent>
+          <!-- (, null, settingStore.editor.tabSize) -->
           <MonacoEditor
             :local="currentLang"
             ref="monacoEditor"
-            :model-value="JSON.stringify(store.previewConfig, null, settingStore.editor.tabSize)"
+            :model-value="JSON.stringify(store.previewConfig)"
             :language="language"
             width="100%"
             height="calc(100vh - 64px)"

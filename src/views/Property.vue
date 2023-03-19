@@ -1,87 +1,92 @@
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
-    <template v-if="store.selectedKeys.indexOf(property.key) !== -1">
-      <Component
-        style="--n-margin: 15px 0 7.5px 0"
-        :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
-        ># {{ property.key }}</Component
-      >
-      <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
-        {{ $t('defaultValue') }}: {{ property.default }}
-      </div>
-      <div v-if="settingStore.showDescription" style="color: #999; margin-bottom: 10px">
-        {{ property.description }}
-      </div>
-      <template key="array" v-if="getInputType(property) === 'array'">
-        <div type="array" class="array_property-container">
-          <NDynamicTags
-            style="--n-input-width: 150px"
-            :render-tag="(tag:string,index:number) => renderTag(tag,index,property)"
-            :size="'large'"
-            :value="store.rawConfig[property.key]"
-            @update:value="(event: any) => handleArrayDataItemCheck(event, property)"
+    <TransitionGroup
+      enter-active-class="animated animate__fadeInLeft"
+      leave-active-class="animated animate__fadeOutRight"
+    >
+      <template v-if="store.selectedKeys.indexOf(property.key) !== -1">
+        <Component
+          style="--n-margin: 15px 0 7.5px 0"
+          :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
+          ># {{ property.key }}</Component
+        >
+        <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
+          {{ $t('defaultValue') }}: {{ property.default }}
+        </div>
+        <div v-if="settingStore.showDescription" style="color: #999; margin-bottom: 10px">
+          {{ property.description }}
+        </div>
+        <template key="array" v-if="getInputType(property) === 'array'">
+          <div type="array" class="array_property-container">
+            <NDynamicTags
+              style="--n-input-width: 150px"
+              :render-tag="(tag:string,index:number) => renderTag(tag,index,property)"
+              :size="'large'"
+              :value="store.rawConfig[property.key]"
+              @update:value="(event: any) => handleArrayDataItemCheck(event, property)"
+            />
+          </div>
+        </template>
+        <template key="array" v-if="getInputType(property) === 'keyValues'">
+          <KeyValuesInput
+            :data="store.rawConfig[property.key]"
+            @update:data="(data) => (store.rawConfig[property.key] = data)"
+            key-desc="alias path"
+            value-desc="alias target"
           />
-        </div>
+        </template>
+        <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
+          <div type="boolean" class="boolean_property-container">
+            <NSwitch v-model:value="store.rawConfig[property.key]" />
+          </div>
+        </template>
+        <template key="string" v-else-if="getInputType(property) === 'string'">
+          <div type="string" class="string_property-container">
+            <NInput v-model:value="store.rawConfig[property.key]" />
+          </div>
+        </template>
+        <template key="select" v-else-if="getInputType(property) === 'select'">
+          <div type="enum" class="enum_property-container">
+            <NSelect
+              :multiple="property.type === 'array'"
+              :default-value="property.default"
+              :options="enumToOptions(property.enum, key as unknown as string)"
+              v-model:value="store.rawConfig[property.key]"
+            />
+          </div>
+        </template>
+        <template key="select.multiple" v-else-if="getInputType(property) === 'array.object'">
+          <ObjectInput
+            :property="property"
+            :data="store.rawConfig[property.key]"
+            @update:data="(data) => (store.rawConfig[property.key] = data)"
+          ></ObjectInput>
+        </template>
+        <template
+          key="arrayButConvertWhenSingle"
+          v-else-if="getInputType(property) === 'arrayButConvertWhenSingle'"
+        >
+          <div type="arrayButConvertWhenSingle" class="enum_property-container">
+            <NDynamicTags
+              style="--n-input-width: 150px"
+              :size="'large'"
+              :value="
+                typeof store.rawConfig[property.key] === 'string'
+                  ? [store.rawConfig[property.key]]
+                  : store.rawConfig[property.key]
+              "
+              @update:value="(event: any) => handleTagsChange(event, property)"
+            />
+          </div>
+        </template>
+        <template
+          key="selectOrInputWithCheck"
+          v-else-if="getInputType(property) === 'selectOrInputWithCheck'"
+        >
+          <div type="selectOrInputWithCheck" class="enum_property-container">123</div>
+        </template>
       </template>
-      <template key="array" v-if="getInputType(property) === 'keyValues'">
-        <KeyValuesInput
-          :data="store.rawConfig[property.key]"
-          @update:data="(data) => (store.rawConfig[property.key] = data)"
-          key-desc="alias path"
-          value-desc="alias target"
-        />
-      </template>
-      <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
-        <div type="boolean" class="boolean_property-container">
-          <NSwitch v-model:value="store.rawConfig[property.key]" />
-        </div>
-      </template>
-      <template key="string" v-else-if="getInputType(property) === 'string'">
-        <div type="string" class="string_property-container">
-          <NInput v-model:value="store.rawConfig[property.key]" />
-        </div>
-      </template>
-      <template key="select" v-else-if="getInputType(property) === 'select'">
-        <div type="enum" class="enum_property-container">
-          <NSelect
-            :multiple="property.type === 'array'"
-            :default-value="property.default"
-            :options="enumToOptions(property.enum, key as unknown as string)"
-            v-model:value="store.rawConfig[property.key]"
-          />
-        </div>
-      </template>
-      <template key="select.multiple" v-else-if="getInputType(property) === 'array.object'">
-        <ObjectInput
-          :property="property"
-          :data="store.rawConfig[property.key]"
-          @update:data="(data) => (store.rawConfig[property.key] = data)"
-        ></ObjectInput>
-      </template>
-      <template
-        key="arrayButConvertWhenSingle"
-        v-else-if="getInputType(property) === 'arrayButConvertWhenSingle'"
-      >
-        <div type="arrayButConvertWhenSingle" class="enum_property-container">
-          <NDynamicTags
-            style="--n-input-width: 150px"
-            :size="'large'"
-            :value="
-              typeof store.rawConfig[property.key] === 'string'
-                ? [store.rawConfig[property.key]]
-                : store.rawConfig[property.key]
-            "
-            @update:value="(event: any) => handleTagsChange(event, property)"
-          />
-        </div>
-      </template>
-      <template
-        key="selectOrInputWithCheck"
-        v-else-if="getInputType(property) === 'selectOrInputWithCheck'"
-      >
-        <div type="selectOrInputWithCheck" class="enum_property-container">123</div>
-      </template>
-    </template>
+    </TransitionGroup>
     <template v-if="property.children.length">
       <Property :level="props.level + 1" :definition="property.children" />
     </template>
