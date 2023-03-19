@@ -1,5 +1,6 @@
 {
-  "defaultValue":"默认值",
+  "defaultValue": "默认值",
+  "add": "添加",
   "nav": {
     "export": "导出",
     "theme": "切换主题",

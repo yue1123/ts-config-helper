@@ -1,5 +1,6 @@
 {
-  "defaultValue":"Default",
+  "defaultValue": "Default",
+  "add": "Add",
   "nav": {
     "export": "Export",
     "theme": "Toggle theme",

@@ -25,9 +25,11 @@ export function useProperty() {
       let children: Options[] = []
       if (ele.properties) {
         tempKeys.push(key)
-        const { res, allFlatKeys } = getOptions(ele.properties, tempKeys)
+        allFlatKeys.push(key)
+        // deep get
+        const { res, allFlatKeys: _allFlatKeys } = getOptions(ele.properties, tempKeys)
         children = res
-        allFlatKeys.push.apply(allFlatKeys, allFlatKeys)
+        allFlatKeys.push.apply(allFlatKeys, _allFlatKeys)
       }
       let flatKeys = [...tempKeys, key].join('.')
       allFlatKeys.push(flatKeys)
@@ -48,6 +50,7 @@ export function useProperty() {
     property.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
       if (allDefinitions[key].properties) {
         const { res, allFlatKeys } = getOptions(allDefinitions[key].properties, [])
+        // console.log(allFlatKeys)
         allFlatKeys.forEach((key) => allFlatPropertyKeysMap.value.set(key, true))
         _values.push.apply(_values, res)
       }

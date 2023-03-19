@@ -20,13 +20,16 @@
             :size="'large'"
             :value="store.rawConfig[property.key]"
             @update:value="(event: any) => handleArrayDataItemCheck(event, property)"
-          >
-          </NDynamicTags>
+          />
         </div>
       </template>
       <template key="array" v-if="getInputType(property) === 'keyValues'">
-        <!-- TODO: handle this case -->
-        <KeyValuesInput v-model:data="store.rawConfig[property.key]" key-desc="alias path" value-desc="alias target" />
+        <KeyValuesInput
+          :data="store.rawConfig[property.key]"
+          @update:data="(data) => (store.rawConfig[property.key] = data)"
+          key-desc="alias path"
+          value-desc="alias target"
+        />
       </template>
       <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
         <div type="boolean" class="boolean_property-container">
@@ -149,14 +152,14 @@ function renderTag(tag: string, index: number, property: Options) {
 function handleTagsChange(value: string[], property: Options) {
   store.rawConfig[property.key] = value.length === 1 ? value[0] : value
 }
-function getArrayData(property: Options) {
-  if (property.items) {
-    const { type } = property.items
-    if (type === 'object') {
-      store.rawConfig[property.key].map()
-    }
-  }
-}
+// function getArrayData(property: Options) {
+//   if (property.items) {
+//     const { type } = property.items
+//     if (type === 'object') {
+//       store.rawConfig[property.key].map()
+//     }
+//   }
+// }
 
 function handleArrayDataItemCheck(value: string[], property: Options) {
   let _value: any = value

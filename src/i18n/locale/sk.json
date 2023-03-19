@@ -1,5 +1,6 @@
 {
   "defaultValue": "기본값",
+  "add": "에 추가",
   "nav": {
     "export": "내보내기",
     "theme": "테마 전환",

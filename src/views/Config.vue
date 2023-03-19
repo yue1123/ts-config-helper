@@ -55,29 +55,31 @@ import 'splitpanes/dist/splitpanes.css'
 import { parse, stripComments } from 'jsonc-parser'
 import useStore from '../store/data'
 import useSettingStore from '../store/setting'
-import { getValueByPath, parsePath, flatObjDeep, debounce } from '../utils'
+import { getValueByPath, parsePath, flatObjWithDepthControl, debounce } from '../utils'
 import Property from './Property.vue'
 import MyCheckbox from './Checkbox.vue'
 import MonacoEditor from '../components/MonacoEditor.vue'
 import { currentLang } from '@i18n'
 
-const { property } = useProperty()
+const { property, allFlatPropertyKeysMap } = useProperty()
 const language = ref('json')
 const store = useStore()
 const settingStore = useSettingStore()
-
 const monacoEditor = ref<typeof MonacoEditor>()
 
 // user paste or input code
 function handleChange(value: string) {
   if (value) {
     try {
-      const { res, parentNodeKey } = flatObjDeep(parse(value))
+      const res = flatObjWithDepthControl(parse(value), (item) => {
+        // check is max level
+        // if value is user value object, should not flatten
+        return !allFlatPropertyKeysMap.value.get(item)
+      })
       store.rawConfig = res
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        store.selectedKeys = selectedKeys.concat(parentNodeKey)
-        console.log(store.selectedKeys, '==========')
+        store.selectedKeys = selectedKeys
       }
     } catch (error) {
       console.log(error)

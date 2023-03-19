@@ -1,51 +1,103 @@
 <template>
-  <NDynamicInput
-    :value="data"
-    preset="pair"
-    :key-placeholder="props.keyDesc"
-    :value-placeholder="props.valueDesc"
-    @update:value="handleUpdate"
-  />
+  <NSpace vertical>
+    <NSpace v-for="(item, i) in data" :key="i">
+      <NInput
+        :placeholder="keyDesc"
+        style="min-width: 170px"
+        @keyup="handleUpdate"
+        @blur="handleUpdate"
+        v-model:value="item.key"
+      ></NInput>
+      <NDynamicTags
+        size="large"
+        :value="item.value"
+        :render-tag="(tag:string,index:number) => renderTag(tag,index,item)"
+        @update:value="(event: any) => handleArrayDataItemCheck(event, item)"
+      />
+    </NSpace>
+    <div class="create-button" role="container">
+      <NButton @click="handleCreate" dashed style="width: 100%">{{ $t('add') }}</NButton>
+    </div>
+  </NSpace>
 </template>
 
 <script lang="ts" setup>
-import { NDynamicInput } from 'naive-ui'
-import { withDefaults, ref, watch } from 'vue'
+import { NInput, NSpace, NDynamicTags, NTag, NButton, useMessage } from 'naive-ui'
+import { withDefaults, ref, watch, h } from 'vue'
 import { debounce } from '@utils'
 export interface Props {
-  data: any
+  data?: Record<string, any>
   keyDesc: string
   valueDesc: string
 }
-interface KeyValue {
+interface KeyValues {
   key: string
-  value: string
+  value: string[]
 }
-const data = ref()
+const message = useMessage()
 const props = withDefaults(defineProps<Props>(), {
   keyDesc: 'key',
   valueDesc: 'value'
 })
-// TODO: 至少保留一项
-// 空的时候
+const dataValue = keyValuesToObjectKeyValues(props.data || {})
+const defaultValueGetter = () => {
+  return { key: '', value: [] }
+}
+const data = ref<KeyValues[]>(dataValue.length ? dataValue : [defaultValueGetter()])
 const emit = defineEmits(['update:data'])
-const handleUpdate = debounce((values: KeyValue[]) => {
+const handleUpdate = debounce(() => {
   const res = Object.fromEntries(
-    values.reduce((resData, { key, value }) => {
+    data.value.reduce((resData, { key, value }) => {
       key && value && resData.push([key, value])
       return resData
-    }, [] as [string, string][]) as Iterable<string[]>
+    }, [] as [string, string[]][]) as Iterable<string[]>
   )
-  if (props.data?.length || Object.keys(res).length) {
-    emit('update:data', res)
-  }
-}, 300)
+  emit('update:data', res)
+}, 200)
+// listen data change and convert it to object key value
 watch(
   () => props.data,
   (newValue) => {
-    console.log(newValue)
+    if (newValue) data.value = keyValuesToObjectKeyValues(newValue)
   }
 )
+function keyValuesToObjectKeyValues(obj: Record<string, any[]>) {
+  return Object.entries(obj || {}).map(([key, value]: [string, any[]]) => {
+    return {
+      key,
+      value
+    }
+  })
+}
+function handleCreate() {
+  data.value.push(defaultValueGetter())
+}
+function renderTag(tag: string, index: number, item: KeyValues) {
+  return h(
+    NTag,
+    {
+      closable: true,
+      size: 'large',
+      onClose: () => {
+        item.value.splice(index, 1)
+      }
+    },
+    {
+      default: () => tag
+    }
+  )
+}
+function handleArrayDataItemCheck(value: string[], item: KeyValues) {
+  let _value: any = value
+  // check uniqueItems
+  let inputItem = _value.slice().pop()
+  let savedValue = item.value
+  if (savedValue.indexOf(inputItem) !== -1) {
+    return message.warning(`已存在 ${inputItem}`)
+  }
+  item.value = _value
+  handleUpdate()
+}
 </script>
 
 <style></style>
