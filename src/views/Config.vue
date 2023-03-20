@@ -12,7 +12,17 @@
       :on-after-leave="handleResize"
     >
       <NSpace vertical>
-        <!-- <NInput :placeholder="$t('config.searchConfig')"></NInput> -->
+        <NInput clear @input="handleSearch" :placeholder="$t('config.searchConfig')"></NInput>
+        <div
+          :style="{
+            height: '25px',
+            lineHeight: '25px',
+            opacity: runtimeStore.searchHitKeysMap ? 1 : 0
+          }"
+        >
+          {{ runtimeStore.searchHitKeysMap && Object.keys(runtimeStore.searchHitKeysMap).length
+          }} {{ $t('result') }}
+        </div>
         <MyCheckbox :level="0" :data="property" />
       </NSpace>
     </NLayoutSider>
@@ -30,11 +40,10 @@
       </Pane>
       <Pane style="min-width: 240px">
         <NLayoutContent>
-          <!-- (, null, settingStore.editor.tabSize) -->
           <MonacoEditor
             :local="currentLang"
             ref="monacoEditor"
-            :model-value="JSON.stringify(store.previewConfig)"
+            :model-value="JSON.stringify(store.previewConfig, null, settingStore.editor.tabSize)"
             :language="language"
             width="100%"
             height="calc(100vh - 64px)"
@@ -49,22 +58,24 @@
 
 <script lang="ts" setup>
 import { onMounted, ref, watchEffect, shallowRef } from 'vue'
-import { NLayout, NLayoutSider, NSpace, NLayoutContent, NScrollbar } from 'naive-ui'
+import { NLayout, NLayoutSider, NSpace, NInput, NLayoutContent, NScrollbar } from 'naive-ui'
 import { useEventListener, useProperty } from '@hooks'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
 import { parse, stripComments } from 'jsonc-parser'
-import useStore from '../store/data'
-import useSettingStore from '../store/setting'
+import useStore from '@store/data'
+import useRuntimeStore from '@store/runtime'
+import useSettingStore from '@store/setting'
 import { getValueByPath, parsePath, flatObjWithDepthControl, debounce } from '../utils'
 import Property from './Property.vue'
 import MyCheckbox from './Checkbox.vue'
 import MonacoEditor from '../components/MonacoEditor.vue'
 import { currentLang } from '@i18n'
 
-const { property, allFlatPropertyKeysMap } = useProperty()
+const { property, allFlatPropertyKeysMap, allFlatPropertyKeys } = useProperty()
 const language = ref('json')
 const store = useStore()
+const runtimeStore = useRuntimeStore()
 const settingStore = useSettingStore()
 const monacoEditor = ref<typeof MonacoEditor>()
 
@@ -94,6 +105,23 @@ function handleChange(value: string) {
 const handleResize = debounce(() => {
   monacoEditor.value?.resize()
 }, (1000 / 60) * 5)
+
+// # search
+const handleSearch = debounce((searchKeyword: string) => {
+  // runtimeStore
+  let obj = Object.create(null)
+  if (searchKeyword) {
+    for (const item of allFlatPropertyKeys) {
+      if (item.indexOf(searchKeyword) !== -1) {
+        obj[item] = true
+      }
+    }
+    runtimeStore.searchHitKeysMap = obj
+  } else {
+    runtimeStore.resetHitKeysMap(runtimeStore)
+  }
+}, 200)
+// # end search
 
 onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>

@@ -8,13 +8,17 @@
       <template v-if="item.children.length">
         <NCollapse style="margin-top: 10px" :key="i">
           <NCollapseItem :title="item.label">
-            <MyCheckbox :level="props.level + 1" :data="item.children"></MyCheckbox>
+            <MyCheckbox :level="props.level + 1" :data="item.children" />
           </NCollapseItem>
         </NCollapse>
         <NDivider />
       </template>
       <template v-else>
-        <NSpace :key="i"><NCheckbox :value="item.key" :label="item.label" /></NSpace>
+        <NSpace
+          v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[item.key]"
+          :key="i"
+          ><NCheckbox :value="item.key" :label="item.label"
+        /></NSpace>
       </template>
     </template>
   </NCheckboxGroup>
@@ -23,7 +27,8 @@
 <script setup lang="ts">
 import { NSpace, NDivider, NCheckbox, NCollapse, NCollapseItem, NCheckboxGroup } from 'naive-ui'
 import type { Options } from '../types'
-import useStore from '../store/data'
+import useStore from '@store/data'
+import useRuntimeStore from '@store/runtime'
 import { deletePropertyByPath } from '../utils'
 
 export interface Props {
@@ -35,6 +40,7 @@ type eventValue = {
   value: string | number
 }
 
+const runtimeStore = useRuntimeStore()
 const props = defineProps<Props>()
 const store = useStore()
 function handleChange(_e: any, { actionType, value: path }: eventValue) {

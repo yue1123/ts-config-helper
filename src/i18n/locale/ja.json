@@ -1,6 +1,7 @@
 {
   "defaultValue": "デフォルト値",
   "add": "追加",
+  "result": "アイテム結果",
   "nav": {
     "export": "エクスポート",
     "theme": "テーマを切り替える",

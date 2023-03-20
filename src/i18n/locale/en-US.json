@@ -1,6 +1,7 @@
 {
   "defaultValue": "Default",
   "add": "Add",
+  "result": "item result",
   "nav": {
     "export": "Export",
     "theme": "Toggle theme",

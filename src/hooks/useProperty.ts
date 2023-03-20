@@ -7,6 +7,7 @@ import type { Options } from '@types'
 export function useProperty() {
   const property = shallowRef()
   const allFlatPropertyKeysMap = shallowRef(new Map())
+  const allFlatPropertyKeys: string[] = []
   function getOptions(rawData: any, keys: string[]): { res: Options[]; allFlatKeys: string[] } {
     let tempKeys = [...keys]
     let allFlatKeys: string[] = []
@@ -43,6 +44,7 @@ export function useProperty() {
     return { allFlatKeys, res }
   }
   watchEffect(() => {
+    allFlatPropertyKeys.length = 0
     let schema = (schemaLangMap as any)[currentLang.value]
     if (!schema) schema = (schemaLangMap as any)['en-US']
     const allDefinitions: Record<string, any> = schema.definitions
@@ -51,11 +53,12 @@ export function useProperty() {
       if (allDefinitions[key].properties) {
         const { res, allFlatKeys } = getOptions(allDefinitions[key].properties, [])
         // console.log(allFlatKeys)
+        allFlatPropertyKeys.push.apply(allFlatPropertyKeys, allFlatKeys)
         allFlatKeys.forEach((key) => allFlatPropertyKeysMap.value.set(key, true))
         _values.push.apply(_values, res)
       }
       return _values
     }, [])
   })
-  return { property, allFlatPropertyKeysMap }
+  return { property, allFlatPropertyKeysMap, allFlatPropertyKeys }
 }

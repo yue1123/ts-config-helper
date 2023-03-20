@@ -8,7 +8,7 @@
         <Component
           style="--n-margin: 15px 0 7.5px 0"
           :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
-          ># {{ property.key }}</Component
+          >{{ property.key }}</Component
         >
         <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
           {{ $t('defaultValue') }}: {{ property.default }}
