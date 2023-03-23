@@ -3,8 +3,7 @@ import { diffArray, debounce, initValueByPath } from '../utils'
 import { compare } from 'fast-json-patch'
 import { DATA_CACHE } from '@constants'
 // import prettier from 'https://unpkg.com/prettier@2.5.1/esm/standalone.mjs'
-// import parserBabel from 'https://unpkg.com/prettier@2.5.1/esm/parser-babel.mjs' 
-
+// import parserBabel from 'https://unpkg.com/prettier@2.5.1/esm/parser-babel.mjs'
 
 type ConfigValue = boolean | string | string[] | undefined
 interface State {
@@ -16,7 +15,7 @@ export default defineStore(DATA_CACHE, {
   state: (): State => {
     return {
       config: '',
-      selectedKeys: ['compilerOptions.paths'],
+      selectedKeys: [],
       // TODO: json 支持注释
       rawConfig: {}
     }
@@ -31,14 +30,7 @@ export default defineStore(DATA_CACHE, {
           initValueByPath(obj, key, ele)
         }
       })
-      const a = Object.keys(obj).length ? obj : undefined
-      // console.log(
-      //   prettier.format(JSON.stringify(a), {
-      //     parser: 'babel',
-      //     plugins: [parserBabel]
-      //   })
-      // )
-      return a
+      return Object.keys(obj).length ? obj : undefined
     }
   },
   persist: true || import.meta.env.PROD

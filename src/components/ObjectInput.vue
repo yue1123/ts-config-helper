@@ -38,16 +38,7 @@ function onCreate() {
   return deepClone(schema)
 }
 const handleUpdate = debounce(() => {
-  emit(
-    'update:data',
-    data
-    // Object.fromEntries(
-    //   data.value.reduce((resData, { key, value }) => {
-    //     key && value && resData.push([key, value])
-    //     return resData
-    //   }, [] as [string, string[]][]) as Iterable<string[]>
-    // )
-  )
+  emit('update:data', data)
 }, 200)
 watch(
   () => props.data,

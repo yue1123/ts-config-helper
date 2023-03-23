@@ -12,6 +12,7 @@
       :on-after-leave="handleResize"
     >
       <NSpace vertical>
+        
         <NInput clear @input="handleSearch" :placeholder="$t('config.searchConfig')"></NInput>
         <div
           :style="{
@@ -57,7 +58,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref, watchEffect, shallowRef } from 'vue'
+import { onMounted, ref } from 'vue'
 import { NLayout, NLayoutSider, NSpace, NInput, NLayoutContent, NScrollbar } from 'naive-ui'
 import { useEventListener, useProperty } from '@hooks'
 import { Splitpanes, Pane } from 'splitpanes'
