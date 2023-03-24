@@ -12,7 +12,6 @@
       :on-after-leave="handleResize"
     >
       <NSpace vertical>
-        
         <NInput clear @input="handleSearch" :placeholder="$t('config.searchConfig')"></NInput>
         <div
           :style="{
@@ -21,8 +20,8 @@
             opacity: runtimeStore.searchHitKeysMap ? 1 : 0
           }"
         >
-          {{ runtimeStore.searchHitKeysMap && Object.keys(runtimeStore.searchHitKeysMap).length
-          }} {{ $t('result') }}
+          {{ runtimeStore.searchHitKeysMap && Object.keys(runtimeStore.searchHitKeysMap).length }}
+          {{ $t('result') }}
         </div>
         <MyCheckbox :level="0" :data="property" />
       </NSpace>
@@ -129,7 +128,7 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
 
 <style scoped>
 .tipText {
-  color: #999;
+  color: var(--vt-c-placeholder);
   text-align: center;
 }
 </style>
