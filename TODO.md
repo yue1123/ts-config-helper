@@ -1,0 +1,8 @@
+- Json 编辑器支持注释
+- 配置项更详细解释
+- 复制到剪贴板
+- 侧边栏快捷功能
+  - 展开所有配置
+  - 清空
+- 支持配置分类查找(分类参考: https://www.typescriptlang.org/zh/tsconfig)
+- 添加预设配置(参考: https://github.com/tsconfig/bases)
