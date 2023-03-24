@@ -11,7 +11,7 @@
   "config": {
     "searchConfig": "구성 항목 검색"
   },
-  "emptyTips": "오른쪽의 구성 항목을 확인하거나 왼쪽의 tsconfig.json 구성을 입력하십시오",
+  "emptyTips": "왼쪽의 구성 항목을 확인하거나 오른쪽의 tsconfig.json 구성을 입력하십시오.",
   "setting": {
     "title": "설정",
     "resetDefault": "기본값으로 재설정",

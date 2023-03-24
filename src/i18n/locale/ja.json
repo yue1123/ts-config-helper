@@ -11,7 +11,7 @@
   "config": {
     "searchConfig": "検索構成アイテム"
   },
-  "emptyTips": "右側の構成項目を確認するか,左側の tsconfig.json 構成を入力してください",
+  "emptyTips": "左側の構成項目を確認するか、右側の tsconfig.json 構成を入力してください",
   "setting": {
     "title": "設定",
     "resetDefault": "デフォルトにリセット",

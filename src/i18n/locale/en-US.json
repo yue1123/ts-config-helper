@@ -11,7 +11,7 @@
   "config": {
     "searchConfig": "search config item"
   },
-  "emptyTips": "Please check the configuration item on the right or enter the tsconfig.json configuration on the left",
+  "emptyTips": "Please check the configuration item on the left or enter the tsconfig.json configuration on the right",
   "setting": {
     "title": "Settings",
     "general": "General",

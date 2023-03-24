@@ -11,7 +11,7 @@
   "config": {
     "searchConfig": "搜索配置项"
   },
-  "emptyTips": "请在右侧勾选配置项或左侧输入tsconfig.json配置",
+  "emptyTips": "请在左侧勾选配置项或右侧输入tsconfig.json配置",
   "setting": {
     "title": "设置",
     "resetDefault": "重置为默认",
