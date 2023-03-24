@@ -129,7 +129,7 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
 
 <style scoped>
 .tipText {
-  color: var(--n-placeholder-color);
+  color: var(--color-heading);
   text-align: center;
 }
 </style>
