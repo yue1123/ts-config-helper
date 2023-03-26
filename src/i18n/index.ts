@@ -1,20 +1,19 @@
 import { ref } from 'vue'
 import { createI18n, type VueI18nOptions } from 'vue-i18n'
 import { SUPPORT_LOCALES } from '@constants'
-import en_US from '@i18n/locale/en-US.json'
-import zh_cn from '@i18n/locale/zh_cn.json'
+import en from '@i18n/locale/en.json'
+import zh from '@i18n/locale/zh.json'
 import ja from '@i18n/locale/ja.json'
-import sk from '@i18n/locale/sk.json'
 import useSettingStore from '@store/setting'
 
 // for global use
 export let i18n: any
-export let currentLang = ref<SUPPORT_LOCALES>(SUPPORT_LOCALES['zh_cn'])
+export let currentLang = ref<SUPPORT_LOCALES>(SUPPORT_LOCALES['zh'])
 // for setup
 export function setupI18n() {
   const options: VueI18nOptions = {
-    fallbackLocale: 'zh_cn',
-    messages: { zh_cn, 'en-US': en_US, ja, sk }
+    fallbackLocale: 'zh',
+    messages: { zh, en, ja }
   }
 
   i18n = createI18n(options)

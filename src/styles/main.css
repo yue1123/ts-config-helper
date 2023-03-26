@@ -1,4 +1,7 @@
 @import './base.css';
+@import 'github-markdown-css/github-markdown.css';
+@tailwind components;
+@tailwind utilities;
 
 #app {
   margin: 0 auto;
@@ -56,65 +59,73 @@ body {
 .splitpanes__splitter:active::after {
   background: #18a058 !important;
 }
-@-webkit-keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%,0,0);
-        transform: translate3d(-100%,0,0)
-    }
 
-    to {
-        opacity: 1;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0)
-    }
+.n-popover pre {
+  background: var(--color-background-mute);
+  margin: 15px 0;
+  padding: 15px;
+  border-radius: 4px;
+}
+
+@-webkit-keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
 }
 
 @keyframes fadeInLeft {
-    0% {
-        opacity: 0;
-        -webkit-transform: translate3d(-100%,0,0);
-        transform: translate3d(-100%,0,0)
-    }
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
 
-    to {
-        opacity: 1;
-        -webkit-transform: translateZ(0);
-        transform: translateZ(0)
-    }
+  to {
+    opacity: 1;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
 }
 
 .animate__fadeInLeft {
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
 }
 @-webkit-keyframes fadeOutRight {
-    0% {
-        opacity: 1
-    }
+  0% {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(100%,0,0);
-        transform: translate3d(100%,0,0)
-    }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 @keyframes fadeOutRight {
-    0% {
-        opacity: 1
-    }
+  0% {
+    opacity: 1;
+  }
 
-    to {
-        opacity: 0;
-        -webkit-transform: translate3d(100%,0,0);
-        transform: translate3d(100%,0,0)
-    }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
 }
 
 .animate__fadeOutRight {
-    -webkit-animation-name: fadeOutRight;
-    animation-name: fadeOutRight
+  -webkit-animation-name: fadeOutRight;
+  animation-name: fadeOutRight;
 }
 .animated {
   -webkit-animation-duration: 0.6s;
@@ -184,4 +195,8 @@ body {
     transform: rotate(200deg);
     opacity: 0;
   }
+}
+
+.markdown-body {
+  background-color: transparent;
 }

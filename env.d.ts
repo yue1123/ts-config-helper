@@ -12,7 +12,7 @@ declare module 'splitpanes' {
 
 // i18n translate key
 declare module '@intlify/core-base' {
-  import I18nStore from '@i18n/locale/zh_cn.json'
+  import I18nStore from '@i18n/locale/zh.json'
 
   export type PickupPathKey<
     T extends Record<string, any>,

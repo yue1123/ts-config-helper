@@ -38,7 +38,12 @@ function getInputTypeHelper(property: Options): InputType {
       return 'boolean'
     } else if (type === 'number') {
       return 'number'
-    } else if ((type === 'string' && !_enum) || (type as string[]).includes('string')) {
+    } else if (type === 'string' && _enum) {
+      return 'select'
+    } else if (
+      (type === 'string' && !_enum) ||
+      (type.find && (type as string[]).find((item) => item === 'string'))
+    ) {
       if (anyOf) {
         property.enum = anyOf[0].enum
         return 'select'

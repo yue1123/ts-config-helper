@@ -3,7 +3,7 @@
     <template #create-button-default> {{ $t('add') }} </template>
     <template #default="{ value }">
       <div class="key_value-item">
-        <div v-for="(v, k) in value" role="container" class="key_value-input-container">
+        <div v-for="(v, k) in value" :key="k" role="container" class="key_value-input-container">
           <span role="label">{{ k }} : </span
           ><NInput
             @update:value="handleUpdate"

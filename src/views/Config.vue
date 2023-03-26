@@ -30,11 +30,17 @@
       <Pane style="min-width: 240px">
         <NLayoutContent>
           <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
-            <template v-if="!store.selectedKeys.length">
+            <!-- <TransitionGroup
+              enter-active-class="animated animate__fadeInLeft"
+              leave-active-class="animated animate__fadeOutRight"
+            > -->
+            <template key="tipText" v-if="!store.selectedKeys.length">
               <div class="tipText">{{ $t('about') }}</div>
               <div class="tipText">{{ $t('emptyTips') }}</div>
             </template>
-            <Property :level="1" :definition="property"></Property>
+
+            <Property key="property" :level="1" :definition="property"></Property>
+            <!-- </TransitionGroup> -->
           </NScrollbar>
         </NLayoutContent>
       </Pane>
@@ -83,11 +89,15 @@ const monacoEditor = ref<typeof MonacoEditor>()
 function handleChange(value: string) {
   if (value) {
     try {
-      const res = flatObjWithDepthControl(parse(value), (item) => {
-        // check is max level
-        // if value is user value object, should not flatten
-        return !allFlatPropertyKeysMap.value.get(item)
-      })
+      console.log(parse(value))
+      const res = flatObjWithDepthControl(
+        parse(value, undefined, { allowEmptyContent: true }),
+        (item) => {
+          // check is max level
+          // if value is user value object, should not flatten
+          return !allFlatPropertyKeysMap.value.get(item)
+        }
+      )
       store.rawConfig = res
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {

@@ -18,7 +18,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
+      '@': resolve(__dirname, './src/'),
       '@themeVars': resolve(__dirname, './src/styles/theme.module.scss'),
       '@layout': resolve(__dirname, './src/layout'),
       '@views': resolve(__dirname, './src/views'),
@@ -28,6 +28,7 @@ export default defineConfig({
       '@router': join(__dirname, 'src/router/'),
       '@store': join(__dirname, 'src/store/'),
       '@api': join(__dirname, 'src/api/'),
+      '@modules': join(__dirname, 'src/modules/'),
       '@styles': join(__dirname, 'src/styles/'),
       '@constants': join(__dirname, 'src/constants/'),
       '@hooks': join(__dirname, 'src/hooks/'),

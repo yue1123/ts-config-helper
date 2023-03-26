@@ -7,7 +7,7 @@
     :style="{ width: '600px' }"
     :title="$t('setting.title')"
     size="huge"
-    :bordered="false"
+    :bordered="true"
   >
     <NForm
       ref="formRef"

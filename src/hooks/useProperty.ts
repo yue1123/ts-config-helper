@@ -1,6 +1,6 @@
 import { getValueByPath, parsePath } from '@utils'
 import { tsconfigSchema, schemaLangMap } from '@schema'
-import { shallowRef, watchEffect } from 'vue'
+import { shallowRef, watch, watchEffect } from 'vue'
 import { currentLang } from '@i18n'
 import type { Options } from '@types'
 
@@ -43,22 +43,26 @@ export function useProperty() {
     })
     return { allFlatKeys, res }
   }
-  watchEffect(() => {
-    allFlatPropertyKeys.length = 0
-    let schema = (schemaLangMap as any)[currentLang.value]
-    if (!schema) schema = (schemaLangMap as any)['en-US']
-    const allDefinitions: Record<string, any> = schema.definitions
-    Reflect.deleteProperty(allDefinitions, '//')
-    property.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
-      if (allDefinitions[key].properties) {
-        const { res, allFlatKeys } = getOptions(allDefinitions[key].properties, [])
-        // console.log(allFlatKeys)
-        allFlatPropertyKeys.push.apply(allFlatPropertyKeys, allFlatKeys)
-        allFlatKeys.forEach((key) => allFlatPropertyKeysMap.value.set(key, true))
-        _values.push.apply(_values, res)
-      }
-      return _values
-    }, [])
-  })
+  watchEffect(
+    () => {
+      allFlatPropertyKeys.length = 0
+      let schema = (schemaLangMap as any)[currentLang.value]
+      if (!schema) schema = (schemaLangMap as any)['en-US']
+      const allDefinitions: Record<string, any> = schema.definitions
+      Reflect.deleteProperty(allDefinitions, '//')
+      property.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {
+        if (allDefinitions[key].properties) {
+          const { res, allFlatKeys } = getOptions(allDefinitions[key].properties, [])
+          allFlatPropertyKeys.push.apply(allFlatPropertyKeys, allFlatKeys)
+          allFlatKeys.forEach((key) => allFlatPropertyKeysMap.value.set(key, true))
+          _values.push.apply(_values, res)
+        }
+        return _values
+      }, [])
+    },
+    {
+      flush: 'sync'
+    }
+  )
   return { property, allFlatPropertyKeysMap, allFlatPropertyKeys }
 }

@@ -15,23 +15,7 @@
     "rootDir": ".",
     "baseUrl": "./",
     "paths": {
-      "@*": ["src/*"],
-      "@styles": ["src/styles/*"],
-      "@layout": ["src/layout/*"],
-      "@views": ["src/views/*"],
-      "@router": ["src/router/*"],
-      "@components/*": ["src/components/*"],
-      "@utils/*": ["src/utils/*"],
-      "@store/*": ["src/store/*"],
-      "@api/*": ["src/api/*"],
-      "@styles/*": ["src/styles/*"],
-      "@constants/*": ["src/constants/*"],
-      "@hooks/*": ["src/hooks/*"],
-      "@types/*": ["src/types/*"],
-      "@plugins/*": ["src/plugins/*"],
-      "@i18n/*": ["src/i18n/*"],
-      "@package": ["./package.json"],
-      "@schema/*": ["src/schema/*"]
+      "@*": ["src/*"]
     }
   }
 }

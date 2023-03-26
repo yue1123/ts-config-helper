@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-
 import App from './App.vue'
 import { setupI18n } from '@i18n'
 import './modules/monaco'
