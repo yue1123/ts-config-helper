@@ -7,6 +7,7 @@ specifiers:
   '@types/node': ^18.14.2
   '@types/prettier': ^2.7.2
   '@typescript/twoslash': ^3.2.1
+  '@typescript/vfs': ^1.4.0
   '@vitejs/plugin-vue': ^4.0.0
   '@vue/eslint-config-prettier': ^7.1.0
   '@vue/eslint-config-typescript': ^11.0.2
@@ -34,6 +35,7 @@ specifiers:
   pinia-plugin-persistedstate: ^3.1.0
   postcss: ^8.4.21
   prettier: ^2.8.4
+  remark-shiki-twoslash: ^3.1.1
   splitpanes: ^3.1.5
   start-server-and-test: ^2.0.0
   strip-json-comments: ^5.0.0
@@ -50,6 +52,7 @@ specifiers:
 
 dependencies:
   '@typescript/twoslash': 3.2.1
+  '@typescript/vfs': 1.4.0
   bootstrap-icons-vue: 1.8.1
   comment-json: 4.2.3
   fast-json-patch: 3.1.1
@@ -65,6 +68,7 @@ dependencies:
   naive-ui: 2.34.3_vue@3.2.47
   pinia: 2.0.32_7h6e7cvei2rsgyre2mq4fyhehq
   pinia-plugin-persistedstate: 3.1.0_pinia@2.0.32
+  remark-shiki-twoslash: 3.1.1_typescript@4.8.4
   splitpanes: 3.1.5
   strip-json-comments: 5.0.0
   vite-plugin-pwa: 0.14.4_vite@4.1.4

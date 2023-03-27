@@ -16,6 +16,9 @@ export default defineConfig({
       devEnable: true
     })
   ],
+  define: {
+    process: process
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src/'),
