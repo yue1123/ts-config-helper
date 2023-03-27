@@ -2,6 +2,9 @@
   "defaultValue": "デフォルト値",
   "add": "追加",
   "result": "アイテム結果",
+  "release": "リリース済み",
+  "related": "関連",
+  "quote": "引用元",
   "nav": {
     "export": "エクスポート",
     "theme": "テーマを切り替える",

@@ -23,7 +23,7 @@ export const DEFAULT_SETTING = {
     lineNumbers: true
   },
   showDescription: true,
-  lang: SUPPORT_LOCALES['zh_cn']
+  lang: SUPPORT_LOCALES['zh']
 }
 
 export default defineStore(SETTING_STORAGE, {
@@ -37,7 +37,7 @@ export default defineStore(SETTING_STORAGE, {
         lineNumbers: true
       },
       showDescription: true,
-      lang: SUPPORT_LOCALES['zh_cn']
+      lang: SUPPORT_LOCALES['zh']
     }
   },
   persist: {

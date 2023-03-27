@@ -2,6 +2,7 @@
   <NPopover
     style="max-width: 500px; max-height: 50vh"
     header-style="position: sticky; top:0; background: var(--n-color)"
+    footer-style="position: sticky; bottom:0; background: var(--n-color)"
     scrollable
     :show="showPopover"
     placement="right"
@@ -15,9 +16,9 @@
       </NButton>
     </template>
     <template #header>
-      <div style="display: flex; justify-content: space-between">
+      <div class="flex justify-between">
         <div class="flex items-center space-x-2">
-          <span>引用自:</span>
+          <span>{{ $t('quote') }}:</span>
           <NButton
             text
             tag="a"
@@ -32,17 +33,46 @@
       </div>
     </template>
     <div class="markdown-body" style="height: 100%; overflow: hidden" v-html="data"></div>
+    <template #footer>
+      <div class="flex flex-col">
+        <div v-if="configVersion" class="flex items-center space-x-2">
+          <span>{{ $t('release') }}:</span>
+          <NButton
+            text
+            tag="a"
+            :href="`https://www.typescriptlang.org/docs/handbook/release-notes/typescript-${configVersion.replace(
+              '.',
+              '-'
+            )}.html`"
+            target="_blank"
+            type="primary"
+          >
+            {{ configVersion }}
+          </NButton>
+        </div>
+        <div v-if="relatedTo" class="flex items-center flex-wrap space-y-2 space-x-2">
+          <div>{{ $t('related') }}:</div>
+          <NTag v-for="item in relatedTo" type="success" size="small" :bordered="false">
+            {{ item }}
+          </NTag>
+        </div>
+      </div>
+    </template>
   </NPopover>
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue'
-import { NPopover, NButton } from 'naive-ui'
+import { computed, ref } from 'vue'
+import { NPopover, NButton, NTag } from 'naive-ui'
 import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
 import { usePropertyRemoteMarkdown } from '@hooks'
+import { configReleaseMap, relatedToMap } from '@utils'
+
 export interface Props {
   property: string
 }
+const configVersion = computed(() => configReleaseMap[props.property])
+const relatedTo = computed(() => relatedToMap[props.property])
 const props = defineProps<Props>()
 
 const { get, data, isLoading } = usePropertyRemoteMarkdown()
@@ -51,7 +81,6 @@ const showPopover = ref<boolean>(false)
 function handleGetMarkdownDesc() {
   get(props.property).then(() => {
     showPopover.value = true
-    console.log()
   })
 }
 </script>

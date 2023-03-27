@@ -47,7 +47,7 @@ export function useProperty() {
     () => {
       allFlatPropertyKeys.length = 0
       let schema = (schemaLangMap as any)[currentLang.value]
-      if (!schema) schema = (schemaLangMap as any)['en-US']
+      if (!schema) schema = (schemaLangMap as any)['en']
       const allDefinitions: Record<string, any> = schema.definitions
       Reflect.deleteProperty(allDefinitions, '//')
       property.value = Object.keys(allDefinitions).reduce<Options[]>((_values, key) => {

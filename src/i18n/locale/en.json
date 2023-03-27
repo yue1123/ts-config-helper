@@ -2,6 +2,9 @@
   "defaultValue": "Default",
   "add": "Add",
   "result": "item result",
+  "release": "Released",
+  "related": "Related",
+  "quote":"Quoted from",
   "nav": {
     "export": "Export",
     "theme": "Toggle theme",

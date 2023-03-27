@@ -2,6 +2,9 @@
   "defaultValue": "默认值",
   "add": "添加",
   "result": "项结果",
+  "release": "版本",
+  "related": "相关",
+  "quote": "引用自",
   "nav": {
     "export": "导出",
     "theme": "切换主题",

@@ -14,7 +14,7 @@ function fetchMarkdown(url: string) {
     throw response
   })
 }
-const mdRender = createMarkdownRenderer()
+const mdRender = await createMarkdownRenderer()
 export function usePropertyRemoteMarkdown() {
   const isLoading = ref<boolean>(false)
   const data = ref<string>()
