@@ -17,7 +17,7 @@
             <NSpace role="functional-btn" class="buttons-container">
               <NTooltip placement="bottom" trigger="hover">
                 <template #trigger>
-                  <NButton @click="handleExport" strong secondary>
+                  <NButton @click="handleExport" strong quaternary>
                     <template #icon> <BIconDownload /> </template
                   ></NButton>
                 </template>
@@ -31,7 +31,7 @@
               </NTooltip>
               <NTooltip placement="bottom" trigger="hover">
                 <template #trigger>
-                  <NButton @click="handleShowSetting" strong secondary>
+                  <NButton @click="handleShowSetting" strong quaternary>
                     <template #icon> <BIconGearFill /> </template
                   ></NButton>
                 </template>
@@ -40,11 +40,11 @@
               <NTooltip placement="bottom" trigger="hover">
                 <template #trigger>
                   <NButton
+                    quaternary
                     tag="a"
                     href="https://github.com/yue1123/ts-config-helper"
                     target="_blank"
                     strong
-                    secondary
                   >
                     <template #icon> <BIconGithub /> </template
                   ></NButton>

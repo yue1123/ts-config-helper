@@ -15,7 +15,8 @@
     "rootDir": ".",
     "baseUrl": "./",
     "paths": {
-      "@*": ["src/*"]
+      "@*": ["src/*"],
+      "@package": ["./package.json"]
     }
   }
 }

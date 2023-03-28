@@ -1,5 +1,5 @@
 <template>
-  <NButton @click="handleChangeTheme" strong secondary>
+  <NButton @click="handleChangeTheme" quaternary>
     <template #icon>
       <span class="theme-icon" style="--animation-time: 0.6s">
         <transition
