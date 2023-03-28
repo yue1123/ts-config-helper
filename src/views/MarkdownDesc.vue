@@ -6,7 +6,8 @@
     scrollable
     :show="showPopover"
     placement="right"
-    trigger="manual"
+    trigger="click"
+    @update:show="handleUpdateShow"
   >
     <template #trigger>
       <NButton text :bordered="false" :loading="isLoading" @click="handleGetMarkdownDesc">
@@ -15,7 +16,7 @@
         </template>
       </NButton>
     </template>
-    <template #header>
+    <template #header v-if="data">
       <div class="flex justify-between">
         <div class="flex items-center space-x-2">
           <span>{{ $t('quote') }}:</span>
@@ -29,12 +30,17 @@
             <BIconLink45deg />
           </NButton>
         </div>
-        <NButton text :bordered="false" @click="showPopover = false">关闭</NButton>
+        <NButton text :bordered="false" @click="showPopover = false">{{ $t('close') }}</NButton>
       </div>
     </template>
-    <div class="markdown-body" style="height: 100%; overflow: hidden" v-html="data"></div>
-    <template #footer>
-      <div class="flex flex-col">
+    <div
+      v-if="data"
+      class="markdown-body"
+      style="height: 100%; overflow: hidden"
+      v-html="data"
+    ></div>
+    <template #footer v-if="configVersion || relatedTo">
+      <div class="flex flex-col space-y-2">
         <div v-if="configVersion" class="flex items-center space-x-2">
           <span>{{ $t('release') }}:</span>
           <NButton
@@ -50,7 +56,7 @@
             {{ configVersion }}
           </NButton>
         </div>
-        <div v-if="relatedTo" class="flex items-center flex-wrap space-y-2 space-x-2">
+        <div v-if="relatedTo" class="flex items-center flex-wrap gap-2">
           <div>{{ $t('related') }}:</div>
           <NTag v-for="item in relatedTo" type="success" size="small" :bordered="false">
             {{ item }}
@@ -62,27 +68,35 @@
 </template>
 
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
-import { NPopover, NButton, NTag } from 'naive-ui'
+import { computed, h, ref, watch, nextTick, getCurrentInstance } from 'vue'
+import { NPopover, NButton, NTag, useMessage, type PopoverTrigger } from 'naive-ui'
 import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
-import { usePropertyRemoteMarkdown } from '@hooks'
+import { useEventListener, usePropertyRemoteMarkdown } from '@hooks'
 import { configReleaseMap, relatedToMap } from '@utils'
+import { useI18n } from 'vue-i18n'
 
 export interface Props {
   property: string
 }
+// const { t } = useI18n()
 const configVersion = computed(() => configReleaseMap[props.property])
 const relatedTo = computed(() => relatedToMap[props.property])
 const props = defineProps<Props>()
-
 const { get, data, isLoading } = usePropertyRemoteMarkdown()
-
+const message = useMessage()
+const { ctx } = getCurrentInstance() as unknown as { ctx: any }
 const showPopover = ref<boolean>(false)
 function handleGetMarkdownDesc() {
-  get(props.property).then(() => {
-    showPopover.value = true
-  })
+  showPopover.value = false
+  get(props.property)
+    .then(() => {
+      showPopover.value = true
+    })
+    .catch(() => {
+      message.error(ctx.$t('notFound', { property: props.property }))
+    })
+}
+function handleUpdateShow(value: boolean) {
+  if (!value) showPopover.value = value
 }
 </script>
-
-<style lang="scss" scoped></style>

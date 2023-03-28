@@ -4,7 +4,7 @@
   "result": "item result",
   "release": "Released",
   "related": "Related",
-  "quote":"Quoted from",
+  "quote": "Quoted from",
   "nav": {
     "export": "Export",
     "theme": "Toggle theme",
@@ -32,5 +32,7 @@
       "lineNumbers": "Show code line numbers"
     }
   },
-  "about": "This is a visual TypeScript configuration tool that can help you configure and learn TypeScript configuration options."
+  "about": "This is a visual TypeScript configuration tool that can help you configure and learn TypeScript configuration options.",
+  "notFound": "No relevant document content found for `{property}`",
+  "close": "close"
 }

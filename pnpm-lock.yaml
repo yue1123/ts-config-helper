@@ -4,6 +4,7 @@ specifiers:
   '@rushstack/eslint-patch': ^1.2.0
   '@types/jsdom': ^21.1.0
   '@types/markdown-it': ^12.2.3
+  '@types/markdown-it-link-attributes': ^3.0.1
   '@types/node': ^18.14.2
   '@types/prettier': ^2.7.2
   '@typescript/twoslash': ^3.2.1
@@ -26,6 +27,7 @@ specifiers:
   jsonc-parser: ^3.2.0
   jsondiffpatch: ^0.4.1
   markdown-it: ^13.0.1
+  markdown-it-link-attributes: ^4.0.1
   markdown-it-shiki: ^0.8.0
   markdown-it-shiki-twoslash: ^2.1.1
   monaco-editor: ^0.36.1
@@ -62,6 +64,7 @@ dependencies:
   jsonc-parser: 3.2.0
   jsondiffpatch: 0.4.1
   markdown-it: 13.0.1
+  markdown-it-link-attributes: 4.0.1
   markdown-it-shiki: 0.8.0
   markdown-it-shiki-twoslash: 2.1.1_typescript@4.8.4
   monaco-editor: 0.36.1
@@ -80,6 +83,7 @@ devDependencies:
   '@rushstack/eslint-patch': 1.2.0
   '@types/jsdom': 21.1.0
   '@types/markdown-it': 12.2.3
+  '@types/markdown-it-link-attributes': 3.0.1
   '@types/node': 18.14.2
   '@types/prettier': 2.7.2
   '@vitejs/plugin-vue': 4.0.0_vite@4.1.4+vue@3.2.47
@@ -1793,6 +1797,12 @@ packages:
   /@types/lodash/4.14.191:
     resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
     dev: false
+
+  /@types/markdown-it-link-attributes/3.0.1:
+    resolution: {integrity: sha512-K8RnNb1q8j7rDOJbMF7AnlhCC/45BjrQ8z3WZWOrvkBIl8u9RXvmBdG/hfpnmK1JhhEZcmFEKWt+ilW1Mly+2Q==}
+    dependencies:
+      '@types/markdown-it': 12.2.3
+    dev: true
 
   /@types/markdown-it/12.2.3:
     resolution: {integrity: sha512-GKMHFfv3458yYy+v/N8gjufHO6MSZKCOXpZc5GXIWWy8uldwfmPn98vp81gZ5f9SVw8YYBctgfJ22a2d7AOMeQ==}
@@ -4070,6 +4080,10 @@ packages:
   /map-stream/0.1.0:
     resolution: {integrity: sha512-CkYQrPYZfWnu/DAmVCpTSX/xHpKZ80eKh2lAkyA6AJTef6bW+6JpbQZN5rofum7da+SyN1bi5ctTm+lTfcCW3g==}
     dev: true
+
+  /markdown-it-link-attributes/4.0.1:
+    resolution: {integrity: sha512-pg5OK0jPLg62H4k7M9mRJLT61gUp9nvG0XveKYHMOOluASo9OEF13WlXrpAp2aj35LbedAy3QOCgQCw0tkLKAQ==}
+    dev: false
 
   /markdown-it-shiki-twoslash/2.1.1_typescript@4.8.4:
     resolution: {integrity: sha512-vu5F3M9/livaM0LVHhcaVmh3YKZIUOo2Pt9Vf2rIH3OyXaf1e6w3A7i09Uqkpx5YtRkhPuWyXQI0ZrOBN+HE3Q==}

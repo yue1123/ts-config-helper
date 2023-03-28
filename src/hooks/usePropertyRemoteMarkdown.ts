@@ -2,8 +2,6 @@ import { ref } from 'vue'
 import { currentLang } from '@i18n'
 import { createMarkdownRenderer } from '@modules/markdown'
 
-const cache = new Map()
-
 function fetchMarkdown(url: string) {
   return fetch(url, {
     mode: 'cors'
@@ -14,14 +12,19 @@ function fetchMarkdown(url: string) {
     throw response
   })
 }
+const cache = new Map()
 const mdRender = await createMarkdownRenderer()
 export function usePropertyRemoteMarkdown() {
   const isLoading = ref<boolean>(false)
   const data = ref<string>()
   const get = (property: string) => {
     const catchKey = `${currentLang.value}:${property}`
-    const res = cache.get(catchKey)
+    const res = cache.get(catchKey) || cache.get(property)
     if (res) return Promise.resolve((data.value = res))
+    else if (res === null) {
+      isLoading.value = false
+      return Promise.reject(res)
+    }
     const currentLangMarkdownUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website-Localizations@1.0.0-alpha.1/docs/tsconfig/${currentLang.value}/options/${property}.md`
     const fallbackDescUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website@1.0.0-alpha.1/packages/tsconfig-reference/copy/en/options/${property}.md`
     isLoading.value = true
@@ -37,6 +40,10 @@ export function usePropertyRemoteMarkdown() {
           data.value = mdRender(res!)
           cache.set(catchKey, data.value)
           resolve(data.value)
+        })
+        .catch((errResponse) => {
+          cache.set(property, null)
+          reject(errResponse)
         })
         .finally(() => {
           isLoading.value = false

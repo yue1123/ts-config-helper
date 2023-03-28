@@ -1,4 +1,5 @@
 @import './base.css';
+@import 'highlight.js/styles/base16/material-darker.css';
 @import 'github-markdown-css/github-markdown.css';
 @tailwind components;
 @tailwind utilities;

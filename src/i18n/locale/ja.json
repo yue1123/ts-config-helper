@@ -32,5 +32,7 @@
       "lineNumbers": "コードの行番号を表示"
     }
   },
-  "about": "これは,TypeScript 構成項目の構成と学習に役立つ視覚的な TypeScript 構成ツールです。"
+  "about": "これは,TypeScript 構成項目の構成と学習に役立つ視覚的な TypeScript 構成ツールです。",
+  "notFound": "`{property}` に関連するドキュメントの内容が見つかりません",
+  "close": "近い"
 }

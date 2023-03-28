@@ -19,6 +19,8 @@ declare module '@intlify/core-base' {
     K extends string | null = null,
     M = keyof T
   > = M extends string ? PickupPathKey<T[M], K extends string ? `${K}.${M}` : M> : K
+  type keys = PickupPathKey<typeof I18nStore>
 
-  export declare type Path = PickupPathKey<typeof I18nStore>
+  export declare type Path = keys
+  export declare type ResourceKeys = keys
 }
