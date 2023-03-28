@@ -1,5 +1,4 @@
 import markdownIt from 'markdown-it'
-import linkAttr from 'markdown-it-link-attributes'
 import hljs from 'highlight.js'
 import javascript from 'highlight.js/lib/languages/javascript'
 import typescript from 'highlight.js/lib/languages/typescript'
@@ -28,13 +27,6 @@ export async function createMarkdownRenderer() {
       }
 
       return ''
-    }
-  })
-  md.use(linkAttr, {
-    pattern: /^https?:/,
-    attrs: {
-      target: '_blank',
-      rel: 'noopener'
     }
   })
 
