@@ -13,7 +13,9 @@ export default defineConfig({
     spaLoading('svg', {
       debounce: 100,
       path: './src/assets/loading.svg',
-      devEnable: true
+      devEnable: true,
+      tipText: 'Please stand by, source is loading...',
+      css: '.loading-text{margin-top:20px}'
     })
   ],
   define: {

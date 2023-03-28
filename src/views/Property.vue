@@ -5,8 +5,8 @@
         style="--n-margin: 15px 0 7.5px 0"
         :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
       >
-        <div class="flex items-center space-x-2">
-          <span>{{ property.key }}</span>
+        <div class="flex items-center space-x-4">
+          <span># {{ property.key }}</span>
           <MarkdownDesc :property="property.label" />
         </div>
       </Component>

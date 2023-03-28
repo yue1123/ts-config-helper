@@ -39,7 +39,7 @@
         {{ $t('setting.editor') }}
       </NDivider>
       <NFormItem :label="$t('setting.editorSetting.tabSize')" path="editor.tabSize">
-        <NInputNumber v-model:value="settingCopy.editor.tabSize" />
+        <NInputNumber :min="2" :max="8" v-model:value="settingCopy.editor.tabSize" />
       </NFormItem>
       <NFormItem :label="$t('setting.editorSetting.fontSize')" path="editor.fontSize">
         <NInputNumber v-model:value="settingCopy.editor.fontSize" />

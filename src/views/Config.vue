@@ -89,7 +89,6 @@ const monacoEditor = ref<typeof MonacoEditor>()
 function handleChange(value: string) {
   if (value) {
     try {
-      console.log(parse(value))
       const res = flatObjWithDepthControl(
         parse(value, undefined, { allowEmptyContent: true }),
         (item) => {
@@ -101,7 +100,8 @@ function handleChange(value: string) {
       store.rawConfig = res
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        store.selectedKeys = selectedKeys
+        store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
+        
       }
     } catch (error) {
       console.log(error)
