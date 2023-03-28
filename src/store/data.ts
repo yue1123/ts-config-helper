@@ -2,8 +2,6 @@ import { defineStore, type PiniaPluginContext } from 'pinia'
 import { diffArray, debounce, initValueByPath } from '../utils'
 import { compare } from 'fast-json-patch'
 import { DATA_CACHE } from '@constants'
-// import prettier from 'https://unpkg.com/prettier@2.5.1/esm/standalone.mjs'
-// import parserBabel from 'https://unpkg.com/prettier@2.5.1/esm/parser-babel.mjs'
 
 type ConfigValue = boolean | string | string[] | undefined
 interface State {
@@ -33,7 +31,7 @@ export default defineStore(DATA_CACHE, {
       return Object.keys(obj).length ? obj : undefined
     }
   },
-  persist: true || import.meta.env.PROD
+  persist: import.meta.env.PROD
 })
 
 // export function watchChange({ store }: PiniaPluginContext) {
