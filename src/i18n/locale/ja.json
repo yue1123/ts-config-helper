@@ -9,7 +9,9 @@
     "export": "エクスポート",
     "theme": "テーマを切り替える",
     "setting": "設定",
-    "github": "GitHub リポジトリ"
+    "github": "GitHub リポジトリ",
+    "copied": "正常にコピー",
+    "copyToClipboard": "クリップボードにコピー"
   },
   "config": {
     "searchConfig": "検索構成アイテム"
@@ -34,5 +36,6 @@
   },
   "about": "これは,TypeScript 構成項目の構成と学習に役立つ視覚的な TypeScript 構成ツールです。",
   "notFound": "`{property}` に関連するドキュメントの内容が見つかりません",
-  "close": "近い"
+  "close": "近い",
+  "showMarkdownDesc": "ts ドキュメントの説明を表示"
 }

@@ -9,7 +9,9 @@
     "export": "导出",
     "theme": "切换主题",
     "setting": "设置",
-    "github": "GitHub仓库"
+    "github": "Star me on gitHub",
+    "copied": "复制成功",
+    "copyToClipboard": "复制到剪贴板"
   },
   "config": {
     "searchConfig": "搜索配置项"
@@ -34,5 +36,6 @@
   },
   "about": "这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。",
   "notFound": "未找到`{property}`相关文档内容",
-  "close": "关闭"
+  "close": "关闭",
+  "showMarkdownDesc": "查看 ts 文档描述"
 }

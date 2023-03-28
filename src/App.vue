@@ -15,13 +15,16 @@
               {{ $t('about') }}
             </NTooltip>
             <NSpace role="functional-btn" class="buttons-container">
-              <NTooltip placement="bottom" trigger="hover">
+              <NTooltip v-if="isSupported" placement="bottom" trigger="hover">
                 <template #trigger>
-                  <NButton @click="handleExport" strong quaternary>
-                    <template #icon> <BIconDownload /> </template
+                  <NButton @click="handleCopy" strong quaternary>
+                    <template #icon>
+                      <BIconClipboardFill v-if="!copied" />
+                      <BIconClipboardCheckFill v-else /> </template
                   ></NButton>
                 </template>
-                <span>{{ $t('nav.export') }}</span>
+                <span v-if="!copied">{{ $t('nav.copyToClipboard') }}</span>
+                <span v-else>{{ $t('nav.copied') }}</span>
               </NTooltip>
               <NTooltip placement="bottom" trigger="hover">
                 <template #trigger>
@@ -62,7 +65,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, shallowRef, watchEffect } from 'vue'
+import { getCurrentInstance, ref, shallowRef, watchEffect } from 'vue'
 import {
   NConfigProvider,
   NMessageProvider,
@@ -73,9 +76,16 @@ import {
   NButton,
   NLayoutHeader,
   NSpace,
-  NTooltip
+  NTooltip,
+  useMessage
 } from 'naive-ui'
-import { BIconDownload, BIconGearFill, BIconGithub } from 'bootstrap-icons-vue'
+import {
+  BIconClipboardFill,
+  BIconClipboardCheckFill,
+  BIconGearFill,
+  BIconGithub
+} from 'bootstrap-icons-vue'
+import { useClipboard } from '@vueuse/core'
 import { version } from '@package'
 import ThemeButton from '@components/ThemeButton.vue'
 import Config from '@views/Config.vue'
@@ -86,30 +96,14 @@ import useThemeStore from '@store/theme'
 const currentTheme = shallowRef(darkTheme)
 const store = useStore()
 const themeStore = useThemeStore()
+const { copy, copied, isSupported } = useClipboard()
 
 function handleChangeTheme(isDark: boolean) {
   currentTheme.value = isDark ? darkTheme : lightTheme
 }
 watchEffect(() => handleChangeTheme(themeStore.isDark))
-function handleExport() {
-  if (!store.previewConfig) return
-  // 创建一个新的 Blob 对象
-  const blobToSave = new Blob([store.config], { type: 'application/json' })
-
-  // 创建一个 URL 对象，以便可以将其用作下载链接
-  const urlToSave = URL.createObjectURL(blobToSave)
-
-  // 创建一个下载链接
-  const downloadLink = document.createElement('a')
-  downloadLink.href = urlToSave
-  downloadLink.download = 'tsconfig.json'
-
-  // 将下载链接添加到文档中并单击它以开始下载
-  document.body.appendChild(downloadLink)
-  downloadLink.click()
-
-  // 释放 URL 对象以释放内存
-  URL.revokeObjectURL(urlToSave)
+function handleCopy() {
+  copy(store.config)
 }
 
 // setting
