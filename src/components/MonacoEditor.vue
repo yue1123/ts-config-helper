@@ -10,15 +10,13 @@ import {
   watch,
   defineExpose,
   getCurrentInstance,
-  watchEffect
+  watchEffect,
+  nextTick
 } from 'vue'
 import * as monaco from 'monaco-editor'
-// import { parse, modify, applyEdits, format } from 'jsonc-parser'
-// import { compare, applyOperation, applyPatch } from 'fast-json-patch'
 import useThemeStore from '../store/theme'
 import useDataStore from '../store/data'
 import useSettingStore from '../store/setting'
-// import { parse, assign, stringify } from 'comment-json'
 import es from '../schema/_tsconfig.json?url'
 import zh from '../schema/_tsconfig.zh.json?url'
 export interface Props {
@@ -41,6 +39,7 @@ const settingStore = useSettingStore()
 const dataStore = useDataStore()
 let editor: monaco.editor.IStandaloneCodeEditor | null = null
 const codeEditBox = ref()
+let shouldEmitChange = true
 const init = () => {
   // 定义主题
   monaco.editor.defineTheme('darkTheme', {
@@ -92,6 +91,7 @@ const init = () => {
 
   // 监听值的变化
   editor.onDidChangeModelContent(() => {
+    if (!shouldEmitChange) return
     const value = editor!.getValue() //给父组件实时返回最新文本
     dataStore.config = value
     emit('update:modelValue', value)
@@ -138,6 +138,7 @@ watch(
     if (editor) {
       let value = editor.getValue()
       if (newValue !== value) {
+        shouldEmitChange = false
         const model = editor.getModel()
         const position = editor.getPosition()
         // let numberRegexp = /\d+/gs
@@ -160,6 +161,7 @@ watch(
 
         // formatAction && formatAction.run()
         position && editor.setPosition(position)
+        nextTick(() => (shouldEmitChange = true))
       }
     }
   }
