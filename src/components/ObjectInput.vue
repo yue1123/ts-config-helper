@@ -4,8 +4,9 @@
     <template #default="{ value }">
       <div class="key_value-item">
         <div v-for="(v, k) in value" :key="k" role="container" class="key_value-input-container">
-          <span role="label">{{ k }} : </span
-          ><NInput
+          <NInput disabled role="label" :value="k as unknown as string" />
+          <span>:</span>
+          <NInput
             @update:value="handleUpdate"
             :placeholder="props.placeholder"
             v-model:value="value[k]"
@@ -18,7 +19,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { NInput, NDynamicInput } from 'naive-ui'
 import { debounce, getObjectSchema, deepClone } from '@utils'
 
@@ -31,19 +32,21 @@ const emit = defineEmits(['update:data'])
 const props = withDefaults(defineProps<Props>(), {
   placeholder: 'place input value'
 })
-
 const data = ref<Record<string, any>[]>(props.data)
 const schema = getObjectSchema(props.property)
 function onCreate() {
   return deepClone(schema)
 }
+
 const handleUpdate = debounce(() => {
-  emit('update:data', data)
+  emit('update:data', deepClone(data.value))
 }, 200)
+
 watch(
   () => props.data,
   (newValue) => {
-    data.value = newValue
+    if (JSON.stringify(newValue) === JSON.stringify(data.value)) return
+    data.value = newValue.map((item) => Object.assign(deepClone(schema), deepClone(item)))
   }
 )
 </script>
@@ -67,7 +70,8 @@ watch(
   width: 100%;
 }
 [role='label'] {
-  min-width: 80px;
+  width: 120px;
+  min-width: 120px;
   text-align: right;
 }
 </style>
