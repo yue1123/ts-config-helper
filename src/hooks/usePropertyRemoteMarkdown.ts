@@ -13,7 +13,7 @@ function fetchMarkdown(url: string) {
   })
 }
 const cache = new Map()
-const mdRender = await createMarkdownRenderer()
+const mdRender = createMarkdownRenderer()
 export function usePropertyRemoteMarkdown() {
   const isLoading = ref<boolean>(false)
   const data = ref<string>()

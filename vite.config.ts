@@ -9,7 +9,7 @@ export default defineConfig({
   base: '/ts-config-helper/',
   plugins: [
     vue(),
-    // VitePWA(),
+    VitePWA(),
     spaLoading('svg', {
       debounce: 100,
       path: './src/assets/loading.svg',
@@ -18,9 +18,6 @@ export default defineConfig({
       css: '.loading-text{margin-top:20px}'
     })
   ],
-  define: {
-    process: process
-  },
   resolve: {
     alias: {
       '@': resolve(__dirname, './src/'),

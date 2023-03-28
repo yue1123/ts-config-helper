@@ -11,7 +11,7 @@ import {
   tsConfigSiteRef
 } from '@constants'
 
-export async function createMarkdownRenderer() {
+export function createMarkdownRenderer() {
   hljs.registerLanguage('json', json)
   hljs.registerLanguage('typescript', typescript)
   hljs.registerLanguage('javascript', javascript)
