@@ -10,8 +10,7 @@ import {
   NButton,
   NLayoutHeader,
   NSpace,
-  NTooltip,
-  type GlobalThemeOverrides
+  NTooltip
 } from 'naive-ui'
 
 import {
@@ -28,14 +27,6 @@ import Setting from '@views/Setting.vue'
 import useStore from '@store/data'
 import useThemeStore from '@store/theme'
 
-const themeOverrides: GlobalThemeOverrides = {
-  common: {
-    primaryColor: '#FF0000'
-  },
-  Button: {
-    textColor: '#FF0000'
-  }
-}
 const currentTheme = shallowRef(darkTheme)
 const store = useStore()
 const themeStore = useThemeStore()
@@ -44,7 +35,6 @@ const { copy, copied, isSupported } = useClipboard()
 function handleChangeTheme(isDark: boolean) {
   currentTheme.value = isDark ? darkTheme : lightTheme
 }
-watchEffect(() => handleChangeTheme(themeStore.isDark))
 function handleCopy() {
   copy(store.config)
 }
@@ -54,10 +44,18 @@ const setting = ref<typeof Setting>()
 function handleShowSetting() {
   setting.value?.show()
 }
+watchEffect(() => {
+  handleChangeTheme(themeStore.isDark)
+  const root = document.querySelector('html')
+  if (root) {
+    root.classList.toggle('dark', themeStore.isDark)
+    root.classList.toggle('light', !themeStore.isDark)
+  }
+})
 </script>
 
 <template>
-  <NConfigProvider :theme-overrides="themeOverrides" :theme="currentTheme">
+  <NConfigProvider :theme="currentTheme">
     <NMessageProvider>
       <NLayout style="height: 100vh">
         <NLayoutHeader style="position: sticky; top: 0; height: 64px; padding: 15px 24px" bordered>

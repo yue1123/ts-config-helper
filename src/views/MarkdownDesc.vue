@@ -103,17 +103,3 @@ function handleUpdateShow(value: boolean) {
     </template>
   </NPopover>
 </template>
-
-<style>
-.n-card.n-modal {
-  background: rgba(60, 65, 67, 0.35);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  border: 1 solid rgba(255, 255, 255, 0.18);
-  box-shadow: rgba(15, 15, 16, 0.19) 0px 6px 15px 0px;
-  -webkit-box-shadow: rgba(15, 15, 16, 0.19) 0px 6px 15px 0px;
-  border-radius: 12px;
-  -webkit-border-radius: 12px;
-  color: rgb(129, 122, 111);
-}
-</style>
