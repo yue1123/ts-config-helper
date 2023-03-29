@@ -2,7 +2,6 @@ import { resolve, join } from 'node:path'
 import { defineConfig } from 'vite'
 import { VitePWA } from 'vite-plugin-pwa'
 import { spaLoading } from 'vite-plugin-spa-loading'
-
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
