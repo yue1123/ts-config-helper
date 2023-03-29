@@ -1,3 +1,35 @@
+<script lang="ts" setup>
+import { computed, h, ref, getCurrentInstance } from 'vue'
+import { NPopover, NButton, NTooltip, NTag, useMessage, type PopoverTrigger } from 'naive-ui'
+import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
+import { useEventListener, usePropertyRemoteMarkdown } from '@hooks'
+import { configReleaseMap, relatedToMap } from '@utils'
+
+export interface Props {
+  property: string
+}
+const configVersion = computed(() => configReleaseMap[props.property])
+const relatedTo = computed(() => relatedToMap[props.property])
+const props = defineProps<Props>()
+const { get, data, isLoading } = usePropertyRemoteMarkdown()
+const message = useMessage()
+const { ctx } = getCurrentInstance() as unknown as { ctx: any }
+const showPopover = ref<boolean>(false)
+function handleGetMarkdownDesc() {
+  showPopover.value = false
+  get(props.property)
+    .then(() => {
+      showPopover.value = true
+    })
+    .catch(() => {
+      message.error(ctx.$t('notFound', { property: props.property }))
+    })
+}
+function handleUpdateShow(value: boolean) {
+  if (!value) showPopover.value = value
+}
+</script>
+
 <template>
   <NPopover
     style="max-width: 500px; max-height: 50vh"
@@ -71,38 +103,6 @@
     </template>
   </NPopover>
 </template>
-
-<script lang="ts" setup>
-import { computed, h, ref, getCurrentInstance } from 'vue'
-import { NPopover, NButton, NTooltip, NTag, useMessage, type PopoverTrigger } from 'naive-ui'
-import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
-import { useEventListener, usePropertyRemoteMarkdown } from '@hooks'
-import { configReleaseMap, relatedToMap } from '@utils'
-
-export interface Props {
-  property: string
-}
-const configVersion = computed(() => configReleaseMap[props.property])
-const relatedTo = computed(() => relatedToMap[props.property])
-const props = defineProps<Props>()
-const { get, data, isLoading } = usePropertyRemoteMarkdown()
-const message = useMessage()
-const { ctx } = getCurrentInstance() as unknown as { ctx: any }
-const showPopover = ref<boolean>(false)
-function handleGetMarkdownDesc() {
-  showPopover.value = false
-  get(props.property)
-    .then(() => {
-      showPopover.value = true
-    })
-    .catch(() => {
-      message.error(ctx.$t('notFound', { property: props.property }))
-    })
-}
-function handleUpdateShow(value: boolean) {
-  if (!value) showPopover.value = value
-}
-</script>
 
 <style>
 .n-card.n-modal {

@@ -1,3 +1,59 @@
+
+<script lang="ts" setup>
+import {
+  NForm,
+  NFormItem,
+  NDropdown,
+  NSwitch,
+  NInputNumber,
+  NDivider,
+  NSpace,
+  NModal,
+  NButton
+} from 'naive-ui'
+import { computed, reactive, ref } from 'vue'
+import useSettingStore, { DEFAULT_SETTING } from '@store/setting'
+import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
+import { currentLang, setI18nLanguage } from '@i18n'
+import { deepClone } from '@utils'
+const settingStore = useSettingStore()
+const showSetting = ref(false)
+let settingCopy = ref(deepClone(settingStore.$state))
+
+const lang = computed(() => {
+  return Object.keys(SUPPORT_LOCALES).map((l) => {
+    return {
+      disabled: l === currentLang.value,
+      label: SUPPORT_LOCALES_LABEL[l as keyof typeof SUPPORT_LOCALES_LABEL],
+      key: l
+    }
+  })
+})
+function resetDefaultSetting() {
+  settingCopy.value = deepClone(DEFAULT_SETTING)
+}
+function handleSelectLanguage(lang: SUPPORT_LOCALES) {
+  settingCopy.value.lang = lang
+}
+function save() {
+  settingStore.$state = deepClone(settingCopy.value)
+}
+defineExpose({
+  show: () => {
+    showSetting.value = true
+  },
+  hide: () => {
+    showSetting.value = false
+  },
+  save
+})
+function handleSaveSetting(saveAndClose: boolean = false) {
+  showSetting.value = !saveAndClose
+  setI18nLanguage(settingCopy.value.lang)
+  save()
+}
+</script>
+
 <template>
   <NModal
     v-model:show="showSetting"
@@ -69,60 +125,3 @@
     </template>
   </NModal>
 </template>
-
-<script lang="ts" setup>
-import {
-  NForm,
-  NFormItem,
-  NDropdown,
-  NSwitch,
-  NInputNumber,
-  NDivider,
-  NSpace,
-  NModal,
-  NButton
-} from 'naive-ui'
-import { computed, reactive, ref } from 'vue'
-import useSettingStore, { DEFAULT_SETTING } from '@store/setting'
-import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
-import { currentLang, setI18nLanguage } from '@i18n'
-import { deepClone } from '@utils'
-const settingStore = useSettingStore()
-const showSetting = ref(false)
-let settingCopy = ref(deepClone(settingStore.$state))
-
-const lang = computed(() => {
-  return Object.keys(SUPPORT_LOCALES).map((l) => {
-    return {
-      disabled: l === currentLang.value,
-      label: SUPPORT_LOCALES_LABEL[l as keyof typeof SUPPORT_LOCALES_LABEL],
-      key: l
-    }
-  })
-})
-function resetDefaultSetting() {
-  settingCopy.value = deepClone(DEFAULT_SETTING)
-}
-function handleSelectLanguage(lang: SUPPORT_LOCALES) {
-  settingCopy.value.lang = lang
-}
-function save() {
-  settingStore.$state = deepClone(settingCopy.value)
-}
-defineExpose({
-  show: () => {
-    showSetting.value = true
-  },
-  hide: () => {
-    showSetting.value = false
-  },
-  save
-})
-function handleSaveSetting(saveAndClose: boolean = false) {
-  showSetting.value = !saveAndClose
-  setI18nLanguage(settingCopy.value.lang)
-  save()
-}
-</script>
-
-<style></style>

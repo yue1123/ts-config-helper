@@ -1,29 +1,3 @@
-<template>
-  <NCheckboxGroup
-    v-model:value="store.selectedKeys"
-    :style="{ paddingLeft: `${props.level >= 1 ? 18 : 0}px` }"
-    @update:value="handleChange"
-  >
-    <template v-for="(item, i) in props.data">
-      <template v-if="item.children.length">
-        <NCollapse style="margin-top: 10px" :key="i">
-          <NCollapseItem :title="item.label" :name="item.label">
-            <MyCheckbox :level="props.level + 1" :data="item.children" />
-          </NCollapseItem>
-        </NCollapse>
-        <NDivider />
-      </template>
-      <template v-else>
-        <NSpace
-          v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[item.key]"
-          :key="i"
-          ><NCheckbox :value="item.key" :label="item.label"
-        /></NSpace>
-      </template>
-    </template>
-  </NCheckboxGroup>
-</template>
-
 <script setup lang="ts">
 import { NSpace, NDivider, NCheckbox, NCollapse, NCollapseItem, NCheckboxGroup } from 'naive-ui'
 import type { Options } from '../types'
@@ -58,6 +32,32 @@ export default {
   name: 'MyCheckbox'
 }
 </script>
+
+<template>
+  <NCheckboxGroup
+    v-model:value="store.selectedKeys"
+    :style="{ paddingLeft: `${props.level >= 1 ? 18 : 0}px` }"
+    @update:value="handleChange"
+  >
+    <template v-for="(item, i) in props.data">
+      <template v-if="item.children.length">
+        <NCollapse style="margin-top: 10px" :key="i">
+          <NCollapseItem :title="item.label" :name="item.label">
+            <MyCheckbox :level="props.level + 1" :data="item.children" />
+          </NCollapseItem>
+        </NCollapse>
+        <NDivider />
+      </template>
+      <template v-else>
+        <NSpace
+          v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[item.key]"
+          :key="i"
+          ><NCheckbox :value="item.key" :label="item.label"
+        /></NSpace>
+      </template>
+    </template>
+  </NCheckboxGroup>
+</template>
 
 <style scoped>
 :deep(.n-divider:not(.n-divider--vertical)) {

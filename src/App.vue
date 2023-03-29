@@ -1,5 +1,63 @@
+<script lang="ts" setup>
+import { ref, shallowRef, watchEffect } from 'vue'
+import {
+  NConfigProvider,
+  NMessageProvider,
+  darkTheme,
+  lightTheme,
+  NH2,
+  NLayout,
+  NButton,
+  NLayoutHeader,
+  NSpace,
+  NTooltip,
+  type GlobalThemeOverrides
+} from 'naive-ui'
+
+import {
+  BIconClipboardFill,
+  BIconClipboardCheckFill,
+  BIconGearFill,
+  BIconGithub
+} from 'bootstrap-icons-vue'
+import { useClipboard } from '@vueuse/core'
+import { version } from '@package'
+import ThemeButton from '@components/ThemeButton.vue'
+import Config from '@views/Config.vue'
+import Setting from '@views/Setting.vue'
+import useStore from '@store/data'
+import useThemeStore from '@store/theme'
+
+const themeOverrides: GlobalThemeOverrides = {
+  common: {
+    primaryColor: '#FF0000'
+  },
+  Button: {
+    textColor: '#FF0000'
+  }
+}
+const currentTheme = shallowRef(darkTheme)
+const store = useStore()
+const themeStore = useThemeStore()
+const { copy, copied, isSupported } = useClipboard()
+
+function handleChangeTheme(isDark: boolean) {
+  currentTheme.value = isDark ? darkTheme : lightTheme
+}
+watchEffect(() => handleChangeTheme(themeStore.isDark))
+function handleCopy() {
+  copy(store.config)
+}
+
+// setting
+const setting = ref<typeof Setting>()
+function handleShowSetting() {
+  setting.value?.show()
+}
+</script>
+
 <template>
-  <NConfigProvider :theme="currentTheme">
+  <NConfigProvider :theme-overrides="themeOverrides" :theme="currentTheme">
     <NMessageProvider>
       <NLayout style="height: 100vh">
         <NLayoutHeader style="position: sticky; top: 0; height: 64px; padding: 15px 24px" bordered>
@@ -63,52 +121,3 @@
     </NMessageProvider>
   </NConfigProvider>
 </template>
-
-<script lang="ts" setup>
-import { getCurrentInstance, ref, shallowRef, watchEffect } from 'vue'
-import {
-  NConfigProvider,
-  NMessageProvider,
-  darkTheme,
-  lightTheme,
-  NH2,
-  NLayout,
-  NButton,
-  NLayoutHeader,
-  NSpace,
-  NTooltip,
-  useMessage
-} from 'naive-ui'
-import {
-  BIconClipboardFill,
-  BIconClipboardCheckFill,
-  BIconGearFill,
-  BIconGithub
-} from 'bootstrap-icons-vue'
-import { useClipboard } from '@vueuse/core'
-import { version } from '@package'
-import ThemeButton from '@components/ThemeButton.vue'
-import Config from '@views/Config.vue'
-import Setting from '@views/Setting.vue'
-import useStore from '@store/data'
-import useThemeStore from '@store/theme'
-
-const currentTheme = shallowRef(darkTheme)
-const store = useStore()
-const themeStore = useThemeStore()
-const { copy, copied, isSupported } = useClipboard()
-
-function handleChangeTheme(isDark: boolean) {
-  currentTheme.value = isDark ? darkTheme : lightTheme
-}
-watchEffect(() => handleChangeTheme(themeStore.isDark))
-function handleCopy() {
-  copy(store.config)
-}
-
-// setting
-const setting = ref<typeof Setting>()
-function handleShowSetting() {
-  setting.value?.show()
-}
-</script>

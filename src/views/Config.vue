@@ -1,66 +1,3 @@
-<template>
-  <NLayout style="height: calc(100vh - 64px)" has-sider>
-    <NLayoutSider
-      collapse-mode="transform"
-      :collapsed-width="0"
-      :width="430"
-      show-trigger="bar"
-      content-style="padding:15px 24px;"
-      bordered
-      :native-scrollbar="false"
-      :on-after-enter="handleResize"
-      :on-after-leave="handleResize"
-    >
-      <NSpace vertical>
-        <NInput clear @input="handleSearch" :placeholder="$t('config.searchConfig')"></NInput>
-        <div
-          :style="{
-            height: '25px',
-            lineHeight: '25px',
-            opacity: runtimeStore.searchHitKeysMap ? 1 : 0
-          }"
-        >
-          {{ runtimeStore.searchHitKeysMap && Object.keys(runtimeStore.searchHitKeysMap).length }}
-          {{ $t('result') }}
-        </div>
-        <MyCheckbox :level="0" :data="property" />
-      </NSpace>
-    </NLayoutSider>
-    <Splitpanes @resize="handleResize" :dblClickSplitter="false">
-      <Pane style="min-width: 240px">
-        <NLayoutContent>
-          <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
-            <!-- <TransitionGroup
-              enter-active-class="animated animate__fadeInLeft"
-              leave-active-class="animated animate__fadeOutRight"
-            > -->
-            <template key="tipText" v-if="!store.selectedKeys.length">
-              <div class="tipText">{{ $t('about') }}</div>
-              <div class="tipText">{{ $t('emptyTips') }}</div>
-            </template>
-
-            <Property key="property" :level="1" :definition="property"></Property>
-            <!-- </TransitionGroup> -->
-          </NScrollbar>
-        </NLayoutContent>
-      </Pane>
-      <Pane style="min-width: 240px">
-        <NLayoutContent>
-          <MonacoEditor
-            :local="currentLang"
-            ref="monacoEditor"
-            :model-value="JSON.stringify(store.previewConfig, null, settingStore.editor.tabSize)"
-            :language="language"
-            width="100%"
-            height="calc(100vh - 64px)"
-            theme="vs-dark"
-            @change="handleChange"
-          ></MonacoEditor>
-        </NLayoutContent>
-      </Pane>
-    </Splitpanes>
-  </NLayout>
-</template>
 
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
@@ -135,6 +72,70 @@ const handleSearch = debounce((searchKeyword: string) => {
 
 onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>
+
+<template>
+  <NLayout style="height: calc(100vh - 64px)" has-sider>
+    <NLayoutSider
+      collapse-mode="transform"
+      :collapsed-width="0"
+      :width="430"
+      show-trigger="bar"
+      content-style="padding:15px 24px;"
+      bordered
+      :native-scrollbar="false"
+      :on-after-enter="handleResize"
+      :on-after-leave="handleResize"
+    >
+      <NSpace vertical>
+        <NInput clear @input="handleSearch" :placeholder="$t('config.searchConfig')"></NInput>
+        <div
+          :style="{
+            height: '25px',
+            lineHeight: '25px',
+            opacity: runtimeStore.searchHitKeysMap ? 1 : 0
+          }"
+        >
+          {{ runtimeStore.searchHitKeysMap && Object.keys(runtimeStore.searchHitKeysMap).length }}
+          {{ $t('result') }}
+        </div>
+        <MyCheckbox :level="0" :data="property" />
+      </NSpace>
+    </NLayoutSider>
+    <Splitpanes @resize="handleResize" :dblClickSplitter="false">
+      <Pane style="min-width: 240px">
+        <NLayoutContent>
+          <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
+            <!-- <TransitionGroup
+              enter-active-class="animated animate__fadeInLeft"
+              leave-active-class="animated animate__fadeOutRight"
+            > -->
+            <template key="tipText" v-if="!store.selectedKeys.length">
+              <div class="tipText">{{ $t('about') }}</div>
+              <div class="tipText">{{ $t('emptyTips') }}</div>
+            </template>
+
+            <Property key="property" :level="1" :definition="property"></Property>
+            <!-- </TransitionGroup> -->
+          </NScrollbar>
+        </NLayoutContent>
+      </Pane>
+      <Pane style="min-width: 240px">
+        <NLayoutContent>
+          <MonacoEditor
+            :local="currentLang"
+            ref="monacoEditor"
+            :model-value="JSON.stringify(store.previewConfig, null, settingStore.editor.tabSize)"
+            :language="language"
+            width="100%"
+            height="calc(100vh - 64px)"
+            theme="vs-dark"
+            @change="handleChange"
+          ></MonacoEditor>
+        </NLayoutContent>
+      </Pane>
+    </Splitpanes>
+  </NLayout>
+</template>
 
 <style scoped>
 .tipText {
