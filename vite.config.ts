@@ -6,7 +6,6 @@ import { spaLoading } from 'vite-plugin-spa-loading'
 import vue from '@vitejs/plugin-vue'
 
 export default defineConfig({
-  base: '/ts-config-helper/',
   plugins: [
     vue(),
     VitePWA(),
