@@ -13,7 +13,12 @@ export default defineConfig({
       path: './src/assets/loading.svg',
       devEnable: true,
       tipText: 'Please stand by, source is loading...',
-      css: '.loading-text{margin-top:20px}'
+      css: '.loading-text{margin-top:20px}',
+      onError(){
+        const search = window.location.search
+        const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
+        if (reloadNum < 3) window.location.search = `slt=${Date.now()}&slr=${reloadNum + 1}`
+      }
     })
   ],
   resolve: {

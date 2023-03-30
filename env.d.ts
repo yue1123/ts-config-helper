@@ -24,3 +24,5 @@ declare module '@intlify/core-base' {
   export declare type Path = keys
   export declare type ResourceKeys = keys
 }
+
+interface Window {}
