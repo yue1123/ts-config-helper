@@ -226,6 +226,6 @@ body {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-.markdown-body {
+.markdown-body > *:not(table, td, th, tr) {
   color: var(--n-text-color);
 }
