@@ -16,8 +16,14 @@ export function createMarkdownRenderer() {
   hljs.registerLanguage('typescript', typescript)
   hljs.registerLanguage('javascript', javascript)
 
-  const md = markdownIt('commonmark', {
+  const md = markdownIt({
+    html: true,
+    xhtmlOut: true,
+    breaks: true,
+    linkify: true,
+    typographer: true,
     highlight(str, lang) {
+      console.log(lang)
       if (lang && hljs.getLanguage(lang)) {
         try {
           return hljs.highlight(str, {
