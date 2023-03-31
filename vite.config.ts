@@ -27,25 +27,6 @@ export default defineConfig({
     visualizer({
       emitFile: true,
       filename: 'stats.html'
-    }),
-    importToCDN({
-      modules: [
-        {
-          name: 'vue',
-          var: 'Vue',
-          path: `https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.esm-browser.js`
-        },
-        {
-          name: 'naive-ui',
-          var: 'naive-ui',
-          path: `https://cdn.jsdelivr.net/npm/naive-ui@2.34.3/es/index.js`
-        },
-        {
-          name: 'pinia',
-          var: 'pinia',
-          path: `https://cdn.jsdelivr.net/npm/pinia@2.0.33/dist/pinia.esm-browser.js`
-        }
-      ]
     })
   ],
   resolve: {
