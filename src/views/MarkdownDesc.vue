@@ -11,7 +11,7 @@ export interface Props {
 const configVersion = computed(() => configReleaseMap[props.property])
 const relatedTo = computed(() => relatedToMap[props.property])
 const props = defineProps<Props>()
-const { get, data, isLoading } = usePropertyRemoteMarkdown()
+const { get, data, isLoading } = await usePropertyRemoteMarkdown()
 const message = useMessage()
 const { ctx } = getCurrentInstance() as unknown as { ctx: any }
 const showPopover = ref<boolean>(false)

@@ -1,8 +1,4 @@
 import markdownIt from 'markdown-it'
-import hljs from 'highlight.js'
-import javascript from 'highlight.js/lib/languages/javascript'
-import typescript from 'highlight.js/lib/languages/typescript'
-import json from 'highlight.js/lib/languages/json'
 import {
   frontmatterReg,
   markdownHashLinkReg,
@@ -11,9 +7,14 @@ import {
   tsConfigSiteRef
 } from '@constants'
 
-export function createMarkdownRenderer() {
+export async function createMarkdownRenderer() {
+  const [{ default: hljs }, { default: javascript }, { default: json }] = await Promise.all([
+    import('highlight.js'),
+    import('highlight.js/lib/languages/javascript'),
+    import('highlight.js/lib/languages/json')
+  ])
+  
   hljs.registerLanguage('json', json)
-  hljs.registerLanguage('typescript', typescript)
   hljs.registerLanguage('javascript', javascript)
 
   const md = markdownIt({

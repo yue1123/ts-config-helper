@@ -104,7 +104,10 @@ export default {
       >
         <div class="flex items-center space-x-4">
           <span># {{ property.key }}</span>
-          <MarkdownDesc :property="property.label" />
+          <Suspense>
+            <MarkdownDesc :property="property.label" />
+            <template #fallback> Loading... </template>
+          </Suspense>
         </div>
       </Component>
       <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
