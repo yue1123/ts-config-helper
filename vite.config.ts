@@ -16,6 +16,7 @@ export default defineConfig({
       devEnable: true,
       tipText: 'Please stand by, source is loading...',
       css: '.loading-text{margin-top:20px}',
+      errorTip: 'Error occurred, It may be caused by cache, try to force refresh',
       onError() {
         // @ts-ignore
         const search = window.location.search
