@@ -1,4 +1,3 @@
-
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { NLayout, NLayoutSider, NSpace, NInput, NLayoutContent, NScrollbar } from 'naive-ui'
@@ -37,8 +36,7 @@ function handleChange(value: string) {
       store.rawConfig = res
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        store.selectedKeys = Object.assign(selectedKeys, store.selectedKeys)
-        
+        store.selectedKeys = [...store.selectedKeys, ...selectedKeys]
       }
     } catch (error) {
       console.log(error)
