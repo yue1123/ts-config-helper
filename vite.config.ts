@@ -4,7 +4,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import { spaLoading } from 'vite-plugin-spa-loading'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
-import importToCDN from 'vite-plugin-cdn-import'
+// import importToCDN from 'vite-plugin-cdn-import'
 
 export default defineConfig({
   plugins: [
@@ -28,25 +28,20 @@ export default defineConfig({
       emitFile: true,
       filename: 'stats.html'
     }),
-    importToCDN({
-      modules: [
-        {
-          name: 'vue',
-          var: 'Vue',
-          path: `https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.esm-browser.js`
-        },
-        {
-          name: 'naive-ui',
-          var: 'naive-ui',
-          path: `https://cdn.jsdelivr.net/npm/naive-ui@2.34.3/es/index.js`
-        },
-        {
-          name: 'pinia',
-          var: 'pinia',
-          path: `https://cdn.jsdelivr.net/npm/pinia@2.0.33/dist/pinia.esm-browser.js`
-        }
-      ]
-    })
+    // importToCDN({
+    //   modules: [
+    //     {
+    //       name: 'vue',
+    //       var: 'Vue',
+    //       path: `https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.runtime.global.prod.min.js`
+    //     },
+    //     {
+    //       name: 'naive-ui',
+    //       var: 'naive-ui',
+    //       path: `https://cdn.jsdelivr.net/npm/naive-ui@2.34.3/dist/index.prod.js`
+    //     }
+    //   ]
+    // })
   ],
   resolve: {
     alias: {
