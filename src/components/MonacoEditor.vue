@@ -69,6 +69,9 @@ const init = () => {
       verticalScrollbarSize: 8,
       horizontalScrollbarSize: 8
     },
+    suggest: {
+      preview: true
+    },
     fontSize,
     lineHeight,
     tabSize,

@@ -59,14 +59,6 @@ function renderTag(tag: string, index: number, property: Options) {
 function handleTagsChange(value: string[], property: Options) {
   store.rawConfig[property.key] = value.length === 1 ? value[0] : value
 }
-// function getArrayData(property: Options) {
-//   if (property.items) {
-//     const { type } = property.items
-//     if (type === 'object') {
-//       store.rawConfig[property.key].map()
-//     }
-//   }
-// }
 
 function handleArrayDataItemCheck(value: string[], property: Options) {
   let _value: any = value
@@ -106,7 +98,6 @@ export default {
           <span># {{ property.key }}</span>
           <Suspense>
             <MarkdownDesc :property="property.label" />
-            <template #fallback> Loading... </template>
           </Suspense>
         </div>
       </Component>

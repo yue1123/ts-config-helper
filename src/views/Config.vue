@@ -4,7 +4,7 @@ import { NLayout, NLayoutSider, NSpace, NInput, NLayoutContent, NScrollbar } fro
 import { useEventListener, useProperty } from '@hooks'
 import { Splitpanes, Pane } from 'splitpanes'
 import 'splitpanes/dist/splitpanes.css'
-import { parse, stripComments } from 'jsonc-parser'
+// import { parse, stripComments } from 'jsonc-parser'
 import useStore from '@store/data'
 import useRuntimeStore from '@store/runtime'
 import useSettingStore from '@store/setting'
@@ -13,6 +13,7 @@ import Property from './Property.vue'
 import MyCheckbox from './Checkbox.vue'
 import MonacoEditor from '../components/MonacoEditor.vue'
 import { currentLang } from '@i18n'
+import json5 from 'json5'
 
 const { property, allFlatPropertyKeysMap, allFlatPropertyKeys } = useProperty()
 const language = ref('json')
@@ -25,22 +26,17 @@ const monacoEditor = ref<typeof MonacoEditor>()
 function handleChange(value: string) {
   if (value) {
     try {
-      const res = flatObjWithDepthControl(
-        parse(value, undefined, { allowEmptyContent: true }),
-        (item) => {
-          // check is max level
-          // if value is user value object, should not flatten
-          return !allFlatPropertyKeysMap.value.get(item)
-        }
-      )
+      const res = flatObjWithDepthControl(json5.parse(value), (item) => {
+        // check is max level
+        // if value is user value object, should not flatten
+        return !allFlatPropertyKeysMap.value.get(item)
+      })
       store.rawConfig = res
       let selectedKeys = Object.keys(store.rawConfig)
       if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
         store.selectedKeys = [...store.selectedKeys, ...selectedKeys]
       }
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   } else {
     store.selectedKeys = []
     store.rawConfig = {}
