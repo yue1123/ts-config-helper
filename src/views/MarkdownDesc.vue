@@ -2,7 +2,7 @@
 import { computed, h, ref, getCurrentInstance } from 'vue'
 import { NPopover, NButton, NTooltip, NTag, useMessage, type PopoverTrigger } from 'naive-ui'
 import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
-import { useEventListener, usePropertyRemoteMarkdown } from '@hooks'
+import { usePropertyRemoteMarkdown } from '@hooks'
 import { configReleaseMap, relatedToMap } from '@utils'
 
 export interface Props {

@@ -1,14 +1,18 @@
 // https://github.com/microsoft/node-jsonc-parser#readme
-// const { parse, format, modify, applyEdits, stringify } = require('jsonc-parser')
+const { parse, format, modify, applyEdits, stringify } = require('jsonc-parser')
 // const {  compare, applyOperation, applyPatch } = require('fast-json-patch')
 // const { parse, assign, stringify } = require('comment-json')
 
-const { stringify, parse } = require('json5')
+// const { stringify, parse } = require('json5')
 
 let json = `{
   // this is files
   /* this is files */
-  "files": [],
+"files": [
+  /**0000*/
+  123,
+  'adfasd'
+],
   // this is files
   "age": 123,
   // this is files
@@ -46,7 +50,31 @@ let a = parse(json)
 // console.log('---------\n', applyPatch(a, patch).newDocument, '\n---------')
 // let edits = []
 console.log(a)
-console.log(stringify(a))
+
+console.log()
+
+const jsonRes = applyEdits(
+  json,
+  modify(json, ['files', 0], 'ahhhhhhhhhhhhhhhhhhhhhh', {
+    formattingOptions: {
+      tabSize: 2,
+      insertSpaces: true,
+      keepLines: true
+    }
+  })
+)
+
+console.log(jsonRes)
+// console.log(
+//   applyEdits(
+//     jsonRes,
+//     format(jsonRes, undefined, {
+
+//     }),
+//     {}
+//   )
+// )
+// console.log(stringify(a))
 // patch.forEach(({ path, value }) => {
 //   json = applyEdits(json, modify(json, path.split('/').filter(Boolean), value, {}))
 //   // edits.push.apply(edits)

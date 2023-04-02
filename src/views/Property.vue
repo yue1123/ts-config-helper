@@ -13,6 +13,7 @@ import {
   useMessage
 } from 'naive-ui'
 
+import description from '@schema/description.json'
 import KeyValuesInput from '@components/KeyValuesInput.vue'
 import ObjectInput from '@components/ObjectInput.vue'
 import MarkdownDesc from './MarkdownDesc.vue'
@@ -105,7 +106,7 @@ export default {
         {{ $t('defaultValue') }}: {{ property.default }}
       </div>
       <div v-if="settingStore.showDescription" class="text-gray-400 mb-2">
-        {{ property.description }}
+        {{ description[property.key] }}
       </div>
       <template key="array" v-if="getInputType(property) === 'array'">
         <div type="array" class="array_property-container">
