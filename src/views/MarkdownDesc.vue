@@ -70,12 +70,7 @@ function handleUpdateShow(value: boolean) {
         <NButton text :bordered="false" @click="showPopover = false">{{ $t('close') }}</NButton>
       </div>
     </template>
-    <div
-      v-if="data"
-      class="markdown-body"
-      style="height: 100%; overflow: hidden"
-      v-html="data"
-    ></div>
+    <div v-if="data" class="markdown-body h-full overflow-hidden" v-html="data"></div>
     <template #footer v-if="configVersion || relatedTo">
       <div class="flex flex-col space-y-2">
         <div v-if="configVersion" class="flex items-center space-x-2">

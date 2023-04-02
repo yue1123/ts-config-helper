@@ -101,10 +101,10 @@ export default {
           </Suspense>
         </div>
       </Component>
-      <div style="color: #999; margin-bottom: 5px" v-if="property.default !== undefined">
+      <div class="text-gray-400 mb-1" v-if="property.default !== undefined">
         {{ $t('defaultValue') }}: {{ property.default }}
       </div>
-      <div v-if="settingStore.showDescription" style="color: #999; margin-bottom: 10px">
+      <div v-if="settingStore.showDescription" class="text-gray-400 mb-2">
         {{ property.description }}
       </div>
       <template key="array" v-if="getInputType(property) === 'array'">

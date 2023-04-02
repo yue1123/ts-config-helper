@@ -41,7 +41,7 @@ export default {
   >
     <template v-for="(item, i) in props.data">
       <template v-if="item.children.length">
-        <NCollapse style="margin-top: 10px" :key="i">
+        <NCollapse class="mt-2" :key="i">
           <NCollapseItem :title="item.label" :name="item.label">
             <MyCheckbox :level="props.level + 1" :data="item.children" />
           </NCollapseItem>

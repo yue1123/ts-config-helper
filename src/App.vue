@@ -36,7 +36,7 @@ function handleChangeTheme(isDark: boolean) {
   currentTheme.value = isDark ? darkTheme : lightTheme
 }
 function handleCopy() {
-  copy(store.config)
+  copy(store.previewConfig || '')
 }
 
 // setting
@@ -57,15 +57,15 @@ watchEffect(() => {
 <template>
   <NConfigProvider :theme="currentTheme">
     <NMessageProvider>
-      <NLayout style="height: 100vh">
-        <NLayoutHeader style="position: sticky; top: 0; height: 64px; padding: 15px 24px" bordered>
+      <NLayout class="h-screen">
+        <NLayoutHeader class="sticky top-0 h-16 py-4 px-6" bordered>
           <NSpace justify="space-between" align="center">
-            <NTooltip placement="right" :style="{ maxWidth: '400px' }" trigger="hover">
+            <NTooltip placement="right" :style="{ maxWidth: '500px' }" trigger="hover">
               <template #trigger>
                 <NSpace align="end">
                   <img width="32" height="32" src="./assets/logo.png" alt="" />
-                  <NH2 style="margin-bottom: 0">Config helper</NH2>
-                  <span style="font-size: 12px">{{ version }}</span>
+                  <NH2 class="mb-0">Config helper</NH2>
+                  <span class="text-xs">{{ version }}</span>
                 </NSpace>
               </template>
               {{ $t('about') }}

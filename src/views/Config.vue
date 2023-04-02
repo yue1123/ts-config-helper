@@ -118,7 +118,7 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
           <MonacoEditor
             :local="currentLang"
             ref="monacoEditor"
-            :model-value="JSON.stringify(store.previewConfig, null, settingStore.editor.tabSize)"
+            :model-value="store.previewConfig"
             :language="language"
             width="100%"
             height="calc(100vh - 64px)"
