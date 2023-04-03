@@ -32,7 +32,11 @@ function getOptions(rawData, map = Object.create(null), keys = []) {
       getOptions(ele.properties, map, tempKeys)
     }
     let flatKeys = [...new Set([...tempKeys, key])].join('.')
-    map[flatKeys] = rawData[key].markdownDescription || rawData[key].description
+    // https://github.com/microsoft/TypeScript-Website/blob/v2/packages/tsconfig-reference/scripts/schema/result/schema.json
+    map[flatKeys] = {
+      message: rawData[key].markdownDescription || rawData[key].description,
+      link: ''
+    }
   })
   return map
 }
