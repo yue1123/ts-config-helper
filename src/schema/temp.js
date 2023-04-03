@@ -20,19 +20,18 @@ function getOptions(rawData, map = Object.create(null), keys = []) {
   let tempKeys = [...keys]
   Object.keys(rawData).map((key) => {
     let ele = rawData[key]
-    const refProperty = ele.allOf
-      ? ele.allOf.map(({ $ref }) => getValueByPath(schema, parsePath($ref, '/')))
-      : null
-    if (refProperty) {
-      refProperty.map((item) => {
-        ele = Object.assign(ele, item)
-      })
+    if (ele.allOf) {
+      const refProperty = ele.allOf.map(({ $ref }) => getValueByPath(schema, parsePath($ref, '/')))
+      refProperty &&
+        refProperty.map((item) => {
+          ele = Object.assign(ele, item)
+        })
     }
     if (ele.properties) {
       tempKeys.push(key)
       getOptions(ele.properties, map, tempKeys)
     }
-    let flatKeys = [...tempKeys, key].join('.')
+    let flatKeys = [...new Set([...tempKeys, key])].join('.')
     map[flatKeys] = rawData[key].markdownDescription || rawData[key].description
   })
   return map
@@ -43,9 +42,6 @@ Reflect.deleteProperty(allDefinitions, '//')
 const res = Object.keys(allDefinitions).reduce((map, key) => {
   if (allDefinitions[key].properties) {
     const res1 = getOptions(allDefinitions[key].properties)
-    // allFlatPropertyKeys.push.apply(allFlatPropertyKeys, allFlatKeys)
-    // allFlatKeys.forEach((key) => allFlatPropertyKeysMap.value.set(key, true))
-    // _values.push.apply(_values, res)
     map = { ...map, ...res1 }
   }
   return map

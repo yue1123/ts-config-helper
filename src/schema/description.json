@@ -1,7 +1,7 @@
 {
   "files": "If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. When a 'files' property is specified, only those files and those specified by 'include' are included.",
   "exclude": "Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later.",
-  "include": "指定与编译中包括的文件匹配的全局模式列表。如果在 tsconfig.json 文件中没有指定 'files' 或 'include' 属性，则编译器默认包括包含目录和子目录中的所有文件，除了 'exclude' 属性指定的文件。需要 TypeScript 2.0 或更高版本。",
+  "include": "Specifies a list of glob patterns that match files to be included in compilation. If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. Requires TypeScript version 2.0 or later.",
   "compileOnSave": "Enable Compile-on-Save for this project.",
   "extends": "Path to base configuration file to inherit from. Requires TypeScript version 2.1 or later.",
   "references": "Referenced projects. Requires TypeScript version 3.0 or later.",
@@ -17,7 +17,7 @@
   "watchOptions.synchronousWatchDirectory": "Synchronously call callbacks and update the state of directory watchers on platforms that don`t support recursive watching natively.\n\nSee more: https://www.typescriptlang.org/tsconfig#synchronousWatchDirectory",
   "watchOptions.excludeFiles": "Remove a list of files from the watch mode's processing.\n\nSee more: https://www.typescriptlang.org/tsconfig#excludeFiles",
   "watchOptions.excludeDirectories": "Remove a list of directories from the watch process.\n\nSee more: https://www.typescriptlang.org/tsconfig#excludeDirectories",
-  "watchOptions.watchOptions": "Settings for the watch mode in TypeScript.",
+  "watchOptions": "Settings for the watch mode in TypeScript.",
   "compilerOptions.charset": "No longer supported. In early versions, manually set the text encoding for reading files.\n\nSee more: https://www.typescriptlang.org/tsconfig#charset",
   "compilerOptions.composite": "Enable constraints that allow a TypeScript project to be used with project references.\n\nSee more: https://www.typescriptlang.org/tsconfig#composite",
   "compilerOptions.declaration": "Generate .d.ts files from TypeScript and JavaScript files in your project.\n\nSee more: https://www.typescriptlang.org/tsconfig#declaration",
@@ -118,11 +118,11 @@
   "compilerOptions.extendedDiagnostics": "Output more detailed compiler performance information after building.\n\nSee more: https://www.typescriptlang.org/tsconfig#extendedDiagnostics",
   "compilerOptions.disableSourceOfProjectReferenceRedirect": "Disable preferring source files instead of declaration files when referencing composite projects.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSourceOfProjectReferenceRedirect",
   "compilerOptions.disableSolutionSearching": "Opt a project out of multi-project reference checking when editing.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSolutionSearching",
-  "compilerOptions.compilerOptions": "Instructs the TypeScript compiler how to compile .ts files.",
+  "compilerOptions": "Instructs the TypeScript compiler how to compile .ts files.",
   "typeAcquisition.enable": "Enable auto type acquisition",
   "typeAcquisition.include": "Specifies a list of type declarations to be included in auto type acquisition. Ex. [\"jquery\", \"lodash\"]",
   "typeAcquisition.exclude": "Specifies a list of type declarations to be excluded from auto type acquisition. Ex. [\"jquery\", \"lodash\"]",
-  "typeAcquisition.typeAcquisition": "Auto type (.d.ts) acquisition options for this project. Requires TypeScript version 2.1 or later.",
+  "typeAcquisition": "Auto type (.d.ts) acquisition options for this project. Requires TypeScript version 2.1 or later.",
   "ts-node.compiler": "Specify a custom TypeScript compiler.",
   "ts-node.compilerHost": "Use TypeScript's compiler host API instead of the language service API.",
   "ts-node.compilerOptions.charset": "No longer supported. In early versions, manually set the text encoding for reading files.\n\nSee more: https://www.typescriptlang.org/tsconfig#charset",
@@ -225,7 +225,7 @@
   "ts-node.compilerOptions.extendedDiagnostics": "Output more detailed compiler performance information after building.\n\nSee more: https://www.typescriptlang.org/tsconfig#extendedDiagnostics",
   "ts-node.compilerOptions.disableSourceOfProjectReferenceRedirect": "Disable preferring source files instead of declaration files when referencing composite projects.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSourceOfProjectReferenceRedirect",
   "ts-node.compilerOptions.disableSolutionSearching": "Opt a project out of multi-project reference checking when editing.\n\nSee more: https://www.typescriptlang.org/tsconfig#disableSolutionSearching",
-  "ts-node.compilerOptions.compilerOptions": "Instructs the TypeScript compiler how to compile .ts files.",
+  "ts-node.compilerOptions": "Instructs the TypeScript compiler how to compile .ts files.",
   "ts-node.compilerOptions.emit": "Emit output files into `.ts-node` directory.",
   "ts-node.compilerOptions.experimentalReplAwait": "Allows the usage of top level await in REPL.\n\nUses node's implementation which accomplishes this with an AST syntax transformation.\n\nEnabled by default when tsconfig target is es2018 or above. Set to false to disable.\n\n**Note**: setting to `true` when tsconfig target is too low will throw an Error.  Leave as `undefined`\nto get default, automatic behavior.",
   "ts-node.compilerOptions.files": "Load \"files\" and \"include\" from `tsconfig.json` on startup.\n\nDefault is to override `tsconfig.json` \"files\" and \"include\" to only include the entrypoint script.",
@@ -240,5 +240,5 @@
   "ts-node.compilerOptions.transpileOnly": "Use TypeScript's faster `transpileModule`.",
   "ts-node.compilerOptions.transpiler": "Specify a custom transpiler for use with transpileOnly",
   "ts-node.compilerOptions.typeCheck": "**DEPRECATED** Specify type-check is enabled (e.g. `transpileOnly == false`).",
-  "ts-node.ts-node": "ts-node options.  See also: https://typestrong.org/ts-node/docs/configuration\n\nts-node offers TypeScript execution and REPL for node.js, with source map support."
+  "ts-node": "ts-node options.  See also: https://typestrong.org/ts-node/docs/configuration\n\nts-node offers TypeScript execution and REPL for node.js, with source map support."
 }
