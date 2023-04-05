@@ -27,7 +27,7 @@ export default defineConfig({
     visualizer({
       emitFile: true,
       filename: 'stats.html'
-    }),
+    })
     // importToCDN({
     //   modules: [
     //     {
@@ -49,6 +49,7 @@ export default defineConfig({
       '@themeVars': resolve(__dirname, './src/styles/theme.module.scss'),
       '@layout': resolve(__dirname, './src/layout'),
       '@views': resolve(__dirname, './src/views'),
+      '@assets': resolve(__dirname, './src/assets'),
       '@components': join(__dirname, 'src/components/'),
       '@i18n': join(__dirname, 'src/i18n/'),
       '@utils': join(__dirname, 'src/utils/'),

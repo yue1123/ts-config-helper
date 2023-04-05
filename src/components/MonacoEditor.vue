@@ -163,12 +163,6 @@ watch(
   },
   { deep: true }
 )
-// watch(
-//   () => props.language,
-//   (newValue) => {
-//     monaco.editor.setModelLanguage(editor!.getModel()!, newValue)
-//   }
-// )
 watch(
   () => themeStore.isDark,
   (isDark) => {
@@ -182,40 +176,6 @@ function resize() {
   if (!editor) return
   editor.layout()
 }
-
-// function registerDocumentFormattingEditProviders() {
-//   const disposables: monaco.IDisposable[] = []
-
-//   const formattingEditProvider = {
-//     async provideDocumentFormattingEdits(model, _options, _token) {
-//       // if (!prettierWorker) {
-//       //   prettierWorker = createWorkerQueue(PrettierWorker)
-//       // }
-//       // const { canceled, error, pretty } = await prettierWorker.emit({
-//       //   text: model.getValue(),
-//       //   language: model.getLanguageId()
-//       // })
-//       // if (canceled || error) return []
-//       console.log('format')
-//       return [
-//         {
-//           range: model.getFullModelRange(),
-//           text: model.getValue()
-//         }
-//       ]
-//     }
-//   }
-
-//   disposables.push(
-//     monaco.languages.registerDocumentFormattingEditProvider('json', formattingEditProvider)
-//   )
-
-//   return {
-//     dispose() {
-//       disposables.forEach((disposable) => disposable.dispose())
-//     }
-//   }
-// }
 
 defineExpose({
   resize

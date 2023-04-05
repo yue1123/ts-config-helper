@@ -23,6 +23,7 @@
     "json5": "^2.2.3",
     "jsonc-parser": "^3.2.0",
     "jsondiffpatch": "^0.4.1",
+    "just-diff": "^6.0.2",
     "markdown-it": "^13.0.1",
     "monaco-editor": "^0.36.1",
     "naive-ui": "^2.34.3",

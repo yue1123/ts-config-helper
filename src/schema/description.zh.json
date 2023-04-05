@@ -1,976 +1,976 @@
 {
   "files": {
-    "message": "If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. When a 'files' property is specified, only those files and those specified by 'include' are included."
+    "message": "如果 tsconfig.JSON 中不存在“files ”或“include ”属性，则编译器默认包含包含目录和子目录中的所有文件，但“exclude ”指定的文件除外。如果指定了“files ”属性，则只包含这些文件和由“include ”指定的文件。"
   },
   "exclude": {
-    "message": "Specifies a list of files to be excluded from compilation. The 'exclude' property only affects the files included via the 'include' property and not the 'files' property. Glob patterns require TypeScript version 2.0 or later."
+    "message": "指定要从编译中排除的文件列表。“Exclude ”属性仅影响通过“Include ”属性包含的文件，而不影响“Files ”属性。Glob 模式需要 TypeScript 版本 2.0 或更高版本。"
   },
   "include": {
-    "message": "Specifies a list of glob patterns that match files to be included in compilation. If no 'files' or 'include' property is present in a tsconfig.json, the compiler defaults to including all files in the containing directory and subdirectories except those specified by 'exclude'. Requires TypeScript version 2.0 or later."
+    "message": "指定与要包含在编译中的文件相匹配的 glob 模式的列表。如果 tsconfig.JSON 中不存在“files ”或“include ”属性，则编译器默认包含包含目录和子目录中的所有文件，但“exclude ”指定的文件除外。需要 TypeScript 2.0 或更高版本。"
   },
   "compileOnSave": {
-    "message": "Enable Compile-on-Save for this project."
+    "message": "对此项目启用保存时编译。"
   },
   "extends": {
-    "message": "Path to base configuration file to inherit from. Requires TypeScript version 2.1 or later."
+    "message": "要从中继承的基本配置文件的路径。需要 TypeScript 版本 2.1 或更高版本。"
   },
   "references": {
-    "message": "Referenced projects. Requires TypeScript version 3.0 or later."
+    "message": "引用的项目。需要 TypeScript 3.0 或更高版本。"
   },
   "buildOptions.dry": {
     "message": "~"
   },
   "buildOptions.force": {
-    "message": "Build all projects, including those that appear to be up to date.",
+    "message": "构建所有项目，包括那些看起来是最新的项目。",
     "link": " https://www.typescriptlang.org/tsconfig#force"
   },
   "buildOptions.verbose": {
-    "message": "Enable verbose logging.",
+    "message": "启用详细日志记录。",
     "link": " https://www.typescriptlang.org/tsconfig#verbose"
   },
   "buildOptions.incremental": {
-    "message": "Save .tsbuildinfo files to allow for incremental compilation of projects.",
+    "message": "保存.tsbuildinfo 文件以允许项目的增量编译。",
     "link": " https://www.typescriptlang.org/tsconfig#incremental"
   },
   "buildOptions.assumeChangesOnlyAffectDirectDependencies": {
-    "message": "Have recompiles in projects that use `incremental` and `watch` mode assume that changes within a file will only affect files directly depending on it.",
+    "message": "在使用“增量”和“监视”模式的项目中重新编译时，假设文件中的更改只会直接影响依赖于它的文件。",
     "link": " https://www.typescriptlang.org/tsconfig#assumeChangesOnlyAffectDirectDependencies"
   },
   "buildOptions.traceResolution": {
-    "message": "Log paths used during the `moduleResolution` process.",
+    "message": "在“ModuleResolution ”过程中使用的日志路径。",
     "link": " https://www.typescriptlang.org/tsconfig#traceResolution"
   },
   "buildOptions": {},
   "watchOptions.watchFile": {
-    "message": "Specify how the TypeScript watch mode works.",
+    "message": "指定 TypeScript 监视模式的工作方式。",
     "link": " https://www.typescriptlang.org/tsconfig#watchFile"
   },
   "watchOptions.watchDirectory": {
-    "message": "Specify how directories are watched on systems that lack recursive file-watching functionality.",
+    "message": "指定如何在缺少递归文件监视功能的系统上监视目录。",
     "link": " https://www.typescriptlang.org/tsconfig#watchDirectory"
   },
   "watchOptions.fallbackPolling": {
-    "message": "Specify what approach the watcher should use if the system runs out of native file watchers.",
+    "message": "指定系统用完本机文件监视器时监视器应使用的方法。",
     "link": " https://www.typescriptlang.org/tsconfig#fallbackPolling"
   },
   "watchOptions.synchronousWatchDirectory": {
-    "message": "Synchronously call callbacks and update the state of directory watchers on platforms that don`t support recursive watching natively.",
+    "message": "在本机不支持递归监视的平台上，同步调用回调并更新目录监视器的状态。",
     "link": " https://www.typescriptlang.org/tsconfig#synchronousWatchDirectory"
   },
   "watchOptions.excludeFiles": {
-    "message": "Remove a list of files from the watch mode's processing.",
+    "message": "从监视模式的处理中删除文件列表。",
     "link": " https://www.typescriptlang.org/tsconfig#excludeFiles"
   },
   "watchOptions.excludeDirectories": {
-    "message": "Remove a list of directories from the watch process.",
+    "message": "从监视进程中删除目录列表。",
     "link": " https://www.typescriptlang.org/tsconfig#excludeDirectories"
   },
   "watchOptions": {
-    "message": "Settings for the watch mode in TypeScript."
+    "message": "TypeScript 中监视模式的设置。"
   },
   "compilerOptions.allowArbitraryExtensions": {
-    "message": "Enable importing files with any extension, provided a declaration file is present.",
+    "message": "如果存在声明文件，则允许导入具有任何扩展名的文件。",
     "link": " https://www.typescriptlang.org/tsconfig#allowArbitraryExtensions"
   },
   "compilerOptions.allowImportingTsExtensions": {
-    "message": "Allow imports to include TypeScript file extensions.",
+    "message": "允许导入包含 TypeScript 文件扩展名。",
     "link": " https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions"
   },
   "compilerOptions.charset": {
-    "message": "No longer supported. In early versions, manually set the text encoding for reading files.",
+    "message": "不再支持。在早期版本中，手动设置读取文件的文本编码。",
     "link": " https://www.typescriptlang.org/tsconfig#charset"
   },
   "compilerOptions.composite": {
-    "message": "Enable constraints that allow a TypeScript project to be used with project references.",
+    "message": "启用允许 TypeScript 项目与项目引用一起使用的约束。",
     "link": " https://www.typescriptlang.org/tsconfig#composite"
   },
   "compilerOptions.customConditions": {
-    "message": "Conditions to set in addition to the resolver-specific defaults when resolving imports.",
+    "message": "解析导入时除解析器特定的默认值之外要设置的条件。",
     "link": " https://www.typescriptlang.org/tsconfig#customConditions"
   },
   "compilerOptions.declaration": {
-    "message": "Generate .d.ts files from TypeScript and JavaScript files in your project.",
+    "message": "从项目中的 TypeScript 和 JavaScript 文件生成.d.ts 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#declaration"
   },
   "compilerOptions.declarationDir": {
-    "message": "Specify the output directory for generated declaration files.",
+    "message": "为生成的声明文件指定输出目录。",
     "link": " https://www.typescriptlang.org/tsconfig#declarationDir"
   },
   "compilerOptions.diagnostics": {
-    "message": "Output compiler performance information after building.",
+    "message": "生成后输出编译器性能信息。",
     "link": " https://www.typescriptlang.org/tsconfig#diagnostics"
   },
   "compilerOptions.disableReferencedProjectLoad": {
-    "message": "Reduce the number of projects loaded automatically by TypeScript.",
+    "message": "减少 TypeScript 自动加载的项目数量。",
     "link": " https://www.typescriptlang.org/tsconfig#disableReferencedProjectLoad"
   },
   "compilerOptions.noPropertyAccessFromIndexSignature": {
-    "message": "Enforces using indexed accessors for keys declared using an indexed type.",
+    "message": "对使用索引类型声明的键强制使用索引访问器。",
     "link": " https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature"
   },
   "compilerOptions.emitBOM": {
-    "message": "Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.",
+    "message": "在输出文件的开头发出 UTF-8 字节顺序标记（BOM）。",
     "link": " https://www.typescriptlang.org/tsconfig#emitBOM"
   },
   "compilerOptions.emitDeclarationOnly": {
-    "message": "Only output d.ts files and not JavaScript files.",
+    "message": "仅输出 D.TS 文件，不输出 JavaScript 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#emitDeclarationOnly"
   },
   "compilerOptions.exactOptionalPropertyTypes": {
-    "message": "Interpret optional property types as written, rather than adding `undefined`.",
+    "message": "将可选属性类型解释为书面形式，而不是添加“未定义”。",
     "link": " https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes"
   },
   "compilerOptions.incremental": {
-    "message": "Enable incremental compilation. Requires TypeScript version 3.4 or later."
+    "message": "启用增量编译。需要 TypeScript 3.4 或更高版本。"
   },
   "compilerOptions.tsBuildInfoFile": {
-    "message": "Specify the folder for .tsbuildinfo incremental compilation files.",
+    "message": "指定.TSBuildInfo 增量编译文件的文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#tsBuildInfoFile"
   },
   "compilerOptions.inlineSourceMap": {
-    "message": "Include sourcemap files inside the emitted JavaScript.",
+    "message": "在发出的 JavaScript 中包含 SourceMap 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#inlineSourceMap"
   },
   "compilerOptions.inlineSources": {
-    "message": "Include source code in the sourcemaps inside the emitted JavaScript.",
+    "message": "在发出的 JavaScript 内的 SourceMaps 中包含源代码。",
     "link": " https://www.typescriptlang.org/tsconfig#inlineSources"
   },
   "compilerOptions.jsx": {
-    "message": "Specify what JSX code is generated."
+    "message": "指定生成的 JSX 代码。"
   },
   "compilerOptions.reactNamespace": {
-    "message": "Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.",
+    "message": "指定为“createElement ”调用的对象。这仅适用于以“REACT ”JSX EMIT 为目标时。",
     "link": " https://www.typescriptlang.org/tsconfig#reactNamespace"
   },
   "compilerOptions.jsxFactory": {
-    "message": "Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'.",
+    "message": "指定以 React JSX Emit 为目标时使用的 JSX 工厂函数，例如' react.createElement '或' H '。",
     "link": " https://www.typescriptlang.org/tsconfig#jsxFactory"
   },
   "compilerOptions.jsxFragmentFactory": {
-    "message": "Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'.",
+    "message": "指定以 React JSX Emit 为目标时用于片段的 JSX 片段引用，例如' react.fragment '或' fragment '。",
     "link": " https://www.typescriptlang.org/tsconfig#jsxFragmentFactory"
   },
   "compilerOptions.jsxImportSource": {
-    "message": "Specify module specifier used to import the JSX factory functions when using `jsx: react-jsx`.",
+    "message": "使用 `jsx：react-jsx` 时，指定用于导入 JSX 工厂函数的模块说明符。",
     "link": " https://www.typescriptlang.org/tsconfig#jsxImportSource"
   },
   "compilerOptions.listFiles": {
-    "message": "Print all of the files read during the compilation.",
+    "message": "打印编译期间读取的所有文件。",
     "link": " https://www.typescriptlang.org/tsconfig#listFiles"
   },
   "compilerOptions.mapRoot": {
-    "message": "Specify the location where debugger should locate map files instead of generated locations.",
+    "message": "指定调试器应查找映射文件的位置，而不是生成的位置。",
     "link": " https://www.typescriptlang.org/tsconfig#mapRoot"
   },
   "compilerOptions.module": {
-    "message": "Specify what module code is generated.",
+    "message": "指定生成的模块代码。",
     "link": " https://www.typescriptlang.org/tsconfig#module"
   },
   "compilerOptions.moduleDetection": {
-    "message": "Control what method is used to detect the whether a JS file is a module."
+    "message": "控制用什么方式检测一个 JS 文件是否为模块。"
   },
   "compilerOptions.moduleResolution": {
-    "message": "Specify how TypeScript looks up a file from a given module specifier.",
+    "message": "指定 TypeScript 如何从给定的模块说明符查找文件。",
     "link": " https://www.typescriptlang.org/tsconfig#moduleResolution"
   },
   "compilerOptions.moduleSuffixes": {
-    "message": "List of file name suffixes to search when resolving a module.",
+    "message": "解析模块时要搜索的文件名后缀的列表。",
     "link": " https://www.typescriptlang.org/tsconfig#moduleSuffixes"
   },
   "compilerOptions.newLine": {
-    "message": "Set the newline character for emitting files.",
+    "message": "设置发射文件的换行符。",
     "link": " https://www.typescriptlang.org/tsconfig#newLine"
   },
   "compilerOptions.noEmit": {
-    "message": "Disable emitting files from a compilation.",
+    "message": "禁止从编译中发出文件。",
     "link": " https://www.typescriptlang.org/tsconfig#noEmit"
   },
   "compilerOptions.noEmitHelpers": {
-    "message": "Disable generating custom helper functions like `extends` in compiled output.",
+    "message": "禁止在编译输出中生成自定义辅助函数，如“扩展”。",
     "link": " https://www.typescriptlang.org/tsconfig#noEmitHelpers"
   },
   "compilerOptions.noEmitOnError": {
-    "message": "Disable emitting files if any type checking errors are reported.",
+    "message": "如果报告了任何类型检查错误，则禁用发出文件。",
     "link": " https://www.typescriptlang.org/tsconfig#noEmitOnError"
   },
   "compilerOptions.noImplicitAny": {
-    "message": "Enable error reporting for expressions and declarations with an implied `any` type.",
+    "message": "为隐含“任何”类型的表达式和声明启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitAny"
   },
   "compilerOptions.noImplicitThis": {
-    "message": "Enable error reporting when `this` is given the type `any`.",
+    "message": "当给定“this ”的类型为“any ”时，启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitThis"
   },
   "compilerOptions.noUnusedLocals": {
-    "message": "Enable error reporting when local variables aren't read.",
+    "message": "未读取局部变量时启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noUnusedLocals"
   },
   "compilerOptions.noUnusedParameters": {
-    "message": "Raise an error when a function parameter isn't read.",
+    "message": "未读取函数参数时引发错误。",
     "link": " https://www.typescriptlang.org/tsconfig#noUnusedParameters"
   },
   "compilerOptions.noLib": {
-    "message": "Disable including any library files, including the default lib.d.ts.",
+    "message": "禁止包括任何库文件，包括默认的 lib.d.ts.",
     "link": " https://www.typescriptlang.org/tsconfig#noLib"
   },
   "compilerOptions.noResolve": {
-    "message": "Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project.",
+    "message": "禁止“import ”、“require ”或“<reference>'s ”扩展 TypeScript 应添加到项目中的文件数量。",
     "link": " https://www.typescriptlang.org/tsconfig#noResolve"
   },
   "compilerOptions.noStrictGenericChecks": {
-    "message": "Disable strict checking of generic signatures in function types.",
+    "message": "在函数类型中禁用对泛型签名的严格检查。",
     "link": " https://www.typescriptlang.org/tsconfig#noStrictGenericChecks"
   },
   "compilerOptions.skipDefaultLibCheck": {
-    "message": "Skip type checking .d.ts files that are included with TypeScript.",
+    "message": "跳过 TypeScript 附带的.d.ts 文件的类型检查。",
     "link": " https://www.typescriptlang.org/tsconfig#skipDefaultLibCheck"
   },
   "compilerOptions.skipLibCheck": {
-    "message": "Skip type checking all .d.ts files.",
+    "message": "跳过对所有.d.ts 文件的类型检查。",
     "link": " https://www.typescriptlang.org/tsconfig#skipLibCheck"
   },
   "compilerOptions.outFile": {
-    "message": "Specify a file that bundles all outputs into one JavaScript file. If `declaration` is true, also designates a file that bundles all .d.ts output.",
+    "message": "指定将所有输出捆绑到一个 JavaScript 文件中的文件。如果“declaration ”为 true，则还指定捆绑所有.d.ts 输出的文件。",
     "link": " https://www.typescriptlang.org/tsconfig#outFile"
   },
   "compilerOptions.outDir": {
-    "message": "Specify an output folder for all emitted files.",
+    "message": "为所有发出的文件指定输出文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#outDir"
   },
   "compilerOptions.preserveConstEnums": {
-    "message": "Disable erasing `const enum` declarations in generated code.",
+    "message": "在生成的代码中禁用删除“const num ”声明。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveConstEnums"
   },
   "compilerOptions.preserveSymlinks": {
-    "message": "Disable resolving symlinks to their realpath. This correlates to the same flag in node.",
+    "message": "禁用将符号链接解析到其 realpath.这与节点中的相同标志相关。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveSymlinks"
   },
   "compilerOptions.preserveValueImports": {
-    "message": "Preserve unused imported values in the JavaScript output that would otherwise be removed.",
+    "message": "在 JavaScript 输出中保留未使用的导入值，否则这些值将被删除。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveValueImports"
   },
   "compilerOptions.preserveWatchOutput": {
-    "message": "Disable wiping the console in watch mode.",
+    "message": "在“监视”模式下禁用擦除控制台。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveWatchOutput"
   },
   "compilerOptions.pretty": {
-    "message": "Enable color and formatting in TypeScript's output to make compiler errors easier to read.",
+    "message": "在 TypeScript 的输出中启用颜色和格式，以使编译器错误更易于阅读。",
     "link": " https://www.typescriptlang.org/tsconfig#pretty"
   },
   "compilerOptions.removeComments": {
-    "message": "Disable emitting comments.",
+    "message": "禁用发出注释。",
     "link": " https://www.typescriptlang.org/tsconfig#removeComments"
   },
   "compilerOptions.rootDir": {
-    "message": "Specify the root folder within your source files.",
+    "message": "指定源文件中的根文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#rootDir"
   },
   "compilerOptions.isolatedModules": {
-    "message": "Ensure that each file can be safely transpiled without relying on other imports.",
+    "message": "确保每个文件都可以安全地传输，而不依赖于其他导入。",
     "link": " https://www.typescriptlang.org/tsconfig#isolatedModules"
   },
   "compilerOptions.sourceMap": {
-    "message": "Create source map files for emitted JavaScript files.",
+    "message": "为发出的 JavaScript 文件创建源映射文件。",
     "link": " https://www.typescriptlang.org/tsconfig#sourceMap"
   },
   "compilerOptions.sourceRoot": {
-    "message": "Specify the root path for debuggers to find the reference source code.",
+    "message": "指定调试器查找引用源代码的根路径。",
     "link": " https://www.typescriptlang.org/tsconfig#sourceRoot"
   },
   "compilerOptions.suppressExcessPropertyErrors": {
-    "message": "Disable reporting of excess property errors during the creation of object literals.",
+    "message": "禁止在创建对象文本期间报告过多的属性错误。",
     "link": " https://www.typescriptlang.org/tsconfig#suppressExcessPropertyErrors"
   },
   "compilerOptions.suppressImplicitAnyIndexErrors": {
-    "message": "Suppress `noImplicitAny` errors when indexing objects that lack index signatures.",
+    "message": "为缺少索引签名的对象编制索引时隐藏“noimplicitany ”错误。",
     "link": " https://www.typescriptlang.org/tsconfig#suppressImplicitAnyIndexErrors"
   },
   "compilerOptions.stripInternal": {
-    "message": "Disable emitting declarations that have `@internal` in their JSDoc comments.",
+    "message": "禁用在其 JSDoc 注释中包含“@internal ”的发出声明。",
     "link": " https://www.typescriptlang.org/tsconfig#stripInternal"
   },
   "compilerOptions.target": {
-    "message": "Set the JavaScript language version for emitted JavaScript and include compatible library declarations.",
+    "message": "为发出的 JavaScript 设置 JavaScript 语言版本，并包含兼容的库声明。",
     "link": " https://www.typescriptlang.org/tsconfig#target"
   },
   "compilerOptions.useUnknownInCatchVariables": {
-    "message": "Default catch clause variables as `unknown` instead of `any`.",
+    "message": "默认 catch 子句变量为“unknown ”而不是“any ”。",
     "link": " https://www.typescriptlang.org/tsconfig#useUnknownInCatchVariables"
   },
   "compilerOptions.experimentalDecorators": {
-    "message": "Enable experimental support for TC39 stage 2 draft decorators.",
+    "message": "启用对 TC39 阶段 2 草稿修饰符的实验性支持。",
     "link": " https://www.typescriptlang.org/tsconfig#experimentalDecorators"
   },
   "compilerOptions.emitDecoratorMetadata": {
-    "message": "Emit design-type metadata for decorated declarations in source files.",
+    "message": "为源文件中的修饰声明发出设计类型元数据。",
     "link": " https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata"
   },
   "compilerOptions.allowUnusedLabels": {
-    "message": "Disable error reporting for unused labels.",
+    "message": "禁用未使用标签的错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#allowUnusedLabels"
   },
   "compilerOptions.noImplicitReturns": {
-    "message": "Enable error reporting for codepaths that do not explicitly return in a function.",
+    "message": "为未在函数中显式返回的代码路径启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitReturns"
   },
   "compilerOptions.noUncheckedIndexedAccess": {
-    "message": "Add `undefined` to a type when accessed using an index.",
+    "message": "使用索引访问时，将“undefined ”添加到类型中。",
     "link": " https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess"
   },
   "compilerOptions.noFallthroughCasesInSwitch": {
-    "message": "Enable error reporting for fallthrough cases in switch statements.",
+    "message": "为 switch 语句中的故障情况启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch"
   },
   "compilerOptions.noImplicitOverride": {
-    "message": "Ensure overriding members in derived classes are marked with an override modifier.",
+    "message": "确保用 override 修饰符标记派生类中的重写成员。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitOverride"
   },
   "compilerOptions.allowUnreachableCode": {
-    "message": "Disable error reporting for unreachable code.",
+    "message": "对无法访问的代码禁用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#allowUnreachableCode"
   },
   "compilerOptions.forceConsistentCasingInFileNames": {
-    "message": "Ensure that casing is correct in imports.",
+    "message": "确保进口套管正确。",
     "link": " https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames"
   },
   "compilerOptions.generateCpuProfile": {
-    "message": "Emit a v8 CPU profile of the compiler run for debugging.",
+    "message": "发出编译器运行的 V8 CPU 配置文件以进行调试。",
     "link": " https://www.typescriptlang.org/tsconfig#generateCpuProfile"
   },
   "compilerOptions.baseUrl": {
-    "message": "Specify the base directory to resolve non-relative module names.",
+    "message": "指定用于解析非相对模块名称的基目录。",
     "link": " https://www.typescriptlang.org/tsconfig#baseUrl"
   },
   "compilerOptions.paths": {
-    "message": "Specify a set of entries that re-map imports to additional lookup locations.",
+    "message": "指定将导入重新映射到其他查找位置的一组条目。",
     "link": " https://www.typescriptlang.org/tsconfig#paths"
   },
   "compilerOptions.plugins": {
-    "message": "Specify a list of language service plugins to include.",
+    "message": "指定要包含的语言服务插件的列表。",
     "link": " https://www.typescriptlang.org/tsconfig#plugins"
   },
   "compilerOptions.rootDirs": {
-    "message": "Allow multiple folders to be treated as one when resolving modules.",
+    "message": "允许在解析模块时将多个文件夹视为一个文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#rootDirs"
   },
   "compilerOptions.typeRoots": {
-    "message": "Specify multiple folders that act like `./node_modules/@types`.",
+    "message": "指定多个类似于“./node_ 模块/@types ”的文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#typeRoots"
   },
   "compilerOptions.types": {
-    "message": "Specify type package names to be included without being referenced in a source file.",
+    "message": "指定要在源文件中包含但不引用的类型包名称。",
     "link": " https://www.typescriptlang.org/tsconfig#types"
   },
   "compilerOptions.traceResolution": {
-    "message": "Enable tracing of the name resolution process. Requires TypeScript version 2.0 or later."
+    "message": "启用名称解析过程的跟踪。需要 TypeScript 2.0 或更高版本。"
   },
   "compilerOptions.allowJs": {
-    "message": "Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files.",
+    "message": "允许 JavaScript 文件成为程序的一部分。使用“checkjs ”选项从这些文件中获取错误。",
     "link": " https://www.typescriptlang.org/tsconfig#allowJs"
   },
   "compilerOptions.noErrorTruncation": {
-    "message": "Disable truncating types in error messages.",
+    "message": "在错误消息中禁用截断类型。",
     "link": " https://www.typescriptlang.org/tsconfig#noErrorTruncation"
   },
   "compilerOptions.allowSyntheticDefaultImports": {
-    "message": "Allow 'import x from y' when a module doesn't have a default export.",
+    "message": "当模块没有默认导出时，允许“从 Y 导入 X ”。",
     "link": " https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports"
   },
   "compilerOptions.noImplicitUseStrict": {
-    "message": "Disable adding 'use strict' directives in emitted JavaScript files.",
+    "message": "禁止在发出的 JavaScript 文件中添加“使用严格”指令。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitUseStrict"
   },
   "compilerOptions.listEmittedFiles": {
-    "message": "Print the names of emitted files after a compilation.",
+    "message": "在编译后打印发出的文件的名称。",
     "link": " https://www.typescriptlang.org/tsconfig#listEmittedFiles"
   },
   "compilerOptions.disableSizeLimit": {
-    "message": "Remove the 20mb cap on total source code size for JavaScript files in the TypeScript language server.",
+    "message": "删除 TypeScript 语言服务器中 JavaScript 文件的总源代码大小的 20MB 上限。",
     "link": " https://www.typescriptlang.org/tsconfig#disableSizeLimit"
   },
   "compilerOptions.lib": {
-    "message": "Specify a set of bundled library declaration files that describe the target runtime environment.",
+    "message": "指定一组描述目标运行时环境的捆绑库声明文件。",
     "link": " https://www.typescriptlang.org/tsconfig#lib"
   },
   "compilerOptions.strictNullChecks": {
-    "message": "When type checking, take into account `null` and `undefined`.",
+    "message": "检查类型时，请考虑“null ”和“undefined ”。",
     "link": " https://www.typescriptlang.org/tsconfig#strictNullChecks"
   },
   "compilerOptions.maxNodeModuleJsDepth": {
-    "message": "Specify the maximum folder depth used for checking JavaScript files from `node_modules`. Only applicable with `allowJs`.",
+    "message": "指定用于从“节点 _ 模块”检查 JavaScript 文件的最大文件夹深度。仅适用于“allowjs ”。",
     "link": " https://www.typescriptlang.org/tsconfig#maxNodeModuleJsDepth"
   },
   "compilerOptions.importHelpers": {
-    "message": "Allow importing helper functions from tslib once per project, instead of including them per-file.",
+    "message": "允许在每个项目中从 TSLIB 导入一次帮助程序函数，而不是在每个文件中包含它们。",
     "link": " https://www.typescriptlang.org/tsconfig#importHelpers"
   },
   "compilerOptions.importsNotUsedAsValues": {
-    "message": "Specify emit/checking behavior for imports that are only used for types."
+    "message": "为仅用于类型的导入指定发出/检查行为。"
   },
   "compilerOptions.alwaysStrict": {
-    "message": "Ensure 'use strict' is always emitted.",
+    "message": "确保始终发出“use strict ”。",
     "link": " https://www.typescriptlang.org/tsconfig#alwaysStrict"
   },
   "compilerOptions.strict": {
-    "message": "Enable all strict type-checking options.",
+    "message": "启用所有严格类型检查选项。",
     "link": " https://www.typescriptlang.org/tsconfig#strict"
   },
   "compilerOptions.strictBindCallApply": {
-    "message": "Check that the arguments for `bind`, `call`, and `apply` methods match the original function.",
+    "message": "检查“bind ”、“call ”和“apply ”方法的参数是否与原始函数匹配。",
     "link": " https://www.typescriptlang.org/tsconfig#strictBindCallApply"
   },
   "compilerOptions.downlevelIteration": {
-    "message": "Emit more compliant, but verbose and less performant JavaScript for iteration.",
+    "message": "为迭代生成更兼容，但冗长且性能较低的 JavaScript.",
     "link": " https://www.typescriptlang.org/tsconfig#downlevelIteration"
   },
   "compilerOptions.checkJs": {
-    "message": "Enable error reporting in type-checked JavaScript files.",
+    "message": "在类型检查的 JavaScript 文件中启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#checkJs"
   },
   "compilerOptions.strictFunctionTypes": {
-    "message": "When assigning functions, check to ensure parameters and the return values are subtype-compatible.",
+    "message": "分配函数时，请检查以确保参数和返回值是子类型兼容的。",
     "link": " https://www.typescriptlang.org/tsconfig#strictFunctionTypes"
   },
   "compilerOptions.strictPropertyInitialization": {
-    "message": "Check for class properties that are declared but not set in the constructor.",
+    "message": "检查已声明但未在构造函数中设置的类属性。",
     "link": " https://www.typescriptlang.org/tsconfig#strictPropertyInitialization"
   },
   "compilerOptions.esModuleInterop": {
-    "message": "Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility.",
+    "message": "发出额外的 JavaScript 以简化对导入 CommonJS 模块的支持。这将为类型兼容性启用“AllowSyntheticDefaultImports ”。",
     "link": " https://www.typescriptlang.org/tsconfig#esModuleInterop"
   },
   "compilerOptions.allowUmdGlobalAccess": {
-    "message": "Allow accessing UMD globals from modules.",
+    "message": "允许从模块访问 UMD 全局变量。",
     "link": " https://www.typescriptlang.org/tsconfig#allowUmdGlobalAccess"
   },
   "compilerOptions.keyofStringsOnly": {
-    "message": "Make keyof only return strings instead of string, numbers or symbols. Legacy option.",
+    "message": "使 KeyOf 只返回字符串，而不是字符串、数字或符号。传统选项。",
     "link": " https://www.typescriptlang.org/tsconfig#keyofStringsOnly"
   },
   "compilerOptions.useDefineForClassFields": {
-    "message": "Emit ECMAScript-standard-compliant class fields.",
+    "message": "发出符合 ECMAScript 标准的类字段。",
     "link": " https://www.typescriptlang.org/tsconfig#useDefineForClassFields"
   },
   "compilerOptions.declarationMap": {
-    "message": "Create sourcemaps for d.ts files.",
+    "message": "为 D.TS 文件创建源映射。",
     "link": " https://www.typescriptlang.org/tsconfig#declarationMap"
   },
   "compilerOptions.resolveJsonModule": {
-    "message": "Enable importing .json files.",
+    "message": "启用导入.JSON 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#resolveJsonModule"
   },
   "compilerOptions.resolvePackageJsonExports": {
-    "message": "Use the package.json 'exports' field when resolving package imports.",
+    "message": "解析包导入时使用 package.JSON “exports ”字段。",
     "link": " https://www.typescriptlang.org/tsconfig#resolvePackageJsonExports"
   },
   "compilerOptions.resolvePackageJsonImports": {
-    "message": "Use the package.json 'imports' field when resolving imports.",
+    "message": "解析导入时使用 package.JSON ' Imports '字段。",
     "link": " https://www.typescriptlang.org/tsconfig#resolvePackageJsonImports"
   },
   "compilerOptions.verbatimModuleSyntax": {
-    "message": "Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting.",
+    "message": "不要转换或忽略任何未标记为仅类型的导入或导出，确保根据“模块”设置以输出文件的格式写入它们。",
     "link": " https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax"
   },
   "compilerOptions.assumeChangesOnlyAffectDirectDependencies": {
-    "message": "Have recompiles in '--incremental' and '--watch' assume that changes within a file will only affect files directly depending on it. Requires TypeScript version 3.8 or later."
+    "message": "在“--incremental ”和“--watch ”中重新编译时，假设文件中的更改只会影响直接依赖于它的文件。需要 TypeScript 3.8 或更高版本。"
   },
   "compilerOptions.extendedDiagnostics": {
-    "message": "Output more detailed compiler performance information after building.",
+    "message": "生成后输出更详细的编译器性能信息。",
     "link": " https://www.typescriptlang.org/tsconfig#extendedDiagnostics"
   },
   "compilerOptions.disableSourceOfProjectReferenceRedirect": {
-    "message": "Disable preferring source files instead of declaration files when referencing composite projects.",
+    "message": "禁止在引用复合项目时首选源文件而不是声明文件。",
     "link": " https://www.typescriptlang.org/tsconfig#disableSourceOfProjectReferenceRedirect"
   },
   "compilerOptions.disableSolutionSearching": {
-    "message": "Opt a project out of multi-project reference checking when editing.",
+    "message": "编辑时将项目从多项目引用检查中选择出来。",
     "link": " https://www.typescriptlang.org/tsconfig#disableSolutionSearching"
   },
   "compilerOptions": {
-    "message": "Instructs the TypeScript compiler how to compile .ts files."
+    "message": "指示 TypeScript 编译器如何编译.ts 文件。"
   },
   "typeAcquisition.enable": {
-    "message": "Enable auto type acquisition"
+    "message": "启用自动类型获取"
   },
   "typeAcquisition.include": {
-    "message": "Specifies a list of type declarations to be included in auto type acquisition. Ex. [\"jquery\", \"lodash\"]"
+    "message": "指定要包含在自动类型获取中的类型声明列表。前。[“jQuery ”，“lodash ”]"
   },
   "typeAcquisition.exclude": {
-    "message": "Specifies a list of type declarations to be excluded from auto type acquisition. Ex. [\"jquery\", \"lodash\"]"
+    "message": "指定要从自动类型获取中排除的类型声明列表。前。[“jQuery ”，“lodash ”]"
   },
   "typeAcquisition": {
-    "message": "Auto type (.d.ts) acquisition options for this project. Requires TypeScript version 2.1 or later."
+    "message": "此项目的自动类型（.d.ts）获取选项。需要 TypeScript 版本 2.1 或更高版本。"
   },
   "ts-node.compiler": {
-    "message": "Specify a custom TypeScript compiler."
+    "message": "指定自定义 TypeScript 编译器。"
   },
   "ts-node.compilerHost": {
-    "message": "Use TypeScript's compiler host API instead of the language service API."
+    "message": "使用 TypeScript 的编译器主机 API，而不是语言服务 API."
   },
   "ts-node.compilerOptions.allowArbitraryExtensions": {
-    "message": "Enable importing files with any extension, provided a declaration file is present.",
+    "message": "如果存在声明文件，则允许导入具有任何扩展名的文件。",
     "link": " https://www.typescriptlang.org/tsconfig#allowArbitraryExtensions"
   },
   "ts-node.compilerOptions.allowImportingTsExtensions": {
-    "message": "Allow imports to include TypeScript file extensions.",
+    "message": "允许导入包含 TypeScript 文件扩展名。",
     "link": " https://www.typescriptlang.org/tsconfig#allowImportingTsExtensions"
   },
   "ts-node.compilerOptions.charset": {
-    "message": "No longer supported. In early versions, manually set the text encoding for reading files.",
+    "message": "不再支持。在早期版本中，手动设置读取文件的文本编码。",
     "link": " https://www.typescriptlang.org/tsconfig#charset"
   },
   "ts-node.compilerOptions.composite": {
-    "message": "Enable constraints that allow a TypeScript project to be used with project references.",
+    "message": "启用允许 TypeScript 项目与项目引用一起使用的约束。",
     "link": " https://www.typescriptlang.org/tsconfig#composite"
   },
   "ts-node.compilerOptions.customConditions": {
-    "message": "Conditions to set in addition to the resolver-specific defaults when resolving imports.",
+    "message": "解析导入时除解析器特定的默认值之外要设置的条件。",
     "link": " https://www.typescriptlang.org/tsconfig#customConditions"
   },
   "ts-node.compilerOptions.declaration": {
-    "message": "Generate .d.ts files from TypeScript and JavaScript files in your project.",
+    "message": "从项目中的 TypeScript 和 JavaScript 文件生成.d.ts 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#declaration"
   },
   "ts-node.compilerOptions.declarationDir": {
-    "message": "Specify the output directory for generated declaration files.",
+    "message": "为生成的声明文件指定输出目录。",
     "link": " https://www.typescriptlang.org/tsconfig#declarationDir"
   },
   "ts-node.compilerOptions.diagnostics": {
-    "message": "Output compiler performance information after building.",
+    "message": "生成后输出编译器性能信息。",
     "link": " https://www.typescriptlang.org/tsconfig#diagnostics"
   },
   "ts-node.compilerOptions.disableReferencedProjectLoad": {
-    "message": "Reduce the number of projects loaded automatically by TypeScript.",
+    "message": "减少 TypeScript 自动加载的项目数量。",
     "link": " https://www.typescriptlang.org/tsconfig#disableReferencedProjectLoad"
   },
   "ts-node.compilerOptions.noPropertyAccessFromIndexSignature": {
-    "message": "Enforces using indexed accessors for keys declared using an indexed type.",
+    "message": "对使用索引类型声明的键强制使用索引访问器。",
     "link": " https://www.typescriptlang.org/tsconfig#noPropertyAccessFromIndexSignature"
   },
   "ts-node.compilerOptions.emitBOM": {
-    "message": "Emit a UTF-8 Byte Order Mark (BOM) in the beginning of output files.",
+    "message": "在输出文件的开头发出 UTF-8 字节顺序标记（BOM）。",
     "link": " https://www.typescriptlang.org/tsconfig#emitBOM"
   },
   "ts-node.compilerOptions.emitDeclarationOnly": {
-    "message": "Only output d.ts files and not JavaScript files.",
+    "message": "仅输出 D.TS 文件，不输出 JavaScript 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#emitDeclarationOnly"
   },
   "ts-node.compilerOptions.exactOptionalPropertyTypes": {
-    "message": "Interpret optional property types as written, rather than adding `undefined`.",
+    "message": "将可选属性类型解释为书面形式，而不是添加“未定义”。",
     "link": " https://www.typescriptlang.org/tsconfig#exactOptionalPropertyTypes"
   },
   "ts-node.compilerOptions.incremental": {
-    "message": "Enable incremental compilation. Requires TypeScript version 3.4 or later."
+    "message": "启用增量编译。需要 TypeScript 3.4 或更高版本。"
   },
   "ts-node.compilerOptions.tsBuildInfoFile": {
-    "message": "Specify the folder for .tsbuildinfo incremental compilation files.",
+    "message": "指定.TSBuildInfo 增量编译文件的文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#tsBuildInfoFile"
   },
   "ts-node.compilerOptions.inlineSourceMap": {
-    "message": "Include sourcemap files inside the emitted JavaScript.",
+    "message": "在发出的 JavaScript 中包含 SourceMap 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#inlineSourceMap"
   },
   "ts-node.compilerOptions.inlineSources": {
-    "message": "Include source code in the sourcemaps inside the emitted JavaScript.",
+    "message": "在发出的 JavaScript 内的 SourceMaps 中包含源代码。",
     "link": " https://www.typescriptlang.org/tsconfig#inlineSources"
   },
   "ts-node.compilerOptions.jsx": {
-    "message": "Specify what JSX code is generated."
+    "message": "指定生成的 JSX 代码。"
   },
   "ts-node.compilerOptions.reactNamespace": {
-    "message": "Specify the object invoked for `createElement`. This only applies when targeting `react` JSX emit.",
+    "message": "指定为“createElement ”调用的对象。这仅适用于以“REACT ”JSX EMIT 为目标时。",
     "link": " https://www.typescriptlang.org/tsconfig#reactNamespace"
   },
   "ts-node.compilerOptions.jsxFactory": {
-    "message": "Specify the JSX factory function used when targeting React JSX emit, e.g. 'React.createElement' or 'h'.",
+    "message": "指定以 React JSX Emit 为目标时使用的 JSX 工厂函数，例如' react.createElement '或' H '。",
     "link": " https://www.typescriptlang.org/tsconfig#jsxFactory"
   },
   "ts-node.compilerOptions.jsxFragmentFactory": {
-    "message": "Specify the JSX Fragment reference used for fragments when targeting React JSX emit e.g. 'React.Fragment' or 'Fragment'.",
+    "message": "指定以 React JSX Emit 为目标时用于片段的 JSX 片段引用，例如' react.fragment '或' fragment '。",
     "link": " https://www.typescriptlang.org/tsconfig#jsxFragmentFactory"
   },
   "ts-node.compilerOptions.jsxImportSource": {
-    "message": "Specify module specifier used to import the JSX factory functions when using `jsx: react-jsx`.",
+    "message": "使用 `jsx：react-jsx` 时，指定用于导入 JSX 工厂函数的模块说明符。",
     "link": " https://www.typescriptlang.org/tsconfig#jsxImportSource"
   },
   "ts-node.compilerOptions.listFiles": {
-    "message": "Print all of the files read during the compilation.",
+    "message": "打印编译期间读取的所有文件。",
     "link": " https://www.typescriptlang.org/tsconfig#listFiles"
   },
   "ts-node.compilerOptions.mapRoot": {
-    "message": "Specify the location where debugger should locate map files instead of generated locations.",
+    "message": "指定调试器应查找映射文件的位置，而不是生成的位置。",
     "link": " https://www.typescriptlang.org/tsconfig#mapRoot"
   },
   "ts-node.compilerOptions.module": {
-    "message": "Specify what module code is generated.",
+    "message": "指定生成的模块代码。",
     "link": " https://www.typescriptlang.org/tsconfig#module"
   },
   "ts-node.compilerOptions.moduleDetection": {
-    "message": "Control what method is used to detect the whether a JS file is a module."
+    "message": "控制用什么方式检测一个 JS 文件是否为模块。"
   },
   "ts-node.compilerOptions.moduleResolution": {
-    "message": "Specify how TypeScript looks up a file from a given module specifier.",
+    "message": "指定 TypeScript 如何从给定的模块说明符查找文件。",
     "link": " https://www.typescriptlang.org/tsconfig#moduleResolution"
   },
   "ts-node.compilerOptions.moduleSuffixes": {
-    "message": "List of file name suffixes to search when resolving a module.",
+    "message": "解析模块时要搜索的文件名后缀的列表。",
     "link": " https://www.typescriptlang.org/tsconfig#moduleSuffixes"
   },
   "ts-node.compilerOptions.newLine": {
-    "message": "Set the newline character for emitting files.",
+    "message": "设置发射文件的换行符。",
     "link": " https://www.typescriptlang.org/tsconfig#newLine"
   },
   "ts-node.compilerOptions.noEmit": {
-    "message": "Disable emitting files from a compilation.",
+    "message": "禁止从编译中发出文件。",
     "link": " https://www.typescriptlang.org/tsconfig#noEmit"
   },
   "ts-node.compilerOptions.noEmitHelpers": {
-    "message": "Disable generating custom helper functions like `extends` in compiled output.",
+    "message": "禁止在编译输出中生成自定义辅助函数，如“扩展”。",
     "link": " https://www.typescriptlang.org/tsconfig#noEmitHelpers"
   },
   "ts-node.compilerOptions.noEmitOnError": {
-    "message": "Disable emitting files if any type checking errors are reported.",
+    "message": "如果报告了任何类型检查错误，则禁用发出文件。",
     "link": " https://www.typescriptlang.org/tsconfig#noEmitOnError"
   },
   "ts-node.compilerOptions.noImplicitAny": {
-    "message": "Enable error reporting for expressions and declarations with an implied `any` type.",
+    "message": "为隐含“任何”类型的表达式和声明启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitAny"
   },
   "ts-node.compilerOptions.noImplicitThis": {
-    "message": "Enable error reporting when `this` is given the type `any`.",
+    "message": "当给定“this ”的类型为“any ”时，启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitThis"
   },
   "ts-node.compilerOptions.noUnusedLocals": {
-    "message": "Enable error reporting when local variables aren't read.",
+    "message": "未读取局部变量时启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noUnusedLocals"
   },
   "ts-node.compilerOptions.noUnusedParameters": {
-    "message": "Raise an error when a function parameter isn't read.",
+    "message": "未读取函数参数时引发错误。",
     "link": " https://www.typescriptlang.org/tsconfig#noUnusedParameters"
   },
   "ts-node.compilerOptions.noLib": {
-    "message": "Disable including any library files, including the default lib.d.ts.",
+    "message": "禁止包括任何库文件，包括默认的 lib.d.ts.",
     "link": " https://www.typescriptlang.org/tsconfig#noLib"
   },
   "ts-node.compilerOptions.noResolve": {
-    "message": "Disallow `import`s, `require`s or `<reference>`s from expanding the number of files TypeScript should add to a project.",
+    "message": "禁止“import ”、“require ”或“<reference>'s ”扩展 TypeScript 应添加到项目中的文件数量。",
     "link": " https://www.typescriptlang.org/tsconfig#noResolve"
   },
   "ts-node.compilerOptions.noStrictGenericChecks": {
-    "message": "Disable strict checking of generic signatures in function types.",
+    "message": "在函数类型中禁用对泛型签名的严格检查。",
     "link": " https://www.typescriptlang.org/tsconfig#noStrictGenericChecks"
   },
   "ts-node.compilerOptions.skipDefaultLibCheck": {
-    "message": "Skip type checking .d.ts files that are included with TypeScript.",
+    "message": "跳过 TypeScript 附带的.d.ts 文件的类型检查。",
     "link": " https://www.typescriptlang.org/tsconfig#skipDefaultLibCheck"
   },
   "ts-node.compilerOptions.skipLibCheck": {
-    "message": "Skip type checking all .d.ts files.",
+    "message": "跳过对所有.d.ts 文件的类型检查。",
     "link": " https://www.typescriptlang.org/tsconfig#skipLibCheck"
   },
   "ts-node.compilerOptions.outFile": {
-    "message": "Specify a file that bundles all outputs into one JavaScript file. If `declaration` is true, also designates a file that bundles all .d.ts output.",
+    "message": "指定将所有输出捆绑到一个 JavaScript 文件中的文件。如果“declaration ”为 true，则还指定捆绑所有.d.ts 输出的文件。",
     "link": " https://www.typescriptlang.org/tsconfig#outFile"
   },
   "ts-node.compilerOptions.outDir": {
-    "message": "Specify an output folder for all emitted files.",
+    "message": "为所有发出的文件指定输出文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#outDir"
   },
   "ts-node.compilerOptions.preserveConstEnums": {
-    "message": "Disable erasing `const enum` declarations in generated code.",
+    "message": "在生成的代码中禁用删除“const num ”声明。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveConstEnums"
   },
   "ts-node.compilerOptions.preserveSymlinks": {
-    "message": "Disable resolving symlinks to their realpath. This correlates to the same flag in node.",
+    "message": "禁用将符号链接解析到其 realpath.这与节点中的相同标志相关。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveSymlinks"
   },
   "ts-node.compilerOptions.preserveValueImports": {
-    "message": "Preserve unused imported values in the JavaScript output that would otherwise be removed.",
+    "message": "在 JavaScript 输出中保留未使用的导入值，否则这些值将被删除。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveValueImports"
   },
   "ts-node.compilerOptions.preserveWatchOutput": {
-    "message": "Disable wiping the console in watch mode.",
+    "message": "在“监视”模式下禁用擦除控制台。",
     "link": " https://www.typescriptlang.org/tsconfig#preserveWatchOutput"
   },
   "ts-node.compilerOptions.pretty": {
-    "message": "Use pretty diagnostic formatter."
+    "message": "使用漂亮的诊断格式化程序。"
   },
   "ts-node.compilerOptions.removeComments": {
-    "message": "Disable emitting comments.",
+    "message": "禁用发出注释。",
     "link": " https://www.typescriptlang.org/tsconfig#removeComments"
   },
   "ts-node.compilerOptions.rootDir": {
-    "message": "Specify the root folder within your source files.",
+    "message": "指定源文件中的根文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#rootDir"
   },
   "ts-node.compilerOptions.isolatedModules": {
-    "message": "Ensure that each file can be safely transpiled without relying on other imports.",
+    "message": "确保每个文件都可以安全地传输，而不依赖于其他导入。",
     "link": " https://www.typescriptlang.org/tsconfig#isolatedModules"
   },
   "ts-node.compilerOptions.sourceMap": {
-    "message": "Create source map files for emitted JavaScript files.",
+    "message": "为发出的 JavaScript 文件创建源映射文件。",
     "link": " https://www.typescriptlang.org/tsconfig#sourceMap"
   },
   "ts-node.compilerOptions.sourceRoot": {
-    "message": "Specify the root path for debuggers to find the reference source code.",
+    "message": "指定调试器查找引用源代码的根路径。",
     "link": " https://www.typescriptlang.org/tsconfig#sourceRoot"
   },
   "ts-node.compilerOptions.suppressExcessPropertyErrors": {
-    "message": "Disable reporting of excess property errors during the creation of object literals.",
+    "message": "禁止在创建对象文本期间报告过多的属性错误。",
     "link": " https://www.typescriptlang.org/tsconfig#suppressExcessPropertyErrors"
   },
   "ts-node.compilerOptions.suppressImplicitAnyIndexErrors": {
-    "message": "Suppress `noImplicitAny` errors when indexing objects that lack index signatures.",
+    "message": "为缺少索引签名的对象编制索引时隐藏“noimplicitany ”错误。",
     "link": " https://www.typescriptlang.org/tsconfig#suppressImplicitAnyIndexErrors"
   },
   "ts-node.compilerOptions.stripInternal": {
-    "message": "Disable emitting declarations that have `@internal` in their JSDoc comments.",
+    "message": "禁用在其 JSDoc 注释中包含“@internal ”的发出声明。",
     "link": " https://www.typescriptlang.org/tsconfig#stripInternal"
   },
   "ts-node.compilerOptions.target": {
-    "message": "Set the JavaScript language version for emitted JavaScript and include compatible library declarations.",
+    "message": "为发出的 JavaScript 设置 JavaScript 语言版本，并包含兼容的库声明。",
     "link": " https://www.typescriptlang.org/tsconfig#target"
   },
   "ts-node.compilerOptions.useUnknownInCatchVariables": {
-    "message": "Default catch clause variables as `unknown` instead of `any`.",
+    "message": "默认 catch 子句变量为“unknown ”而不是“any ”。",
     "link": " https://www.typescriptlang.org/tsconfig#useUnknownInCatchVariables"
   },
   "ts-node.compilerOptions.experimentalDecorators": {
-    "message": "Enable experimental support for TC39 stage 2 draft decorators.",
+    "message": "启用对 TC39 阶段 2 草稿修饰符的实验性支持。",
     "link": " https://www.typescriptlang.org/tsconfig#experimentalDecorators"
   },
   "ts-node.compilerOptions.emitDecoratorMetadata": {
-    "message": "Emit design-type metadata for decorated declarations in source files.",
+    "message": "为源文件中的修饰声明发出设计类型元数据。",
     "link": " https://www.typescriptlang.org/tsconfig#emitDecoratorMetadata"
   },
   "ts-node.compilerOptions.allowUnusedLabels": {
-    "message": "Disable error reporting for unused labels.",
+    "message": "禁用未使用标签的错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#allowUnusedLabels"
   },
   "ts-node.compilerOptions.noImplicitReturns": {
-    "message": "Enable error reporting for codepaths that do not explicitly return in a function.",
+    "message": "为未在函数中显式返回的代码路径启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitReturns"
   },
   "ts-node.compilerOptions.noUncheckedIndexedAccess": {
-    "message": "Add `undefined` to a type when accessed using an index.",
+    "message": "使用索引访问时，将“undefined ”添加到类型中。",
     "link": " https://www.typescriptlang.org/tsconfig#noUncheckedIndexedAccess"
   },
   "ts-node.compilerOptions.noFallthroughCasesInSwitch": {
-    "message": "Enable error reporting for fallthrough cases in switch statements.",
+    "message": "为 switch 语句中的故障情况启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#noFallthroughCasesInSwitch"
   },
   "ts-node.compilerOptions.noImplicitOverride": {
-    "message": "Ensure overriding members in derived classes are marked with an override modifier.",
+    "message": "确保用 override 修饰符标记派生类中的重写成员。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitOverride"
   },
   "ts-node.compilerOptions.allowUnreachableCode": {
-    "message": "Disable error reporting for unreachable code.",
+    "message": "对无法访问的代码禁用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#allowUnreachableCode"
   },
   "ts-node.compilerOptions.forceConsistentCasingInFileNames": {
-    "message": "Ensure that casing is correct in imports.",
+    "message": "确保进口套管正确。",
     "link": " https://www.typescriptlang.org/tsconfig#forceConsistentCasingInFileNames"
   },
   "ts-node.compilerOptions.generateCpuProfile": {
-    "message": "Emit a v8 CPU profile of the compiler run for debugging.",
+    "message": "发出编译器运行的 V8 CPU 配置文件以进行调试。",
     "link": " https://www.typescriptlang.org/tsconfig#generateCpuProfile"
   },
   "ts-node.compilerOptions.baseUrl": {
-    "message": "Specify the base directory to resolve non-relative module names.",
+    "message": "指定用于解析非相对模块名称的基目录。",
     "link": " https://www.typescriptlang.org/tsconfig#baseUrl"
   },
   "ts-node.compilerOptions.paths": {
-    "message": "Specify a set of entries that re-map imports to additional lookup locations.",
+    "message": "指定将导入重新映射到其他查找位置的一组条目。",
     "link": " https://www.typescriptlang.org/tsconfig#paths"
   },
   "ts-node.compilerOptions.plugins": {
-    "message": "Specify a list of language service plugins to include.",
+    "message": "指定要包含的语言服务插件的列表。",
     "link": " https://www.typescriptlang.org/tsconfig#plugins"
   },
   "ts-node.compilerOptions.rootDirs": {
-    "message": "Allow multiple folders to be treated as one when resolving modules.",
+    "message": "允许在解析模块时将多个文件夹视为一个文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#rootDirs"
   },
   "ts-node.compilerOptions.typeRoots": {
-    "message": "Specify multiple folders that act like `./node_modules/@types`.",
+    "message": "指定多个类似于“./node_ 模块/@types ”的文件夹。",
     "link": " https://www.typescriptlang.org/tsconfig#typeRoots"
   },
   "ts-node.compilerOptions.types": {
-    "message": "Specify type package names to be included without being referenced in a source file.",
+    "message": "指定要在源文件中包含但不引用的类型包名称。",
     "link": " https://www.typescriptlang.org/tsconfig#types"
   },
   "ts-node.compilerOptions.traceResolution": {
-    "message": "Enable tracing of the name resolution process. Requires TypeScript version 2.0 or later."
+    "message": "启用名称解析过程的跟踪。需要 TypeScript 2.0 或更高版本。"
   },
   "ts-node.compilerOptions.allowJs": {
-    "message": "Allow JavaScript files to be a part of your program. Use the `checkJS` option to get errors from these files.",
+    "message": "允许 JavaScript 文件成为程序的一部分。使用“checkjs ”选项从这些文件中获取错误。",
     "link": " https://www.typescriptlang.org/tsconfig#allowJs"
   },
   "ts-node.compilerOptions.noErrorTruncation": {
-    "message": "Disable truncating types in error messages.",
+    "message": "在错误消息中禁用截断类型。",
     "link": " https://www.typescriptlang.org/tsconfig#noErrorTruncation"
   },
   "ts-node.compilerOptions.allowSyntheticDefaultImports": {
-    "message": "Allow 'import x from y' when a module doesn't have a default export.",
+    "message": "当模块没有默认导出时，允许“从 Y 导入 X ”。",
     "link": " https://www.typescriptlang.org/tsconfig#allowSyntheticDefaultImports"
   },
   "ts-node.compilerOptions.noImplicitUseStrict": {
-    "message": "Disable adding 'use strict' directives in emitted JavaScript files.",
+    "message": "禁止在发出的 JavaScript 文件中添加“使用严格”指令。",
     "link": " https://www.typescriptlang.org/tsconfig#noImplicitUseStrict"
   },
   "ts-node.compilerOptions.listEmittedFiles": {
-    "message": "Print the names of emitted files after a compilation.",
+    "message": "在编译后打印发出的文件的名称。",
     "link": " https://www.typescriptlang.org/tsconfig#listEmittedFiles"
   },
   "ts-node.compilerOptions.disableSizeLimit": {
-    "message": "Remove the 20mb cap on total source code size for JavaScript files in the TypeScript language server.",
+    "message": "删除 TypeScript 语言服务器中 JavaScript 文件的总源代码大小的 20MB 上限。",
     "link": " https://www.typescriptlang.org/tsconfig#disableSizeLimit"
   },
   "ts-node.compilerOptions.lib": {
-    "message": "Specify a set of bundled library declaration files that describe the target runtime environment.",
+    "message": "指定一组描述目标运行时环境的捆绑库声明文件。",
     "link": " https://www.typescriptlang.org/tsconfig#lib"
   },
   "ts-node.compilerOptions.strictNullChecks": {
-    "message": "When type checking, take into account `null` and `undefined`.",
+    "message": "检查类型时，请考虑“null ”和“undefined ”。",
     "link": " https://www.typescriptlang.org/tsconfig#strictNullChecks"
   },
   "ts-node.compilerOptions.maxNodeModuleJsDepth": {
-    "message": "Specify the maximum folder depth used for checking JavaScript files from `node_modules`. Only applicable with `allowJs`.",
+    "message": "指定用于从“节点 _ 模块”检查 JavaScript 文件的最大文件夹深度。仅适用于“allowjs ”。",
     "link": " https://www.typescriptlang.org/tsconfig#maxNodeModuleJsDepth"
   },
   "ts-node.compilerOptions.importHelpers": {
-    "message": "Allow importing helper functions from tslib once per project, instead of including them per-file.",
+    "message": "允许在每个项目中从 TSLIB 导入一次帮助程序函数，而不是在每个文件中包含它们。",
     "link": " https://www.typescriptlang.org/tsconfig#importHelpers"
   },
   "ts-node.compilerOptions.importsNotUsedAsValues": {
-    "message": "Specify emit/checking behavior for imports that are only used for types."
+    "message": "为仅用于类型的导入指定发出/检查行为。"
   },
   "ts-node.compilerOptions.alwaysStrict": {
-    "message": "Ensure 'use strict' is always emitted.",
+    "message": "确保始终发出“use strict ”。",
     "link": " https://www.typescriptlang.org/tsconfig#alwaysStrict"
   },
   "ts-node.compilerOptions.strict": {
-    "message": "Enable all strict type-checking options.",
+    "message": "启用所有严格类型检查选项。",
     "link": " https://www.typescriptlang.org/tsconfig#strict"
   },
   "ts-node.compilerOptions.strictBindCallApply": {
-    "message": "Check that the arguments for `bind`, `call`, and `apply` methods match the original function.",
+    "message": "检查“bind ”、“call ”和“apply ”方法的参数是否与原始函数匹配。",
     "link": " https://www.typescriptlang.org/tsconfig#strictBindCallApply"
   },
   "ts-node.compilerOptions.downlevelIteration": {
-    "message": "Emit more compliant, but verbose and less performant JavaScript for iteration.",
+    "message": "为迭代生成更兼容，但冗长且性能较低的 JavaScript.",
     "link": " https://www.typescriptlang.org/tsconfig#downlevelIteration"
   },
   "ts-node.compilerOptions.checkJs": {
-    "message": "Enable error reporting in type-checked JavaScript files.",
+    "message": "在类型检查的 JavaScript 文件中启用错误报告。",
     "link": " https://www.typescriptlang.org/tsconfig#checkJs"
   },
   "ts-node.compilerOptions.strictFunctionTypes": {
-    "message": "When assigning functions, check to ensure parameters and the return values are subtype-compatible.",
+    "message": "分配函数时，请检查以确保参数和返回值是子类型兼容的。",
     "link": " https://www.typescriptlang.org/tsconfig#strictFunctionTypes"
   },
   "ts-node.compilerOptions.strictPropertyInitialization": {
-    "message": "Check for class properties that are declared but not set in the constructor.",
+    "message": "检查已声明但未在构造函数中设置的类属性。",
     "link": " https://www.typescriptlang.org/tsconfig#strictPropertyInitialization"
   },
   "ts-node.compilerOptions.esModuleInterop": {
-    "message": "Emit additional JavaScript to ease support for importing CommonJS modules. This enables `allowSyntheticDefaultImports` for type compatibility.",
+    "message": "发出额外的 JavaScript 以简化对导入 CommonJS 模块的支持。这将为类型兼容性启用“AllowSyntheticDefaultImports ”。",
     "link": " https://www.typescriptlang.org/tsconfig#esModuleInterop"
   },
   "ts-node.compilerOptions.allowUmdGlobalAccess": {
-    "message": "Allow accessing UMD globals from modules.",
+    "message": "允许从模块访问 UMD 全局变量。",
     "link": " https://www.typescriptlang.org/tsconfig#allowUmdGlobalAccess"
   },
   "ts-node.compilerOptions.keyofStringsOnly": {
-    "message": "Make keyof only return strings instead of string, numbers or symbols. Legacy option.",
+    "message": "使 KeyOf 只返回字符串，而不是字符串、数字或符号。传统选项。",
     "link": " https://www.typescriptlang.org/tsconfig#keyofStringsOnly"
   },
   "ts-node.compilerOptions.useDefineForClassFields": {
-    "message": "Emit ECMAScript-standard-compliant class fields.",
+    "message": "发出符合 ECMAScript 标准的类字段。",
     "link": " https://www.typescriptlang.org/tsconfig#useDefineForClassFields"
   },
   "ts-node.compilerOptions.declarationMap": {
-    "message": "Create sourcemaps for d.ts files.",
+    "message": "为 D.TS 文件创建源映射。",
     "link": " https://www.typescriptlang.org/tsconfig#declarationMap"
   },
   "ts-node.compilerOptions.resolveJsonModule": {
-    "message": "Enable importing .json files.",
+    "message": "启用导入.JSON 文件。",
     "link": " https://www.typescriptlang.org/tsconfig#resolveJsonModule"
   },
   "ts-node.compilerOptions.resolvePackageJsonExports": {
-    "message": "Use the package.json 'exports' field when resolving package imports.",
+    "message": "解析包导入时使用 package.JSON “exports ”字段。",
     "link": " https://www.typescriptlang.org/tsconfig#resolvePackageJsonExports"
   },
   "ts-node.compilerOptions.resolvePackageJsonImports": {
-    "message": "Use the package.json 'imports' field when resolving imports.",
+    "message": "解析导入时使用 package.JSON ' Imports '字段。",
     "link": " https://www.typescriptlang.org/tsconfig#resolvePackageJsonImports"
   },
   "ts-node.compilerOptions.verbatimModuleSyntax": {
-    "message": "Do not transform or elide any imports or exports not marked as type-only, ensuring they are written in the output file's format based on the 'module' setting.",
+    "message": "不要转换或忽略任何未标记为仅类型的导入或导出，确保根据“模块”设置以输出文件的格式写入它们。",
     "link": " https://www.typescriptlang.org/tsconfig#verbatimModuleSyntax"
   },
   "ts-node.compilerOptions.assumeChangesOnlyAffectDirectDependencies": {
-    "message": "Have recompiles in '--incremental' and '--watch' assume that changes within a file will only affect files directly depending on it. Requires TypeScript version 3.8 or later."
+    "message": "在“--incremental ”和“--watch ”中重新编译时，假设文件中的更改只会影响直接依赖于它的文件。需要 TypeScript 3.8 或更高版本。"
   },
   "ts-node.compilerOptions.extendedDiagnostics": {
-    "message": "Output more detailed compiler performance information after building.",
+    "message": "生成后输出更详细的编译器性能信息。",
     "link": " https://www.typescriptlang.org/tsconfig#extendedDiagnostics"
   },
   "ts-node.compilerOptions.disableSourceOfProjectReferenceRedirect": {
-    "message": "Disable preferring source files instead of declaration files when referencing composite projects.",
+    "message": "禁止在引用复合项目时首选源文件而不是声明文件。",
     "link": " https://www.typescriptlang.org/tsconfig#disableSourceOfProjectReferenceRedirect"
   },
   "ts-node.compilerOptions.disableSolutionSearching": {
-    "message": "Opt a project out of multi-project reference checking when editing.",
+    "message": "编辑时将项目从多项目引用检查中选择出来。",
     "link": " https://www.typescriptlang.org/tsconfig#disableSolutionSearching"
   },
   "ts-node.compilerOptions": {
-    "message": "Instructs the TypeScript compiler how to compile .ts files."
+    "message": "指示 TypeScript 编译器如何编译.ts 文件。"
   },
   "ts-node.compilerOptions.emit": {
-    "message": "Emit output files into `.ts-node` directory."
+    "message": "将输出文件发送到“.ts-node ”目录。"
   },
   "ts-node.compilerOptions.experimentalReplAwait": {
-    "message": "Allows the usage of top level await in REPL.\n\nUses node's implementation which accomplishes this with an AST syntax transformation.\n\nEnabled by default when tsconfig target is es2018 or above. Set to false to disable.\n\n**Note**: setting to `true` when tsconfig target is too low will throw an Error.  Leave as `undefined`\nto get default, automatic behavior."
+    "message": "允许在 REPL 中使用顶级等待。\n\n使用 Node 的实现，该实现通过 AST 语法转换来实现这一点。\n\n当 tsconfig 目标为 ES2018 或更高版本时，默认启用。设置为 false 以禁用。\n\n** 注意 **：当 tsconfig 目标太低时，设置为“true ”将引发错误。保留为“未定义”\n以获得默认的自动行为。"
   },
   "ts-node.compilerOptions.files": {
-    "message": "Load \"files\" and \"include\" from `tsconfig.json` on startup.\n\nDefault is to override `tsconfig.json` \"files\" and \"include\" to only include the entrypoint script."
+    "message": "启动时从“tsconfig.JSON ”加载“files ”和“include ”。\n\n默认设置是覆盖“tsconfig.JSON ”“files ”和“include ”以仅包含入口点脚本。"
   },
   "ts-node.compilerOptions.ignore": {
-    "message": "Paths which should not be compiled.\n\nEach string in the array is converted to a regular expression via `new RegExp()` and tested against source paths prior to compilation.\n\nSource paths are normalized to posix-style separators, relative to the directory containing `tsconfig.json` or to cwd if no `tsconfig.json` is loaded.\n\nDefault is to ignore all node_modules subdirectories."
+    "message": "不应编译的路径。\n\n数组中的每个字符串都通过“new regexp（）”转换为正则表达式，并在编译之前针对源路径进行测试。\n\n源路径被规范化为 POSIX 样式的分隔符，相对于包含“tsconfig.JSON ”的目录，或者相对于 CWD（如果未加载“tsconfig.JSON ”）。\n\n默认设置是忽略所有节点 _ 模块子目录。"
   },
   "ts-node.compilerOptions.ignoreDiagnostics": {
-    "message": "Ignore TypeScript warnings by diagnostic code."
+    "message": "忽略诊断代码发出的 TypeScript 警告。"
   },
   "ts-node.compilerOptions.logError": {
-    "message": "Logs TypeScript errors to stderr instead of throwing exceptions."
+    "message": "将 TypeScript 错误记录到 stderr，而不是引发异常。"
   },
   "ts-node.compilerOptions.moduleTypes": {
-    "message": "Override certain paths to be compiled and executed as CommonJS or ECMAScript modules.\nWhen overridden, the tsconfig \"module\" and package.json \"type\" fields are overridden.\nThis is useful because TypeScript files cannot use the .cjs nor .mjs file extensions;\nit achieves the same effect.\n\nEach key is a glob pattern following the same rules as tsconfig's \"include\" array.\nWhen multiple patterns match the same file, the last pattern takes precedence.\n\n`cjs` overrides matches files to compile and execute as CommonJS.\n`esm` overrides matches files to compile and execute as native ECMAScript modules.\n`package` overrides either of the above to default behavior, which obeys package.json \"type\" and\ntsconfig.json \"module\" options."
+    "message": "覆盖要作为 CommonJS 或 ECMAScript 模块编译和执行的某些路径。\n当被覆盖时，tsconfig “module ”和 package.JSON “type ”字段将被覆盖。\n这很有用，因为 TypeScript 文件不能使用.cjs 或.mjs 文件扩展名。\n达到了同样的效果。\n\n每个键都是一个 glob 模式，遵循与 tsconfig 的“include ”数组相同的规则。\n当多个模式与同一文件匹配时，最后一个模式优先。\n\n“CJS ”覆盖匹配文件以作为 CommonJS 编译和执行。\n“ESM ”覆盖匹配文件，以作为本机 ECMAScript 模块进行编译和执行。\n“package ”将上述任何一项覆盖为默认行为，默认行为遵循 package.JSON “type ”和\ntsconfig.JSON “模块”选项。"
   },
   "ts-node.compilerOptions.preferTsExts": {
-    "message": "Re-order file extensions so that TypeScript imports are preferred.\n\nFor example, when both `index.js` and `index.ts` exist, enabling this option causes `require('./index')` to resolve to `index.ts` instead of `index.js`"
+    "message": "重新排序文件扩展名，以便优先使用 TypeScript 导入。\n\n例如，当“index.JS ”和“index.ts ”都存在时，启用此选项会导致“require（'./index '）”解析为“index.ts ”，而不是“Index.JS ”"
   },
   "ts-node.compilerOptions.require": {
-    "message": "Modules to require, like node's `--require` flag.\n\nIf specified in `tsconfig.json`, the modules will be resolved relative to the `tsconfig.json` file.\n\nIf specified programmatically, each input string should be pre-resolved to an absolute path for\nbest results."
+    "message": "需要的模块，如节点的“--require ”标志。\n\n如果在“tsconfig.JSON ”中指定，则将相对于“tsconfig.JSON ”文件解析模块。\n\n如果以编程方式指定，则每个输入字符串都应预先解析为\n最好的结果。"
   },
   "ts-node.compilerOptions.scope": {
-    "message": "Scope compiler to files within `scopeDir`."
+    "message": "将编译器作用域设置为“scopedir ”中的文件。"
   },
   "ts-node.compilerOptions.scopeDir": {},
   "ts-node.compilerOptions.skipIgnore": {
-    "message": "Skip ignore check, so that compilation will be attempted for all files with matching extensions."
+    "message": "跳过忽略检查，以便尝试编译具有匹配扩展名的所有文件。"
   },
   "ts-node.compilerOptions.transpileOnly": {
-    "message": "Use TypeScript's faster `transpileModule`."
+    "message": "使用 TypeScript 更快的“转换模式”。"
   },
   "ts-node.compilerOptions.transpiler": {
-    "message": "Specify a custom transpiler for use with transpileOnly"
+    "message": "指定用于 TranspileOnly 的自定义 Transpiler"
   },
   "ts-node.compilerOptions.typeCheck": {
-    "message": "**DEPRECATED** Specify type-check is enabled (e.g. `transpileOnly == false`)."
+    "message": "** 不建议使用 ** 指定启用类型检查（例如 `transpileonly==false`）。"
   },
   "ts-node": {
-    "message": "ts-node options.  See also: https://typestrong.org/ts-node/docs/configuration\n\nts-node offers TypeScript execution and REPL for node.js, with source map support."
+    "message": "TS-节点选项。另请参阅：https：//typestrong.org/ts-node/docs/configuration.\n\nTS-Node 为 Node.JS 提供 TypeScript 执行和 REPL，并提供源映射支持。"
   }
 }

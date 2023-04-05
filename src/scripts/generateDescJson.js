@@ -1,6 +1,8 @@
-const schema = require('./_tsconfig.json')
+const schema = require('../schema/_tsconfig.json')
 const fs = require('fs')
 const path = require('path')
+
+const markdownDescLink = /\\n\\nSee\smore\:.*/g
 
 function parsePath(path, splitter) {
   if (splitter === void 0) {
@@ -33,9 +35,18 @@ function getOptions(rawData, map = Object.create(null), keys = []) {
     }
     let flatKeys = [...new Set([...tempKeys, key])].join('.')
     // https://github.com/microsoft/TypeScript-Website/blob/v2/packages/tsconfig-reference/scripts/schema/result/schema.json
+    let markdownDesc = rawData[key].markdownDescription
+
+    let link
+    if (markdownDesc) {
+      markdownDesc = markdownDesc.replace(/\n\nSee\smore\:(.*)/, (all, l) => {
+        link = l
+        return ''
+      })
+    }
     map[flatKeys] = {
-      message: rawData[key].markdownDescription || rawData[key].description,
-      link: ''
+      message: markdownDesc || rawData[key].description,
+      link: link
     }
   })
   return map
