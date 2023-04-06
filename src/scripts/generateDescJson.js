@@ -2,8 +2,6 @@ const schema = require('../schema/_tsconfig.json')
 const fs = require('fs')
 const path = require('path')
 
-const markdownDescLink = /\\n\\nSee\smore\:.*/g
-
 function parsePath(path, splitter) {
   if (splitter === void 0) {
     splitter = '.'
@@ -39,13 +37,11 @@ function getOptions(rawData, map = Object.create(null), keys = []) {
 
     let link
     if (markdownDesc) {
-      markdownDesc = markdownDesc.replace(/\n\nSee\smore\:(.*)/, (all, l) => {
-        link = l
-        return ''
-      })
+      let res = markdownDesc.split('https')
+      link = res[1] ? `https${res[1]}` : ''
     }
     map[flatKeys] = {
-      message: markdownDesc || rawData[key].description,
+      message: rawData[key].description,
       link: link
     }
   })

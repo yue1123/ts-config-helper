@@ -11,8 +11,8 @@ export default defineStore(RUN_TIME, {
     }
   },
   actions: {
-    resetHitKeysMap(store: any) {
-      store.searchHitKeysMap = null
+    resetHitKeysMap(store: any, value: null | Record<string, boolean>) {
+      store.searchHitKeysMap = value
     }
   }
 })

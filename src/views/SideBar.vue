@@ -4,37 +4,106 @@ import { useProperty } from '@hooks'
 import useRuntimeStore from '@store/runtime'
 import { debounce } from '../utils'
 import OptionsCheckbox from './OptionsCheckbox.vue'
-import { BIconFilterSquare } from 'bootstrap-icons-vue'
-import { commonConfigurationMap } from '@constants'
-import { ref } from 'vue'
+import { BIconFilterRight, BIconLightningFill, BIconGrid } from 'bootstrap-icons-vue'
+import { filterMap } from '@constants'
+import { ref, type Component, h } from 'vue'
+import type { FilterKey } from '@types'
 
-const { property, allFlatPropertyKeys } = useProperty()
+const { property, filter, allFlatPropertyKeys } = useProperty()
 const runtimeStore = useRuntimeStore()
 
-const activeFilter = ref<string>('AllConfiguration')
-const filterLabelMap = {
-  AllConfiguration: '所有配置项',
-  CommonConfiguration: '常用配置项',
-  TypeChecking: '类型检查相关配置'
+const activeFilter = ref<FilterKey>('All')
+const filterLabelMap: Record<FilterKey, string> = {
+  All: '所有配置项',
+  common: '常用配置项',
+  typeChecking: '类型检查相关配置',
+  modules: '模块相关配置',
+  emit: '类型生成相关配置',
+  javaScriptSupport: 'Javascript 支持相关配置',
+  editorSupport: '编辑器支持相关配置',
+  interopConstraints: '互操作约束相关配置',
+  backwardsCompatibility: '兼容性相关配置',
+  languageEnvironment: '语言与环境相关配置',
+  compilerDiagnostics: '编译器诊断相关配置',
+  projects: '工程化相关配置',
+  outputFormatting: '输出格式相关配置',
+  completeness: '完整性相关配置'
+}
+
+const renderIcon = (icon: Component) => {
+  return () => h(icon, null)
 }
 const filterOptions: DropdownOption[] = [
   {
     label: '所有配置项',
-    key: 'AllConfiguration'
+    key: 'All',
+    icon: renderIcon(BIconGrid)
   },
   {
     label: '常用配置项',
-    key: 'CommonConfiguration'
+    key: 'common',
+    icon: renderIcon(BIconLightningFill)
   },
   {
     type: 'divider'
   },
   {
-    disabled: true,
     label: '类型检查相关配置',
-    key: 'TypeChecking'
+    key: 'typeChecking',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '模块相关配置',
+    key: 'modules',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '类型生成相关配置',
+    key: 'emit',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: 'Javascript 支持相关配置',
+    key: 'javaScriptSupport',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '编辑器支持相关配置',
+    key: 'editorSupport',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '互操作约束相关配置',
+    key: 'interopConstraints',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '兼容性相关配置',
+    key: 'backwardsCompatibility',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '语言与环境相关配置',
+    key: 'languageEnvironment',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '工程化相关配置',
+    key: 'projects',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '输出格式相关配置',
+    key: 'outputFormatting',
+    icon: renderIcon(BIconLightningFill)
+  },
+  {
+    label: '完整性相关配置',
+    key: 'completeness',
+    icon: renderIcon(BIconLightningFill)
   }
 ]
+
 const handleSearch = debounce((searchKeyword: string) => {
   // runtimeStore
   let obj = Object.create(null)
@@ -46,11 +115,18 @@ const handleSearch = debounce((searchKeyword: string) => {
     }
     runtimeStore.searchHitKeysMap = obj
   } else {
-    runtimeStore.resetHitKeysMap(runtimeStore)
+    runtimeStore.resetHitKeysMap(runtimeStore, null)
   }
 }, 200)
-function handleChangeFilterType(type: string) {
+function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
+  if (type === 'All') {
+    filter(type, () => true)
+  } else {
+    filter(type, (item: any) => {
+      return (filterMap[type] as any)[item.key]
+    })
+  }
 }
 </script>
 <template>
@@ -70,7 +146,7 @@ function handleChangeFilterType(type: string) {
   <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
     <NSpace :size="15" vertical>
       <div class="flex justify-between items-center">
-        <span class="font-bold">{{ filterLabelMap[activeFilter] }}</span>
+        <span>{{ filterLabelMap[activeFilter] }}</span>
         <div>
           <NDropdown
             placement="bottom-end"
@@ -79,13 +155,18 @@ function handleChangeFilterType(type: string) {
             trigger="click"
             :options="filterOptions"
           >
-            <NButton strong tertiary>
-              <template #icon> <BIconFilterSquare /> </template
+            <NButton quaternary size="small">
+              <template #icon> <BIconFilterRight /> </template
             ></NButton>
           </NDropdown>
         </div>
       </div>
-      <NInput clear @input="handleSearch" :placeholder="$t('config.searchConfig')">
+      <NInput
+        :disabled="activeFilter !== 'All'"
+        clear
+        @input="handleSearch"
+        :placeholder="$t('config.searchConfig')"
+      >
         <template #suffix>
           <div
             :style="{

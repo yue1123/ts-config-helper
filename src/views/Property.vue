@@ -10,10 +10,13 @@ import {
   NSwitch,
   NInput,
   NSelect,
-  useMessage
+  useMessage,
+  NButton,
+  NInputNumber,
+  NTooltip
 } from 'naive-ui'
-
-import description from '@schema/description.json'
+import { BIconHash, BIconLink45deg } from 'bootstrap-icons-vue'
+import { descriptionMap } from '@schema'
 import KeyValuesInput from '@components/KeyValuesInput.vue'
 import ObjectInput from '@components/ObjectInput.vue'
 import MarkdownDesc from './MarkdownDesc.vue'
@@ -22,6 +25,7 @@ import useStore from '../store/data'
 import useSettingStore from '../store/setting'
 import type { Options } from '../types'
 import { type Component, h, ref } from 'vue'
+import { currentLang } from '@i18n'
 export interface Props {
   definition: any
   level: number
@@ -96,7 +100,32 @@ export default {
         :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
       >
         <div class="flex items-center space-x-4">
-          <span># {{ property.key }}</span>
+          <div class="flex items-center space-x-2">
+            <NButton size="small" text>
+              <template #icon>
+                <BIconHash />
+              </template>
+            </NButton>
+            <span>{{ property.key }}</span>
+          </div>
+          <NTooltip placement="right" trigger="hover">
+            <template #trigger>
+              <NButton
+                v-if="descriptionMap[currentLang][property.key].link"
+                text
+                tag="a"
+                :href="descriptionMap[currentLang][property.key].link"
+                target="_blank"
+                type="default"
+              >
+                <template #icon>
+                  <BIconLink45deg />
+                </template>
+              </NButton>
+            </template>
+            文档链接
+          </NTooltip>
+
           <Suspense>
             <MarkdownDesc :property="property.label" />
           </Suspense>
@@ -106,7 +135,7 @@ export default {
         {{ $t('defaultValue') }}: {{ property.default }}
       </div>
       <div v-if="settingStore.showDescription" class="text-gray-400 mb-2">
-        {{ description[property.key] }}
+        {{ descriptionMap[currentLang][property.key].message }}
       </div>
       <template key="array" v-if="getInputType(property) === 'array'">
         <div type="array" class="array_property-container">
@@ -153,6 +182,9 @@ export default {
           :data="store.rawConfig[property.key]"
           @update:data="(data) => (store.rawConfig[property.key] = data)"
         ></ObjectInput>
+      </template>
+      <template key="number" v-else-if="getInputType(property) === 'number'">
+        <NInputNumber v-model:value="store.rawConfig[property.key]" />
       </template>
       <template
         key="arrayButConvertWhenSingle"
