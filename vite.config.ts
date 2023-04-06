@@ -18,17 +18,31 @@ export default defineConfig({
       css: '.loading-text{margin-top:20px}',
       errorTip: 'Error occurred, It may be caused by cache, try to force refresh',
       onError() {
-        // @ts-ignore
-        const search = window.location.search
-        const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
-        // @ts-ignore
-        if (reloadNum < 3) window.location.search = `slt=${Date.now()}&slr=${reloadNum + 1}`
+        // // @ts-ignore
+        // const search = window.location.search
+        // const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
+        // // @ts-ignore
+        // if (reloadNum < 3) window.location.search = `slt=${Date.now()}&slr=${reloadNum + 1}`
       }
     }),
     visualizer({
       emitFile: true,
       filename: 'stats.html'
     })
+    // importToCDN({
+    //   modules: [
+    //     {
+    //       name: 'vue',
+    //       var: 'Vue',
+    //       path: `https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.runtime.global.prod.min.js`
+    //     },
+    //     {
+    //       name: 'naive-ui',
+    //       var: 'naive-ui',
+    //       path: `https://cdn.jsdelivr.net/npm/naive-ui@2.34.3/dist/index.prod.js`
+    //     }
+    //   ]
+    // })
   ],
   resolve: {
     alias: {
@@ -36,6 +50,7 @@ export default defineConfig({
       '@themeVars': resolve(__dirname, './src/styles/theme.module.scss'),
       '@layout': resolve(__dirname, './src/layout'),
       '@views': resolve(__dirname, './src/views'),
+      '@assets': resolve(__dirname, './src/assets'),
       '@components': join(__dirname, 'src/components/'),
       '@i18n': join(__dirname, 'src/i18n/'),
       '@utils': join(__dirname, 'src/utils/'),

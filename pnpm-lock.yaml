@@ -25,6 +25,7 @@ specifiers:
   json5: ^2.2.3
   jsonc-parser: ^3.2.0
   jsondiffpatch: ^0.4.1
+  just-diff: ^6.0.2
   markdown-it: ^13.0.1
   monaco-editor: ^0.36.1
   naive-ui: ^2.34.3
@@ -60,6 +61,7 @@ dependencies:
   json5: 2.2.3
   jsonc-parser: 3.2.0
   jsondiffpatch: 0.4.1
+  just-diff: 6.0.2
   markdown-it: 13.0.1
   monaco-editor: 0.36.1
   naive-ui: 2.34.3_vue@3.2.47
@@ -4372,6 +4374,10 @@ packages:
   /jsonpointer/5.0.1:
     resolution: {integrity: sha512-p/nXbhSEcu3pZRdkW1OfJhpsVtW1gd4Wa1fnQc9YLiTfAjn0312eMKimbdIQzuZl9aa9xUGaRlP9T/CJE/ditQ==}
     engines: {node: '>=0.10.0'}
+    dev: false
+
+  /just-diff/6.0.2:
+    resolution: {integrity: sha512-S59eriX5u3/QhMNq3v/gm8Kd0w8OS6Tz2FS1NG4blv+z0MuQcBRJyFWjdovM0Rad4/P4aUPFtnkNjMjyMlMSYA==}
     dev: false
 
   /labeled-stream-splicer/2.0.2:

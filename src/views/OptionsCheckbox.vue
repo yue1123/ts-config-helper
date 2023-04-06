@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { NSpace, NDivider, NCheckbox, NCollapse, NCollapseItem, NCheckboxGroup } from 'naive-ui'
-import type { Options } from '../types'
+import { NDivider, NCheckbox, NCollapse, NCollapseItem, NCheckboxGroup, NEllipsis } from 'naive-ui'
+import type { Options } from '@types'
 import useStore from '@store/data'
 import useRuntimeStore from '@store/runtime'
 import { deletePropertyByPath } from '../utils'
@@ -29,7 +29,7 @@ function handleChange(_e: any, { actionType, value: path }: eventValue) {
 
 <script lang="ts">
 export default {
-  name: 'MyCheckbox'
+  name: 'OptionsCheckbox'
 }
 </script>
 
@@ -40,20 +40,31 @@ export default {
     @update:value="handleChange"
   >
     <template v-for="(item, i) in props.data">
+      <!-- has children, recursive rendering -->
       <template v-if="item.children.length">
-        <NCollapse style="margin-top: 10px" :key="i">
+        <NCollapse class="mt-2" :key="i">
           <NCollapseItem :title="item.label" :name="item.label">
-            <MyCheckbox :level="props.level + 1" :data="item.children" />
+            <OptionsCheckbox :level="props.level + 1" :data="item.children" />
           </NCollapseItem>
         </NCollapse>
         <NDivider />
       </template>
       <template v-else>
-        <NSpace
+        <div
           v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[item.key]"
           :key="i"
-          ><NCheckbox :value="item.key" :label="item.label"
-        /></NSpace>
+        >
+          <NCheckbox size="large" class="w-full" :value="item.key">
+            <NEllipsis style="max-width: calc(100% - 20px)">
+              {{ item.label }}
+              <template #tooltip>
+                <div>
+                  {{ item.label }}
+                </div>
+              </template>
+            </NEllipsis>
+          </NCheckbox>
+        </div>
       </template>
     </template>
   </NCheckboxGroup>
@@ -69,5 +80,8 @@ export default {
 }
 :deep(.n-collapse .n-collapse-item .n-collapse-item) {
   margin-left: 0;
+}
+:deep(.n-checkbox__label) {
+  width: 100%;
 }
 </style>

@@ -1,9 +1,9 @@
 import { ref } from 'vue'
 import { createI18n, type VueI18nOptions } from 'vue-i18n'
 import { SUPPORT_LOCALES } from '@constants'
-import en from '@i18n/locale/en.json'
-import zh from '@i18n/locale/zh.json'
-import ja from '@i18n/locale/ja.json'
+import en from '@i18n/modules/en.json'
+import zh from '@i18n/modules/zh.json'
+import ja from '@i18n/modules/ja.json'
 import useSettingStore from '@store/setting'
 
 // for global use
