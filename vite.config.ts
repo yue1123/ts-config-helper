@@ -17,11 +17,11 @@ export default defineConfig({
       tipText: 'Please stand by, source is loading...',
       css: '.loading-text{margin-top:20px}',
       onError() {
-        // @ts-ignore
-        const search = window.location.search
-        const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
-        // @ts-ignore
-        if (reloadNum < 3) window.location.search = `slt=${Date.now()}&slr=${reloadNum + 1}`
+        // // @ts-ignore
+        // const search = window.location.search
+        // const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
+        // // @ts-ignore
+        // if (reloadNum < 3) window.location.search = `slt=${Date.now()}&slr=${reloadNum + 1}`
       }
     }),
     visualizer({
