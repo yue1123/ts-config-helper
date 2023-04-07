@@ -54,7 +54,7 @@ export default {
           v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[item.key]"
           :key="i"
         >
-          <NCheckbox size="large" class="w-full" :value="item.key">
+          <NCheckbox size="large" class="w-full mt-1" :value="item.key">
             <NEllipsis style="max-width: calc(100% - 20px)">
               {{ item.label }}
               <template #tooltip>
