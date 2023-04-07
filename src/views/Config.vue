@@ -41,13 +41,17 @@ const handleResize = debounce(() => {
   monacoEditor.value?.resize()
 }, (1000 / 60) * 5)
 
+const handleReady = () => {
+  setTimeout(handleResize, 500)
+}
+
 onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>
 
 <template>
   <NLayout style="height: calc(100vh - 64px)">
-    <Splitpanes @resize="handleResize" :dblClickSplitter="false">
-      <Pane min-size="10"> <SideBar /> </Pane>
+    <Splitpanes @ready="handleReady" @resize="handleResize" :dblClickSplitter="false">
+      <Pane min-size="10" size="20"> <SideBar /> </Pane>
       <Pane min-size="10">
         <NLayoutContent>
           <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">

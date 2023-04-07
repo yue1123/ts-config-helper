@@ -4,7 +4,23 @@ import { useProperty } from '@hooks'
 import useRuntimeStore from '@store/runtime'
 import { debounce } from '../utils'
 import OptionsCheckbox from './OptionsCheckbox.vue'
-import { BIconFilterRight, BIconLightningFill, BIconGrid } from 'bootstrap-icons-vue'
+import {
+  BIconFilterRight,
+  BIconLightningFill,
+  BIconBoxes,
+  BIconCodeSlash,
+  BIconFiletypeJs,
+  BIconGrid,
+  BIconStarFill,
+  BIconTerminal,
+  BIconStack,
+  BIconBoundingBoxCircles,
+  BIconLayoutTextWindowReverse,
+  BIconLifePreserver,
+  BIconListColumns,
+  BIconPlug,
+  BIconUiChecksGrid
+} from 'bootstrap-icons-vue'
 import { filterMap } from '@constants'
 import { ref, type Component, h } from 'vue'
 import type { FilterKey } from '@types'
@@ -42,65 +58,72 @@ const filterOptions: DropdownOption[] = [
   {
     label: '常用配置项',
     key: 'common',
-    icon: renderIcon(BIconLightningFill)
+    icon: renderIcon(BIconStarFill)
   },
   {
     type: 'divider'
   },
   {
-    label: '类型检查相关配置',
-    key: 'typeChecking',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '模块相关配置',
-    key: 'modules',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '类型生成相关配置',
-    key: 'emit',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: 'Javascript 支持相关配置',
-    key: 'javaScriptSupport',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '编辑器支持相关配置',
-    key: 'editorSupport',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '互操作约束相关配置',
-    key: 'interopConstraints',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '兼容性相关配置',
-    key: 'backwardsCompatibility',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '语言与环境相关配置',
-    key: 'languageEnvironment',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '工程化相关配置',
-    key: 'projects',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '输出格式相关配置',
-    key: 'outputFormatting',
-    icon: renderIcon(BIconLightningFill)
-  },
-  {
-    label: '完整性相关配置',
-    key: 'completeness',
-    icon: renderIcon(BIconLightningFill)
+    label: '分类',
+    key: 'others1',
+    icon: renderIcon(BIconUiChecksGrid),
+    children: [
+      {
+        label: '类型检查',
+        key: 'typeChecking',
+        icon: renderIcon(BIconLightningFill)
+      },
+      {
+        label: '模块',
+        key: 'modules',
+        icon: renderIcon(BIconBoxes)
+      },
+      {
+        label: '类型生成',
+        key: 'emit',
+        icon: renderIcon(BIconCodeSlash)
+      },
+      {
+        label: 'Javascript 支持',
+        key: 'javaScriptSupport',
+        icon: renderIcon(BIconFiletypeJs)
+      },
+      {
+        label: '编辑器支持',
+        key: 'editorSupport',
+        icon: renderIcon(BIconLayoutTextWindowReverse)
+      },
+      {
+        label: '互操作约束',
+        key: 'interopConstraints',
+        icon: renderIcon(BIconBoundingBoxCircles)
+      },
+      {
+        label: '兼容性',
+        key: 'backwardsCompatibility',
+        icon: renderIcon(BIconPlug)
+      },
+      {
+        label: '语言与环境',
+        key: 'languageEnvironment',
+        icon: renderIcon(BIconTerminal)
+      },
+      {
+        label: '工程化',
+        key: 'projects',
+        icon: renderIcon(BIconStack)
+      },
+      {
+        label: '输出格式',
+        key: 'outputFormatting',
+        icon: renderIcon(BIconListColumns)
+      },
+      {
+        label: '完整性',
+        key: 'completeness',
+        icon: renderIcon(BIconLifePreserver)
+      }
+    ]
   }
 ]
 
@@ -145,7 +168,7 @@ function handleChangeFilterType(type: FilterKey) {
     </NLayoutSider> -->
   <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
     <NSpace :size="15" vertical>
-      <div class="flex justify-between items-center">
+      <div class="flex items-center justify-between">
         <span>{{ filterLabelMap[activeFilter] }}</span>
         <div>
           <NDropdown
