@@ -13,7 +13,7 @@ import {
 import { computed, reactive, ref } from 'vue'
 import useSettingStore, { DEFAULT_SETTING } from '@store/setting'
 import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
-import { currentLang, setI18nLanguage } from '@i18n'
+import { currentLang } from '@i18n'
 import { deepClone } from '@utils'
 const settingStore = useSettingStore()
 const showSetting = ref(false)
@@ -48,7 +48,6 @@ defineExpose({
 })
 function handleSaveSetting(saveAndClose: boolean = false) {
   showSetting.value = !saveAndClose
-  setI18nLanguage(settingCopy.value.lang)
   save()
 }
 </script>

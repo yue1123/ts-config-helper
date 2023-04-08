@@ -10,6 +10,7 @@ import MonacoEditor from '../components/MonacoEditor.vue'
 import { debounce, flatObjWithDepthControl } from '../utils'
 import Property from './Property.vue'
 import SideBar from './SideBar.vue'
+import Empty from './Empty.vue'
 const { property, allFlatPropertyKeysMap, allFlatPropertyKeys } = useProperty()
 const language = ref('json')
 const store = useStore()
@@ -51,15 +52,16 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
 <template>
   <NLayout style="height: calc(100vh - 64px)">
     <Splitpanes @ready="handleReady" @resize="handleResize" :dblClickSplitter="false">
-      <Pane min-size="10" size="20"> <SideBar /> </Pane>
+      <Pane min-size="10"> <SideBar /> </Pane>
       <Pane min-size="10">
         <NLayoutContent>
           <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
             <template key="tipText" v-if="!store.selectedKeys.length">
-              <div class="tipText">{{ $t('about') }}</div>
-              <div class="tipText">{{ $t('emptyTips') }}</div>
+              <Empty />
             </template>
-            <Property key="property" :level="1" :definition="property"></Property>
+            <template v-else>
+              <!-- <Property key="property" :level="1" :definition="property"></Property> -->
+            </template>
           </NScrollbar>
         </NLayoutContent>
       </Pane>

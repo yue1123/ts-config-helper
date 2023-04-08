@@ -4,10 +4,12 @@ import { NPopover, NButton, NTooltip, NTag, useMessage, type PopoverTrigger } fr
 import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
 import { usePropertyRemoteMarkdown } from '@hooks'
 import { configReleaseMap, relatedToMap } from '@utils'
+import { useI18n } from 'vue-i18n'
 
 export interface Props {
   property: string
 }
+const { t } = useI18n()
 const configVersion = computed(() => configReleaseMap[props.property])
 const relatedTo = computed(() => relatedToMap[props.property])
 const props = defineProps<Props>()
@@ -22,7 +24,7 @@ function handleGetMarkdownDesc() {
       showPopover.value = true
     })
     .catch(() => {
-      message.error(ctx.$t('notFound', { property: props.property }))
+      message.error(t('notFound', { property: props.property }))
     })
 }
 function handleUpdateShow(value: boolean) {

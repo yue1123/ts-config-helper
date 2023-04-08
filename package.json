@@ -37,6 +37,7 @@
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
+    "@intlify/unplugin-vue-i18n": "^0.10.0",
     "@rushstack/eslint-patch": "^1.2.0",
     "@types/jsdom": "^21.1.0",
     "@types/markdown-it": "^12.2.3",

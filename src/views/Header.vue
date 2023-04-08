@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { ref } from 'vue'
-import { NH2, NButton, NLayoutHeader, NSpace, NTooltip } from 'naive-ui'
+import { NButton, NLayoutHeader, NSpace, NTooltip } from 'naive-ui'
 
 import {
   BIconClipboardFill,
@@ -9,11 +9,9 @@ import {
   BIconGithub
 } from 'bootstrap-icons-vue'
 import { useClipboard } from '@vueuse/core'
-import { version } from '@package'
 import ThemeButton from '@components/ThemeButton.vue'
 import Setting from '@views/Setting.vue'
 import useStore from '@store/data'
-
 const store = useStore()
 const { copy, copied, isSupported } = useClipboard()
 
@@ -29,17 +27,22 @@ function handleShowSetting() {
 </script>
 <template>
   <NLayoutHeader class="sticky top-0 h-16 py-4 px-6" bordered>
-    <NSpace justify="space-between" align="center">
-      <NTooltip placement="right" :style="{ maxWidth: '500px' }" trigger="hover">
-        <template #trigger>
-          <NSpace align="end">
-            <img width="32" height="32" src="../assets/logo.png" alt="" />
-            <NH2 class="mb-0">Config helper</NH2>
-            <span class="text-xs">{{ version }}</span>
-          </NSpace>
-        </template>
-        {{ $t('about') }}
-      </NTooltip>
+    <div class="flex justify-between items-center h-full">
+      <div class="flex items-center gap-x-2">
+        <NTooltip placement="right" :style="{ maxWidth: '500px' }" trigger="hover">
+          <template #trigger>
+            <div class="h-full flex justify-start gap-x-2 items-center">
+              <img height="32" src="../assets/logo.png" alt="" />
+            </div>
+          </template>
+          {{ $t('about') }}
+        </NTooltip>
+        <img
+          alt="GitHub tag (latest by date)"
+          src="https://img.shields.io/github/v/tag/yue1123/ts-config-helper?label=Tag%20&logo=github&style=flat-square"
+        />
+      </div>
+
       <NSpace role="functional-btn" class="buttons-container">
         <NTooltip v-if="isSupported" placement="bottom" trigger="hover">
           <template #trigger>
@@ -75,13 +78,15 @@ function handleShowSetting() {
               target="_blank"
               strong
             >
-              <template #icon> <BIconGithub /> </template
-            ></NButton>
+              <template #icon>
+                <BIconGithub />
+              </template>
+            </NButton>
           </template>
           <span>{{ $t('nav.github') }}</span>
         </NTooltip>
       </NSpace>
-    </NSpace>
+    </div>
   </NLayoutHeader>
   <Setting ref="setting" />
 </template>

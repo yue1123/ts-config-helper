@@ -9,9 +9,9 @@ import '@styles/main.css'
 
 const app = createApp(App)
 const store = createPinia()
-const i18n = setupI18n()
-store.use(piniaPluginPersistedstate)
-
-app.use(i18n)
+setupI18n().then((i18n) => {
+  app.use(i18n)
+  app.mount('#app')
+})
 app.use(store)
-app.mount('#app')
+store.use(piniaPluginPersistedstate)

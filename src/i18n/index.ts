@@ -1,28 +1,31 @@
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { createI18n, type VueI18nOptions } from 'vue-i18n'
 import { SUPPORT_LOCALES } from '@constants'
-import en from '@i18n/modules/en.json'
+// import en from '@i18n/modules/en.json'
 import zh from '@i18n/modules/zh.json'
-import ja from '@i18n/modules/ja.json'
+// import ja from '@i18n/modules/ja.json'
 import useSettingStore from '@store/setting'
+
+type LocaleMessageSchema = typeof zh
+const loadedLocaleMap = new Map<SUPPORT_LOCALES, LocaleMessageSchema>()
 
 // for global use
 export let i18n: any
 export let currentLang = ref<SUPPORT_LOCALES>(SUPPORT_LOCALES['zh'])
 // for setup
-export function setupI18n() {
-  const options: VueI18nOptions = {
+export async function setupI18n() {
+  i18n = createI18n<[LocaleMessageSchema], SUPPORT_LOCALES>({
+    legacy: false,
     fallbackLocale: 'zh',
-    messages: { zh, en, ja }
-  }
-
-  i18n = createI18n(options)
-  setI18nLanguage(currentLang.value)
+    messages: { zh }
+  })
+  await setI18nLanguage(currentLang.value)
   return i18n
 }
 
-export function setI18nLanguage(locale: SUPPORT_LOCALES) {
+export async function setI18nLanguage(locale: SUPPORT_LOCALES) {
   try {
+    await loadLocaleMessages(locale)
     const setting = useSettingStore()
     if (setting.lang !== locale) setting.lang = locale
   } catch (error) {}
@@ -40,4 +43,14 @@ export function setI18nLanguage(locale: SUPPORT_LOCALES) {
    * axios.defaults.headers.common['Accept-Language'] = locale
    */
   document.querySelector('html')?.setAttribute('lang', locale)
+}
+export async function loadLocaleMessages(locale: SUPPORT_LOCALES) {
+  if (!loadedLocaleMap.get(locale)) {
+    // load locale messages with dynamic import
+    const messages = await import(`./modules/${locale}.json`)
+    // set locale and locale message
+    i18n.global.setLocaleMessage(locale, messages.default)
+  }
+
+  return nextTick()
 }
