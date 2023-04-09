@@ -1,3 +1,8 @@
+export type schemaConvertResult = {
+  treeData: Options[]
+  allOptionsFlatKeys: string[]
+  allOptionsFlatKeysMap: Map<string, boolean>
+}
 export interface Options {
   label: string
   key: string
@@ -8,6 +13,9 @@ export interface Options {
   oneOf?: any[]
   anyOf?: any[]
   uniqueItems?: boolean
+  flatKeys: string
+  parentKeys: string[]
+  description: string
   properties: Record<string, any>
   children: Options[]
 }
@@ -146,7 +154,7 @@ export type CompilerOptionName =
   | 'disableFilenameBasedTypeAcquisition'
 
 export type FilterKey =
-  | 'All'
+  | 'all'
   | 'common'
   | 'typeChecking'
   | 'modules'

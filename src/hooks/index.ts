@@ -1,3 +1,4 @@
 export * from './useEventListener'
-export * from './useProperty'
+export * from './useSchemaDataWithFilter'
 export * from './usePropertyRemoteMarkdown'
+export * from './useSchemaData'

@@ -17,21 +17,22 @@ import * as monaco from 'monaco-editor'
 import useThemeStore from '../store/theme'
 import useDataStore from '../store/data'
 import useSettingStore from '../store/setting'
-import es from '../schema/_tsconfig.json?url'
-import zh from '../schema/_tsconfig.zh.json?url'
+// import es from '../schema/_tsconfig.json?url'
+// import zh from '../schema/_tsconfig.zh.json?url'
 export interface Props {
   modelValue?: string
   language: string
+  schemaUrl: string
   theme: 'vs' | 'vs-dark' | 'hc-black'
   options?: Record<string, any>
   width?: string
   height?: string
   local: any
 }
-const schemaJsonMap = {
-  'en-US': es,
-  zh_cn: zh
-}
+// const schemaJsonMap = {
+//   'en-US': es,
+//   zh_cn: zh
+// }
 const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted'])
 const props = defineProps<Props>()
 const themeStore = useThemeStore()
@@ -121,8 +122,8 @@ watchEffect(() => {
   })
 })
 watchEffect(() => {
-  let url = (schemaJsonMap as any)[props.local]
-  if (!url) url = (schemaJsonMap as any)['en-US']
+  // let url = (schemaJsonMap as any)[props.local]
+  // if (!url) url = (schemaJsonMap as any)['en-US']
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
     validate: true,
     enableSchemaRequest: true,
@@ -131,7 +132,7 @@ watchEffect(() => {
       {
         // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
         fileMatch: ['*'],
-        uri: new URL(url, import.meta.url).href
+        uri: new URL(props.schemaUrl, import.meta.url).href
       }
     ]
   })

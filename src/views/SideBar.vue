@@ -1,9 +1,9 @@
 <script lang="ts" setup>
 import { NSpace, NInput, NButton, NScrollbar, NDropdown, type DropdownOption } from 'naive-ui'
-import { useProperty } from '@hooks'
+import { useSchemaDataWithFilter } from '@hooks'
 import useRuntimeStore from '@store/runtime'
 import { debounce } from '../utils'
-import OptionsCheckbox from './OptionsCheckbox.vue'
+import OptionsCheckbox from './OptionsCheckbox/index.vue'
 import {
   BIconFilterRight,
   BIconLightningFill,
@@ -21,18 +21,18 @@ import {
   BIconPlug,
   BIconUiChecksGrid
 } from 'bootstrap-icons-vue'
-import { filterMap } from '@constants'
+
 import { ref, type Component, h, computed } from 'vue'
 import type { FilterKey } from '@types'
 import { useI18n } from 'vue-i18n'
 
 const { t } = useI18n({ useScope: 'global' })
-const { property, filter, allFlatPropertyKeys } = useProperty()
+const { filterData, filter, allOptionsFlatKeys } = await useSchemaDataWithFilter()
 const runtimeStore = useRuntimeStore()
 
-const activeFilter = ref<FilterKey>('All')
+const activeFilter = ref<FilterKey>('all')
 const filterLabelMap = computed<Record<FilterKey, string>>(() => ({
-  All: t('sidebar.all'),
+  all: t('sidebar.all'),
   common: t('sidebar.common'),
   typeChecking: t('sidebar.typeChecking'),
   modules: t('sidebar.modules'),
@@ -54,7 +54,7 @@ const filterOptions = computed<DropdownOption[]>(() => {
   return [
     {
       label: t('sidebar.all'),
-      key: 'All',
+      key: 'all',
       icon: renderIcon(BIconGrid)
     },
     {
@@ -131,10 +131,9 @@ const filterOptions = computed<DropdownOption[]>(() => {
 })
 
 const handleSearch = debounce((searchKeyword: string) => {
-  // runtimeStore
   let obj = Object.create(null)
   if (searchKeyword) {
-    for (const item of allFlatPropertyKeys) {
+    for (const item of allOptionsFlatKeys.value) {
       if (item.indexOf(searchKeyword) !== -1) {
         obj[item] = true
       }
@@ -143,7 +142,7 @@ const handleSearch = debounce((searchKeyword: string) => {
   } else {
     runtimeStore.resetHitKeysMap(runtimeStore, null)
   }
-}, 200)
+}, 300)
 
 const searchResult = computed(() => {
   return runtimeStore.searchHitKeysMap ? Object.keys(runtimeStore.searchHitKeysMap).length : 0
@@ -151,29 +150,10 @@ const searchResult = computed(() => {
 
 function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
-  if (type === 'All') {
-    filter(type, () => true)
-  } else {
-    filter(type, (item: any) => {
-      return (filterMap[type] as any)[item.key]
-    })
-  }
+  filter(type)
 }
 </script>
 <template>
-  <!-- <NLayoutSider
-      collapse-mode="transform"
-      :collapsed-width="0"
-      :width="430"
-      show-trigger="bar"
-      content-style="padding:15px 24px;"
-      bordered
-      :native-scrollbar="false"
-      :on-after-enter="handleResize"
-      :on-after-leave="handleResize"
-    >
-      
-    </NLayoutSider> -->
   <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
     <NSpace :size="15" vertical>
       <div class="flex items-center justify-between">
@@ -183,7 +163,7 @@ function handleChangeFilterType(type: FilterKey) {
             placement="bottom-end"
             @select="handleChangeFilterType"
             :value="activeFilter"
-            trigger="click"
+            trigger="hover"
             :options="filterOptions"
           >
             <NButton quaternary size="small">
@@ -193,10 +173,9 @@ function handleChangeFilterType(type: FilterKey) {
         </div>
       </div>
       <NInput
-        :disabled="activeFilter !== 'All'"
         clear
         @input="handleSearch"
-        :placeholder="$t('config.searchConfig')"
+        :placeholder="$t('config.searchConfig', { type: filterLabelMap[activeFilter] })"
       >
         <template #suffix>
           <div
@@ -207,20 +186,14 @@ function handleChangeFilterType(type: FilterKey) {
             }"
           >
             {{
-              $t(
-                'sidebar.result',
-                searchResult,
-                searchResult
-                  ? {
-                      count: searchResult
-                    }
-                  : undefined
-              )
+              $t('sidebar.result', {
+                count: searchResult
+              })
             }}
           </div>
         </template>
       </NInput>
-      <OptionsCheckbox :level="0" :data="property" />
+      <OptionsCheckbox :level="0" :data="filterData" />
     </NSpace>
   </NScrollbar>
 </template>

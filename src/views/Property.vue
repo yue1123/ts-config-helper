@@ -1,33 +1,30 @@
 <script setup lang="ts">
-import {
-  NH2,
-  NH3,
-  NH4,
-  NH5,
-  NH6,
-  NTag,
-  NDynamicTags,
-  NSwitch,
-  NInput,
-  NSelect,
-  useMessage,
-  NButton,
-  NInputNumber,
-  NTooltip
-} from 'naive-ui'
-import { BIconHash, BIconLink45deg } from 'bootstrap-icons-vue'
-import { descriptionMap } from '@schema'
 import KeyValuesInput from '@components/KeyValuesInput.vue'
 import ObjectInput from '@components/ObjectInput.vue'
-import MarkdownDesc from './MarkdownDesc.vue'
-import { enumToOptions, getInputType } from '../utils'
+import { currentLang } from '@i18n'
+import { descriptionMap } from '@schema'
+import { BIconHash, BIconLink45deg } from 'bootstrap-icons-vue'
+import {
+  NButton,
+  NDynamicTags,
+  NH3,
+  NH4,
+  NInput,
+  NInputNumber,
+  NSelect,
+  NSwitch,
+  NTag,
+  NTooltip,
+  useMessage
+} from 'naive-ui'
+import { h } from 'vue'
 import useStore from '../store/data'
 import useSettingStore from '../store/setting'
 import type { Options } from '../types'
-import { type Component, h, ref } from 'vue'
-import { currentLang } from '@i18n'
+import { enumToOptions, getInputType } from '../utils'
+import MarkdownDesc from './MarkdownDesc.vue'
 export interface Props {
-  definition: any
+  definition: Options[]
   level: number
 }
 const store = useStore()
@@ -85,7 +82,7 @@ export default {
 
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
-    <template v-if="store.selectedKeys.indexOf(property.key) !== -1">
+    <template v-if="store.selectedKeys.indexOf(property.flatKeys) !== -1">
       <div class="mt-3 flex items-center space-x-4">
         <div class="flex justify-start items-center space-x-2">
           <NButton size="small" text>
@@ -98,7 +95,7 @@ export default {
               <NH4 style="color: #bbb; --n-margin: 0">{{ key }}</NH4>
               <span> . </span>
             </template>
-            <NH3 style="--n-margin: 0">{{ property.label }}</NH3>
+            <NH3 style="--n-margin: 0">{{ property.key }}</NH3>
           </div>
         </div>
         <template v-if="descriptionMap[currentLang][property.key].link">

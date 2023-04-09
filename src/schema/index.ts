@@ -1,11 +1,11 @@
 import type { SUPPORT_LOCALES } from '@constants'
-import tsconfigSchema from './_tsconfig.json'
+// import tsconfigSchema from '../assets/_tsconfig.json'
 import zh from './description.zh.json'
 import en from './description.json'
 
-const schemaLangMap = {
-  en: tsconfigSchema
-}
+// const schemaLangMap = {
+//   en: tsconfigSchema
+// }
 
 const descriptionMap: Record<SUPPORT_LOCALES, any> = {
   en,
@@ -13,4 +13,7 @@ const descriptionMap: Record<SUPPORT_LOCALES, any> = {
   ja: en
 }
 
-export { schemaLangMap, tsconfigSchema, descriptionMap }
+export {
+  //  tsconfigSchema,
+  descriptionMap
+}

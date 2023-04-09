@@ -6,7 +6,7 @@
   "quote": "引用自",
   "sidebar": {
     "related": "相关配置",
-    "result": "无结果  | {count} 项结果",
+    "result": "{count} 项结果",
     "all": "所有配置项",
     "common": "常用配置项",
     "more": "分类",
@@ -45,7 +45,7 @@
     "copyToClipboard": "复制到剪贴板"
   },
   "config": {
-    "searchConfig": "搜索配置项"
+    "searchConfig": "搜索{type}"
   },
   "emptyTips": "请在左侧勾选配置项或右侧输入tsconfig.json配置",
   "setting": {

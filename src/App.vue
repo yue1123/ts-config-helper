@@ -2,7 +2,6 @@
 import { shallowRef, watchEffect } from 'vue'
 import { NConfigProvider, NMessageProvider, darkTheme, lightTheme } from 'naive-ui'
 import useThemeStore from '@store/theme'
-
 import Main from '@views/Main.vue'
 
 const currentTheme = shallowRef(darkTheme)

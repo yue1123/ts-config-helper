@@ -5,7 +5,7 @@
   "related": "関連",
   "quote": "引用元",
   "sidebar": {
-    "result": "検索結果はありません | {count} アイテム結果",
+    "result": "{count} アイテム結果",
     "all": "すべての構成アイテム",
     "backwardsCompatibility": "@:sidebar.dropdown.backwardsCompatibility@:sidebar.related",
     "common": "共通設定項目",
@@ -45,7 +45,7 @@
     "copyToClipboard": "クリップボードにコピー"
   },
   "config": {
-    "searchConfig": "検索構成アイテム"
+    "searchConfig": "検索{type}"
   },
   "emptyTips": "左側の構成項目を確認するか、右側の tsconfig.json 構成を入力してください",
   "setting": {

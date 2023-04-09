@@ -5,7 +5,7 @@
   "related": "Related",
   "quote": "Quoted from",
   "sidebar": {
-    "result": "No result | {count} item result",
+    "result": "{count} item result",
     "all": "All configuration items",
     "backwardsCompatibility": "@:sidebar.dropdown.backwardsCompatibility@:sidebar.related",
     "common": "Common configuration items",
@@ -45,7 +45,7 @@
     "copied": "copy successfully"
   },
   "config": {
-    "searchConfig": "search config item"
+    "searchConfig": "search{type}"
   },
   "emptyTips": "Please check the configuration item on the left or enter the tsconfig.json configuration on the right",
   "setting": {
