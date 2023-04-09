@@ -30,15 +30,6 @@ export interface Props {
   definition: any
   level: number
 }
-
-const levelTitleMap: Record<number, Component> = {
-  1: NH2,
-  2: NH3,
-  3: NH4,
-  4: NH5,
-  5: NH6
-}
-
 const store = useStore()
 const settingStore = useSettingStore()
 const message = useMessage()
@@ -95,23 +86,25 @@ export default {
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.indexOf(property.key) !== -1">
-      <Component
-        style="--n-margin: 15px 0 7.5px 0"
-        :is="props.level >= 6 ? NH6 : levelTitleMap[props.level]"
-      >
-        <div class="flex items-center space-x-4">
-          <div class="flex items-center space-x-2">
-            <NButton size="small" text>
-              <template #icon>
-                <BIconHash />
-              </template>
-            </NButton>
-            <span>{{ property.key }}</span>
+      <div class="mt-3 flex items-center space-x-4">
+        <div class="flex justify-start items-center space-x-2">
+          <NButton size="small" text>
+            <template #icon>
+              <BIconHash />
+            </template>
+          </NButton>
+          <div class="flex items-center keys">
+            <template v-for="(key, index) in property.parentKeys" :key="index">
+              <NH4 style="color: #bbb; --n-margin: 0">{{ key }}</NH4>
+              <span> . </span>
+            </template>
+            <NH3 style="--n-margin: 0">{{ property.label }}</NH3>
           </div>
+        </div>
+        <template v-if="descriptionMap[currentLang][property.key].link">
           <NTooltip placement="right" trigger="hover">
             <template #trigger>
               <NButton
-                v-if="descriptionMap[currentLang][property.key].link"
                 text
                 tag="a"
                 :href="descriptionMap[currentLang][property.key].link"
@@ -125,12 +118,11 @@ export default {
             </template>
             文档链接
           </NTooltip>
-
-          <Suspense>
-            <MarkdownDesc :property="property.label" />
-          </Suspense>
-        </div>
-      </Component>
+        </template>
+        <Suspense>
+          <MarkdownDesc :property="property.label" />
+        </Suspense>
+      </div>
       <div class="text-gray-400 mb-1" v-if="property.default !== undefined">
         {{ $t('defaultValue') }}: {{ property.default }}
       </div>

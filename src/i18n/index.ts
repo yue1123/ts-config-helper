@@ -28,21 +28,21 @@ export async function setI18nLanguage(locale: SUPPORT_LOCALES) {
     await loadLocaleMessages(locale)
     const setting = useSettingStore()
     if (setting.lang !== locale) setting.lang = locale
+    currentLang.value = locale
+    if (i18n.mode === 'legacy') {
+      i18n.global.locale = locale
+    } else {
+      i18n.global.locale.value = locale
+    }
+    /**
+     * NOTE:
+     * If you need to specify the language setting for headers, such as the `fetch` API, set it here.
+     * The following is an example for axios.
+     *
+     * axios.defaults.headers.common['Accept-Language'] = locale
+     */
+    document.querySelector('html')?.setAttribute('lang', locale)
   } catch (error) {}
-  currentLang.value = locale
-  if (i18n.mode === 'legacy') {
-    i18n.global.locale = locale
-  } else {
-    i18n.global.locale.value = locale
-  }
-  /**
-   * NOTE:
-   * If you need to specify the language setting for headers, such as the `fetch` API, set it here.
-   * The following is an example for axios.
-   *
-   * axios.defaults.headers.common['Accept-Language'] = locale
-   */
-  document.querySelector('html')?.setAttribute('lang', locale)
 }
 export async function loadLocaleMessages(locale: SUPPORT_LOCALES) {
   if (!loadedLocaleMap.get(locale)) {

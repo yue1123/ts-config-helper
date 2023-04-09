@@ -1,24 +1,28 @@
 <script lang="ts" setup>
-import { ref } from 'vue'
 import { NButton, NLayoutHeader, NSpace, NTooltip } from 'naive-ui'
+import { computed, ref } from 'vue'
 
+import ThemeButton from '@components/ThemeButton.vue'
+import useStore from '@store/data'
+import useThemeStore from '@store/theme'
+import Setting from '@views/Setting.vue'
+import { useClipboard } from '@vueuse/core'
 import {
-  BIconClipboardFill,
   BIconClipboardCheckFill,
+  BIconClipboardFill,
   BIconGearFill,
   BIconGithub
 } from 'bootstrap-icons-vue'
-import { useClipboard } from '@vueuse/core'
-import ThemeButton from '@components/ThemeButton.vue'
-import Setting from '@views/Setting.vue'
-import useStore from '@store/data'
+import darkLogo from '../assets/logo.png'
+import lightLogo from '../assets/logo-light.png'
 const store = useStore()
 const { copy, copied, isSupported } = useClipboard()
+const themeStore = useThemeStore()
 
 function handleCopy() {
   copy(store.previewConfig || '')
 }
-
+const logoUrl = computed<string>(() => (themeStore.isDark ? darkLogo : lightLogo))
 // setting
 const setting = ref<typeof Setting>()
 function handleShowSetting() {
@@ -32,7 +36,7 @@ function handleShowSetting() {
         <NTooltip placement="right" :style="{ maxWidth: '500px' }" trigger="hover">
           <template #trigger>
             <div class="h-full flex justify-start gap-x-2 items-center">
-              <img height="32" src="../assets/logo.png" alt="" />
+              <img height="32" :src="logoUrl" alt="" />
             </div>
           </template>
           {{ $t('about') }}

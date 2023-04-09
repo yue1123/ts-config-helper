@@ -23,6 +23,7 @@ declare module '@intlify/core-base' {
 
   export declare type Path = keys
   export declare type ResourceKeys = keys
+  export declare type DefineLocaleMessage = typeof I18nStore
 }
 
 interface Window {}

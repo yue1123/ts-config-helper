@@ -22,110 +22,113 @@ import {
   BIconUiChecksGrid
 } from 'bootstrap-icons-vue'
 import { filterMap } from '@constants'
-import { ref, type Component, h } from 'vue'
+import { ref, type Component, h, computed } from 'vue'
 import type { FilterKey } from '@types'
+import { useI18n } from 'vue-i18n'
 
+const { t } = useI18n({ useScope: 'global' })
 const { property, filter, allFlatPropertyKeys } = useProperty()
 const runtimeStore = useRuntimeStore()
 
 const activeFilter = ref<FilterKey>('All')
-const filterLabelMap: Record<FilterKey, string> = {
-  All: '所有配置项',
-  common: '常用配置项',
-  typeChecking: '类型检查相关配置',
-  modules: '模块相关配置',
-  emit: '类型生成相关配置',
-  javaScriptSupport: 'Javascript 支持相关配置',
-  editorSupport: '编辑器支持相关配置',
-  interopConstraints: '互操作约束相关配置',
-  backwardsCompatibility: '兼容性相关配置',
-  languageEnvironment: '语言与环境相关配置',
-  compilerDiagnostics: '编译器诊断相关配置',
-  projects: '工程化相关配置',
-  outputFormatting: '输出格式相关配置',
-  completeness: '完整性相关配置'
-}
-
+const filterLabelMap = computed<Record<FilterKey, string>>(() => ({
+  All: t('sidebar.all'),
+  common: t('sidebar.common'),
+  typeChecking: t('sidebar.typeChecking'),
+  modules: t('sidebar.modules'),
+  emit: t('sidebar.emit'),
+  javaScriptSupport: t('sidebar.javaScriptSupport'),
+  editorSupport: t('sidebar.editorSupport'),
+  interopConstraints: t('sidebar.interopConstraints'),
+  backwardsCompatibility: t('sidebar.backwardsCompatibility'),
+  languageEnvironment: t('sidebar.languageEnvironment'),
+  compilerDiagnostics: t('sidebar.compilerDiagnostics'),
+  projects: t('sidebar.projects'),
+  outputFormatting: t('sidebar.outputFormatting'),
+  completeness: t('sidebar.completeness')
+}))
 const renderIcon = (icon: Component) => {
   return () => h(icon, null)
 }
-const filterOptions: DropdownOption[] = [
-  {
-    label: '所有配置项',
-    key: 'All',
-    icon: renderIcon(BIconGrid)
-  },
-  {
-    label: '常用配置项',
-    key: 'common',
-    icon: renderIcon(BIconStarFill)
-  },
-  {
-    type: 'divider'
-  },
-  {
-    label: '分类',
-    key: 'others1',
-    icon: renderIcon(BIconUiChecksGrid),
-    children: [
-      {
-        label: '类型检查',
-        key: 'typeChecking',
-        icon: renderIcon(BIconLightningFill)
-      },
-      {
-        label: '模块',
-        key: 'modules',
-        icon: renderIcon(BIconBoxes)
-      },
-      {
-        label: '类型生成',
-        key: 'emit',
-        icon: renderIcon(BIconCodeSlash)
-      },
-      {
-        label: 'Javascript 支持',
-        key: 'javaScriptSupport',
-        icon: renderIcon(BIconFiletypeJs)
-      },
-      {
-        label: '编辑器支持',
-        key: 'editorSupport',
-        icon: renderIcon(BIconLayoutTextWindowReverse)
-      },
-      {
-        label: '互操作约束',
-        key: 'interopConstraints',
-        icon: renderIcon(BIconBoundingBoxCircles)
-      },
-      {
-        label: '兼容性',
-        key: 'backwardsCompatibility',
-        icon: renderIcon(BIconPlug)
-      },
-      {
-        label: '语言与环境',
-        key: 'languageEnvironment',
-        icon: renderIcon(BIconTerminal)
-      },
-      {
-        label: '工程化',
-        key: 'projects',
-        icon: renderIcon(BIconStack)
-      },
-      {
-        label: '输出格式',
-        key: 'outputFormatting',
-        icon: renderIcon(BIconListColumns)
-      },
-      {
-        label: '完整性',
-        key: 'completeness',
-        icon: renderIcon(BIconLifePreserver)
-      }
-    ]
-  }
-]
+const filterOptions = computed<DropdownOption[]>(() => {
+  return [
+    {
+      label: t('sidebar.all'),
+      key: 'All',
+      icon: renderIcon(BIconGrid)
+    },
+    {
+      label: t('sidebar.common'),
+      key: 'common',
+      icon: renderIcon(BIconStarFill)
+    },
+    {
+      type: 'divider'
+    },
+    {
+      label: t('sidebar.more'),
+      key: 'others',
+      icon: renderIcon(BIconUiChecksGrid),
+      children: [
+        {
+          label: t('sidebar.dropdown.typeChecking'),
+          key: 'typeChecking',
+          icon: renderIcon(BIconLightningFill)
+        },
+        {
+          label: t('sidebar.dropdown.modules'),
+          key: 'modules',
+          icon: renderIcon(BIconBoxes)
+        },
+        {
+          label: t('sidebar.dropdown.emit'),
+          key: 'emit',
+          icon: renderIcon(BIconCodeSlash)
+        },
+        {
+          label: t('sidebar.dropdown.javaScriptSupport'),
+          key: 'javaScriptSupport',
+          icon: renderIcon(BIconFiletypeJs)
+        },
+        {
+          label: t('sidebar.dropdown.editorSupport'),
+          key: 'editorSupport',
+          icon: renderIcon(BIconLayoutTextWindowReverse)
+        },
+        {
+          label: t('sidebar.dropdown.interopConstraints'),
+          key: 'interopConstraints',
+          icon: renderIcon(BIconBoundingBoxCircles)
+        },
+        {
+          label: t('sidebar.dropdown.backwardsCompatibility'),
+          key: 'backwardsCompatibility',
+          icon: renderIcon(BIconPlug)
+        },
+        {
+          label: t('sidebar.dropdown.languageEnvironment'),
+          key: 'languageEnvironment',
+          icon: renderIcon(BIconTerminal)
+        },
+        {
+          label: t('sidebar.dropdown.projects'),
+          key: 'projects',
+          icon: renderIcon(BIconStack)
+        },
+        {
+          label: t('sidebar.dropdown.outputFormatting'),
+          key: 'outputFormatting',
+          icon: renderIcon(BIconListColumns)
+        },
+        {
+          label: t('sidebar.dropdown.completeness'),
+          key: 'completeness',
+          icon: renderIcon(BIconLifePreserver)
+        }
+      ]
+    }
+  ]
+})
 
 const handleSearch = debounce((searchKeyword: string) => {
   // runtimeStore
@@ -141,6 +144,11 @@ const handleSearch = debounce((searchKeyword: string) => {
     runtimeStore.resetHitKeysMap(runtimeStore, null)
   }
 }, 200)
+
+const searchResult = computed(() => {
+  return runtimeStore.searchHitKeysMap ? Object.keys(runtimeStore.searchHitKeysMap).length : 0
+})
+
 function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
   if (type === 'All') {
@@ -198,8 +206,17 @@ function handleChangeFilterType(type: FilterKey) {
               opacity: runtimeStore.searchHitKeysMap ? 1 : 0
             }"
           >
-            {{ runtimeStore.searchHitKeysMap && Object.keys(runtimeStore.searchHitKeysMap).length }}
-            {{ $t('result') }}
+            {{
+              $t(
+                'sidebar.result',
+                searchResult,
+                searchResult
+                  ? {
+                      count: searchResult
+                    }
+                  : undefined
+              )
+            }}
           </div>
         </template>
       </NInput>

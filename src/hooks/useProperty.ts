@@ -40,6 +40,7 @@ export function useProperty() {
         ...ele,
         label: key,
         key: flatKeys,
+        parentKeys: tempKeys,
         children
       }
     })

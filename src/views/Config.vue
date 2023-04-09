@@ -55,12 +55,12 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
       <Pane min-size="10"> <SideBar /> </Pane>
       <Pane min-size="10">
         <NLayoutContent>
-          <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
+          <NScrollbar class="p-5" style="height: calc(100vh - 64px)">
             <template key="tipText" v-if="!store.selectedKeys.length">
               <Empty />
             </template>
             <template v-else>
-              <!-- <Property key="property" :level="1" :definition="property"></Property> -->
+              <Property key="property" :level="1" :definition="property"></Property>
             </template>
           </NScrollbar>
         </NLayoutContent>
