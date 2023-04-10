@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NLayout, NSkeleton } from 'naive-ui'
+import { NLayout, NSkeleton, NTabs, NTab } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { ref } from 'vue'
 import SidePanel from './SidePanel/index.vue'
@@ -10,16 +10,9 @@ import VisualizationPanelLoadingSkeleton from './VisualizationPanel/components/L
 import EditorPanelLoadingSkeleton from './EditorPanel/components/LoadingSkeleton.vue'
 import EditorPanel from './EditorPanel/index.vue'
 
-const refreshId = ref(0)
 const editorPanel = ref<typeof EditorPanel>()
-const handleReady = () => {
-  setTimeout(() => {
-    refreshId.value += 1
-  }, 300)
-}
 const handleResize = () => {
-  // console.log(editorPanel.value?.resizeEditor)
-  // editorPanel.value?.resizeEditor()
+  editorPanel.value?.handleResize && editorPanel.value?.handleResize()
 }
 </script>
 
@@ -27,8 +20,8 @@ const handleResize = () => {
   <NLayout class="h-screen">
     <Header />
     <NLayout style="height: calc(100vh - 64px)">
-      <Splitpanes @ready="handleReady" @resize="handleResize" :dblClickSplitter="false">
-        <Pane min-size="10">
+      <Splitpanes @resize="handleResize" :dblClickSplitter="false">
+        <Pane min-size="10" size="20">
           <Suspense>
             <SidePanel />
             <template #fallback>
@@ -36,7 +29,7 @@ const handleResize = () => {
             </template>
           </Suspense>
         </Pane>
-        <Pane min-size="10">
+        <Pane min-size="10" size="40">
           <Suspense>
             <VisualizationPanel />
             <template #fallback>
@@ -44,7 +37,7 @@ const handleResize = () => {
             </template>
           </Suspense>
         </Pane>
-        <Pane min-size="10">
+        <Pane min-size="10" size="40">
           <Suspense>
             <EditorPanel ref="editorPanel" />
             <template #fallback>

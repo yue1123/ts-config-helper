@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NButton, NLayoutHeader, NSpace, NTooltip } from 'naive-ui'
+import { NButton, NLayoutHeader, NSpace, NTooltip, NSelect } from 'naive-ui'
 import { computed, ref } from 'vue'
 
 import ThemeButton from '@components/ThemeButton.vue'
@@ -46,7 +46,6 @@ function handleShowSetting() {
           src="https://img.shields.io/github/v/tag/yue1123/ts-config-helper?label=Tag%20&logo=github&style=flat-square"
         />
       </div>
-
       <NSpace role="functional-btn" class="buttons-container">
         <NTooltip v-if="isSupported" placement="bottom" trigger="hover">
           <template #trigger>

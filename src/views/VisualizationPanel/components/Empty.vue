@@ -1,15 +1,16 @@
 <template>
   <NEmpty style="--n-icon-size: auto" :description="$t('emptyTips')">
     <template #icon>
-      <img v-show="themeStore.isDark" src="@assets/b5eb2f7d6b3f8cc9b60be4a5dcf28015.svg" alt="" />
-      <img
+      <img src="@assets/empty.svg" alt="" style="opacity: 0.3" />
+      <!-- v-show="themeStore.isDark" -->
+      <!-- <img
         v-show="!themeStore.isDark"
         src="@assets/02625ee29f851ec588c2020a88d82665.svg"
         alt=""
-      />
+      /> -->
     </template>
     <template #extra>
-      <div class="tipText">{{ $t('about') }}</div>
+      <!-- <div class="tipText">{{ $t('about') }}</div> -->
     </template>
   </NEmpty>
 </template>

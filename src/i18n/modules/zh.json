@@ -1,5 +1,5 @@
 {
-  "defaultValue": "默认值",
+  "default": "默认",
   "add": "添加",
   "release": "版本",
   "related": "相关",
@@ -69,5 +69,6 @@
   "notFound": "未找到`{property}`相关文档内容",
   "close": "关闭",
   "showMarkdownDesc": "查看 ts 文档描述",
-  "networkError": "网络错误"
+  "networkError": "网络错误",
+  "docLink": "文档链接"
 }

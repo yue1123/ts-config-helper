@@ -16,12 +16,12 @@ type eventValue = {
 const props = defineProps<Props>()
 const store = useStore()
 function handleChange(_e: any, { actionType, value: path }: eventValue) {
-  const item = props.data.find((item) => item.key === path)
-  if (item && actionType === 'check' && item.default !== undefined) {
-    store.rawConfig[path] = item.default
-  } else if (actionType === 'uncheck') {
-    deletePropertyByPath(store.rawConfig, [path as string])
-  }
+//   const item = props.data.find((item) => item.key === path)
+//   if (item && actionType === 'check' && item.default !== undefined) {
+//     store.rawConfig[path] = item.default
+//   } else if (actionType === 'uncheck') {
+//     deletePropertyByPath(store.rawConfig, [path as string])
+//   }
 }
 </script>
 

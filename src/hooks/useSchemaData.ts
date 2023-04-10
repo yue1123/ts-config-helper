@@ -74,7 +74,7 @@ let calledData: schemaConvertResult | null = null
 export async function useSchemaData() {
   if (!calledData) {
     const [schema] = await Promise.all([
-      import('@assets/_tsconfig.json'),
+      import('@schema/_tsconfig.json'),
       new Promise<void>((resolve) => {
         setTimeout(resolve, 800)
       })

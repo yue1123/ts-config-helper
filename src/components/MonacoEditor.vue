@@ -3,16 +3,7 @@
 </template>
 ​
 <script setup lang="ts">
-import {
-  onBeforeUnmount,
-  onMounted,
-  ref,
-  watch,
-  defineExpose,
-  getCurrentInstance,
-  watchEffect,
-  nextTick
-} from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch, defineExpose, watchEffect, nextTick } from 'vue'
 import * as monaco from 'monaco-editor'
 import useThemeStore from '../store/theme'
 import useDataStore from '../store/data'
@@ -22,7 +13,6 @@ import useSettingStore from '../store/setting'
 export interface Props {
   modelValue?: string
   language: string
-  schemaUrl: string
   theme: 'vs' | 'vs-dark' | 'hc-black'
   options?: Record<string, any>
   width?: string
@@ -94,7 +84,6 @@ const init = () => {
     console.log('重做')
     editor?.trigger('keyboard', 'redo', null)
   })
-
   // 监听值的变化
   editor.onDidChangeModelContent(() => {
     if (!shouldEmitChange) return
@@ -132,7 +121,7 @@ watchEffect(() => {
       {
         // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
         fileMatch: ['*'],
-        uri: new URL(props.schemaUrl, import.meta.url).href
+        uri: 'http://json.schemastore.org/tsconfig'
       }
     ]
   })

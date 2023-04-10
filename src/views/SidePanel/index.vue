@@ -1,11 +1,19 @@
 <script lang="ts" setup>
-import { NSpace, NInput, NButton, NScrollbar, NDropdown, type DropdownOption } from 'naive-ui'
+import {
+  NSpace,
+  NInput,
+  NButton,
+  NScrollbar,
+  NDropdown,
+  type DropdownOption
+  // NSelect
+} from 'naive-ui'
 import { useSchemaDataWithFilter } from '@hooks'
 import useRuntimeStore from '@store/runtime'
 import { debounce } from '@utils'
 import OptionsCheckbox from './components/OptionsCheckbox/index.vue'
 import {
-  BIconFilterRight,
+  // BIconFilterRight,
   BIconLightningFill,
   BIconBoxes,
   BIconCodeSlash,
@@ -19,7 +27,9 @@ import {
   BIconLifePreserver,
   BIconListColumns,
   BIconPlug,
-  BIconUiChecksGrid
+  BIconUiChecksGrid,
+  BIconBookmarkStar,
+  BIconFunnel
 } from 'bootstrap-icons-vue'
 
 import { ref, type Component, h, computed } from 'vue'
@@ -152,22 +162,39 @@ function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
   filter(type)
 }
+const configList = ['recommended.json', 'node16.json'].map((item) => {
+  return {
+    key: item,
+    label: item
+  }
+})
+const config = ref('recommended.json')
 </script>
 <template>
   <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
     <NSpace :size="15" vertical>
       <div class="flex items-center justify-between">
         <span>{{ filterLabelMap[activeFilter] }}</span>
-        <div>
+        <div class="flex items-center">
+          <NDropdown
+            placement="bottom-end"
+            :value="config"
+            trigger="click"
+            :options="configList"
+          >
+            <NButton disabled quaternary size="small">
+              <template #icon> <BIconBookmarkStar /> </template
+            ></NButton>
+          </NDropdown>
           <NDropdown
             placement="bottom-end"
             @select="handleChangeFilterType"
             :value="activeFilter"
-            trigger="hover"
+            trigger="click"
             :options="filterOptions"
           >
             <NButton quaternary size="small">
-              <template #icon> <BIconFilterRight /> </template
+              <template #icon> <BIconFunnel /> </template
             ></NButton>
           </NDropdown>
         </div>

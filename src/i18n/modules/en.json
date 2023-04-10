@@ -1,5 +1,5 @@
 {
-  "defaultValue": "Default",
+  "default": "Default",
   "add": "Add",
   "release": "Released",
   "related": "Related",

@@ -56,7 +56,6 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
       height="calc(100vh - 64px)"
       theme="vs-dark"
       @change="handleChange"
-      schema-url="../assets/_tsconfig.json"
     ></MonacoEditor>
   </NLayoutContent>
 </template>

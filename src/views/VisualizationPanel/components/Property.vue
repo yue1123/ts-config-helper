@@ -18,10 +18,10 @@ import {
   useMessage
 } from 'naive-ui'
 import { h } from 'vue'
-import useStore from '../../../store/data'
-import useSettingStore from '../../../store/setting'
-import type { Options } from '../../../types'
-import { enumToOptions, getInputType } from '../../../utils'
+import useStore from '@store/data'
+import useSettingStore from '@store/setting'
+import type { Options } from '@types'
+import { enumToOptions, getInputType } from '@utils'
 import MarkdownDesc from './MarkdownDesc.vue'
 export interface Props {
   definition: Options[]
@@ -113,7 +113,7 @@ export default {
                 </template>
               </NButton>
             </template>
-            文档链接
+            {{ $t('docLink') }}
           </NTooltip>
         </template>
         <Suspense>
@@ -121,7 +121,7 @@ export default {
         </Suspense>
       </div>
       <div class="mb-1 text-gray-400" v-if="property.default !== undefined">
-        {{ $t('defaultValue') }}: {{ property.default }}
+        {{ $t('default') }}: {{ property.default }}
       </div>
       <div v-if="settingStore.showDescription" class="mb-2 text-gray-400">
         {{ descriptionMap[currentLang][property.flatKeys]?.message }}
