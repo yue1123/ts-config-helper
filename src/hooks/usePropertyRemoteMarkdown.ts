@@ -23,7 +23,7 @@ export async function usePropertyRemoteMarkdown() {
     if (res) return Promise.resolve((data.value = res))
     else if (res === null) {
       isLoading.value = false
-      return Promise.reject(res)
+      return Promise.reject(null)
     }
     const currentLangMarkdownUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website-Localizations@1.0.0-alpha.1/docs/tsconfig/${currentLang.value}/options/${property}.md`
     const fallbackDescUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website@1.0.0-alpha.1/packages/tsconfig-reference/copy/en/options/${property}.md`
@@ -33,8 +33,9 @@ export async function usePropertyRemoteMarkdown() {
         .catch((errResponse) => {
           if (errResponse.status === 404) {
             return fetchMarkdown(fallbackDescUrl)
+          } else {
+            reject(errResponse)
           }
-          reject(errResponse)
         })
         .then((res) => {
           data.value = mdRender(res!)
@@ -42,7 +43,9 @@ export async function usePropertyRemoteMarkdown() {
           resolve(data.value)
         })
         .catch((errResponse) => {
-          cache.set(property, null)
+          if (errResponse.status === 404) {
+            cache.set(property, null)
+          }
           reject(errResponse)
         })
         .finally(() => {

@@ -68,5 +68,6 @@
   "about": "这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。",
   "notFound": "未找到`{property}`相关文档内容",
   "close": "关闭",
-  "showMarkdownDesc": "查看 ts 文档描述"
+  "showMarkdownDesc": "查看 ts 文档描述",
+  "networkError": "网络错误"
 }

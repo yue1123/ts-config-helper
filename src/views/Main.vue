@@ -2,10 +2,13 @@
 import { NLayout, NSkeleton } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { ref } from 'vue'
-import SideBar from './SideBar.vue'
+import SidePanel from './SidePanel/index.vue'
 import Header from './Header.vue'
-import VisualizationPanel from './VisualizationPanel.vue'
-import EditorPanel from './EditorPanel.vue'
+import VisualizationPanel from './VisualizationPanel/index.vue'
+import SidePanelLoadingSkeleton from './SidePanel/components/LoadingSkeleton.vue'
+import VisualizationPanelLoadingSkeleton from './VisualizationPanel/components/LoadingSkeleton.vue'
+import EditorPanelLoadingSkeleton from './EditorPanel/components/LoadingSkeleton.vue'
+import EditorPanel from './EditorPanel/index.vue'
 
 const refreshId = ref(0)
 const editorPanel = ref<typeof EditorPanel>()
@@ -16,7 +19,7 @@ const handleReady = () => {
 }
 const handleResize = () => {
   // console.log(editorPanel.value?.resizeEditor)
-  editorPanel.value?.resizeEditor()
+  // editorPanel.value?.resizeEditor()
 }
 </script>
 
@@ -27,11 +30,9 @@ const handleResize = () => {
       <Splitpanes @ready="handleReady" @resize="handleResize" :dblClickSplitter="false">
         <Pane min-size="10">
           <Suspense>
-            <SideBar />
+            <SidePanel />
             <template #fallback>
-              <div style="padding: 15px 24px 15px 30px">
-                <NSkeleton text :repeat="2" />
-              </div>
+              <SidePanelLoadingSkeleton />
             </template>
           </Suspense>
         </Pane>
@@ -39,9 +40,7 @@ const handleResize = () => {
           <Suspense>
             <VisualizationPanel />
             <template #fallback>
-              <div style="padding: 15px 24px 15px 30px">
-                <NSkeleton text :repeat="2" />
-              </div>
+              <VisualizationPanelLoadingSkeleton />
             </template>
           </Suspense>
         </Pane>
@@ -49,9 +48,7 @@ const handleResize = () => {
           <Suspense>
             <EditorPanel ref="editorPanel" />
             <template #fallback>
-              <div style="padding: 15px 24px 15px 30px">
-                <NSkeleton text :repeat="2" />
-              </div>
+              <EditorPanelLoadingSkeleton />
             </template>
           </Suspense>
         </Pane>

@@ -24,7 +24,6 @@ export async function createMarkdownRenderer() {
     linkify: true,
     typographer: true,
     highlight(str, lang) {
-      console.log(lang)
       if (lang && hljs.getLanguage(lang)) {
         try {
           return hljs.highlight(str, {

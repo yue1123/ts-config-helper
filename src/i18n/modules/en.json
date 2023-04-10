@@ -68,5 +68,6 @@
   "about": "This is a visual TypeScript configuration tool that can help you configure and learn TypeScript configuration options.",
   "notFound": "No relevant document content found for `{property}`",
   "close": "close",
-  "showMarkdownDesc": "View ts documentation description"
+  "showMarkdownDesc": "View ts documentation description",
+  "networkError": "Network Error"
 }

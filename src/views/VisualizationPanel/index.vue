@@ -2,8 +2,8 @@
 import { useSchemaData } from '@hooks'
 import useStore from '@store/data'
 import { NLayoutContent, NScrollbar } from 'naive-ui'
-import Property from './Property.vue'
-import Empty from './Empty.vue'
+import Property from './components/Property.vue'
+import Empty from './components/Empty.vue'
 
 const store = useStore()
 const { treeData } = await useSchemaData()

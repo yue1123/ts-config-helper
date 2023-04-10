@@ -1,12 +1,12 @@
 <script lang="ts" setup>
+import MonacoEditor from '@components/MonacoEditor.vue'
 import { useEventListener, useSchemaData } from '@hooks'
 import { currentLang } from '@i18n'
 import useStore from '@store/data'
+import { debounce, flatObjWithDepthControl } from '@utils'
 import json5 from 'json5'
 import { NLayoutContent } from 'naive-ui'
 import { onMounted, ref } from 'vue'
-import MonacoEditor from '../components/MonacoEditor.vue'
-import { debounce, flatObjWithDepthControl } from '../utils'
 
 const language = ref('json')
 const store = useStore()

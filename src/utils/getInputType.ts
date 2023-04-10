@@ -14,17 +14,17 @@ type InputType =
 const typeCache = new Map<string, InputType>()
 // get input type
 export function getInputType(property: Options): InputType {
-  let cache = typeCache.get(property.key)
+  let cache = typeCache.get(property.flatKeys)
   if (cache) return cache
   let res = getInputTypeHelper(property)
-  typeCache.set(property.key, res as InputType)
+  typeCache.set(property.flatKeys, res as InputType)
   return res
 }
 
 // special property
 // transpiler
 function getInputTypeHelper(property: Options): InputType {
-  let { items, type, oneOf, anyOf, key, enum: _enum } = property
+  let { items, type, oneOf, anyOf, enum: _enum } = property
   if (type) {
     if (type === 'array') {
       if (items.type === 'object') {

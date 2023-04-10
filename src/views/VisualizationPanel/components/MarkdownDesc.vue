@@ -15,7 +15,6 @@ const relatedTo = computed(() => relatedToMap[props.property])
 const props = defineProps<Props>()
 const { get, data, isLoading } = await usePropertyRemoteMarkdown()
 const message = useMessage()
-const { ctx } = getCurrentInstance() as unknown as { ctx: any }
 const showPopover = ref<boolean>(false)
 function handleGetMarkdownDesc() {
   showPopover.value = false
@@ -23,8 +22,12 @@ function handleGetMarkdownDesc() {
     .then(() => {
       showPopover.value = true
     })
-    .catch(() => {
-      message.error(t('notFound', { property: props.property }))
+    .catch((errResponse) => {
+      if (errResponse === null || errResponse.status === 404) {
+        message.error(t('notFound', { property: props.property }))
+      } else {
+        message.error(t('networkError'))
+      }
     })
 }
 function handleUpdateShow(value: boolean) {
@@ -72,7 +75,7 @@ function handleUpdateShow(value: boolean) {
         <NButton text :bordered="false" @click="showPopover = false">{{ $t('close') }}</NButton>
       </div>
     </template>
-    <div v-if="data" class="markdown-body h-full overflow-hidden" v-html="data"></div>
+    <div v-if="data" class="h-full overflow-hidden markdown-body" v-html="data"></div>
     <template #footer v-if="configVersion || relatedTo">
       <div class="flex flex-col space-y-2">
         <div v-if="configVersion" class="flex items-center space-x-2">
@@ -90,7 +93,7 @@ function handleUpdateShow(value: boolean) {
             {{ configVersion }}
           </NButton>
         </div>
-        <div v-if="relatedTo" class="flex items-center flex-wrap gap-2">
+        <div v-if="relatedTo" class="flex flex-wrap items-center gap-2">
           <div>{{ $t('related') }}:</div>
           <NTag v-for="item in relatedTo" type="success" size="small" :bordered="false">
             {{ item }}

@@ -2,8 +2,8 @@
 import { NSpace, NInput, NButton, NScrollbar, NDropdown, type DropdownOption } from 'naive-ui'
 import { useSchemaDataWithFilter } from '@hooks'
 import useRuntimeStore from '@store/runtime'
-import { debounce } from '../utils'
-import OptionsCheckbox from './OptionsCheckbox/index.vue'
+import { debounce } from '@utils'
+import OptionsCheckbox from './components/OptionsCheckbox/index.vue'
 import {
   BIconFilterRight,
   BIconLightningFill,

@@ -73,7 +73,12 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
 let calledData: schemaConvertResult | null = null
 export async function useSchemaData() {
   if (!calledData) {
-    const schema = await import('@assets/_tsconfig.json')
+    const [schema] = await Promise.all([
+      import('@assets/_tsconfig.json'),
+      new Promise<void>((resolve) => {
+        setTimeout(resolve, 800)
+      })
+    ])
     calledData = convertSchemaData(schema)
   }
   return calledData

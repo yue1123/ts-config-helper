@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { NDivider, NCheckbox, NCollapse, NCollapseItem, NTooltip } from 'naive-ui'
+import { NDivider, NCheckbox, NCollapse, NButton, NCollapseItem, NTooltip } from 'naive-ui'
 import { currentLang } from '@i18n'
 import type { Options } from '@types'
 import useRuntimeStore from '@store/runtime'
 import { descriptionMap } from '@schema'
+import { BIconQuestion } from 'bootstrap-icons-vue'
 export interface Props {
   data: Options[]
   level: number
@@ -35,17 +36,23 @@ export default {
         <div
           v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[options.flatKeys]"
           :key="i"
+          class="flex items-center justify-start px-2 py-1 transition-colors checked-box-item"
         >
-          <NTooltip placement="top-start" :style="{ maxWidth: '400px' }">
+          <NCheckbox size="large" class="flex-1 w-full" :value="options.flatKeys">
+            <div
+              class="overflow-hidden text-ellipsis whitespace-nowrap"
+              style="max-width: calc(100% - 20px)"
+            >
+              {{ options.key }}
+            </div>
+          </NCheckbox>
+          <NTooltip :delay="400" placement="top-end" :style="{ maxWidth: '400px' }">
             <template #trigger>
-              <NCheckbox size="large" class="w-full mt-1" :value="options.key">
-                <div
-                  class="text-ellipsis overflow-hidden whitespace-nowrap"
-                  style="max-width: calc(100% - 20px)"
-                >
-                  {{ options.key }}
-                </div>
-              </NCheckbox>
+              <NButton class="opacity-0 help" size="tiny" quaternary type="primary">
+                <template #icon>
+                  <BIconQuestion />
+                </template>
+              </NButton>
             </template>
             {{ descriptionMap[currentLang][options.flatKeys]?.message }}
           </NTooltip>
@@ -69,4 +76,17 @@ export default {
 :deep(.n-checkbox__label) {
   width: 100%;
 }
+.checked-box-item {
+  border-radius: 4px;
+}
+.dark .checked-box-item:hover {
+  background: var(--n-scrollbar-color);
+}
+.light .checked-box-item:hover {
+  background: #f1f1f1;
+}
+.checked-box-item:hover .help {
+  opacity: 1;
+}
+/* .help */
 </style>
