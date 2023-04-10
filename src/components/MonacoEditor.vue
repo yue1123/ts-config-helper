@@ -121,7 +121,7 @@ watchEffect(() => {
       {
         // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
         fileMatch: ['*'],
-        uri: 'http://json.schemastore.org/tsconfig'
+        uri: 'https://json.schemastore.org/tsconfig'
       }
     ]
   })
