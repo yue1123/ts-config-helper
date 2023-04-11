@@ -111,15 +111,12 @@ watchEffect(() => {
   })
 })
 watchEffect(() => {
-  // let url = (schemaJsonMap as any)[props.local]
-  // if (!url) url = (schemaJsonMap as any)['en-US']
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
     validate: true,
     enableSchemaRequest: true,
     allowComments: false,
     schemas: [
       {
-        // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
         fileMatch: ['*'],
         uri: 'http://json.schemastore.org/tsconfig'
       }

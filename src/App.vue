@@ -1,9 +1,24 @@
 <script lang="ts" setup>
-import { shallowRef, watchEffect } from 'vue'
+import { onMounted, shallowRef, watchEffect } from 'vue'
 import { NConfigProvider, NMessageProvider, darkTheme, lightTheme } from 'naive-ui'
 import useThemeStore from '@store/theme'
 import Main from '@views/Main.vue'
+// import { Fireworks } from 'https://esm.run/fireworks-js'
 
+// onMounted(() => {
+//   let container = document.querySelector('#app')
+
+//   let options = {
+//     gravity: 1.4,
+//     opacity: 0.4,
+//     autoresize: true,
+//     acceleration: 1.0
+//   }
+
+//   let fireworks = new Fireworks(container, options)
+
+//   fireworks.start()
+// })
 const currentTheme = shallowRef(darkTheme)
 const themeStore = useThemeStore()
 

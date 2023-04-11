@@ -8,9 +8,9 @@ import useThemeStore from '@store/theme'
 import Setting from '@views/Setting.vue'
 import { useClipboard } from '@vueuse/core'
 import {
-  BIconClipboardCheckFill,
-  BIconClipboardFill,
-  BIconGearFill,
+  BIconClipboardCheck,
+  BIconClipboard,
+  BIconGear,
   BIconGithub
 } from 'bootstrap-icons-vue'
 import darkLogo from '../assets/logo.png'
@@ -51,8 +51,8 @@ function handleShowSetting() {
           <template #trigger>
             <NButton @click="handleCopy" strong quaternary>
               <template #icon>
-                <BIconClipboardFill v-if="!copied" />
-                <BIconClipboardCheckFill v-else /> </template
+                <BIconClipboard v-if="!copied" />
+                <BIconClipboardCheck v-else /> </template
             ></NButton>
           </template>
           <span v-if="!copied">{{ $t('nav.copyToClipboard') }}</span>
@@ -67,7 +67,7 @@ function handleShowSetting() {
         <NTooltip placement="bottom" trigger="hover">
           <template #trigger>
             <NButton @click="handleShowSetting" strong quaternary>
-              <template #icon> <BIconGearFill /> </template
+              <template #icon> <BIconGear /> </template
             ></NButton>
           </template>
           <span>{{ $t('nav.setting') }}</span>

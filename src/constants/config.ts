@@ -1,3 +1,93 @@
+/**
+ * @link https://github.com/tsconfig/bases
+ * @link loadLink https://cdn.jsdelivr.net/npm/@tsconfig/{libName}@latest/tsconfig.json
+ */
+import nodejsLogo from '@assets/node_js.svg?url'
+console.log(nodejsLogo)
+export const baseTsConfigLibName = [
+  {
+    name: 'create-react-app',
+    icon: 'vscode-icons:file-type-reactjs'
+  },
+  {
+    name: 'cypress',
+    icon: 'vscode-icons:file-type-cypress'
+  },
+  {
+    name: 'deno',
+    icon: 'vscode-icons:file-type-deno'
+  },
+  {
+    name: 'docusaurus',
+    icon: 'logos:docusaurus'
+  },
+  {
+    name: 'ember',
+    icon: 'vscode-icons:file-type-ember'
+  },
+  {
+    name: 'esm',
+    icon: 'vscode-icons:file-type-js-official'
+  },
+  {
+    name: 'next',
+    icon: 'vscode-icons:file-type-next'
+  },
+  {
+    name: 'node-lts'
+  },
+  {
+    name: 'node10'
+  },
+  {
+    name: 'node12'
+  },
+  {
+    name: 'node14'
+  },
+  {
+    name: 'node16'
+  },
+  {
+    name: 'node17'
+  },
+  {
+    name: 'node18'
+  },
+  {
+    name: 'nuxt'
+  },
+  {
+    name: 'react-native'
+  },
+  {
+    name: 'recommended'
+  },
+  {
+    name: 'remix'
+  },
+  {
+    name: 'strictest'
+  },
+  {
+    name: 'svelte'
+  },
+  {
+    name: 'taro'
+  },
+  {
+    name: 'vite-react'
+  },
+  {
+    name: 'vue-common'
+  },
+  {
+    name: 'vue-node'
+  },
+  {
+    name: 'vue-web'
+  }
+] as const
 export const common = {
   include: true,
   exclude: true,

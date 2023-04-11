@@ -1,1 +1,1 @@
-export const skeletonHeight = `30px`
+export const skeletonHeight = `20px`
