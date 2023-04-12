@@ -111,15 +111,12 @@ watchEffect(() => {
   })
 })
 watchEffect(() => {
-  // let url = (schemaJsonMap as any)[props.local]
-  // if (!url) url = (schemaJsonMap as any)['en-US']
   monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
     validate: true,
     enableSchemaRequest: true,
     allowComments: false,
     schemas: [
       {
-        // fileMatch: ['tsconfig.*.json', 'tsconfig.json'],
         fileMatch: ['*'],
         uri: 'https://json.schemastore.org/tsconfig'
       }
@@ -159,7 +156,7 @@ watch(
     monaco.editor.setTheme(isDark ? 'darkTheme' : 'lightTheme')
   }
 )
-onBeforeUnmount(() => editor!.dispose())
+onBeforeUnmount(() => editor && editor.dispose())
 onMounted(init)
 
 function resize() {

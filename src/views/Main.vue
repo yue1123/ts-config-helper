@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { NLayout, NSkeleton, NTabs, NTab } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 import SidePanel from './SidePanel/index.vue'
 import Header from './Header.vue'
 import VisualizationPanel from './VisualizationPanel/index.vue'

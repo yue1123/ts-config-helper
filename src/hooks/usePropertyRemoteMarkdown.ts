@@ -1,17 +1,8 @@
 import { ref } from 'vue'
 import { currentLang } from '@i18n'
 import { createMarkdownRenderer } from '@modules/markdown'
+import { request } from '@utils'
 
-function fetchMarkdown(url: string) {
-  return fetch(url, {
-    mode: 'cors'
-  }).then((response) => {
-    if (response.ok) {
-      return response.text()
-    }
-    throw response
-  })
-}
 const cache = new Map()
 export async function usePropertyRemoteMarkdown() {
   const mdRender = await createMarkdownRenderer()
@@ -29,10 +20,10 @@ export async function usePropertyRemoteMarkdown() {
     const fallbackDescUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website@1.0.0-alpha.1/packages/tsconfig-reference/copy/en/options/${property}.md`
     isLoading.value = true
     return new Promise<string>((resolve, reject) => {
-      fetchMarkdown(currentLangMarkdownUrl)
+      request(currentLangMarkdownUrl)
         .catch((errResponse) => {
           if (errResponse.status === 404) {
-            return fetchMarkdown(fallbackDescUrl)
+            return request(fallbackDescUrl)
           } else {
             reject(errResponse)
           }

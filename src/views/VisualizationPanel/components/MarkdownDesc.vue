@@ -49,7 +49,13 @@ function handleUpdateShow(value: boolean) {
     <template #trigger>
       <NTooltip placement="right" trigger="hover">
         <template #trigger>
-          <NButton text :bordered="false" :loading="isLoading" @click="handleGetMarkdownDesc">
+          <NButton
+            v-bind="$attrs"
+            text
+            :bordered="false"
+            :loading="isLoading"
+            @click="handleGetMarkdownDesc"
+          >
             <template #icon>
               <BIconMarkdown />
             </template>

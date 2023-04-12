@@ -83,124 +83,137 @@ export default {
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.indexOf(property.flatKeys) !== -1">
-      <div class="flex items-center mt-4 space-x-4">
-        <div class="flex items-center justify-start space-x-1">
-          <NButton size="small" text>
-            <template #icon>
-              <BIconHash />
-            </template>
-          </NButton>
-          <div class="flex items-center keys">
-            <template v-for="(key, index) in property.parentKeys" :key="index">
-              <NH4 style="color: #bbb; --n-margin: 0">{{ key }}</NH4>
-              <span> . </span>
-            </template>
-            <NH3 style="--n-margin: 0">{{ property.key }}</NH3>
+      <div class="property-item mb-4">
+        <div class="flex items-center space-x-4">
+          <div class="flex items-center justify-start space-x-1">
+            <NButton size="small" text>
+              <template #icon>
+                <BIconHash />
+              </template>
+            </NButton>
+            <div class="flex items-center keys">
+              <template v-for="(key, index) in property.parentKeys" :key="index">
+                <NH4 style="color: #bbb; --n-margin: 0">{{ key }}</NH4>
+                <span> . </span>
+              </template>
+              <NH3 style="--n-margin: 0">{{ property.key }}</NH3>
+            </div>
           </div>
+          <template v-if="descriptionMap[currentLang][property.flatKeys]?.link">
+            <NTooltip placement="right" trigger="hover">
+              <template #trigger>
+                <NButton
+                  text
+                  tag="a"
+                  :href="descriptionMap[currentLang][property.flatKeys].link"
+                  target="_blank"
+                  class="tool-btn"
+                  type="default"
+                >
+                  <template #icon>
+                    <BIconLink45deg />
+                  </template>
+                </NButton>
+              </template>
+              {{ $t('docLink') }}
+            </NTooltip>
+          </template>
+          <Suspense>
+            <MarkdownDesc class="tool-btn" :property="property.key" />
+          </Suspense>
         </div>
-        <template v-if="descriptionMap[currentLang][property.flatKeys]?.link">
-          <NTooltip placement="right" trigger="hover">
-            <template #trigger>
-              <NButton
-                text
-                tag="a"
-                :href="descriptionMap[currentLang][property.flatKeys].link"
-                target="_blank"
-                type="default"
-              >
-                <template #icon>
-                  <BIconLink45deg />
-                </template>
-              </NButton>
-            </template>
-            {{ $t('docLink') }}
-          </NTooltip>
+        <div class="mb-1 text-gray-400" v-if="property.default !== undefined">
+          {{ $t('default') }}: {{ property.default }}
+        </div>
+        <div v-if="settingStore.showDescription" class="mb-2 text-gray-400">
+          {{ descriptionMap[currentLang][property.flatKeys]?.message }}
+        </div>
+        <template key="array" v-if="getInputType(property) === 'array'">
+          <div type="array" class="array_property-container">
+            <NDynamicTags
+              style="--n-input-width: 150px"
+              :render-tag="(tag:string,index:number) => renderTag(tag,index,property)"
+              :size="'large'"
+              :value="store.rawConfig[property.flatKeys]"
+              @update:value="(event: any) => handleArrayDataItemCheck(event, property)"
+            />
+          </div>
         </template>
-        <Suspense>
-          <MarkdownDesc :property="property.key" />
-        </Suspense>
-      </div>
-      <div class="mb-1 text-gray-400" v-if="property.default !== undefined">
-        {{ $t('default') }}: {{ property.default }}
-      </div>
-      <div v-if="settingStore.showDescription" class="mb-2 text-gray-400">
-        {{ descriptionMap[currentLang][property.flatKeys]?.message }}
-      </div>
-      <template key="array" v-if="getInputType(property) === 'array'">
-        <div type="array" class="array_property-container">
-          <NDynamicTags
-            style="--n-input-width: 150px"
-            :render-tag="(tag:string,index:number) => renderTag(tag,index,property)"
-            :size="'large'"
-            :value="store.rawConfig[property.flatKeys]"
-            @update:value="(event: any) => handleArrayDataItemCheck(event, property)"
+        <template key="array" v-if="getInputType(property) === 'keyValues'">
+          <KeyValuesInput
+            :data="store.rawConfig[property.flatKeys]"
+            @update:data="(data) => (store.rawConfig[property.flatKeys] = data)"
+            key-desc="alias path"
+            value-desc="alias target"
           />
-        </div>
-      </template>
-      <template key="array" v-if="getInputType(property) === 'keyValues'">
-        <KeyValuesInput
-          :data="store.rawConfig[property.flatKeys]"
-          @update:data="(data) => (store.rawConfig[property.flatKeys] = data)"
-          key-desc="alias path"
-          value-desc="alias target"
-        />
-      </template>
-      <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
-        <div type="boolean" class="boolean_property-container">
-          <NSwitch v-model:value="store.rawConfig[property.flatKeys]" />
-        </div>
-      </template>
-      <template key="string" v-else-if="getInputType(property) === 'string'">
-        <div type="string" class="string_property-container">
-          <NInput v-model:value="store.rawConfig[property.flatKeys]" />
-        </div>
-      </template>
-      <template key="select" v-else-if="getInputType(property) === 'select'">
-        <div type="enum" class="enum_property-container">
-          <NSelect
-            :multiple="property.type === 'array'"
-            :default-value="property.default"
-            :options="enumToOptions(property.enum, key as unknown as string)"
-            v-model:value="store.rawConfig[property.flatKeys]"
-          />
-        </div>
-      </template>
-      <template key="select.multiple" v-else-if="getInputType(property) === 'array.object'">
-        <ObjectInput
-          :property="property"
-          :data="store.rawConfig[property.flatKeys]"
-          @update:data="(data) => (store.rawConfig[property.flatKeys] = data)"
-        ></ObjectInput>
-      </template>
-      <template key="number" v-else-if="getInputType(property) === 'number'">
-        <NInputNumber v-model:value="store.rawConfig[property.flatKeys]" />
-      </template>
-      <template
-        key="arrayButConvertWhenSingle"
-        v-else-if="getInputType(property) === 'arrayButConvertWhenSingle'"
-      >
-        <div type="arrayButConvertWhenSingle" class="enum_property-container">
-          <NDynamicTags
-            style="--n-input-width: 150px"
-            :size="'large'"
-            :value="
-              typeof store.rawConfig[property.flatKeys] === 'string'
-                ? [store.rawConfig[property.flatKeys]]
-                : store.rawConfig[property.flatKeys]
-            "
-            @update:value="(event: any) => handleTagsChange(event, property)"
-          />
-        </div>
-      </template>
-      <template
-        key="selectOrInputWithCheck"
-        v-else-if="getInputType(property) === 'selectOrInputWithCheck'"
-      >
-        <div type="selectOrInputWithCheck" class="enum_property-container">123</div>
-      </template>
+        </template>
+        <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
+          <div type="boolean" class="boolean_property-container">
+            <NSwitch v-model:value="store.rawConfig[property.flatKeys]" />
+          </div>
+        </template>
+        <template key="string" v-else-if="getInputType(property) === 'string'">
+          <div type="string" class="string_property-container">
+            <NInput v-model:value="store.rawConfig[property.flatKeys]" />
+          </div>
+        </template>
+        <template key="select" v-else-if="getInputType(property) === 'select'">
+          <div type="enum" class="enum_property-container">
+            <NSelect
+              :multiple="property.type === 'array'"
+              :default-value="property.default"
+              :options="enumToOptions(property.enum, key as unknown as string)"
+              v-model:value="store.rawConfig[property.flatKeys]"
+            />
+          </div>
+        </template>
+        <template key="select.multiple" v-else-if="getInputType(property) === 'array.object'">
+          <ObjectInput
+            :property="property"
+            :data="store.rawConfig[property.flatKeys]"
+            @update:data="(data) => (store.rawConfig[property.flatKeys] = data)"
+          ></ObjectInput>
+        </template>
+        <template key="number" v-else-if="getInputType(property) === 'number'">
+          <NInputNumber v-model:value="store.rawConfig[property.flatKeys]" />
+        </template>
+        <template
+          key="arrayButConvertWhenSingle"
+          v-else-if="getInputType(property) === 'arrayButConvertWhenSingle'"
+        >
+          <div type="arrayButConvertWhenSingle" class="enum_property-container">
+            <NDynamicTags
+              style="--n-input-width: 150px"
+              :size="'large'"
+              :value="
+                typeof store.rawConfig[property.flatKeys] === 'string'
+                  ? [store.rawConfig[property.flatKeys]]
+                  : store.rawConfig[property.flatKeys]
+              "
+              @update:value="(event: any) => handleTagsChange(event, property)"
+            />
+          </div>
+        </template>
+        <!-- <template
+          key="selectOrInputWithCheck"
+          v-else-if="getInputType(property) === 'selectOrInputWithCheck'"
+        >
+          <div type="selectOrInputWithCheck" class="enum_property-container">123</div>
+        </template> -->
+      </div>
     </template>
     <template v-if="property.children.length">
       <Property :level="props.level + 1" :definition="property.children" />
     </template>
   </template>
 </template>
+
+<style>
+.tool-btn {
+  opacity: 0;
+}
+.property-item:hover .tool-btn {
+  opacity: 1;
+  background: #000;
+}
+</style>
