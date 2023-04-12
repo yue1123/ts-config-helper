@@ -4,7 +4,8 @@ import { computed, ref, watch } from 'vue'
 import { initValueByPath } from '../utils'
 // import { parse, format, modify, applyEdits } from 'jsonc-parser'
 // import { diff, jsonPatchPathConverter } from 'just-diff'
-
+import json5 from 'json5'
+import { flatObjWithDepthControl } from '@utils'
 import useSettingStore from './setting'
 
 const dataStore = defineStore(
@@ -32,7 +33,30 @@ const dataStore = defineStore(
     //     console.log(newValue)
     //   }
     // )
-    return { config, selectedKeys, rawConfig, previewConfig }
+    function dispatchConfigWithJsonString(
+      value: string,
+      allOptionsFlatKeysMap: Map<string, boolean>
+    ) {
+      if (value) {
+        try {
+          const parseObj = json5.parse(value)
+          const res = flatObjWithDepthControl(parseObj, (item) => {
+            // check is max level
+            // if value is user value object, should not flatten
+            return !allOptionsFlatKeysMap.get(item)
+          })
+          rawConfig.value = res
+          let newSelectedKeys = Object.keys(rawConfig.value)
+          if (JSON.stringify(selectedKeys) !== JSON.stringify(selectedKeys.value)) {
+            selectedKeys.value = [...selectedKeys.value, ...newSelectedKeys]
+          }
+        } catch (error) {}
+      } else {
+        selectedKeys.value = []
+        rawConfig.value = {}
+      }
+    }
+    return { config, selectedKeys, rawConfig, previewConfig, dispatchConfigWithJsonString }
   },
   {
     persist: import.meta.env.PROD

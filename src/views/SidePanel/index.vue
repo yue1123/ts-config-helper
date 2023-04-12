@@ -10,21 +10,23 @@ import {
 } from 'naive-ui'
 import { useSchemaDataWithFilter, useOptionsFilterOptions, useBaseTsConfig } from '@hooks'
 import useRuntimeStore from '@store/runtime'
+import useDataStore from '@store/data'
 import { debounce } from '@utils'
 import OptionsCheckbox from './components/OptionsCheckbox/index.vue'
 import { BIconBookmarkStar, BIconFunnel } from 'bootstrap-icons-vue'
-import { ref, computed } from 'vue'
+import { ref, computed, watch } from 'vue'
 import type { FilterKey } from '@types'
+const dataStore = useDataStore()
 // 当前过滤配置列表
 const activeFilter = ref<FilterKey>('all')
 const runtimeStore = useRuntimeStore()
 // tsconfig schema json data
-const { filterData, filter, allOptionsFlatKeys } = await useSchemaDataWithFilter()
+const { filterData, filter, allOptionsFlatKeys, allOptionsFlatKeysMap } =
+  await useSchemaDataWithFilter()
 // 配置过滤下拉选项
 const { filterLabelMap, filterOptions } = useOptionsFilterOptions()
 // 预设配置列表
-const { baseTsConfigOptions } = useBaseTsConfig()
-
+const { getConfigJson, configJson, isLoading, baseTsConfigLibOptions } = useBaseTsConfig()
 const handleSearch = debounce((searchKeyword: string) => {
   let obj = Object.create(null)
   if (searchKeyword) {
@@ -47,7 +49,12 @@ function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
   filter(type)
 }
-const config = ref('recommended.json')
+watch(
+  () => configJson.value,
+  (newValue) => {
+    if (newValue) dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap)
+  }
+)
 </script>
 <template>
   <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
@@ -57,11 +64,11 @@ const config = ref('recommended.json')
         <div class="flex items-center">
           <NDropdown
             placement="bottom-end"
-            :value="config"
             trigger="click"
-            :options="baseTsConfigOptions"
+            @select="getConfigJson"
+            :options="baseTsConfigLibOptions"
           >
-            <NButton quaternary size="small">
+            <NButton :loading="isLoading" quaternary size="small">
               <template #icon> <BIconBookmarkStar /> </template
             ></NButton>
           </NDropdown>

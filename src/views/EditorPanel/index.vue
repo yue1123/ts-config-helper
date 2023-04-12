@@ -4,7 +4,7 @@ import { useEventListener, useSchemaData } from '@hooks'
 import { currentLang } from '@i18n'
 import useStore from '@store/data'
 import { debounce, flatObjWithDepthControl } from '@utils'
-import json5 from 'json5'
+
 import { NLayoutContent } from 'naive-ui'
 import { onMounted, ref } from 'vue'
 
@@ -14,24 +14,7 @@ const monacoEditor = ref<typeof MonacoEditor>()
 const { allOptionsFlatKeysMap } = await useSchemaData()
 // user paste or input code
 function handleChange(value: string) {
-  if (value) {
-    try {
-      const parseObj = json5.parse(value)
-      const res = flatObjWithDepthControl(parseObj, (item) => {
-        // check is max level
-        // if value is user value object, should not flatten
-        return !allOptionsFlatKeysMap.get(item)
-      })
-      store.rawConfig = res
-      let selectedKeys = Object.keys(store.rawConfig)
-      if (JSON.stringify(selectedKeys) !== JSON.stringify(store.selectedKeys)) {
-        store.selectedKeys = [...store.selectedKeys, ...selectedKeys]
-      }
-    } catch (error) {}
-  } else {
-    store.selectedKeys = []
-    store.rawConfig = {}
-  }
+  store.dispatchConfigWithJsonString(value, allOptionsFlatKeysMap)
 }
 
 const handleResize = debounce(() => {

@@ -80,7 +80,7 @@ export async function useSchemaData() {
         setTimeout(resolve, 800)
       })
     ])
-    calledData = !isQueued ? convertSchemaData(schema) : calledData
+    calledData = !isQueued ? convertSchemaData(schema) : calledData!
     isQueued = true
   }
   return calledData

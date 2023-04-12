@@ -156,7 +156,7 @@ watch(
     monaco.editor.setTheme(isDark ? 'darkTheme' : 'lightTheme')
   }
 )
-onBeforeUnmount(() => editor!.dispose())
+onBeforeUnmount(() => editor && editor.dispose())
 onMounted(init)
 
 function resize() {
