@@ -54,7 +54,6 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
     })
     return { flatKeys, res }
   }
-
   Reflect.deleteProperty(schemaDefinitions, '//')
   for (const definitionKeys of Object.keys(schemaDefinitions)) {
     let properties = schemaDefinitions[definitionKeys].properties
@@ -70,6 +69,8 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
   return { treeData, allOptionsFlatKeys, allOptionsFlatKeysMap }
 }
 
+// only one time init
+let isQueued = false
 let calledData: schemaConvertResult | null = null
 export async function useSchemaData() {
   if (!calledData) {
@@ -79,7 +80,8 @@ export async function useSchemaData() {
         setTimeout(resolve, 800)
       })
     ])
-    calledData = convertSchemaData(schema)
+    calledData = !isQueued ? convertSchemaData(schema) : calledData
+    isQueued = true
   }
   return calledData
 }
