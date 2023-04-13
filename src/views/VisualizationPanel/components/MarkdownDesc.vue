@@ -42,17 +42,18 @@ function handleUpdateShow(value: boolean) {
     footer-style="position: sticky; bottom:0; background: var(--n-color);border-radius: 0 0 4px 4px;"
     scrollable
     :show="showPopover"
-    placement="right"
+    :show-arrow="false"
+    placement="bottom-start"
     trigger="click"
     class="opacity-100"
     @update:show="handleUpdateShow"
   >
     <template #trigger>
-      <NTooltip placement="right" trigger="hover">
+      <NTooltip :disabled="showPopover" placement="right" trigger="hover">
         <template #trigger>
           <NButton text :bordered="false" :loading="isLoading" @click="handleGetMarkdownDesc">
             <template #icon>
-              <BIconMarkdown class="opacity-40 hover:opacity-100" />
+              <BIconMarkdown class="hover:opacity-100" :class="{ 'opacity-40': !showPopover }" />
             </template>
           </NButton>
         </template>

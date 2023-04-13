@@ -20,7 +20,7 @@ import { skeletonHeight } from '@constants'
       <NSkeleton width="30px" height="30px" :sharp="false" />
       <NSkeleton :height="skeletonHeight" width="25%" :sharp="false" />
     </div>
-    <div v-for="i in 10" class="flex justify-start space-x-4">
+    <div v-for="i in 5" class="flex justify-start space-x-4">
       <NSkeleton width="30px" :height="skeletonHeight" :sharp="false" />
       <NSkeleton :height="skeletonHeight" width="75%" :sharp="false" />
     </div>

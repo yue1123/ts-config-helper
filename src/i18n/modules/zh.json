@@ -5,6 +5,8 @@
   "related": "相关",
   "quote": "引用自",
   "sidebar": {
+    "presetConfig": "预设配置",
+    "configFilter": "配置项过滤",
     "related": "相关配置",
     "result": "{count} 项结果",
     "all": "所有配置项",
@@ -35,7 +37,9 @@
     "compilerDiagnostics": "@:sidebar.dropdown.compilerDiagnostics@:sidebar.related",
     "projects": "@:sidebar.dropdown.projects@:sidebar.related",
     "outputFormatting": "@:sidebar.dropdown.outputFormatting@:sidebar.related",
-    "completeness": "@:sidebar.dropdown.completeness@:sidebar.related"
+    "completeness": "@:sidebar.dropdown.completeness@:sidebar.related",
+    "successLoadConfig": "成功加载{name}配置",
+    "learnMore": "了解如何使用"
   },
   "nav": {
     "theme": "切换主题",

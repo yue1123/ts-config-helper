@@ -1,16 +1,7 @@
 <template>
   <NEmpty style="--n-icon-size: auto" :description="$t('emptyTips')">
     <template #icon>
-      <img src="@assets/empty.svg" alt="" style="opacity: 0.3" />
-      <!-- v-show="themeStore.isDark" -->
-      <!-- <img
-        v-show="!themeStore.isDark"
-        src="@assets/02625ee29f851ec588c2020a88d82665.svg"
-        alt=""
-      /> -->
-    </template>
-    <template #extra>
-      <!-- <div class="tipText">{{ $t('about') }}</div> -->
+      <img src="@assets/empty.svg" alt="" :style="{ opacity: themeStore.isDark ? 0.35 : 0.5 }" />
     </template>
   </NEmpty>
 </template>

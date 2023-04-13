@@ -1,9 +1,10 @@
 import { h, ref } from 'vue'
-import { useMessage, type DropdownOption } from 'naive-ui'
+import { useMessage, NButton, type DropdownOption } from 'naive-ui'
 import { Icon } from '@iconify/vue'
 import { request } from '@utils'
 import json5 from 'json5'
 import useSettingStore from '@store/setting'
+import { useI18n } from 'vue-i18n'
 
 const loadLink = (libName: string) =>
   `https://cdn.jsdelivr.net/npm/@tsconfig/${libName}@latest/tsconfig.json`
@@ -19,6 +20,7 @@ export function useBaseTsConfig() {
    * @link https://github.com/tsconfig/bases
    * @link loadLink https://cdn.jsdelivr.net/npm/@tsconfig/{liblabel}@latest/tsconfig.json
    */
+  const { t } = useI18n()
   const settingStore = useSettingStore()
   const baseTsConfigLibOptions: DropdownOption[] = [
     {
@@ -150,6 +152,24 @@ export function useBaseTsConfig() {
           label: 'vue-common'
         }
       ]
+    },
+    {
+      key: 'more',
+      type: 'render',
+      render() {
+        return h(
+          NButton,
+          {
+            class: 'p-3',
+            text: true,
+            tag: 'a',
+            href: 'https://github.com/tsconfig/bases',
+            target: '_blank',
+            type: 'primary'
+          },
+          () => t('sidebar.learnMore')
+        )
+      }
     }
   ]
   const isLoading = ref<boolean>()
@@ -166,6 +186,9 @@ export function useBaseTsConfig() {
         config['$schema'] && Reflect.deleteProperty(config, '$schema')
         config['display'] && Reflect.deleteProperty(config, 'display')
         configJson.value = json5.stringify(config, null, settingStore.editor.tabSize)
+        message.success(t('sidebar.successLoadConfig', { name: libName }), {
+          duration: 3000
+        })
       })
       .catch((err) => {
         message.error(err.message || 'Unknown Error !!')

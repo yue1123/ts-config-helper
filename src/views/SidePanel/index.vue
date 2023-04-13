@@ -1,13 +1,5 @@
 <script lang="ts" setup>
-import {
-  NSpace,
-  NInput,
-  NButton,
-  NScrollbar,
-  NDropdown,
-  type DropdownOption
-  // NSelect
-} from 'naive-ui'
+import { NSpace, NInput, NButton, NScrollbar, NDropdown, NTooltip } from 'naive-ui'
 import { useSchemaDataWithFilter, useOptionsFilterOptions, useBaseTsConfig } from '@hooks'
 import useRuntimeStore from '@store/runtime'
 import useDataStore from '@store/data'
@@ -16,6 +8,7 @@ import OptionsCheckbox from './components/OptionsCheckbox/index.vue'
 import { BIconBookmarkStar, BIconFunnel } from 'bootstrap-icons-vue'
 import { ref, computed, watch } from 'vue'
 import type { FilterKey } from '@types'
+import { Icon } from '@iconify/vue'
 const dataStore = useDataStore()
 // 当前过滤配置列表
 const activeFilter = ref<FilterKey>('all')
@@ -60,7 +53,10 @@ watch(
   <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
     <NSpace :size="15" vertical>
       <div class="flex items-center justify-between">
-        <span>{{ filterLabelMap[activeFilter] }}</span>
+        <div class="flex items-center space-x-2">
+          <Icon icon="bi:ui-checks-grid" />
+          <span>{{ filterLabelMap[activeFilter] }}</span>
+        </div>
         <div class="flex items-center">
           <NDropdown
             placement="bottom-end"
@@ -68,9 +64,16 @@ watch(
             @select="getConfigJson"
             :options="baseTsConfigLibOptions"
           >
-            <NButton :loading="isLoading" quaternary size="small">
-              <template #icon> <BIconBookmarkStar /> </template
-            ></NButton>
+            <NTooltip placement="bottom" trigger="hover">
+              <template #trigger>
+                <NButton :loading="isLoading" quaternary size="small">
+                  <template #icon>
+                    <BIconBookmarkStar />
+                  </template>
+                </NButton>
+              </template>
+              {{ $t('sidebar.presetConfig') }}
+            </NTooltip>
           </NDropdown>
           <NDropdown
             placement="bottom-end"
@@ -79,9 +82,16 @@ watch(
             trigger="click"
             :options="filterOptions"
           >
-            <NButton quaternary size="small">
-              <template #icon> <BIconFunnel /> </template
-            ></NButton>
+            <NTooltip placement="bottom" trigger="hover">
+              <template #trigger>
+                <NButton quaternary size="small">
+                  <template #icon>
+                    <BIconFunnel />
+                  </template>
+                </NButton>
+              </template>
+              {{ $t('sidebar.configFilter') }}
+            </NTooltip>
           </NDropdown>
         </div>
       </div>
