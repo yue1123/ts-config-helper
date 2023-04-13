@@ -83,7 +83,7 @@ export default {
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.indexOf(property.flatKeys) !== -1">
-      <div class="property-item mb-4">
+      <div class="mb-4 property-item">
         <div class="flex items-center space-x-4">
           <div class="flex items-center justify-start space-x-1">
             <NButton size="small" text>
@@ -107,7 +107,7 @@ export default {
                   tag="a"
                   :href="descriptionMap[currentLang][property.flatKeys].link"
                   target="_blank"
-                  class="tool-btn"
+                  class="opacity-40 hover:opacity-100"
                   type="default"
                 >
                   <template #icon>
@@ -119,7 +119,7 @@ export default {
             </NTooltip>
           </template>
           <Suspense>
-            <MarkdownDesc class="tool-btn" :property="property.key" />
+            <MarkdownDesc :property="property.key" />
           </Suspense>
         </div>
         <div class="mb-1 text-gray-400" v-if="property.default !== undefined">
@@ -207,13 +207,3 @@ export default {
     </template>
   </template>
 </template>
-
-<style>
-.tool-btn {
-  opacity: 0;
-}
-.property-item:hover .tool-btn {
-  opacity: 1;
-  background: #000;
-}
-</style>

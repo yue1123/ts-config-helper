@@ -44,20 +44,15 @@ function handleUpdateShow(value: boolean) {
     :show="showPopover"
     placement="right"
     trigger="click"
+    class="opacity-100"
     @update:show="handleUpdateShow"
   >
     <template #trigger>
       <NTooltip placement="right" trigger="hover">
         <template #trigger>
-          <NButton
-            v-bind="$attrs"
-            text
-            :bordered="false"
-            :loading="isLoading"
-            @click="handleGetMarkdownDesc"
-          >
+          <NButton text :bordered="false" :loading="isLoading" @click="handleGetMarkdownDesc">
             <template #icon>
-              <BIconMarkdown />
+              <BIconMarkdown class="opacity-40 hover:opacity-100" />
             </template>
           </NButton>
         </template>
