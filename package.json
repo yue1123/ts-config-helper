@@ -1,6 +1,6 @@
 {
   "name": "ts-config-helper",
-  "version": "1.0.0-beta-6",
+  "version": "1.0.0-beta-7",
   "private": true,
   "description": "这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。",
   "scripts": {
