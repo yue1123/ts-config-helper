@@ -12,12 +12,11 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
   const treeData: Options[] = []
   const allOptionsFlatKeysMap = new Map<string, boolean>()
   const recursionHelper = (property: any, keys: string[] = []) => {
-    let tempKeys = [...keys]
     let flatKeys: string[] = []
     let res = Object.keys(property).map((key) => {
       let ele = property[key]
       let children: Options[] = []
-      let temp = [...tempKeys, key]
+      let temp = [...keys, key]
       let flatKeyString = temp.join('.')
       // get $ref data
       if (ele.allOf) {
@@ -33,9 +32,8 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
       }
 
       if (ele.properties) {
-        tempKeys.push(key)
         // deep get
-        const { res, flatKeys: _flatKeys } = recursionHelper(ele.properties, tempKeys)
+        const { res, flatKeys: _flatKeys } = recursionHelper(ele.properties, temp)
         children = res
         Array.prototype.push.apply(flatKeys, _flatKeys)
       }
@@ -48,7 +46,7 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
         ...ele,
         key,
         flatKeys: flatKeyString,
-        parentKeys: tempKeys,
+        parentKeys: temp,
         children
       }
     })
@@ -81,6 +79,7 @@ export async function useSchemaData() {
       })
     ])
     calledData = !isQueued ? convertSchemaData(schema) : calledData!
+    console.log(calledData)
     isQueued = true
   }
   return calledData
