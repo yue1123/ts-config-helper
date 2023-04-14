@@ -45,7 +45,7 @@ function handleChangeFilterType(type: FilterKey) {
 watch(
   () => configJson.value,
   (newValue) => {
-    if (newValue) dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap)
+    if (newValue) dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true)
   }
 )
 </script>

@@ -35,7 +35,8 @@ const dataStore = defineStore(
     // )
     function dispatchConfigWithJsonString(
       value: string,
-      allOptionsFlatKeysMap: Map<string, boolean>
+      allOptionsFlatKeysMap: Map<string, boolean>,
+      clear: boolean = false
     ) {
       if (value) {
         try {
@@ -47,7 +48,9 @@ const dataStore = defineStore(
           })
           rawConfig.value = res
           let newSelectedKeys = Object.keys(rawConfig.value)
-          if (JSON.stringify(selectedKeys) !== JSON.stringify(selectedKeys.value)) {
+          if (clear) {
+            selectedKeys.value = newSelectedKeys
+          } else {
             selectedKeys.value = [...selectedKeys.value, ...newSelectedKeys]
           }
         } catch (error) {}
