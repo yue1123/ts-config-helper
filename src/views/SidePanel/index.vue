@@ -21,14 +21,26 @@ const { filterLabelMap, filterOptions } = useOptionsFilterOptions()
 // 预设配置列表
 const { getConfigJson, configJson, isLoading, baseTsConfigLibOptions } = useBaseTsConfig()
 const handleSearch = debounce((searchKeyword: string) => {
-  let obj = Object.create(null)
+  let hitKeysMap = Object.create(null)
+  let hitCountMap = Object.create(null)
   if (searchKeyword) {
     for (const item of allOptionsFlatKeys.value) {
       if (item.indexOf(searchKeyword) !== -1) {
-        obj[item] = true
+        hitKeysMap[item] = true
+        // 计算命中个数
+        hitCountMap[item] = 1
+        const keys = item.split('.')
+        if (keys.length > 0) {
+          keys.forEach((splitKey, index) => {
+            const _splitKey = index > 0 ? [keys[index - 1], splitKey].join('.') : splitKey
+            let count = hitCountMap[_splitKey] || 0
+            hitCountMap[_splitKey] = hitCountMap[_splitKey] ? count + 1 : 1
+          })
+        }
       }
     }
-    runtimeStore.searchHitKeysMap = obj
+    runtimeStore.searchHitKeysCountMap = hitCountMap
+    runtimeStore.searchHitKeysMap = hitKeysMap
   } else {
     runtimeStore.resetHitKeysMap(runtimeStore, null)
   }

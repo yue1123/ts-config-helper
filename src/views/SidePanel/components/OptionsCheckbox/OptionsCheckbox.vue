@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { NDivider, NCheckbox, NCollapse, NButton, NCollapseItem, NTooltip } from 'naive-ui'
+import { NDivider, NCheckbox, NCollapse, NButton, NCollapseItem, NTooltip, NBadge } from 'naive-ui'
 import { currentLang } from '@i18n'
 import type { Options } from '@types'
 import useRuntimeStore from '@store/runtime'
 import { descriptionMap } from '@schema'
 import { BIconQuestion } from 'bootstrap-icons-vue'
+import { computed, watchEffect } from 'vue'
 export interface Props {
   data: Options[]
   level: number
@@ -12,6 +13,14 @@ export interface Props {
 
 const runtimeStore = useRuntimeStore()
 const props = defineProps<Props>()
+const renderData = computed(() => {
+  if (runtimeStore.searchHitKeysCountMap !== null) {
+    return props.data.filter((item) => {
+      return runtimeStore.searchHitKeysCountMap![item.flatKeys]
+    })
+  }
+  return props.data
+})
 </script>
 
 <script lang="ts">
@@ -22,11 +31,17 @@ export default {
 
 <template>
   <div :style="{ paddingLeft: `${props.level >= 1 ? 18 : 0}px` }">
-    <template v-for="(options, i) in props.data" :key="options.flatKeys">
+    <template v-for="(options, i) in renderData" :key="options.flatKeys">
       <!-- has children, recursive rendering -->
       <template v-if="options.children.length">
-        <NCollapse class="mt-2" :key="i">
+        <NCollapse display-directive="show" class="mt-2" :key="i">
           <NCollapseItem :title="options.key" :name="options.key">
+            <template #header-extra v-if="runtimeStore.searchHitKeysCountMap">
+              <NBadge
+                type="success"
+                :value="runtimeStore.searchHitKeysCountMap![options.flatKeys]"
+              />
+            </template>
             <OptionsCheckbox :level="props.level + 1" :data="options.children" />
           </NCollapseItem>
         </NCollapse>
@@ -34,7 +49,6 @@ export default {
       </template>
       <template v-else>
         <div
-          v-if="!runtimeStore.searchHitKeysMap || runtimeStore.searchHitKeysMap?.[options.flatKeys]"
           :key="i"
           class="flex items-center justify-start px-2 py-1 transition-colors checked-box-item"
         >
