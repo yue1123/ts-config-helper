@@ -79,7 +79,6 @@ export async function useSchemaData() {
       })
     ])
     calledData = !isQueued ? convertSchemaData(schema) : calledData!
-    console.log(calledData)
     isQueued = true
   }
   return calledData

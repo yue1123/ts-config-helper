@@ -49,6 +49,17 @@ const init = () => {
       'editor.background': '#ffffff'
     }
   })
+  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
+    validate: true,
+    enableSchemaRequest: true,
+    allowComments: false,
+    schemas: [
+      {
+        fileMatch: ['*'],
+        uri: 'https://json.schemastore.org/tsconfig'
+      }
+    ]
+  })
   const { tabSize, fontSize, lineHeight, minimap, lineNumbers } = settingStore.editor
   editor = monaco.editor.create(codeEditBox.value, {
     value: props.modelValue,
@@ -108,19 +119,6 @@ watchEffect(() => {
     minimap: {
       enabled: minimap
     }
-  })
-})
-watchEffect(() => {
-  monaco.languages.json.jsonDefaults.setDiagnosticsOptions({
-    validate: true,
-    enableSchemaRequest: true,
-    allowComments: false,
-    schemas: [
-      {
-        fileMatch: ['*'],
-        uri: 'https://json.schemastore.org/tsconfig'
-      }
-    ]
   })
 })
 

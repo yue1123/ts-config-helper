@@ -10,6 +10,10 @@ declare module 'splitpanes' {
   export const Pane: Component
 }
 
+declare module 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js' {
+  export * from '@types/canvas-confetti'
+}
+
 // i18n translate key
 declare module '@intlify/core-base' {
   import I18nStore from '@i18n/modules/zh.json'

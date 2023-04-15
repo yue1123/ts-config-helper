@@ -7,12 +7,8 @@ import useStore from '@store/data'
 import useThemeStore from '@store/theme'
 import Setting from '@views/Setting.vue'
 import { useClipboard } from '@vueuse/core'
-import {
-  BIconClipboardCheck,
-  BIconClipboard,
-  BIconGear,
-  BIconGithub
-} from 'bootstrap-icons-vue'
+import { BIconClipboardCheck, BIconClipboard, BIconGear, BIconGithub } from 'bootstrap-icons-vue'
+import Version from '@components/Version.vue'
 import darkLogo from '../assets/logo.png'
 import lightLogo from '../assets/logo-light.png'
 const store = useStore()
@@ -41,10 +37,7 @@ function handleShowSetting() {
           </template>
           {{ $t('about') }}
         </NTooltip>
-        <img
-          alt="GitHub tag (latest by date)"
-          src="https://img.shields.io/github/v/tag/yue1123/ts-config-helper?label=Tag%20&logo=github&style=flat-square"
-        />
+        <Version />
       </div>
       <NSpace role="functional-btn" class="buttons-container">
         <NTooltip v-if="isSupported" placement="bottom" trigger="hover">

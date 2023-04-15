@@ -9,6 +9,7 @@ import SidePanelLoadingSkeleton from './SidePanel/components/LoadingSkeleton.vue
 import VisualizationPanelLoadingSkeleton from './VisualizationPanel/components/LoadingSkeleton.vue'
 import EditorPanelLoadingSkeleton from './EditorPanel/components/LoadingSkeleton.vue'
 import EditorPanel from './EditorPanel/index.vue'
+import Guide from './Guide.vue'
 
 const editorPanel = ref<typeof EditorPanel>()
 const handleResize = () => {
@@ -48,4 +49,5 @@ const handleResize = () => {
       </Splitpanes>
     </NLayout>
   </NLayout>
+  <Guide />
 </template>
