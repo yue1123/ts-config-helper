@@ -81,7 +81,7 @@ function handleSkip() {
       <img src="../assets/guideCover.svg" alt="" />
     </template>
     <div class="content">
-      <NH1 class="m-0 pb-2">Welcome TS Config Helper</NH1>
+      <NH1 class="m-0 pb-2">TS Config Helper</NH1>
       <div class="space-x-2">
         <Version />
         <img
