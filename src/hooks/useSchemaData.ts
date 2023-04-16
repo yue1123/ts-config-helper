@@ -14,9 +14,9 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
   const recursionHelper = (property: any, keys: string[] = []) => {
     let flatKeys: string[] = []
     let res = Object.keys(property).map((key) => {
+      let temp = [...keys, key]
       let ele = property[key]
       let children: Options[] = []
-      let temp = [...keys, key]
       let flatKeyString = temp.join('.')
       // get $ref data
       if (ele.allOf) {
@@ -46,7 +46,7 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
         ...ele,
         key,
         flatKeys: flatKeyString,
-        parentKeys: temp,
+        parentKeys: keys,
         children
       }
     })
