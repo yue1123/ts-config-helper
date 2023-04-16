@@ -35,7 +35,11 @@
     "outputFormatting": "@:sidebar.dropdown.outputFormatting@:sidebar.related",
     "projects": "@:sidebar.dropdown.projects@:sidebar.related",
     "related": "関連する構成",
-    "typeChecking": "@:sidebar.dropdown.typeChecking@:sidebar.related"
+    "typeChecking": "@:sidebar.dropdown.typeChecking@:sidebar.related",
+    "configFilter": "構成アイテムのフィルタリング",
+    "learnMore": "使い方を学ぶ",
+    "presetConfig": "デフォルト構成",
+    "successLoadConfig": "{name} 構成を正常にロードしました"
   },
   "nav": {
     "theme": "テーマを切り替える",
@@ -65,9 +69,19 @@
       "lineNumbers": "コードの行番号を表示"
     }
   },
-  "about": "これは,TypeScript 構成項目の構成と学習に役立つ視覚的な TypeScript 構成ツールです。",
   "notFound": "`{property}` に関連するドキュメントの内容が見つかりません",
   "close": "近い",
   "showMarkdownDesc": "ts ドキュメントの説明を表示",
-  "networkError": "ネットワークエラー"
+  "networkError": "ネットワークエラー",
+  "docLink": "ドキュメント リンク",
+  "site": {
+    "about": "だいたい",
+    "desc": "Ts Config Helper は強力で使いやすい TypeScript 構成ツールであり、視覚的な構成、詳細な Ts 公式 Web サイト ドキュメント レビュー、プリセット構成リスト、分類フィルタリングなどのさまざまな機能を提供し、tsconfig.json をより迅速に完了するのに役立ちます。そして正確に構成。",
+    "docs": "ドキュメンテーション",
+    "optionsFilter": "カテゴリ フィルタリング",
+    "optionsList": "デフォルト構成",
+    "twoWayParse": "二元分析",
+    "visualizationConfig": "ビジュアル構成"
+  },
+  "gotIt": "知っていた"
 }

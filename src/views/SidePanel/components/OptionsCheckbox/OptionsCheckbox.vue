@@ -33,7 +33,7 @@ export default {
   <div :style="{ paddingLeft: `${props.level >= 1 ? 18 : 0}px` }">
     <template v-for="(options, i) in renderData" :key="options.flatKeys">
       <!-- has children, recursive rendering -->
-      <template v-if="options.children.length">
+      <template v-if="options.children && options.children.length !== 0">
         <NCollapse display-directive="show" class="mt-2" :key="i">
           <NCollapseItem :title="options.key" :name="options.key">
             <template #header-extra v-if="runtimeStore.searchHitKeysCountMap">
@@ -44,8 +44,8 @@ export default {
             </template>
             <OptionsCheckbox :level="props.level + 1" :data="options.children" />
           </NCollapseItem>
+          <NDivider />
         </NCollapse>
-        <NDivider />
       </template>
       <template v-else>
         <div

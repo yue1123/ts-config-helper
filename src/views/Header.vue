@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { NButton, NLayoutHeader, NSpace, NTooltip, NSelect } from 'naive-ui'
 import { computed, ref } from 'vue'
-
 import ThemeButton from '@components/ThemeButton.vue'
 import useStore from '@store/data'
 import useThemeStore from '@store/theme'
@@ -15,27 +14,35 @@ const store = useStore()
 const { copy, copied, isSupported } = useClipboard()
 const themeStore = useThemeStore()
 
-function handleCopy() {
-  copy(store.previewConfig || '')
-}
+const emits = defineEmits(['showAbout'])
 const logoUrl = computed<string>(() => (themeStore.isDark ? darkLogo : lightLogo))
 // setting
 const setting = ref<typeof Setting>()
+
+function handleCopy() {
+  copy(store.previewConfig || '')
+}
 function handleShowSetting() {
   setting.value?.show()
+}
+function handleLogoClick() {
+  emits('showAbout')
 }
 </script>
 <template>
   <NLayoutHeader class="sticky top-0 h-16 py-4 px-6" bordered>
     <div class="flex justify-between items-center h-full">
       <div class="flex items-center gap-x-2">
-        <NTooltip placement="right" :style="{ maxWidth: '500px' }" trigger="hover">
+        <NTooltip placement="bottom-start" :style="{ maxWidth: '500px' }" trigger="hover">
           <template #trigger>
-            <div class="h-full flex justify-start gap-x-2 items-center">
+            <div
+              @click="handleLogoClick"
+              class="h-full flex justify-start gap-x-2 items-center cursor-pointer"
+            >
               <img height="32" :src="logoUrl" alt="" />
             </div>
           </template>
-          {{ $t('about') }}
+          {{ $t('site.about') }}
         </NTooltip>
         <Version />
       </div>

@@ -69,10 +69,19 @@
       "lineNumbers": "显示代码行号"
     }
   },
-  "about": "这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。",
   "notFound": "未找到`{property}`相关文档内容",
   "close": "关闭",
   "showMarkdownDesc": "查看 ts 文档描述",
   "networkError": "网络错误",
-  "docLink": "文档链接"
+  "docLink": "文档链接",
+  "site": {
+    "about": "关于",
+    "desc": "Ts Config Helper 是一个功能强大、易用性高的 TypeScript 配置工具，提供可视化配置、详细Ts官网文档查阅、预设配置列表和分类过滤等多种功能，帮助你更快速、准确地完成 tsconfig.json 的配置。",
+    "visualizationConfig": "可视化配置",
+    "docs": "文档查阅",
+    "optionsList": "预设配置",
+    "optionsFilter": "分类过滤",
+    "twoWayParse": "双向解析"
+  },
+  "gotIt": "知道了"
 }

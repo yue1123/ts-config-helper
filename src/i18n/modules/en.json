@@ -35,7 +35,11 @@
     "outputFormatting": "@:sidebar.dropdown.outputFormatting@:sidebar.related",
     "projects": "@:sidebar.dropdown.projects@:sidebar.related",
     "related": "related configuration",
-    "typeChecking": "@:sidebar.dropdown.typeChecking@:sidebar.related"
+    "typeChecking": "@:sidebar.dropdown.typeChecking@:sidebar.related",
+    "configFilter": "Configuration item filtering",
+    "learnMore": "Learn how to use",
+    "presetConfig": "default configuration",
+    "successLoadConfig": "Successfully loaded {name} configuration"
   },
   "nav": {
     "theme": "Toggle theme",
@@ -65,9 +69,19 @@
       "lineNumbers": "Show code line numbers"
     }
   },
-  "about": "This is a visual TypeScript configuration tool that can help you configure and learn TypeScript configuration options.",
   "notFound": "No relevant document content found for `{property}`",
   "close": "close",
   "showMarkdownDesc": "View ts documentation description",
-  "networkError": "Network Error"
+  "networkError": "Network Error",
+  "docLink": "document link",
+  "site": {
+    "about": "about",
+    "desc": "Ts Config Helper is a powerful and easy-to-use TypeScript configuration tool that provides various functions such as visual configuration, detailed Ts official website document review, preset configuration list and classification filtering, etc., to help you complete tsconfig.json more quickly and accurately \nConfiguration.",
+    "docs": "Documentation",
+    "optionsFilter": "Category filtering",
+    "optionsList": "default configuration",
+    "twoWayParse": "two-way analysis",
+    "visualizationConfig": "Visual configuration"
+  },
+  "gotIt": "knew"
 }

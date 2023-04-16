@@ -11,5 +11,5 @@ export default defineStore(GUIDE, {
       isFirst: true
     }
   },
-  persist: false
+  persist: true
 })
