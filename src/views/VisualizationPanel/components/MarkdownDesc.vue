@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, h, ref, getCurrentInstance } from 'vue'
+import { computed, ref } from 'vue'
 import { NPopover, NButton, NTooltip, NTag, useMessage, type PopoverTrigger } from 'naive-ui'
 import { BIconMarkdown, BIconLink45deg } from 'bootstrap-icons-vue'
 import { usePropertyRemoteMarkdown } from '@hooks'
@@ -9,6 +9,7 @@ import { useI18n } from 'vue-i18n'
 export interface Props {
   property: string
 }
+const emit = defineEmits(['scrollToTargetOptions'])
 const { t } = useI18n()
 const configVersion = computed(() => configReleaseMap[props.property])
 const relatedTo = computed(() => relatedToMap[props.property])
@@ -33,6 +34,9 @@ function handleGetMarkdownDesc() {
 function handleUpdateShow(value: boolean) {
   if (!value) showPopover.value = value
 }
+function handleScrollToTargetOptions(property: string) {
+  emit('scrollToTargetOptions', property)
+}
 </script>
 
 <template>
@@ -51,12 +55,7 @@ function handleUpdateShow(value: boolean) {
     <template #trigger>
       <NTooltip :disabled="showPopover" placement="right" trigger="hover">
         <template #trigger>
-          <NButton
-            text
-            :bordered="false"
-            :loading="isLoading"
-            @click="handleGetMarkdownDesc"
-          >
+          <NButton text :bordered="false" :loading="isLoading" @click="handleGetMarkdownDesc">
             <template #icon>
               <BIconMarkdown class="hover:opacity-100" :class="{ 'opacity-40': !showPopover }" />
             </template>
@@ -102,7 +101,14 @@ function handleUpdateShow(value: boolean) {
         </div>
         <div v-if="relatedTo" class="flex flex-wrap items-center gap-2">
           <div>{{ $t('related') }}:</div>
-          <NTag v-for="item in relatedTo" type="success" size="small" :bordered="false">
+          <NTag
+            class="cursor-pointer"
+            v-for="item in relatedTo"
+            @click="handleScrollToTargetOptions(item)"
+            type="success"
+            size="small"
+            :bordered="false"
+          >
             {{ item }}
           </NTag>
         </div>

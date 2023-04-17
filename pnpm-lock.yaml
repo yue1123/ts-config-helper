@@ -18,6 +18,7 @@ specifiers:
   autoprefixer: ^10.4.14
   bootstrap-icons-vue: ^1.8.1
   browserify: ^17.0.0
+  canvas-confetti: ^1.6.0
   comment-json: ^4.2.3
   eslint: ^8.34.0
   eslint-plugin-vue: ^9.9.0
@@ -30,6 +31,7 @@ specifiers:
   jsondiffpatch: ^0.4.1
   just-diff: ^6.0.2
   markdown-it: ^13.0.1
+  mitt: ^3.0.0
   monaco-editor: ^0.36.1
   naive-ui: ^2.34.3
   npm-run-all: ^4.1.5
@@ -58,6 +60,7 @@ dependencies:
   '@iconify/vue': 4.1.1_vue@3.2.47
   '@vueuse/core': 9.13.0_vue@3.2.47
   bootstrap-icons-vue: 1.8.1
+  canvas-confetti: 1.6.0
   comment-json: 4.2.3
   fast-json-patch: 3.1.1
   github-markdown-css: 5.2.0
@@ -67,6 +70,7 @@ dependencies:
   jsondiffpatch: 0.4.1
   just-diff: 6.0.2
   markdown-it: 13.0.1
+  mitt: 3.0.0
   monaco-editor: 0.36.1
   naive-ui: 2.34.3_vue@3.2.47
   pinia: 2.0.32_7h6e7cvei2rsgyre2mq4fyhehq
@@ -2801,6 +2805,10 @@ packages:
   /caniuse-lite/1.0.30001466:
     resolution: {integrity: sha512-ewtFBSfWjEmxUgNBSZItFSmVtvk9zkwkl1OfRZlKA8slltRN+/C/tuGVrF9styXkN36Yu3+SeJ1qkXxDEyNZ5w==}
 
+  /canvas-confetti/1.6.0:
+    resolution: {integrity: sha512-ej+w/m8Jzpv9Z7W7uJZer14Ke8P2ogsjg4ZMGIuq4iqUOqY2Jq8BNW42iGmNfRwREaaEfFIczLuZZiEVSYNHAA==}
+    dev: false
+
   /chai/4.3.7:
     resolution: {integrity: sha512-HLnAzZ2iupm25PlN0xFreAlBA5zaBSv3og0DdeGA4Ar6h6rJ3A0rolRUKJhSF2V10GZKDgWF/VmAEsNWjCRB+A==}
     engines: {node: '>=4'}
@@ -4757,6 +4765,10 @@ packages:
   /minimist/1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
     dev: true
+
+  /mitt/3.0.0:
+    resolution: {integrity: sha512-7dX2/10ITVyqh4aOSVI9gdape+t9l2/8QxHrFmUXu4EEUpdlxl6RudZUPZoc+zuY2hk1j7XxVroIVIan/pD/SQ==}
+    dev: false
 
   /mkdirp-classic/0.5.3:
     resolution: {integrity: sha512-gKLcREMhtuZRwRAfqP3RFW+TK4JqApVBtOIftVgjuABpAtpxhPGaDcfvbhNvD0B8iD1oUr/txX35NjcaY6Ns/A==}

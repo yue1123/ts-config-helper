@@ -3,13 +3,15 @@ import { RUN_TIME } from '@constants'
 interface State {
   searchHitKeysCountMap: Record<string, number> | null
   searchHitKeysMap: Record<string, boolean> | null
+  collapseExpandedNames: string[]
 }
 
 export default defineStore(RUN_TIME, {
   state: (): State => {
     return {
       searchHitKeysCountMap: null,
-      searchHitKeysMap: null
+      searchHitKeysMap: null,
+      collapseExpandedNames: []
     }
   },
   actions: {

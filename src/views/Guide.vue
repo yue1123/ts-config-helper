@@ -3,6 +3,7 @@ import { NSpace, NModal, NButton, NTag, NText, NA, NH1 } from 'naive-ui'
 import { ref, nextTick } from 'vue'
 import Version from '@components/Version.vue'
 import useGuide from '@store/guide'
+import confetti from 'canvas-confetti'
 const guideStore = useGuide()
 const showGuide = ref(false)
 nextTick(async () => {
@@ -17,51 +18,47 @@ defineExpose({
   }
 })
 function handleSkip() {
-  import('https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js').then(
-    () => {
-      setTimeout(() => {
-        showGuide.value = false
-        guideStore.isFirst = false
-      }, 100)
-      const count = 240
-      const defaults = {
-        zIndex: 9999,
-        origin: { y: 0.7 }
-      }
+  const count = 240
+  const defaults = {
+    zIndex: 9999,
+    origin: { y: 0.7 }
+  }
 
-      function fire(particleRatio: number, opts: any) {
-        // @ts-ignore
-        confetti(
-          Object.assign({}, defaults, opts, {
-            particleCount: Math.floor(count * particleRatio)
-          })
-        )
-      }
+  function fire(particleRatio: number, opts: any) {
+    // @ts-ignore
+    confetti(
+      Object.assign({}, defaults, opts, {
+        particleCount: Math.floor(count * particleRatio)
+      })
+    )
+  }
 
-      fire(0.25, {
-        spread: 26,
-        startVelocity: 55
-      })
-      fire(0.2, {
-        spread: 60
-      })
-      fire(0.35, {
-        spread: 100,
-        decay: 0.91,
-        scalar: 0.8
-      })
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 25,
-        decay: 0.92,
-        scalar: 1.2
-      })
-      fire(0.1, {
-        spread: 120,
-        startVelocity: 45
-      })
-    }
-  )
+  fire(0.25, {
+    spread: 26,
+    startVelocity: 55
+  })
+  fire(0.2, {
+    spread: 60
+  })
+  fire(0.35, {
+    spread: 100,
+    decay: 0.91,
+    scalar: 1
+  })
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 25,
+    decay: 0.92,
+    scalar: 1.5
+  })
+  fire(0.1, {
+    spread: 120,
+    startVelocity: 45
+  })
+  setTimeout(() => {
+    showGuide.value = false
+    guideStore.isFirst = false
+  }, 100)
 }
 </script>
 

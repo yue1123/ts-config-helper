@@ -54,6 +54,7 @@ function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
   filter(type)
 }
+
 watch(
   () => configJson.value,
   (newValue) => {
@@ -62,8 +63,13 @@ watch(
 )
 </script>
 <template>
-  <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px)">
-    <NSpace :size="15" vertical>
+  <div class="flex flex-col">
+    <NSpace
+      class="pb-2"
+      style="background: var(--n-color); padding: 15px 24px 0 30px"
+      :size="15"
+      vertical
+    >
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
           <Icon icon="bi:ui-checks-grid" />
@@ -128,7 +134,9 @@ watch(
           </div>
         </template>
       </NInput>
-      <OptionsCheckbox :level="0" :data="filterData" />
     </NSpace>
-  </NScrollbar>
+    <NScrollbar style="padding: 15px 24px 15px 30px; height: calc(100vh - 64px - 92px)">
+      <OptionsCheckbox id="J_Options_Container" :level="0" :data="filterData" />
+    </NScrollbar>
+  </div>
 </template>

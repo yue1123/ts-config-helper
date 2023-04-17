@@ -5,7 +5,7 @@ import type { Options } from '@types'
 import useRuntimeStore from '@store/runtime'
 import { descriptionMap } from '@schema'
 import { BIconQuestion } from 'bootstrap-icons-vue'
-import { computed, watchEffect } from 'vue'
+import { computed, ref } from 'vue'
 export interface Props {
   data: Options[]
   level: number
@@ -34,8 +34,14 @@ export default {
     <template v-for="(options, i) in renderData" :key="options.flatKeys">
       <!-- has children, recursive rendering -->
       <template v-if="options.children && options.children.length !== 0">
-        <NCollapse display-directive="show" class="mt-2" :key="i">
-          <NCollapseItem :title="options.key" :name="options.key">
+        <NCollapse
+          display-directive="show"
+          class="mt-2"
+          :key="i"
+          v-model:expanded-names="runtimeStore.collapseExpandedNames"
+        >
+          <!-- @update:expanded-names="handleOpenCollapse" -->
+          <NCollapseItem :title="options.key" :name="options.flatKeys">
             <template #header-extra v-if="runtimeStore.searchHitKeysCountMap">
               <NBadge
                 type="success"
@@ -52,7 +58,12 @@ export default {
           :key="i"
           class="flex items-center justify-start px-2 py-1 transition-colors checked-box-item"
         >
-          <NCheckbox size="large" class="flex-1 w-full" :value="options.flatKeys">
+          <NCheckbox
+            :id="options.flatKeys"
+            size="large"
+            class="flex-1 w-full"
+            :value="options.flatKeys"
+          >
             <div
               class="overflow-hidden text-ellipsis whitespace-nowrap"
               style="max-width: calc(100% - 20px)"
@@ -60,7 +71,8 @@ export default {
               {{ options.key }}
             </div>
           </NCheckbox>
-          <NTooltip :delay="400" placement="top-end" :style="{ maxWidth: '400px' }">
+
+          <NTooltip :delay="200" placement="top-end" :style="{ maxWidth: '400px' }">
             <template #trigger>
               <NButton class="opacity-0 help" size="tiny" quaternary type="primary">
                 <template #icon>
@@ -93,14 +105,15 @@ export default {
 .checked-box-item {
   border-radius: 4px;
 }
-.dark .checked-box-item:hover {
+.dark .checked-box-item:hover,
+.dark .checked-box-item:focus-within {
   background: var(--n-scrollbar-color);
 }
-.light .checked-box-item:hover {
+.light .checked-box-item:hover,
+.light .checked-box-item:focus-within {
   background: #f1f1f1;
 }
 .checked-box-item:hover .help {
   opacity: 1;
 }
-/* .help */
 </style>

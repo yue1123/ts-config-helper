@@ -17,16 +17,19 @@ import {
   NTooltip,
   useMessage
 } from 'naive-ui'
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import useStore from '@store/data'
 import useSettingStore from '@store/setting'
 import type { Options } from '@types'
 import { enumToOptions, getInputType } from '@utils'
 import MarkdownDesc from './MarkdownDesc.vue'
+import useRuntimeStore from '@store/runtime'
+// props type
 export interface Props {
   definition: Options[]
   level: number
 }
+const runtimeStore = useRuntimeStore()
 const store = useStore()
 const settingStore = useSettingStore()
 const message = useMessage()
@@ -72,6 +75,27 @@ function handleArrayDataItemCheck(value: string[], property: Options) {
   }
   store.rawConfig[property.flatKeys] = _value
 }
+// 点击锚点或相关属性滚动到视口中
+function handleScrollToTargetOptions(property: Options, relatedKey?: string) {
+  const key = relatedKey
+    ? [...property.parentKeys, relatedKey].join('\\.')
+    : property.flatKeys.replace('.', '\\.')
+  const targetOptionEl: HTMLElement | null = document.querySelector(`#J_Options_Container #${key}`)
+  const collapseKey = property.parentKeys.join('.')
+  const hasKey = runtimeStore.collapseExpandedNames.includes(collapseKey)
+  if (!hasKey) {
+    runtimeStore.collapseExpandedNames.push(collapseKey)
+  }
+  if (targetOptionEl) {
+    setTimeout(
+      () => {
+        targetOptionEl.focus()
+        targetOptionEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+      },
+      hasKey ? 0 : 200
+    )
+  }
+}
 </script>
 
 <script lang="ts">
@@ -86,7 +110,7 @@ export default {
       <div class="mb-4 property-item">
         <div class="flex items-center space-x-4">
           <div class="flex items-center justify-start space-x-1">
-            <NButton size="small" text>
+            <NButton size="small" text @click="handleScrollToTargetOptions(property)">
               <template #icon>
                 <BIconHash />
               </template>
@@ -119,7 +143,12 @@ export default {
             </NTooltip>
           </template>
           <Suspense>
-            <MarkdownDesc :property="property.key" />
+            <MarkdownDesc
+              @scrollToTargetOptions="
+                (relatedKey) => handleScrollToTargetOptions(property, relatedKey)
+              "
+              :property="property.key"
+            />
           </Suspense>
         </div>
         <div class="mb-1 text-gray-400" v-if="property.default !== undefined">

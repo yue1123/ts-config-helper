@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NLayout } from 'naive-ui'
+import { NLayout, NTabs, NTab } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { ref } from 'vue'
 import SidePanel from './SidePanel/index.vue'
@@ -10,8 +10,6 @@ import VisualizationPanelLoadingSkeleton from './VisualizationPanel/components/L
 import EditorPanelLoadingSkeleton from './EditorPanel/components/LoadingSkeleton.vue'
 import EditorPanel from './EditorPanel/index.vue'
 import Guide from './Guide.vue'
-import useGuide from '@store/guide'
-const guideStore = useGuide()
 
 const editorPanel = ref<typeof EditorPanel>()
 const guideModal = ref<typeof Guide>()
@@ -39,24 +37,53 @@ function showGuideModal() {
             </template>
           </Suspense>
         </Pane>
-        <Pane min-size="10" size="40">
-          <Suspense>
-            <VisualizationPanel />
-            <template #fallback>
-              <VisualizationPanelLoadingSkeleton />
-            </template>
-          </Suspense>
-        </Pane>
-        <Pane min-size="10" size="40">
-          <Suspense>
-            <EditorPanel ref="editorPanel" />
-            <template #fallback>
-              <EditorPanelLoadingSkeleton />
-            </template>
-          </Suspense>
+        <Pane min-size="10" size="80">
+          <Splitpanes :push-other-panes="false" horizontal :dblClickSplitter="false">
+            <Pane style="min-height: 42px">
+              <!-- addable closable -->
+              <NTabs class="file-tabs" type="card" style="height: 100%">
+                <NTab name="tsconfig.json"> tsconfig.json </NTab>
+              </NTabs>
+            </Pane>
+            <Pane size="99">
+              <Splitpanes
+                :push-other-panes="false"
+                @resize="handleResize"
+                :dblClickSplitter="false"
+              >
+                <Pane min-size="10" size="50">
+                  <Suspense>
+                    <VisualizationPanel />
+                    <template #fallback>
+                      <VisualizationPanelLoadingSkeleton />
+                    </template>
+                  </Suspense>
+                </Pane>
+                <Pane min-size="10" size="50">
+                  <Suspense>
+                    <EditorPanel ref="editorPanel" />
+                    <template #fallback>
+                      <EditorPanelLoadingSkeleton />
+                    </template>
+                  </Suspense>
+                </Pane>
+              </Splitpanes>
+            </Pane>
+          </Splitpanes>
         </Pane>
       </Splitpanes>
     </NLayout>
   </NLayout>
   <Guide ref="guideModal" />
 </template>
+
+<style lang="scss">
+.file-tabs {
+  .n-tabs-nav,
+  .n-tabs-nav-scroll-wrapper,
+  .v-x-scroll,
+  .n-tabs-nav-scroll-content {
+    height: 100%;
+  }
+}
+</style>

@@ -172,8 +172,8 @@ export function useBaseTsConfig() {
       }
     }
   ]
-  const isLoading = ref<boolean>()
-  const configJson = ref<string>()
+  const isLoading = ref<boolean>(false)
+  const configJson = ref<string>('')
   const message = useMessage()
   const getConfigJson = (libName: string) => {
     let res
