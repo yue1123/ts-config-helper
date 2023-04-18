@@ -1,10 +1,18 @@
 # ts config helper ⚡
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/5e16facc-03d0-4bee-8196-a01a370a4e47/deploy-status)](https://app.netlify.com/sites/tsconfighelper/deploys)
+![Netlify Status](https://img.shields.io/github/license/yue1123/ts-config-helper?style=flat-square)
+![Netlify Status](https://img.shields.io/github/v/tag/yue1123/ts-config-helper?label=Tag%20&logo=github&style=flat-square)
 
-这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。
+Ts Config Helper 是一个功能强大、易用性高的 TypeScript 配置工具，提供可视化配置、详细 Ts 官网文档查阅、预设配置列表和分类过滤等多种功能，帮助你更快速、准确地完成 tsconfig.json 的配置。
 
-[TsConfigHelper](https://tsconfighelper.netlify.app/)
+- 可视化配置
+- 文档查阅
+- 预设配置
+- 分类过滤
+- 双向解析
+
+[体验地址](https://tsconfighelper.netlify.app/)
 
 ## 🌟 Star History
 
