@@ -1,8 +1,8 @@
 {
   "name": "ts-config-helper",
-  "version": "1.0.0-beta-8",
+  "version": "1.0.0-beta-9",
   "private": true,
-  "description": "这是一个可视化的 TypeScript 配置工具，它能够帮助你配置和学习 TypeScript 配置项。",
+  "description": "Ts Config Helper 是一个功能强大、易用性高的 TypeScript 配置工具，提供可视化配置、详细 Ts 官网文档查阅、预设配置列表和分类过滤等多种功能，帮助你更快速、准确地完成 tsconfig.json 的配置。",
   "scripts": {
     "dev": "vite",
     "build": "run-p type-check build-only",
