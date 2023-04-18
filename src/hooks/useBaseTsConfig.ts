@@ -4,6 +4,7 @@ import { Icon } from '@iconify/vue'
 import { request } from '@utils'
 import json5 from 'json5'
 import useSettingStore from '@store/setting'
+import useDataStore from '@store/data'
 import { useI18n } from 'vue-i18n'
 
 const loadLink = (libName: string) =>
@@ -174,21 +175,35 @@ export function useBaseTsConfig() {
   ]
   const isLoading = ref<boolean>(false)
   const configJson = ref<string>('')
+  const currentLoadedLibName = ref<string>('')
   const message = useMessage()
+  const timerClear = () => {
+    setTimeout(() => {
+      configJson.value = ''
+    }, 500)
+  }
   const getConfigJson = (libName: string) => {
     let res
-    if ((res = configJsonCache.get(libName))) return (configJson.value = res)
+    currentLoadedLibName.value = libName
+    if ((res = configJsonCache.get(libName))) {
+      configJson.value = res
+      timerClear()
+      return
+    }
     isLoading.value = true
     request(loadLink(libName))
       .then((json) => {
         const config = json5.parse(json)
+        // cache config
         // remove $schema and display property
-        config['$schema'] && Reflect.deleteProperty(config, '$schema')
-        config['display'] && Reflect.deleteProperty(config, 'display')
+        // config['$schema'] && Reflect.deleteProperty(config, '$schema')
+        // config['display'] && Reflect.deleteProperty(config, 'display')
         configJson.value = json5.stringify(config, null, settingStore.editor.tabSize)
+        configJsonCache.set(libName, configJson.value)
         message.success(t('sidebar.successLoadConfig', { name: libName }), {
           duration: 3000
         })
+        timerClear()
       })
       .catch((err) => {
         message.error(err.message || 'Unknown Error !!')
@@ -197,5 +212,5 @@ export function useBaseTsConfig() {
         isLoading.value = false
       })
   }
-  return { getConfigJson, configJson, isLoading, baseTsConfigLibOptions }
+  return { getConfigJson, configJson, currentLoadedLibName, isLoading, baseTsConfigLibOptions }
 }

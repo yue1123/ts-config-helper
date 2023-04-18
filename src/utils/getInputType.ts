@@ -11,6 +11,7 @@ type InputType =
   | 'arrayButConvertWhenSingle'
   | 'selectOrInputWithCheck'
   | 'keyValues'
+  | 'leafNode'
 const typeCache = new Map<string, InputType>()
 // get input type
 export function getInputType(property: Options): InputType {
@@ -24,7 +25,9 @@ export function getInputType(property: Options): InputType {
 // special property
 // transpiler
 function getInputTypeHelper(property: Options): InputType {
-  let { items, type, oneOf, anyOf, enum: _enum } = property
+  let { items, type, oneOf, anyOf, enum: _enum, properties } = property
+  // 分类节点
+  if (properties) return 'leafNode'
   if (type) {
     if (type === 'array') {
       if (items.type === 'object') {

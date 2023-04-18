@@ -1,4 +1,4 @@
-import { getValueByPath, parsePath } from '@utils'
+import { getValueByPath, parsePath, request } from '@utils'
 import type { Options, schemaConvertResult } from '@types'
 
 /**
@@ -75,7 +75,7 @@ export async function useSchemaData() {
     const [schema] = await Promise.all([
       import('@schema/_tsconfig.json'),
       new Promise<void>((resolve) => {
-        setTimeout(resolve, 500000)
+        setTimeout(resolve, 500)
       })
     ])
     calledData = !isQueued ? convertSchemaData(schema) : calledData!

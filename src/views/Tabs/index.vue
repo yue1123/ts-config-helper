@@ -1,9 +1,25 @@
 <script lang="ts" setup>
-import { NTabs, NTab } from 'naive-ui'
-import useDataStore from '@store/data'
-import { useSchemaData } from '@hooks'
+import useDataStore, { type ConfigItemState } from '@store/data'
+import { NTab, NTabs, NButton, NInput } from 'naive-ui'
+import { ref, shallowRef } from 'vue'
+import { Icon } from '@iconify/vue'
+
 const dataStore = useDataStore()
-await useSchemaData()
+
+const renameValue = ref<string>('')
+const currentRenameItem = shallowRef<ConfigItemState | null>(null)
+function handleRename(item: ConfigItemState) {
+  currentRenameItem.value = item
+  renameValue.value = item.name
+}
+function handleQuitRename() {
+  currentRenameItem.value = null
+  renameValue.value = ''
+}
+function handleSureRename() {
+  if (currentRenameItem.value) dataStore.renameConfigTab(currentRenameItem.value, renameValue.value)
+  handleQuitRename()
+}
 </script>
 
 <template>
@@ -17,9 +33,31 @@ await useSchemaData()
     @close="dataStore.removeConfigTab"
     @add="dataStore.addConfigTab"
   >
-    <NTab v-for="item in dataStore.configList" :key="item.name" :name="item.name">
-      <!-- <NInput :value="item.name"></NInput> -->
-      {{ item.name }}
+    <NTab
+      v-for="item in dataStore.configList"
+      :key="item.name"
+      :name="item.name"
+      class="config-name-tab"
+    >
+      <div v-if="currentRenameItem === item" class="rename" @click.stop>
+        <NInput
+          autofocus
+          autosize
+          :placeholder="currentRenameItem.name"
+          v-model:value="renameValue"
+          style="min-width: 120px"
+          @blur="handleSureRename"
+          @keyup.enter="handleSureRename"
+        ></NInput>
+      </div>
+      <div v-else class="flex items-center space-x-2">
+        <span>{{ item.name }}</span>
+        <NButton class="rename-btn" text :bordered="false" @click.stop="handleRename(item)">
+          <template #icon>
+            <Icon width="16" icon="ph:pencil-simple-line-light" />
+          </template>
+        </NButton>
+      </div>
     </NTab>
   </NTabs>
 </template>
@@ -32,5 +70,12 @@ await useSchemaData()
   .n-tabs-nav-scroll-content {
     height: 100%;
   }
+}
+.config-name-tab .rename-btn {
+  transition: opacity 0.3s;
+  opacity: 0;
+}
+.config-name-tab:hover .rename-btn {
+  opacity: 1;
 }
 </style>

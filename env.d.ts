@@ -9,7 +9,9 @@ declare module 'splitpanes' {
   export const Splitpanes: Component
   export const Pane: Component
 }
-
+declare module 'https://json.schemastore.org/tsconfig' {
+  export const tsconfig: string
+}
 declare module 'https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js' {
   export * from '@types/canvas-confetti'
 }

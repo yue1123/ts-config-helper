@@ -6,7 +6,7 @@ import useDataStore from '@store/data'
 import { debounce } from '@utils'
 import OptionsCheckbox from './components/OptionsCheckbox/index.vue'
 import { BIconBookmarkStar, BIconFunnel } from 'bootstrap-icons-vue'
-import { ref, computed, watch } from 'vue'
+import { ref, computed, watch, nextTick } from 'vue'
 import type { FilterKey } from '@types'
 import { Icon } from '@iconify/vue'
 const dataStore = useDataStore()
@@ -19,7 +19,8 @@ const { filterData, filter, allOptionsFlatKeys, allOptionsFlatKeysMap } =
 // 配置过滤下拉选项
 const { filterLabelMap, filterOptions } = useOptionsFilterOptions()
 // 预设配置列表
-const { getConfigJson, configJson, isLoading, baseTsConfigLibOptions } = useBaseTsConfig()
+const { getConfigJson, configJson, currentLoadedLibName, isLoading, baseTsConfigLibOptions } =
+  useBaseTsConfig()
 const handleSearch = debounce((searchKeyword: string) => {
   let hitKeysMap = Object.create(null)
   let hitCountMap = Object.create(null)
@@ -58,7 +59,14 @@ function handleChangeFilterType(type: FilterKey) {
 watch(
   () => configJson.value,
   (newValue) => {
-    if (newValue) dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true)
+    if (newValue) {
+      if (!dataStore.configList.some((item) => item.name === currentLoadedLibName.value)) {
+        dataStore.addConfigTab(currentLoadedLibName.value)
+      } else {
+        dataStore.currentConfigName = currentLoadedLibName.value
+      }
+      nextTick(() => dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true))
+    }
   }
 )
 </script>

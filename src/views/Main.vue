@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NLayout, NInput, NTabs, NTab } from 'naive-ui'
+import { NLayout } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { ref } from 'vue'
 import SidePanel from './SidePanel/index.vue'
@@ -12,10 +12,10 @@ import EditorPanel from './EditorPanel/index.vue'
 import Guide from './Guide.vue'
 import Tabs from './Tabs/index.vue'
 import TabsLoadingSkeleton from './Tabs/components/LoadingSkeleton.vue'
+import { useSchemaData } from '@hooks'
 
 const editorPanel = ref<typeof EditorPanel>()
 const guideModal = ref<typeof Guide>()
-
 function handleResize() {
   editorPanel.value?.handleResize && editorPanel.value?.handleResize()
 }
@@ -24,6 +24,11 @@ function showGuideModal() {
     guideModal.value.show()
   }
 }
+
+const asyncComSharedLoadingState = ref<boolean>(true)
+useSchemaData().finally(() => {
+  asyncComSharedLoadingState.value = false
+})
 </script>
 
 <template>
@@ -31,7 +36,7 @@ function showGuideModal() {
     <Header @showAbout="showGuideModal" />
     <NLayout style="height: calc(100vh - 64px)">
       <Splitpanes @resize="handleResize" :dblClickSplitter="false">
-        <Pane min-size="10" size="20">
+        <Pane role="left-side-container" min-size="10" size="20">
           <Suspense>
             <SidePanel />
             <template #fallback>
@@ -39,23 +44,19 @@ function showGuideModal() {
             </template>
           </Suspense>
         </Pane>
-        <Pane min-size="10" size="80">
+        <Pane role="right-main-container" min-size="10" size="80">
           <Splitpanes :push-other-panes="false" horizontal :dblClickSplitter="false">
-            <Pane style="min-height: 42px; height: 42px">
-              <Suspense>
-                <Tabs />
-                <template #fallback>
-                  <TabsLoadingSkeleton />
-                </template>
-              </Suspense>
+            <Pane role="tabs-container" style="min-height: 42px; height: 42px">
+              <TabsLoadingSkeleton v-if="asyncComSharedLoadingState" />
+              <Tabs v-else />
             </Pane>
-            <Pane size="99">
+            <Pane role="tabs-content-container" size="99">
               <Splitpanes
                 :push-other-panes="false"
                 @resize="handleResize"
                 :dblClickSplitter="false"
               >
-                <Pane min-size="10" size="50">
+                <Pane role="visualization-container" min-size="10" size="50">
                   <Suspense>
                     <VisualizationPanel />
                     <template #fallback>
@@ -63,7 +64,7 @@ function showGuideModal() {
                     </template>
                   </Suspense>
                 </Pane>
-                <Pane min-size="10" size="50">
+                <Pane role="editor-container" min-size="10" size="50">
                   <Suspense>
                     <EditorPanel ref="editorPanel" />
                     <template #fallback>

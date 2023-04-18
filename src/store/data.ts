@@ -1,4 +1,4 @@
-import { DATA_CACHE } from '@constants'
+import { DATA_CACHE, numberReg } from '@constants'
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
 import { initValueByPath, deepClone } from '@utils'
@@ -7,7 +7,7 @@ import { initValueByPath, deepClone } from '@utils'
 import json5 from 'json5'
 import { flatObjWithDepthControl } from '@utils'
 import useSettingStore from './setting'
-interface ConfigItemState {
+export interface ConfigItemState {
   name: string
   config: string
   selectedKeys: string[]
@@ -63,8 +63,19 @@ const dataStore = defineStore(
         }
       }
     )
-    function addConfigTab() {
-      const name = `tsconfig.${Math.random()}.json`
+    function addConfigTab(name?: string) {
+      if (!name) {
+        let nameIndex: number = configList.value.length
+        for (let i = configList.value.length - 1; i >= 0; i--) {
+          const item = configList.value[i]
+          let res = item.name.match(numberReg)
+          if (res) {
+            nameIndex = +res[0] + 1
+            break
+          }
+        }
+        name = `tsconfig.${nameIndex}.json`
+      }
       configList.value.push({
         name,
         config: '',
@@ -80,6 +91,12 @@ const dataStore = defineStore(
       }
       configList.value.splice(index, 1)
     }
+    function renameConfigTab(item: ConfigItemState, newName: string) {
+      if (currentConfigName.value === item.name) {
+        currentConfigName.value = newName
+      }
+      item.name = newName
+    }
     function dispatchConfigWithJsonString(
       value: string,
       allOptionsFlatKeysMap: Map<string, boolean>,
@@ -88,6 +105,7 @@ const dataStore = defineStore(
       if (value) {
         try {
           const parseObj = json5.parse(value)
+          // FIXME: 修复 compileOptions 也出现在面板中
           const res = flatObjWithDepthControl(parseObj, (item) => {
             // check is max level
             // if value is user value object, should not flatten
@@ -97,7 +115,7 @@ const dataStore = defineStore(
           let newSelectedKeys = Object.keys(rawConfig.value)
           if (clear) {
             selectedKeys.value = newSelectedKeys
-          } else {
+          } else if (JSON.stringify(newSelectedKeys) !== JSON.stringify(selectedKeys.value)) {
             selectedKeys.value = [...new Set(newSelectedKeys.concat(selectedKeys.value))]
           }
         } catch (error) {}
@@ -114,6 +132,7 @@ const dataStore = defineStore(
       currentConfigName,
       configList,
       addConfigTab,
+      renameConfigTab,
       removeConfigTab,
       dispatchConfigWithJsonString
     }

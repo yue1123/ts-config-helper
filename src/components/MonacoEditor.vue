@@ -86,13 +86,13 @@ const init = () => {
   })
   // 绑定“Ctrl+Z”键为撤销操作
   editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyZ, function () {
-    console.log('撤销')
+    // console.log('撤销')
     editor?.trigger('keyboard', 'undo', null)
   })
 
   // 绑定“Ctrl+Y”键为重做操作
   editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyY, function () {
-    console.log('重做')
+    // console.log('重做')
     editor?.trigger('keyboard', 'redo', null)
   })
   // 监听值的变化

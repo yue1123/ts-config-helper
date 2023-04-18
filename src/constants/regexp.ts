@@ -6,3 +6,6 @@ export const markdownHashLinkReg = /\[.+?\]\((#.+?)\)/g
 
 // markdown link no base url
 export const markdownNoBaseUrlLinkReg = /\[.+?\]\((\/.+?)\)/g
+
+// match number
+export const numberReg = /(\d+)/g
