@@ -51,7 +51,7 @@ const dataStore = defineStore(
           if (clear) {
             selectedKeys.value = newSelectedKeys
           } else {
-            selectedKeys.value = [...selectedKeys.value, ...newSelectedKeys]
+            selectedKeys.value = [...new Set(newSelectedKeys.concat(selectedKeys.value))]
           }
         } catch (error) {}
       } else {
