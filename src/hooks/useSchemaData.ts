@@ -75,7 +75,7 @@ export async function useSchemaData() {
     const [schema] = await Promise.all([
       import('@schema/_tsconfig.json'),
       new Promise<void>((resolve) => {
-        setTimeout(resolve, 500)
+        setTimeout(resolve, 500000)
       })
     ])
     calledData = !isQueued ? convertSchemaData(schema) : calledData!

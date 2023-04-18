@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NLayout, NTabs, NTab } from 'naive-ui'
+import { NLayout, NInput, NTabs, NTab } from 'naive-ui'
 import { Pane, Splitpanes } from 'splitpanes'
 import { ref } from 'vue'
 import SidePanel from './SidePanel/index.vue'
@@ -10,6 +10,8 @@ import VisualizationPanelLoadingSkeleton from './VisualizationPanel/components/L
 import EditorPanelLoadingSkeleton from './EditorPanel/components/LoadingSkeleton.vue'
 import EditorPanel from './EditorPanel/index.vue'
 import Guide from './Guide.vue'
+import Tabs from './Tabs/index.vue'
+import TabsLoadingSkeleton from './Tabs/components/LoadingSkeleton.vue'
 
 const editorPanel = ref<typeof EditorPanel>()
 const guideModal = ref<typeof Guide>()
@@ -39,11 +41,13 @@ function showGuideModal() {
         </Pane>
         <Pane min-size="10" size="80">
           <Splitpanes :push-other-panes="false" horizontal :dblClickSplitter="false">
-            <Pane style="min-height: 42px">
-              <!-- addable closable -->
-              <NTabs class="file-tabs" type="card" style="height: 100%">
-                <NTab name="tsconfig.json"> tsconfig.json </NTab>
-              </NTabs>
+            <Pane style="min-height: 42px; height: 42px">
+              <Suspense>
+                <Tabs />
+                <template #fallback>
+                  <TabsLoadingSkeleton />
+                </template>
+              </Suspense>
             </Pane>
             <Pane size="99">
               <Splitpanes

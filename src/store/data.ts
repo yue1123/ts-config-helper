@@ -1,20 +1,38 @@
 import { DATA_CACHE } from '@constants'
 import { defineStore } from 'pinia'
 import { computed, ref, watch } from 'vue'
-import { initValueByPath } from '../utils'
+import { initValueByPath, deepClone } from '@utils'
 // import { parse, format, modify, applyEdits } from 'jsonc-parser'
 // import { diff, jsonPatchPathConverter } from 'just-diff'
 import json5 from 'json5'
 import { flatObjWithDepthControl } from '@utils'
 import useSettingStore from './setting'
+interface ConfigItemState {
+  name: string
+  config: string
+  selectedKeys: string[]
+  rawConfig: Record<string, any>
+}
 
 const dataStore = defineStore(
   DATA_CACHE,
   () => {
     const userSetting = useSettingStore()
+
     const config = ref<string>('')
     const selectedKeys = ref<string[]>([])
     const rawConfig = ref<Record<string, any>>({})
+
+    const configList = ref<ConfigItemState[]>([
+      {
+        name: 'tsconfig.json',
+        config: config.value,
+        selectedKeys: selectedKeys.value,
+        rawConfig: rawConfig.value
+      }
+    ])
+    const currentConfigName = ref<string>(configList.value[0].name)
+    // 预览配置
     const previewConfig = computed(() => {
       // let editorValue: Record<string, any> | null = parse(config.value)
       const _rawConfig = rawConfig.value
@@ -27,12 +45,41 @@ const dataStore = defineStore(
         ? JSON.stringify(obj, null, userSetting.editor.tabSize)
         : undefined
     })
-    // watch(
-    //   () => config.value,
-    //   (newValue) => {
-    //     console.log(newValue)
-    //   }
-    // )
+    // 上次的值保存与新值更新
+    watch(
+      () => currentConfigName.value,
+      (newKey, oldKey) => {
+        let oldConfig = configList.value.find((item) => item.name === oldKey)
+        let newConfig = configList.value.find((item) => item.name === newKey)
+        if (oldConfig) {
+          oldConfig.config = config.value
+          oldConfig.selectedKeys = deepClone(selectedKeys.value)
+          oldConfig.rawConfig = deepClone(rawConfig.value)
+        }
+        if (newConfig) {
+          config.value = newConfig.config
+          selectedKeys.value = deepClone(newConfig.selectedKeys)
+          rawConfig.value = deepClone(newConfig.rawConfig)
+        }
+      }
+    )
+    function addConfigTab() {
+      const name = `tsconfig.${Math.random()}.json`
+      configList.value.push({
+        name,
+        config: '',
+        selectedKeys: [],
+        rawConfig: {}
+      })
+      currentConfigName.value = name
+    }
+    function removeConfigTab(name: string) {
+      let index = configList.value.findIndex((item) => item.name === name)
+      if (configList.value[index].name === currentConfigName.value) {
+        currentConfigName.value = configList.value[index - 1].name
+      }
+      configList.value.splice(index, 1)
+    }
     function dispatchConfigWithJsonString(
       value: string,
       allOptionsFlatKeysMap: Map<string, boolean>,
@@ -59,7 +106,17 @@ const dataStore = defineStore(
         rawConfig.value = {}
       }
     }
-    return { config, selectedKeys, rawConfig, previewConfig, dispatchConfigWithJsonString }
+    return {
+      config,
+      selectedKeys,
+      rawConfig,
+      previewConfig,
+      currentConfigName,
+      configList,
+      addConfigTab,
+      removeConfigTab,
+      dispatchConfigWithJsonString
+    }
   },
   {
     persist: import.meta.env.PROD
