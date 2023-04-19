@@ -81,14 +81,3 @@ useSchemaData().finally(() => {
   </NLayout>
   <Guide ref="guideModal" />
 </template>
-
-<style lang="scss">
-.file-tabs {
-  .n-tabs-nav,
-  .n-tabs-nav-scroll-wrapper,
-  .v-x-scroll,
-  .n-tabs-nav-scroll-content {
-    height: 100%;
-  }
-}
-</style>

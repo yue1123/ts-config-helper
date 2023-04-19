@@ -3,32 +3,23 @@
 </template>
 ​
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch, defineExpose, watchEffect, nextTick } from 'vue'
-import * as monaco from 'monaco-editor'
-import useThemeStore from '../store/theme'
+import { onBeforeUnmount, onMounted, ref, watch, defineExpose, nextTick } from 'vue'
 import useDataStore from '../store/data'
-import useSettingStore from '../store/setting'
-// import es from '../schema/_tsconfig.json?url'
-// import zh from '../schema/_tsconfig.zh.json?url'
+import * as monaco from 'monaco-editor'
+export interface EditorOptions {
+  theme: 'darkTheme' | 'lightTheme'
+}
 export interface Props {
   modelValue?: string
   language: string
-  theme: 'vs' | 'vs-dark' | 'hc-black'
-  options?: Record<string, any>
+  options?: EditorOptions
   width?: string
   height?: string
-  local: any
 }
-// const schemaJsonMap = {
-//   'en-US': es,
-//   zh_cn: zh
-// }
 const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted'])
 const props = defineProps<Props>()
-const themeStore = useThemeStore()
-const settingStore = useSettingStore()
 const dataStore = useDataStore()
-let editor: monaco.editor.IStandaloneCodeEditor | null = null
+let editor: any | null = null
 const codeEditBox = ref()
 let shouldEmitChange = true
 const init = () => {
@@ -60,11 +51,8 @@ const init = () => {
       }
     ]
   })
-  const { tabSize, fontSize, lineHeight, minimap, lineNumbers } = settingStore.editor
   editor = monaco.editor.create(codeEditBox.value, {
     value: props.modelValue,
-    language: props.language,
-    theme: themeStore.isDark ? 'darkTheme' : 'lightTheme',
     automaticLayout: false,
     domReadOnly: true,
     scrollbar: {
@@ -74,27 +62,20 @@ const init = () => {
     suggest: {
       preview: true
     },
-    fontSize,
-    lineHeight,
-    tabSize,
     insertSpaces: true,
-    lineNumbers: lineNumbers ? 'on' : 'off',
-    minimap: {
-      enabled: minimap
-    },
     ...props.options
   })
-  // 绑定“Ctrl+Z”键为撤销操作
-  editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyZ, function () {
-    // console.log('撤销')
-    editor?.trigger('keyboard', 'undo', null)
-  })
+  // // 绑定“Ctrl+Z”键为撤销操作
+  // editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyZ, function () {
+  //   // console.log('撤销')
+  //   editor?.trigger('keyboard', 'undo', null)
+  // })
 
-  // 绑定“Ctrl+Y”键为重做操作
-  editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyY, function () {
-    // console.log('重做')
-    editor?.trigger('keyboard', 'redo', null)
-  })
+  // // 绑定“Ctrl+Y”键为重做操作
+  // editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyY, function () {
+  //   // console.log('重做')
+  //   editor?.trigger('keyboard', 'redo', null)
+  // })
   // 监听值的变化
   editor.onDidChangeModelContent(() => {
     if (!shouldEmitChange) return
@@ -108,20 +89,6 @@ const init = () => {
   dataStore.config = props.modelValue || ''
 }
 
-watchEffect(() => {
-  const { tabSize, fontSize, lineHeight, minimap, lineNumbers } = settingStore.editor
-  if (!editor) return
-  editor.updateOptions({
-    fontSize,
-    lineHeight,
-    tabSize,
-    lineNumbers: lineNumbers ? 'on' : 'off',
-    minimap: {
-      enabled: minimap
-    }
-  })
-})
-
 watch(
   () => props.modelValue,
   (newValue) => {
@@ -132,7 +99,7 @@ watch(
         const model = editor.getModel()
         const position = editor.getPosition()
         if (model) {
-          editor.pushUndoStop()
+          // editor.pushUndoStop()
           editor.setValue((newValue as string) || '')
           position && editor.setPosition(position)
         }
@@ -143,34 +110,26 @@ watch(
 )
 watch(
   () => props.options,
-  (newValue) => {
-    editor!.updateOptions(newValue || {})
+  (newOptions) => {
+    if (editor) {
+      editor.updateOptions(newOptions || {})
+    }
   },
   { deep: true }
 )
-watch(
-  () => themeStore.isDark,
-  (isDark) => {
-    monaco.editor.setTheme(isDark ? 'darkTheme' : 'lightTheme')
-  }
-)
-onBeforeUnmount(() => editor && editor.dispose())
-onMounted(init)
-
+// watch(
+//   () => props.theme,
+//   (themeName) => monaco.editor.setTheme(themeName)
+// )
 function resize() {
   if (!editor) return
   editor.layout()
 }
-
+onMounted(init)
+onBeforeUnmount(() => editor && editor.dispose())
 defineExpose({
   resize
 })
-</script>
-
-<script lang="ts">
-export default {
-  name: 'MonacoEditor'
-}
 </script>
 
 <style scoped>

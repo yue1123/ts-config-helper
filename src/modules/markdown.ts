@@ -1,4 +1,3 @@
-import markdownIt from 'markdown-it'
 import {
   frontmatterReg,
   markdownHashLinkReg,
@@ -8,12 +7,14 @@ import {
 } from '@constants'
 
 export async function createMarkdownRenderer() {
-  const [{ default: hljs }, { default: javascript }, { default: json }] = await Promise.all([
-    import('highlight.js'),
-    import('highlight.js/lib/languages/javascript'),
-    import('highlight.js/lib/languages/json')
-  ])
-  
+  const [{ default: markdownIt }, { default: hljs }, { default: javascript }, { default: json }] =
+    await Promise.all([
+      import(/* webpackChunkName: 'markdown-it' */ 'markdown-it'),
+      import('highlight.js/lib/core'),
+      import('highlight.js/lib/languages/javascript'),
+      import('highlight.js/lib/languages/json')
+    ])
+
   hljs.registerLanguage('json', json)
   hljs.registerLanguage('javascript', javascript)
 

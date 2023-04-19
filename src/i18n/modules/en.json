@@ -39,7 +39,8 @@
     "configFilter": "Configuration item filtering",
     "learnMore": "Learn how to use",
     "presetConfig": "default configuration",
-    "successLoadConfig": "Successfully loaded {name} configuration"
+    "successLoadConfig": "Successfully loaded {name} configuration",
+    "collapseConfig": "folded configuration"
   },
   "nav": {
     "theme": "Toggle theme",

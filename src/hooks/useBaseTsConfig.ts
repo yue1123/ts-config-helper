@@ -15,10 +15,31 @@ const renderIcon = (icon: string) => {
   }
 }
 const configJsonCache = new Map<string, string>()
-export const configLibIcon = {
+export const configLibIcon: Record<string, string> = {
   'create-react-app': 'vscode-icons:file-type-reactjs',
   cypress: 'vscode-icons:file-type-cypress',
-  deno: 'vscode-icons:file-type-deno'
+  deno: 'vscode-icons:file-type-deno',
+  docusaurus: 'logos:docusaurus',
+  ember: 'vscode-icons:file-type-ember',
+  esm: 'vscode-icons:file-type-js-official',
+  next: 'vscode-icons:file-type-next',
+  node: 'vscode-icons:file-type-node',
+  'node-lts': 'vscode-icons:file-type-node',
+  node10: 'vscode-icons:file-type-node',
+  node12: 'vscode-icons:file-type-node',
+  node14: 'vscode-icons:file-type-node',
+  node16: 'vscode-icons:file-type-node',
+  node17: 'vscode-icons:file-type-node',
+  node18: 'vscode-icons:file-type-node',
+  nuxt: 'vscode-icons:file-type-nuxt',
+  'vite-react': 'vscode-icons:file-type-vite',
+  vue: 'vscode-icons:file-type-vue',
+  'react-native': 'vscode-icons:file-type-reactjs',
+  recommended: 'vscode-icons:file-type-bazel-ignore',
+  remix: 'ri:remixicon-fill',
+  strictest: 'openmoji:locked',
+  svelte: 'vscode-icons:file-type-svelte',
+  taro: 'twemoji:glowing-star'
 }
 export function useBaseTsConfig() {
   /**
@@ -36,37 +57,37 @@ export function useBaseTsConfig() {
     {
       label: 'cypress',
       key: 'cypress',
-      // icon: renderIcon()
+      icon: renderIcon(configLibIcon['cypress'])
     },
     {
       label: 'deno',
       key: 'deno',
-      // icon: renderIcon()
+      icon: renderIcon(configLibIcon['deno'])
     },
     {
       label: 'docusaurus',
       key: 'docusaurus',
-      icon: renderIcon('logos:docusaurus')
+      icon: renderIcon(configLibIcon['docusaurus'])
     },
     {
       label: 'ember',
       key: 'ember',
-      icon: renderIcon('vscode-icons:file-type-ember')
+      icon: renderIcon(configLibIcon['ember'])
     },
     {
       label: 'esm',
       key: 'esm',
-      icon: renderIcon('vscode-icons:file-type-js-official')
+      icon: renderIcon(configLibIcon['esm'])
     },
     {
       label: 'next',
       key: 'next',
-      icon: renderIcon('vscode-icons:file-type-next')
+      icon: renderIcon(configLibIcon['next'])
     },
     {
       label: 'node',
       key: 'node',
-      icon: renderIcon('vscode-icons:file-type-node'),
+      icon: renderIcon(configLibIcon['node']),
       children: [
         {
           key: 'node-lts',
@@ -101,47 +122,47 @@ export function useBaseTsConfig() {
     {
       key: 'nuxt',
       label: 'nuxt',
-      icon: renderIcon('vscode-icons:file-type-nuxt')
+      icon: renderIcon(configLibIcon['nuxt'])
     },
     {
       key: 'react-native',
       label: 'react-native',
-      icon: renderIcon('vscode-icons:file-type-reactjs')
+      icon: renderIcon(configLibIcon['react-native'])
     },
     {
       key: 'recommended',
       label: 'recommended',
-      icon: renderIcon('vscode-icons:file-type-bazel-ignore')
+      icon: renderIcon(configLibIcon['recommended'])
     },
     {
       key: 'remix',
       label: 'remix',
-      icon: renderIcon('ri:remixicon-fill')
+      icon: renderIcon(configLibIcon['remix'])
     },
     {
       key: 'strictest',
       label: 'strictest',
-      icon: renderIcon('openmoji:locked')
+      icon: renderIcon(configLibIcon['strictest'])
     },
     {
       key: 'svelte',
       label: 'svelte',
-      icon: renderIcon('vscode-icons:file-type-svelte')
+      icon: renderIcon(configLibIcon['svelte'])
     },
     {
       key: 'taro',
       label: 'taro',
-      icon: renderIcon('twemoji:glowing-star')
+      icon: renderIcon(configLibIcon['taro'])
     },
     {
       key: 'vite-react',
       label: 'vite-react',
-      icon: renderIcon('vscode-icons:file-type-vite')
+      icon: renderIcon(configLibIcon['vite-react'])
     },
     {
       key: 'vue',
       label: 'vue (is coming)',
-      icon: renderIcon('vscode-icons:file-type-vue'),
+      icon: renderIcon(configLibIcon['vue']),
       disabled: true,
       children: [
         {

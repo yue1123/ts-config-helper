@@ -9,7 +9,6 @@ import { BIconBookmarkStar, BIconFunnel } from 'bootstrap-icons-vue'
 import { ref, computed, watch, nextTick } from 'vue'
 import type { FilterKey } from '@types'
 import { Icon } from '@iconify/vue'
-import { editor } from 'monaco-editor'
 const dataStore = useDataStore()
 // 当前过滤配置列表
 const activeFilter = ref<FilterKey>('all')
@@ -56,7 +55,9 @@ function handleChangeFilterType(type: FilterKey) {
   activeFilter.value = type
   filter(type)
 }
-
+function handleCollapseConfigOptions() {
+  runtimeStore.collapseExpandedNames = []
+}
 watch(
   () => configJson.value,
   (newValue) => {
@@ -66,9 +67,7 @@ watch(
       } else {
         dataStore.currentConfigName = currentLoadedLibName.value
       }
-      nextTick(() =>
-        dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true)
-      )
+      nextTick(() => dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true))
     }
   }
 )
@@ -122,6 +121,16 @@ watch(
               {{ $t('sidebar.configFilter') }}
             </NTooltip>
           </NDropdown>
+          <NTooltip placement="bottom" trigger="hover">
+            <template #trigger>
+              <NButton @click="handleCollapseConfigOptions" quaternary size="small">
+                <template #icon>
+                  <Icon icon="fluent:arrow-collapse-all-24-filled" />
+                </template>
+              </NButton>
+            </template>
+            {{ $t('sidebar.collapseConfig') }}
+          </NTooltip>
         </div>
       </div>
       <NInput

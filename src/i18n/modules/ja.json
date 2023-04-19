@@ -39,7 +39,8 @@
     "configFilter": "構成アイテムのフィルタリング",
     "learnMore": "使い方を学ぶ",
     "presetConfig": "デフォルト構成",
-    "successLoadConfig": "{name} 構成を正常にロードしました"
+    "successLoadConfig": "{name} 構成を正常にロードしました",
+    "collapseConfig": "折り畳み構成"
   },
   "nav": {
     "theme": "テーマを切り替える",

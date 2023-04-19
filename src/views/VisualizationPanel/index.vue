@@ -11,7 +11,7 @@ const { treeData } = await useSchemaData()
 
 <template>
   <NLayoutContent>
-    <NScrollbar class="p-5" style="height: calc(100vh - 64px)">
+    <NScrollbar class="p-5 pb-0" style="height: calc(100vh - 64px - 42px)">
       <template key="tipText" v-if="!store.selectedKeys.length">
         <Empty />
       </template>

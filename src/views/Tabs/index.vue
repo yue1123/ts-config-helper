@@ -3,7 +3,7 @@ import useDataStore, { type ConfigItemState } from '@store/data'
 import { NTab, NTabs, NButton, NInput } from 'naive-ui'
 import { ref, shallowRef } from 'vue'
 import { Icon } from '@iconify/vue'
-
+import { configLibIcon } from '@hooks'
 const dataStore = useDataStore()
 
 const renameValue = ref<string>('')
@@ -51,7 +51,12 @@ function handleSureRename() {
         ></NInput>
       </div>
       <div v-else class="flex items-center space-x-2">
-        <Icon width="14" icon="vscode-icons:file-type-light-json" />
+        <template v-if="configLibIcon[item.name]">
+          <Icon width="14" :icon="configLibIcon[item.name]" />
+        </template>
+        <template v-else>
+          <Icon width="14" icon="mdi:code-json" />
+        </template>
         <span>{{ item.name }}</span>
         <NButton class="rename-btn" text :bordered="false" @click.stop="handleRename(item)">
           <template #icon>

@@ -1,15 +1,16 @@
 <script lang="ts" setup>
 import MonacoEditor from '@components/MonacoEditor.vue'
 import { useEventListener, useSchemaData } from '@hooks'
-import { currentLang } from '@i18n'
 import useDataStore from '@store/data'
 import { debounce } from '@utils'
 
 import { NLayoutContent } from 'naive-ui'
-import { onMounted, ref } from 'vue'
-
-const language = ref('json')
+import { computed, onMounted, ref } from 'vue'
+import useThemeStore from '@store/theme'
+import useSettingStore from '@store/setting'
 const dataStore = useDataStore()
+const themeStore = useThemeStore()
+const settingStore = useSettingStore()
 const monacoEditor = ref<typeof MonacoEditor>()
 const { allOptionsFlatKeysMap } = await useSchemaData()
 // user paste or input code
@@ -21,24 +22,36 @@ const handleResize = debounce(() => {
   monacoEditor.value?.resize()
 }, (1000 / 60) * 5)
 
+const editorOptions = computed(() => {
+  const { tabSize, fontSize, lineHeight, minimap, lineNumbers } = settingStore.editor
+  return {
+    lineNumbers: lineNumbers ? 'on' : 'off',
+    language: 'json',
+    theme: themeStore.isDark ? 'darkTheme' : 'lightTheme',
+    fontSize,
+    lineHeight,
+    tabSize,
+    minimap: {
+      enabled: minimap
+    }
+  }
+})
 defineExpose({
   handleResize: handleResize
 })
-
 onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>
 
 <template>
   <NLayoutContent>
     <MonacoEditor
-      :local="currentLang"
       ref="monacoEditor"
       :model-value="dataStore.previewConfig"
-      :language="language"
+      language="json"
       width="100%"
       height="calc(100vh - 64px)"
-      theme="vs-dark"
+      :options="editorOptions as any"
       @change="handleChange"
-    ></MonacoEditor>
+    />
   </NLayoutContent>
 </template>

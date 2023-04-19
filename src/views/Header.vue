@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { NButton, NLayoutHeader, NSpace, NTooltip, NSelect } from 'naive-ui'
+import { NButton, NLayoutHeader, NSpace, NTooltip } from 'naive-ui'
 import { computed, ref } from 'vue'
 import ThemeButton from '@components/ThemeButton.vue'
 import useStore from '@store/data'

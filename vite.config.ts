@@ -18,7 +18,7 @@ export default defineConfig({
       devEnable: true,
       tipText: 'Please stand by, source is loading...',
       css: '.loading-text{margin-top:20px}',
-      errorTip: 'Error occurred, It may be caused by cache, try to force refresh',
+      errorTip: '🎉New version Updated! Try force refresh to load updating.',
       onError() {
         // // @ts-ignore
         // const search = window.location.search
@@ -29,28 +29,27 @@ export default defineConfig({
     }),
     visualizer({
       emitFile: true,
+      open: true,
+      openOptions: {
+        app: {
+          name: 'chrome'
+        }
+      },
       filename: 'stats.html'
-    }),
+    })
     // vueI18n.vite({
     //   /* options */
     //   // locale messages resourece pre-compile option
     //   include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/modules/**')
     // })
-    // importToCDN({
-    //   modules: [
-    //     {
-    //       name: 'vue',
-    //       var: 'Vue',
-    //       path: `https://cdn.jsdelivr.net/npm/vue@3.2.47/dist/vue.runtime.global.prod.min.js`
-    //     },
-    //     {
-    //       name: 'naive-ui',
-    //       var: 'naive-ui',
-    //       path: `https://cdn.jsdelivr.net/npm/naive-ui@2.34.3/dist/index.prod.js`
-    //     }
-    //   ]
-    // })
   ],
+  build: {
+    rollupOptions: {
+      manualChunks: {
+        'monaco-editor': ['monaco-editor']
+      }
+    }
+  },
   define: {
     __VUE_I18N_LEGACY_API__: false
   },
