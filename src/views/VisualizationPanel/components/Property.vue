@@ -106,7 +106,7 @@ export default {
 
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
-    <template v-if="store.selectedKeys.indexOf(property.flatKeys) !== -1">
+    <template v-if="store.selectedKeys.includes(property.flatKeys)">
       <div class="mb-4 property-item">
         <div class="flex items-center space-x-4">
           <div class="flex items-center justify-start space-x-1">

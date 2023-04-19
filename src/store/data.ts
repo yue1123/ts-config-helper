@@ -26,9 +26,9 @@ const dataStore = defineStore(
     const configList = ref<ConfigItemState[]>([
       {
         name: 'tsconfig.json',
-        config: config.value,
-        selectedKeys: selectedKeys.value,
-        rawConfig: rawConfig.value
+        config: '',
+        selectedKeys: [],
+        rawConfig: {}
       }
     ])
     const currentConfigName = ref<string>(configList.value[0].name)
@@ -105,19 +105,22 @@ const dataStore = defineStore(
       if (value) {
         try {
           const parseObj = json5.parse(value)
-          // FIXME: 修复 compileOptions 也出现在面板中
           const res = flatObjWithDepthControl(parseObj, (item) => {
             // check is max level
             // if value is user value object, should not flatten
             return !allOptionsFlatKeysMap.get(item)
           })
+          // 过滤key,避免叶子节点出现在面板中
+          let newSelectedKeys = Object.keys(res).filter((key) => allOptionsFlatKeysMap.get(key))
+          // 过滤空值节点, 避免右侧编辑器更改, 左侧消失
+          let emptyValueKeys = selectedKeys.value.filter((key) => {
+            return !rawConfig.value[key]
+          })
           rawConfig.value = res
-          let newSelectedKeys = Object.keys(rawConfig.value)
           if (clear) {
-            selectedKeys.value = newSelectedKeys
-          } else if (JSON.stringify(newSelectedKeys) !== JSON.stringify(selectedKeys.value)) {
-            selectedKeys.value = [...new Set(newSelectedKeys.concat(selectedKeys.value))]
+            selectedKeys.value.length = 0
           }
+          selectedKeys.value = [...new Set(newSelectedKeys.concat(emptyValueKeys))]
         } catch (error) {}
       } else {
         selectedKeys.value = []

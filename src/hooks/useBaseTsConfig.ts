@@ -4,7 +4,6 @@ import { Icon } from '@iconify/vue'
 import { request } from '@utils'
 import json5 from 'json5'
 import useSettingStore from '@store/setting'
-import useDataStore from '@store/data'
 import { useI18n } from 'vue-i18n'
 
 const loadLink = (libName: string) =>
@@ -16,6 +15,11 @@ const renderIcon = (icon: string) => {
   }
 }
 const configJsonCache = new Map<string, string>()
+export const configLibIcon = {
+  'create-react-app': 'vscode-icons:file-type-reactjs',
+  cypress: 'vscode-icons:file-type-cypress',
+  deno: 'vscode-icons:file-type-deno'
+}
 export function useBaseTsConfig() {
   /**
    * @link https://github.com/tsconfig/bases
@@ -27,17 +31,17 @@ export function useBaseTsConfig() {
     {
       label: 'create-react-app',
       key: 'create-react-app',
-      icon: renderIcon('vscode-icons:file-type-reactjs')
+      icon: renderIcon(configLibIcon['create-react-app'])
     },
     {
       label: 'cypress',
       key: 'cypress',
-      icon: renderIcon('vscode-icons:file-type-cypress')
+      // icon: renderIcon()
     },
     {
       label: 'deno',
       key: 'deno',
-      icon: renderIcon('vscode-icons:file-type-deno')
+      // icon: renderIcon()
     },
     {
       label: 'docusaurus',
@@ -196,7 +200,7 @@ export function useBaseTsConfig() {
         const config = json5.parse(json)
         // cache config
         // remove $schema and display property
-        // config['$schema'] && Reflect.deleteProperty(config, '$schema')
+        config['$schema'] && Reflect.deleteProperty(config, '$schema')
         // config['display'] && Reflect.deleteProperty(config, 'display')
         configJson.value = json5.stringify(config, null, settingStore.editor.tabSize)
         configJsonCache.set(libName, configJson.value)

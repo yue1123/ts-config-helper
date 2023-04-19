@@ -51,6 +51,7 @@ function handleSureRename() {
         ></NInput>
       </div>
       <div v-else class="flex items-center space-x-2">
+        <Icon width="14" icon="vscode-icons:file-type-light-json" />
         <span>{{ item.name }}</span>
         <NButton class="rename-btn" text :bordered="false" @click.stop="handleRename(item)">
           <template #icon>

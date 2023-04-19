@@ -9,6 +9,7 @@ import { BIconBookmarkStar, BIconFunnel } from 'bootstrap-icons-vue'
 import { ref, computed, watch, nextTick } from 'vue'
 import type { FilterKey } from '@types'
 import { Icon } from '@iconify/vue'
+import { editor } from 'monaco-editor'
 const dataStore = useDataStore()
 // 当前过滤配置列表
 const activeFilter = ref<FilterKey>('all')
@@ -65,7 +66,9 @@ watch(
       } else {
         dataStore.currentConfigName = currentLoadedLibName.value
       }
-      nextTick(() => dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true))
+      nextTick(() =>
+        dataStore.dispatchConfigWithJsonString(newValue, allOptionsFlatKeysMap, true)
+      )
     }
   }
 )

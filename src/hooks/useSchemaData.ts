@@ -36,9 +36,10 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
         const { res, flatKeys: _flatKeys } = recursionHelper(ele.properties, temp)
         children = res
         Array.prototype.push.apply(flatKeys, _flatKeys)
+      } else {
+        flatKeys.push(flatKeyString)
       }
 
-      flatKeys.push(flatKeyString)
       // remove useless property
       Reflect.deleteProperty(ele, 'description')
       Reflect.deleteProperty(ele, 'markdownDescription')
