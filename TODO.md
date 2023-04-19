@@ -5,5 +5,5 @@
   - [ ] 展开所有配置
   - [ ] 清空
 - [x] 支持配置分类查找(分类参考: https://www.typescriptlang.org/zh/tsconfig)
-- [ ] 添加预设配置(参考: https://github.com/tsconfig/bases)
+- [x] 添加预设配置(参考: https://github.com/tsconfig/bases)
 - [ ] 配置项通过 typescript 包获取，而不是通过 tsconfig.json 的 schema
