@@ -52,8 +52,9 @@ function handleLogoClick() {
             <NButton @click="handleCopy" strong quaternary>
               <template #icon>
                 <BIconClipboard v-if="!copied" />
-                <BIconClipboardCheck v-else /> </template
-            ></NButton>
+                <BIconClipboardCheck v-else />
+              </template>
+            </NButton>
           </template>
           <span v-if="!copied">{{ $t('nav.copyToClipboard') }}</span>
           <span v-else>{{ $t('nav.copied') }}</span>

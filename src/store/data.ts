@@ -141,7 +141,7 @@ const dataStore = defineStore(
     }
   },
   {
-    persist: import.meta.env.PROD
+    persist: import.meta.env.VITE_APP_SHOULD_CATCH_DATA || import.meta.env.PROD
   }
 )
 

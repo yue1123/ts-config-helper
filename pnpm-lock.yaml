@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@formkit/auto-animate': 1.0.0-beta.6
   '@iconify/vue': ^4.1.1
   '@intlify/unplugin-vue-i18n': ^0.10.0
   '@rushstack/eslint-patch': ^1.2.0
@@ -56,6 +57,7 @@ specifiers:
   vue-tsc: ^1.2.0
 
 dependencies:
+  '@formkit/auto-animate': 1.0.0-beta.6
   '@iconify/vue': 4.1.1_vue@3.2.47
   '@vueuse/core': 9.13.0_vue@3.2.47
   bootstrap-icons-vue: 1.8.1
@@ -1493,6 +1495,10 @@ packages:
     resolution: {integrity: sha512-JXdzbRiWclLVoD8sNUjR443VVlYqiYmDVT6rGUEIEHU5YJW0gaVZwV2xgM7D4arkvASqD0IlLUVjHiFuxaftRw==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
+
+  /@formkit/auto-animate/1.0.0-beta.6:
+    resolution: {integrity: sha512-PVDhLAlr+B4Xb7e+1wozBUWmXa6BFU8xUPR/W/E+TsQhPS1qkAdAsJ25keEnFrcePSnXHrOsh3tiFbEToOzV9w==}
+    dev: false
 
   /@hapi/hoek/9.3.0:
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}

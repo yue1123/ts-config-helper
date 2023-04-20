@@ -14,10 +14,12 @@ const dataStore = useDataStore()
 const activeFilter = ref<FilterKey>('all')
 const runtimeStore = useRuntimeStore()
 // tsconfig schema json data
-const { filterData, filter, allOptionsFlatKeys, allOptionsFlatKeysMap } =
+const { filterData, filter, allOptionsFlatKeys, allOptionsFlatKeysMap, leafNodeKey } =
   await useSchemaDataWithFilter()
 // 配置过滤下拉选项
 const { filterLabelMap, filterOptions } = useOptionsFilterOptions()
+// 展开收起配置
+const isExpand = ref<boolean>()
 // 预设配置列表
 const { getConfigJson, configJson, currentLoadedLibName, isLoading, baseTsConfigLibOptions } =
   useBaseTsConfig()
@@ -45,7 +47,7 @@ const handleSearch = debounce((searchKeyword: string) => {
   } else {
     runtimeStore.resetHitKeysMap(runtimeStore, null)
   }
-}, 300)
+}, 260)
 
 const searchResult = computed(() => {
   return runtimeStore.searchHitKeysMap ? Object.keys(runtimeStore.searchHitKeysMap).length : 0
@@ -56,7 +58,13 @@ function handleChangeFilterType(type: FilterKey) {
   filter(type)
 }
 function handleCollapseConfigOptions() {
-  runtimeStore.collapseExpandedNames = []
+  if (runtimeStore.collapseExpandedNames.length < leafNodeKey.length) {
+    runtimeStore.collapseExpandedNames = leafNodeKey
+    isExpand.value = true
+  } else {
+    runtimeStore.collapseExpandedNames = []
+    isExpand.value = false
+  }
 }
 watch(
   () => configJson.value,
@@ -125,19 +133,23 @@ watch(
             <template #trigger>
               <NButton @click="handleCollapseConfigOptions" quaternary size="small">
                 <template #icon>
-                  <Icon icon="fluent:arrow-collapse-all-24-filled" />
+                  <Icon v-if="isExpand" icon="quill:expand" />
+                  <Icon v-else icon="quill:collapse" />
                 </template>
               </NButton>
             </template>
-            {{ $t('sidebar.collapseConfig') }}
+            {{ isExpand ? $t('sidebar.expandConfig') : $t('sidebar.collapseConfig') }}
           </NTooltip>
         </div>
       </div>
       <NInput
-        clear
+        clearable
         @input="handleSearch"
         :placeholder="$t('config.searchConfig', { type: filterLabelMap[activeFilter] })"
       >
+        <template #prefix>
+          <Icon style="color: var(--n-icon-color)" icon="bi:search"></Icon>
+        </template>
         <template #suffix>
           <div
             :style="{

@@ -11,6 +11,7 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
   const allOptionsFlatKeys: string[] = []
   const treeData: Options[] = []
   const allOptionsFlatKeysMap = new Map<string, boolean>()
+  const leafNodeKey: string[] = []
   const recursionHelper = (property: any, keys: string[] = []) => {
     let flatKeys: string[] = []
     let res = Object.keys(property).map((key) => {
@@ -36,6 +37,7 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
         const { res, flatKeys: _flatKeys } = recursionHelper(ele.properties, temp)
         children = res
         Array.prototype.push.apply(flatKeys, _flatKeys)
+        leafNodeKey.push(flatKeyString)
       } else {
         flatKeys.push(flatKeyString)
       }
@@ -65,7 +67,7 @@ function convertSchemaData(schema: Record<string, any>): schemaConvertResult {
   for (const key of allOptionsFlatKeys) {
     allOptionsFlatKeysMap.set(key, true)
   }
-  return { treeData, allOptionsFlatKeys, allOptionsFlatKeysMap }
+  return { treeData, allOptionsFlatKeys, allOptionsFlatKeysMap, leafNodeKey }
 }
 
 // only one time init

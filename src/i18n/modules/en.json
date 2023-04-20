@@ -40,7 +40,8 @@
     "learnMore": "Learn how to use",
     "presetConfig": "default configuration",
     "successLoadConfig": "Successfully loaded {name} configuration",
-    "collapseConfig": "folded configuration"
+    "collapseConfig": "folded configuration",
+    "expandConfig": "put away"
   },
   "nav": {
     "theme": "Toggle theme",

@@ -40,7 +40,8 @@
     "learnMore": "使い方を学ぶ",
     "presetConfig": "デフォルト構成",
     "successLoadConfig": "{name} 構成を正常にロードしました",
-    "collapseConfig": "折り畳み構成"
+    "collapseConfig": "折り畳み構成",
+    "expandConfig": "片付ける"
   },
   "nav": {
     "theme": "テーマを切り替える",

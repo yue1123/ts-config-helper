@@ -40,7 +40,8 @@
     "completeness": "@:sidebar.dropdown.completeness@:sidebar.related",
     "successLoadConfig": "成功加载{name}配置",
     "learnMore": "了解如何使用",
-    "collapseConfig": "折叠配置"
+    "collapseConfig": "折叠",
+    "expandConfig": "收起"
   },
   "nav": {
     "theme": "切换主题",

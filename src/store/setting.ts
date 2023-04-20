@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { SETTING_STORAGE, SUPPORT_LOCALES } from '@constants'
-import { setI18nLanguage, loadLocaleMessages } from '@i18n'
+import { setI18nLanguage } from '@i18n'
 import { ref, watch } from 'vue'
+import { getBrowserLang } from '@utils'
 interface State {
   editor: {
     tabSize: number
@@ -39,8 +40,7 @@ export default defineStore(
       lineNumbers: true
     })
     const showDescription = ref<boolean>(true)
-    const lang = ref<SUPPORT_LOCALES>(SUPPORT_LOCALES['zh'])
-    
+    const lang = ref<SUPPORT_LOCALES>(SUPPORT_LOCALES[getBrowserLang()])
     watch(
       () => lang.value,
       (newLang: SUPPORT_LOCALES) => setI18nLanguage(newLang)

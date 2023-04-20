@@ -4,8 +4,8 @@ import { currentLang } from '@i18n'
 import type { Options } from '@types'
 import useRuntimeStore from '@store/runtime'
 import { descriptionMap } from '@schema'
-import { BIconQuestion } from 'bootstrap-icons-vue'
-import { computed, ref } from 'vue'
+import { Icon } from '@iconify/vue'
+import { computed } from 'vue'
 export interface Props {
   data: Options[]
   level: number
@@ -40,7 +40,6 @@ export default {
           :key="i"
           v-model:expanded-names="runtimeStore.collapseExpandedNames"
         >
-          <!-- @update:expanded-names="handleOpenCollapse" -->
           <NCollapseItem :title="options.key" :name="options.flatKeys">
             <template #header-extra v-if="runtimeStore.searchHitKeysCountMap">
               <NBadge
@@ -74,9 +73,9 @@ export default {
 
           <NTooltip :delay="200" placement="top-end" :style="{ maxWidth: '400px' }">
             <template #trigger>
-              <NButton class="opacity-0 help" size="tiny" quaternary type="primary">
+              <NButton class="opacity-0 help" size="tiny" quaternary>
                 <template #icon>
-                  <BIconQuestion />
+                  <Icon icon="mdi:lightbulb-on" />
                 </template>
               </NButton>
             </template>
@@ -88,7 +87,7 @@ export default {
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 :deep(.n-divider:not(.n-divider--vertical)) {
   margin-top: 12px;
   margin-bottom: 12px;
@@ -105,13 +104,21 @@ export default {
 .checked-box-item {
   border-radius: 4px;
 }
-.dark .checked-box-item:hover,
-.dark .checked-box-item:focus-within {
-  background: var(--n-scrollbar-color);
+.dark {
+  .checked-box-item {
+    &:hover,
+    &:focus-within {
+      background: var(--n-scrollbar-color);
+    }
+  }
 }
-.light .checked-box-item:hover,
-.light .checked-box-item:focus-within {
-  background: #f1f1f1;
+.light {
+  .checked-box-item {
+    &:hover,
+    &:focus-within {
+      background: #f1f1f1;
+    }
+  }
 }
 .checked-box-item:hover .help {
   opacity: 1;

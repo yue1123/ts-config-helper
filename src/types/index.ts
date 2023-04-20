@@ -2,6 +2,7 @@ export type schemaConvertResult = {
   treeData: Options[]
   allOptionsFlatKeys: string[]
   allOptionsFlatKeysMap: Map<string, boolean>
+  leafNodeKey: string[]
 }
 export interface Options {
   label: string

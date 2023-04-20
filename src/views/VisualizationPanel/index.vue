@@ -12,12 +12,12 @@ const { treeData } = await useSchemaData()
 <template>
   <NLayoutContent>
     <NScrollbar class="p-5 pb-0" style="height: calc(100vh - 64px - 42px)">
-      <template key="tipText" v-if="!store.selectedKeys.length">
+      <div class="pt-20" key="tipText" v-if="!store.selectedKeys.length">
         <Empty />
-      </template>
-      <template v-else>
+      </div>
+      <div v-else v-auto-animate>
         <Property key="property" :level="1" :definition="treeData"></Property>
-      </template>
+      </div>
     </NScrollbar>
   </NLayoutContent>
 </template>

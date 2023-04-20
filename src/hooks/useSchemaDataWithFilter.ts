@@ -9,7 +9,12 @@ import { filterMap } from '@constants'
  */
 const filterCache = new Map<FilterKey, any[]>()
 export async function useSchemaDataWithFilter() {
-  const { treeData, allOptionsFlatKeys: keys, allOptionsFlatKeysMap } = await useSchemaData()
+  const {
+    treeData,
+    allOptionsFlatKeys: keys,
+    allOptionsFlatKeysMap,
+    leafNodeKey
+  } = await useSchemaData()
   const filterData = shallowRef(treeData)
   const allOptionsFlatKeys = shallowRef(keys)
   function filter(type: FilterKey) {
@@ -42,6 +47,7 @@ export async function useSchemaDataWithFilter() {
     }
   }
   return {
+    leafNodeKey,
     filterData,
     allOptionsFlatKeys,
     allOptionsFlatKeysMap,

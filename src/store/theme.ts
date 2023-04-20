@@ -11,5 +11,5 @@ export default defineStore(THEME, {
       isDark: true
     }
   },
-  persist: true
+  persist: import.meta.env.VITE_APP_SHOULD_CATCH_DATA || import.meta.env.PROD
 })
