@@ -12,7 +12,7 @@ Ts Config Helper 是一个功能强大、易用性高的 TypeScript 配置工具
 - 分类过滤
 - 双向解析
 
-[体验地址](https://tsconfighelper.netlify.app/)
+[体验地址](https://tsconfiger.netlify.app/)
 
 ## 🌟 Star History
 

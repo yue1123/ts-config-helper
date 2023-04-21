@@ -45,6 +45,7 @@ const dataStore = defineStore(
         ? JSON.stringify(obj, null, userSetting.editor.tabSize)
         : undefined
     })
+    let syncToConfigTarget: ConfigItemState | null
     // 上次的值保存与新值更新
     watch(
       () => currentConfigName.value,
@@ -63,7 +64,7 @@ const dataStore = defineStore(
         }
       }
     )
-    function addConfigTab(name?: string) {
+    function addConfigTab(name: string = '') {
       if (!name) {
         let nameIndex: number = configList.value.length
         for (let i = configList.value.length - 1; i >= 0; i--) {
@@ -76,18 +77,19 @@ const dataStore = defineStore(
         }
         name = `tsconfig.${nameIndex}.json`
       }
-      configList.value.push({
+      syncToConfigTarget = {
         name,
         config: '',
         selectedKeys: [],
         rawConfig: {}
-      })
+      }
+      configList.value.push(syncToConfigTarget)
       currentConfigName.value = name
     }
     function removeConfigTab(name: string) {
       let index = configList.value.findIndex((item) => item.name === name)
       if (configList.value[index].name === currentConfigName.value) {
-        currentConfigName.value = configList.value[index - 1].name
+        currentConfigName.value = configList.value[index === 0 ? index + 1 : index + 1].name
       }
       configList.value.splice(index, 1)
     }
@@ -121,6 +123,12 @@ const dataStore = defineStore(
             selectedKeys.value.length = 0
           }
           selectedKeys.value = [...new Set(newSelectedKeys.concat(emptyValueKeys))]
+          if (syncToConfigTarget) {
+            syncToConfigTarget.config = value
+            syncToConfigTarget.rawConfig = deepClone(res)
+            syncToConfigTarget.selectedKeys = deepClone(selectedKeys.value)
+            syncToConfigTarget = null
+          }
         } catch (error) {}
       } else {
         selectedKeys.value = []
