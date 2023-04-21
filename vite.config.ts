@@ -23,7 +23,7 @@ export default defineConfig({
         handler() {
           // const search = window.location.search
           // const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
-          // if (reloadNum < 3) location.reload(true)
+          // if (reloadNum < 3) location.reload()
         }
       }
     }),

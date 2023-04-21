@@ -49,7 +49,7 @@ specifiers:
   vite: ^4.3.1
   vite-plugin-cdn-import: ^0.3.5
   vite-plugin-pwa: ^0.14.4
-  vite-plugin-spa-loading: ^1.2.0
+  vite-plugin-spa-loading: ^1.2.1
   vitest: ^0.29.1
   vue: ^3.2.47
   vue-i18n: ^9.2.2
@@ -110,7 +110,7 @@ devDependencies:
   typescript: 4.8.4
   vite: 4.3.1_42abj3udvfahcdsqq6v3bsr26e
   vite-plugin-cdn-import: 0.3.5
-  vite-plugin-spa-loading: 1.2.0_vite@4.3.1
+  vite-plugin-spa-loading: 1.2.1_vite@4.3.1
   vitest: 0.29.1_jsdom@21.1.0+sass@1.60.0
   vue-tsc: 1.2.0_typescript@4.8.4
 
@@ -5699,8 +5699,8 @@ packages:
       - supports-color
     dev: false
 
-  /vite-plugin-spa-loading/1.2.0_vite@4.3.1:
-    resolution: {integrity: sha512-Dm2P0CduLoM1LcWmHexy4oEWim+JMTxc3Mn5dM4Hv25H8SWVXKPNM6i4eHNWKt6mO9nTX1QUpEbXrjts/8U3ng==}
+  /vite-plugin-spa-loading/1.2.1_vite@4.3.1:
+    resolution: {integrity: sha512-Z9L0p4g0KnxAKxUvKx1Ggu3D7N7LBw7U9pJLvXjDq79lU39e2zslvikK60S07e6GA2U+yyd4FSWRm6aIeQqUkg==}
     peerDependencies:
       vite: '*'
     dependencies:
