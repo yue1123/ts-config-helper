@@ -12,21 +12,21 @@ export default defineConfig({
   plugins: [
     vue(),
     VitePWA(),
-    spaLoading('svg', {
-      debounce: 100,
-      path: './src/assets/loading.svg',
-      devEnable: true,
-      tipText: 'Please stand by, source is loading...',
-      css: '.loading-text{margin-top:20px}',
-      error: {
-        tip: '🎉New version Updated! Try force refresh to load updating.',
-        handler() {
-          // const search = window.location.search
-          // const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
-          // if (reloadNum < 3) location.reload()
-        }
-      }
-    }),
+    // spaLoading('svg', {
+    //   debounce: 100,
+    //   path: './src/assets/loading.svg',
+    //   devEnable: true,
+    //   tipText: 'Please stand by, source is loading...',
+    //   css: '.loading-text{margin-top:20px}',
+    //   error: {
+    //     tip: '🎉New version Updated! Try force refresh to load updating.',
+    //     handler() {
+    //       // const search = window.location.search
+    //       // const reloadNum = +search.match(/slr=(\d+)/)?.[1] || 1
+    //       // if (reloadNum < 3) location.reload()
+    //     }
+    //   }
+    // }),
     visualizer({
       emitFile: true,
       open: true,

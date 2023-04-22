@@ -7,7 +7,12 @@
     <title>Ts config helper</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
+    <div id="app">Redirecting to <a href="https://tsconfiger.netlify.app/">new site</a>!</div>
+    <script>
+      setTimeout(() => {
+        window.location.href = 'https://tsconfiger.netlify.app/'
+      }, 500)
+    </script>
+    <!-- <script type="module" src="/src/main.ts"></script> -->
   </body>
 </html>
