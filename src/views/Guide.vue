@@ -18,14 +18,13 @@ defineExpose({
   }
 })
 function handleSkip() {
-  const count = 240
+  const count = 260
   const defaults = {
     zIndex: 9999,
     origin: { y: 0.7 }
   }
 
   function fire(particleRatio: number, opts: any) {
-    // @ts-ignore
     confetti(
       Object.assign({}, defaults, opts, {
         particleCount: Math.floor(count * particleRatio)
@@ -38,10 +37,10 @@ function handleSkip() {
     startVelocity: 55
   })
   fire(0.2, {
-    spread: 60
+    spread: 80
   })
   fire(0.35, {
-    spread: 100,
+    spread: 160,
     decay: 0.91,
     scalar: 1
   })

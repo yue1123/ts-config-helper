@@ -4,8 +4,10 @@
 ​
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch, defineExpose, nextTick } from 'vue'
+import { debounce } from '@utils'
 import useDataStore from '../store/data'
 import * as monaco from 'monaco-editor'
+import json5 from 'json5'
 export interface EditorOptions {
   theme: 'darkTheme' | 'lightTheme'
 }
@@ -19,7 +21,7 @@ export interface Props {
 const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted'])
 const props = defineProps<Props>()
 const dataStore = useDataStore()
-let editor: any | null = null
+let editor: monaco.editor.IStandaloneCodeEditor | null = null
 const codeEditBox = ref()
 let shouldEmitChange = true
 const init = () => {
@@ -65,6 +67,39 @@ const init = () => {
     insertSpaces: true,
     ...props.options
   })
+  function findCourserLineJsonKey(jsonObj: Record<string, any>, lineNumber: number) {
+    let currentLine = 1
+    let targetKey = null
+    function helper(obj: Record<string, any>) {
+      Object.keys(obj).forEach((key) => {
+        if (currentLine === lineNumber) {
+          console.log(key)
+          targetKey = key
+          return
+        }
+        currentLine++
+        if (typeof obj[key] === 'object' || Array.isArray(obj[key])) {
+          helper(obj[key])
+        }
+      })
+    }
+    helper(jsonObj)
+    return targetKey
+  }
+  editor.onDidChangeCursorPosition(
+    debounce((e) => {
+      if (!editor) return
+      const selection = editor.getSelection()
+      if (selection && Math.abs(selection.startLineNumber - selection.endLineNumber) !== 0) return
+      const lineNumber: number = e.position.lineNumber
+      var lineContent = editor!.getModel()!.getLineContent(lineNumber)
+      console.log(lineNumber, lineContent)
+      // if(lineContent)
+      // console.log(.split('\n'))
+      // findCourserLineJsonKey()
+      const valueKeyRegexp = /\s*"([a-zA-Z]+)":\s*\{|\[|"(.+)"/gm
+    }, 200)
+  )
   // // 绑定“Ctrl+Z”键为撤销操作
   // editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyZ, function () {
   //   // console.log('撤销')

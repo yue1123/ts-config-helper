@@ -3,6 +3,11 @@ import KeyValuesInput from '@components/KeyValuesInput.vue'
 import ObjectInput from '@components/ObjectInput.vue'
 import { currentLang } from '@i18n'
 import { descriptionMap } from '@schema'
+import useStore from '@store/data'
+import useRuntimeStore from '@store/runtime'
+import useSettingStore from '@store/setting'
+import type { Options } from '@types'
+import { enumToOptions, getInputType } from '@utils'
 import { BIconHash, BIconLink45deg } from 'bootstrap-icons-vue'
 import {
   NButton,
@@ -17,13 +22,8 @@ import {
   NTooltip,
   useMessage
 } from 'naive-ui'
-import { h, nextTick } from 'vue'
-import useStore from '@store/data'
-import useSettingStore from '@store/setting'
-import type { Options } from '@types'
-import { enumToOptions, getInputType } from '@utils'
+import { h } from 'vue'
 import MarkdownDesc from './MarkdownDesc.vue'
-import useRuntimeStore from '@store/runtime'
 // props type
 export interface Props {
   definition: Options[]
@@ -107,10 +107,19 @@ export default {
 <template>
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.includes(property.flatKeys)">
-      <div class="mb-4 property-item">
+      <div
+        class="mb-4 property-item"
+        :class="{ 'focus-key': property.flatKeys === 'compilerOptions.skipLibCheck' }"
+      >
         <div class="flex items-center space-x-4">
-          <div class="flex items-center justify-start space-x-1">
-            <NButton size="small" text @click="handleScrollToTargetOptions(property)">
+          <div class="flex items-center justify-start space-x-1" :id="property.flatKeys">
+            <!-- :type="property.flatKeys === 'compilerOptions.skipLibCheck' ? 'primary' : 'default'" -->
+            <NButton
+              class="hash-btn"
+              size="small"
+              text
+              @click="handleScrollToTargetOptions(property)"
+            >
               <template #icon>
                 <BIconHash />
               </template>
@@ -223,12 +232,6 @@ export default {
             />
           </div>
         </template>
-        <!-- <template
-          key="selectOrInputWithCheck"
-          v-else-if="getInputType(property) === 'selectOrInputWithCheck'"
-        >
-          <div type="selectOrInputWithCheck" class="enum_property-container">123</div>
-        </template> -->
       </div>
     </template>
     <template v-if="property.children.length">
@@ -236,3 +239,13 @@ export default {
     </template>
   </template>
 </template>
+
+<style lang="scss" scoped>
+.property-item .hash-btn {
+  border: 2px solid transparent;
+}
+.property-item.focus-key .hash-btn {
+  border: 2px solid #ffdc34;
+  border-radius: 4px;
+}
+</style>
