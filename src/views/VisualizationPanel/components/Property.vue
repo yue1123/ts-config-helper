@@ -105,7 +105,6 @@ export default {
 </script>
 
 <template>
-  {{ runtimeStore.currentCurserLineFlatKey }}
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.includes(property.flatKeys)">
       <div
