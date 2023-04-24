@@ -4,6 +4,7 @@ interface State {
   searchHitKeysCountMap: Record<string, number> | null
   searchHitKeysMap: Record<string, boolean> | null
   collapseExpandedNames: string[]
+  currentCurserLineFlatKey: string | null
 }
 
 export default defineStore(RUN_TIME, {
@@ -11,7 +12,8 @@ export default defineStore(RUN_TIME, {
     return {
       searchHitKeysCountMap: null,
       searchHitKeysMap: null,
-      collapseExpandedNames: []
+      collapseExpandedNames: [],
+      currentCurserLineFlatKey: null
     }
   },
   actions: {

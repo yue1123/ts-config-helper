@@ -22,7 +22,7 @@ import {
   NTooltip,
   useMessage
 } from 'naive-ui'
-import { h } from 'vue'
+import { h, watch } from 'vue'
 import MarkdownDesc from './MarkdownDesc.vue'
 // props type
 export interface Props {
@@ -105,11 +105,12 @@ export default {
 </script>
 
 <template>
+  {{ runtimeStore.currentCurserLineFlatKey }}
   <template :key="key" v-for="(property, key) in props.definition">
     <template v-if="store.selectedKeys.includes(property.flatKeys)">
       <div
         class="mb-4 property-item"
-        :class="{ 'focus-key': property.flatKeys === 'compilerOptions.skipLibCheck' }"
+        :class="{ 'focus-key': property.flatKeys === runtimeStore.currentCurserLineFlatKey }"
       >
         <div class="flex items-center space-x-4">
           <div class="flex items-center justify-start space-x-1" :id="property.flatKeys">

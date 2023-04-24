@@ -2,15 +2,17 @@
 import MonacoEditor from '@components/MonacoEditor.vue'
 import { useEventListener, useSchemaData } from '@hooks'
 import useDataStore from '@store/data'
-import { debounce } from '@utils'
+import { debounce, getParentKeyByNestedPropertyLineContent } from '@utils'
 
 import { NLayoutContent } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
 import useThemeStore from '@store/theme'
 import useSettingStore from '@store/setting'
+import useRuntimeStore from '@store/runtime'
 const dataStore = useDataStore()
 const themeStore = useThemeStore()
 const settingStore = useSettingStore()
+const runtimeStore = useRuntimeStore()
 const monacoEditor = ref<typeof MonacoEditor>()
 const { allOptionsFlatKeysMap } = await useSchemaData()
 // user paste or input code
@@ -36,6 +38,21 @@ const editorOptions = computed(() => {
     }
   }
 })
+function handleCursorLineChange(lineContent: string, json: string) {
+  const res = getParentKeyByNestedPropertyLineContent(json, lineContent)
+  runtimeStore.currentCurserLineFlatKey = res
+  if (res) {
+    const targetOptionEl: HTMLElement | null = document.querySelector(
+      `#visualization-container #${res.replace('.', '\\.')}`
+    )
+    if (targetOptionEl) {
+      setTimeout(() => {
+        targetOptionEl.focus()
+        targetOptionEl.scrollIntoView({ behavior: 'smooth' })
+      })
+    }
+  }
+}
 defineExpose({
   handleResize: handleResize
 })
@@ -50,8 +67,9 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
       language="json"
       width="100%"
       height="calc(100vh - 64px)"
-      :options="editorOptions as any"
       @change="handleChange"
+      @cursorLineChange="handleCursorLineChange"
+      :options="editorOptions as any"
     />
   </NLayoutContent>
 </template>

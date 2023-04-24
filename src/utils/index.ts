@@ -12,3 +12,6 @@ export * from './getObjectSchema'
 export * from './tsConfigRules'
 export * from './request'
 export * from './getBrowserLang'
+export * from './getParentKeyByNestedPropertyLineContent'
+
+

@@ -18,7 +18,7 @@ export interface Props {
   width?: string
   height?: string
 }
-const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted'])
+const emit = defineEmits(['update:modelValue', 'change', 'editor-mounted', 'cursorLineChange'])
 const props = defineProps<Props>()
 const dataStore = useDataStore()
 let editor: monaco.editor.IStandaloneCodeEditor | null = null
@@ -67,25 +67,6 @@ const init = () => {
     insertSpaces: true,
     ...props.options
   })
-  function findCourserLineJsonKey(jsonObj: Record<string, any>, lineNumber: number) {
-    let currentLine = 1
-    let targetKey = null
-    function helper(obj: Record<string, any>) {
-      Object.keys(obj).forEach((key) => {
-        if (currentLine === lineNumber) {
-          console.log(key)
-          targetKey = key
-          return
-        }
-        currentLine++
-        if (typeof obj[key] === 'object' || Array.isArray(obj[key])) {
-          helper(obj[key])
-        }
-      })
-    }
-    helper(jsonObj)
-    return targetKey
-  }
   editor.onDidChangeCursorPosition(
     debounce((e) => {
       if (!editor) return
@@ -93,11 +74,7 @@ const init = () => {
       if (selection && Math.abs(selection.startLineNumber - selection.endLineNumber) !== 0) return
       const lineNumber: number = e.position.lineNumber
       var lineContent = editor!.getModel()!.getLineContent(lineNumber)
-      console.log(lineNumber, lineContent)
-      // if(lineContent)
-      // console.log(.split('\n'))
-      // findCourserLineJsonKey()
-      const valueKeyRegexp = /\s*"([a-zA-Z]+)":\s*\{|\[|"(.+)"/gm
+      emit('cursorLineChange', lineContent, editor.getValue())
     }, 200)
   )
   // // 绑定“Ctrl+Z”键为撤销操作

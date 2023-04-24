@@ -9,3 +9,11 @@ export const markdownNoBaseUrlLinkReg = /\[.+?\]\((\/.+?)\)/g
 
 // match number
 export const numberReg = /(\d+)/g
+
+// match letter
+export const letterReg = /[a-zA-Z]/
+/**
+ * @example "strict": true ==test==> true
+ * @example "strict": true ==match==> strict
+ */
+export const propertyLineReg = /"([a-zA-Z]+)"\s*:/
