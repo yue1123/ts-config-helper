@@ -3,6 +3,7 @@ import { NDivider, NCheckbox, NCollapse, NButton, NCollapseItem, NTooltip, NBadg
 import { currentLang } from '@i18n'
 import type { Options } from '@types'
 import useRuntimeStore from '@store/runtime'
+import useDataStore from '@store/data'
 import { descriptionMap } from '@schema'
 import { Icon } from '@iconify/vue'
 import { computed } from 'vue'
@@ -11,6 +12,7 @@ export interface Props {
   level: number
 }
 
+const dataStore = useDataStore()
 const runtimeStore = useRuntimeStore()
 const props = defineProps<Props>()
 const renderData = computed(() => {
@@ -21,6 +23,9 @@ const renderData = computed(() => {
   }
   return props.data
 })
+function handleFocusProperty(key: string) {
+  runtimeStore.currentCurserLineFlatKey = key
+}
 </script>
 
 <script lang="ts">
@@ -70,7 +75,25 @@ export default {
               {{ options.key }}
             </div>
           </NCheckbox>
-
+          <NTooltip
+            v-if="dataStore.selectedKeys.includes(options.flatKeys)"
+            placement="top-end"
+            :style="{ maxWidth: '400px' }"
+          >
+            <template #trigger>
+              <NButton
+                @click="handleFocusProperty(options.flatKeys)"
+                class="opacity-0 help"
+                size="tiny"
+                quaternary
+              >
+                <template #icon>
+                  <Icon icon="material-symbols:filter-center-focus-rounded" />
+                </template>
+              </NButton>
+            </template>
+            {{ $t('sidebar.focusProperty') }}
+          </NTooltip>
           <NTooltip :delay="200" placement="top-end" :style="{ maxWidth: '400px' }">
             <template #trigger>
               <NButton class="opacity-0 help" size="tiny" quaternary>

@@ -22,7 +22,7 @@ import {
   NTooltip,
   useMessage
 } from 'naive-ui'
-import { h, watch } from 'vue'
+import { h, watchEffect, watchPostEffect } from 'vue'
 import MarkdownDesc from './MarkdownDesc.vue'
 // props type
 export interface Props {
@@ -95,6 +95,25 @@ function handleScrollToTargetOptions(property: Options, relatedKey?: string) {
       hasKey ? 0 : 200
     )
   }
+}
+
+// 递归组件,只需要第一次渲染监听
+if (props.level === 1) {
+  // 锚点
+  watchEffect(() => {
+    const key = runtimeStore.currentCurserLineFlatKey
+    if (key) {
+      const targetOptionEl: HTMLElement | null = document.querySelector(
+        `#visualization-container #${key.replace('.', '\\.')}`
+      )
+      if (targetOptionEl) {
+        setTimeout(() => {
+          targetOptionEl.focus()
+          targetOptionEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        })
+      }
+    }
+  })
 }
 </script>
 

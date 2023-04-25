@@ -41,7 +41,8 @@
     "presetConfig": "default configuration",
     "successLoadConfig": "Successfully loaded {name} configuration",
     "collapseConfig": "folded configuration",
-    "expandConfig": "put away"
+    "expandConfig": "put away",
+    "focusProperty": "focus"
   },
   "nav": {
     "theme": "Toggle theme",

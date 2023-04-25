@@ -41,7 +41,8 @@
     "successLoadConfig": "成功加载{name}配置",
     "learnMore": "了解如何使用",
     "collapseConfig": "折叠",
-    "expandConfig": "收起"
+    "expandConfig": "收起",
+    "focusProperty": "聚焦"
   },
   "nav": {
     "theme": "切换主题",

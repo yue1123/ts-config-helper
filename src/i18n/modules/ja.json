@@ -41,7 +41,8 @@
     "presetConfig": "デフォルト構成",
     "successLoadConfig": "{name} 構成を正常にロードしました",
     "collapseConfig": "折り畳み構成",
-    "expandConfig": "片付ける"
+    "expandConfig": "片付ける",
+    "focusProperty": "集中"
   },
   "nav": {
     "theme": "テーマを切り替える",

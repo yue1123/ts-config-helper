@@ -39,19 +39,7 @@ const editorOptions = computed(() => {
   }
 })
 function handleCursorLineChange(lineContent: string, json: string) {
-  const res = getParentKeyByNestedPropertyLineContent(json, lineContent)
-  runtimeStore.currentCurserLineFlatKey = res
-  if (res) {
-    const targetOptionEl: HTMLElement | null = document.querySelector(
-      `#visualization-container #${res.replace('.', '\\.')}`
-    )
-    if (targetOptionEl) {
-      setTimeout(() => {
-        targetOptionEl.focus()
-        targetOptionEl.scrollIntoView({ behavior: 'smooth' })
-      })
-    }
-  }
+  runtimeStore.currentCurserLineFlatKey = getParentKeyByNestedPropertyLineContent(json, lineContent)
 }
 defineExpose({
   handleResize: handleResize

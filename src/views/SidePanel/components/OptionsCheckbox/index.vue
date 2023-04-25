@@ -19,7 +19,7 @@ function handleChange(_e: any, { actionType, value: path }: eventValue) {
   // const item = props.data.find((item) => item.key === path)
   // if (item && actionType === 'check' && item.default !== undefined) {
   //   // store.rawConfig[path] = item.default
-  // } else 
+  // } else
   if (actionType === 'uncheck') {
     deletePropertyByPath(store.rawConfig, [path as string])
   }
@@ -28,6 +28,6 @@ function handleChange(_e: any, { actionType, value: path }: eventValue) {
 
 <template>
   <NCheckboxGroup v-model:value="store.selectedKeys" @update:value="handleChange">
-    <OptionsCheckbox v-bind="props" />
+    <OptionsCheckbox v-bind="props"/>
   </NCheckboxGroup>
 </template>
