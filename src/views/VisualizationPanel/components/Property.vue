@@ -113,7 +113,6 @@ export default {
       >
         <div class="flex items-center space-x-4">
           <div class="flex items-center justify-start space-x-1" :id="property.flatKeys">
-            <!-- :type="property.flatKeys === 'compilerOptions.skipLibCheck' ? 'primary' : 'default'" -->
             <NButton
               class="hash-btn"
               size="small"

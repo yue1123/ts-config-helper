@@ -1,5 +1,6 @@
-import { letterReg, propertyLineReg } from '@constants'
-
+import { propertyLineReg } from '@constants'
+import { isLetter } from './isLetter'
+type SearchOpenBrackets = '{' | '[' | '}' | ']'
 export function getParentKeyByNestedPropertyLineContent(json: string, lineContent: string) {
   const trimContent = lineContent.trim()
   if (trimContent === '}') return null
@@ -7,21 +8,40 @@ export function getParentKeyByNestedPropertyLineContent(json: string, lineConten
   const contentIndex = json.indexOf(trimContent)
   // 当前行是否是属性行
   const isPropertyLine = propertyLineReg.test(lineContent)
+  const searchOpenBrackets: Partial<Record<SearchOpenBrackets, boolean>> = {
+    '{': true,
+    '[': false
+  }
+  const searchCloseBrackets: Partial<Record<SearchOpenBrackets, boolean>> = {
+    '}': true,
+    ']': false
+  }
+  // 先前的遍历是否存在关闭括号
+  let hasCloseBracket = false
   const keys = []
+  const jsonArr = json.slice(0, contentIndex).split('')
   if (isPropertyLine) {
     let res = lineContent.match(propertyLineReg)
     res && keys.push(res[1])
+  } else {
+    // 点击行是位于数组中
+    searchOpenBrackets['['] = true
+    searchCloseBrackets[']'] = true
   }
-  for (let i = contentIndex; i > 0; i--) {
-    const element = json[i]
-    if (element === '{' || (!isPropertyLine && element === '[')) {
-      i--
+  for (let i = jsonArr.length - 1; i > 0; i--) {
+    const element = jsonArr[i]
+    if (searchCloseBrackets[element as SearchOpenBrackets]) hasCloseBracket = true
+    if (searchOpenBrackets[element as SearchOpenBrackets]) {
+      if (hasCloseBracket) {
+        hasCloseBracket = false
+        continue
+      }
       // 找到第一个字母
       let key = []
-      while (!letterReg.test(json[i])) i--
+      while (!isLetter(jsonArr[i])) i--
       // 一直运行直到不是字母
-      while (letterReg.test(json[i])) {
-        key.unshift(json[i])
+      while (isLetter(jsonArr[i])) {
+        key.unshift(jsonArr[i])
         i--
       }
       keys.unshift(key.join(''))
