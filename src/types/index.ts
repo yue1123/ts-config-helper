@@ -3,6 +3,7 @@ export type schemaConvertResult = {
   allOptionsFlatKeys: string[]
   allOptionsFlatKeysMap: Map<string, boolean>
   leafNodeKey: string[]
+  leafNodeKeyMap: Map<string, boolean>
 }
 export interface Options {
   label: string

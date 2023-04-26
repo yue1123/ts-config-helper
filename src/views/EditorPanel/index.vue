@@ -14,7 +14,7 @@ const themeStore = useThemeStore()
 const settingStore = useSettingStore()
 const runtimeStore = useRuntimeStore()
 const monacoEditor = ref<typeof MonacoEditor>()
-const { allOptionsFlatKeysMap } = await useSchemaData()
+const { allOptionsFlatKeysMap, leafNodeKeyMap } = await useSchemaData()
 // user paste or input code
 function handleChange(value: string) {
   dataStore.dispatchConfigWithJsonString(value, allOptionsFlatKeysMap)

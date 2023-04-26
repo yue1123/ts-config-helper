@@ -20,8 +20,8 @@ export function flatObjWithDepthControl<T extends Record<string, any> = {}>(
       let flatKeyArr = parentKeys.concat(currentKey)
       let keysString = flatKeyArr.join('.')
       if (parentKeys.length && isMaxFlattenDepth(keysString)) {
-        res[parentKeys.join('.')] = obj
-        break
+        res[keysString] = ele
+        continue
       } else if (typeof ele === 'object' && !Array.isArray(ele) && Object.keys(ele).length !== 0) {
         res = Object.assign(res, flatHelper(ele, flatKeyArr, {}))
       } else {

@@ -1,5 +1,6 @@
 import { propertyLineReg } from '@constants'
 import { isLetter } from './isLetter'
+import { isDash } from './isDash'
 type SearchOpenBrackets = '{' | '[' | '}' | ']'
 export function getParentKeyByNestedPropertyLineContent(json: string, lineContent: string) {
   const trimContent = lineContent.trim()
@@ -40,7 +41,7 @@ export function getParentKeyByNestedPropertyLineContent(json: string, lineConten
       let key = []
       while (!isLetter(jsonArr[i])) i--
       // 一直运行直到不是字母
-      while (isLetter(jsonArr[i])) {
+      while (isLetter(jsonArr[i]) || isDash(jsonArr[i])) {
         key.unshift(jsonArr[i])
         i--
       }

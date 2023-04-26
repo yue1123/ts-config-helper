@@ -1,5 +1,5 @@
 <template>
-  <NSpace vertical>
+  <NSpace v-auto-animate vertical>
     <NSpace v-for="(item, i) in data" :key="i">
       <NInput
         :placeholder="keyDesc"
@@ -15,10 +15,10 @@
         @update:value="(event: any) => handleArrayDataItemCheck(event, item)"
       />
     </NSpace>
-    <div class="create-button" role="container">
-      <NButton @click="handleCreate" dashed style="width: 100%">{{ $t('add') }}</NButton>
-    </div>
   </NSpace>
+  <div class="create-button mt-2" role="container">
+    <NButton @click="handleCreate" dashed style="width: 100%">{{ $t('add') }}</NButton>
+  </div>
 </template>
 
 <script lang="ts" setup>

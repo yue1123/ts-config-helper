@@ -99,6 +99,8 @@ const dataStore = defineStore(
       }
       item.name = newName
     }
+
+    // update by json string
     function dispatchConfigWithJsonString(
       value: string,
       allOptionsFlatKeysMap: Map<string, boolean>,
@@ -110,9 +112,9 @@ const dataStore = defineStore(
           const res = flatObjWithDepthControl(parseObj, (item) => {
             // check is max level
             // if value is user value object, should not flatten
-            return !allOptionsFlatKeysMap.get(item)
+            return !!allOptionsFlatKeysMap.get(item)
           })
-          // 过滤key,避免叶子节点出现在面板中
+          // 过滤key, 避免叶子节点出现在面板中
           let newSelectedKeys = Object.keys(res).filter((key) => allOptionsFlatKeysMap.get(key))
           // 过滤空值节点, 避免右侧编辑器更改, 左侧消失
           let emptyValueKeys = selectedKeys.value.filter((key) => {
