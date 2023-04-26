@@ -22,7 +22,7 @@ const dataStore = defineStore(
     const config = ref<string>('')
     const selectedKeys = ref<string[]>([])
     const rawConfig = ref<Record<string, any>>({})
-
+    // FIXME: tab 之间的 value 会连带
     const configList = ref<ConfigItemState[]>([
       {
         name: 'tsconfig.json',
