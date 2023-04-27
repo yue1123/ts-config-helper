@@ -20,6 +20,9 @@ function handleSureRename() {
   if (currentRenameItem.value) dataStore.renameConfigTab(currentRenameItem.value, renameValue.value)
   handleQuitRename()
 }
+function handleChangeTab(index: number) {
+  dataStore.currentConfigIndex = index
+}
 </script>
 
 <template>
@@ -34,10 +37,11 @@ function handleSureRename() {
     @add="dataStore.addConfigTab"
   >
     <NTab
-      v-for="item in dataStore.configList"
+      v-for="(item, index) in dataStore.configList"
       :key="item.name"
       :name="item.name"
       class="config-name-tab"
+      @click="handleChangeTab(index)"
     >
       <div v-if="currentRenameItem === item" class="rename" @click.stop>
         <NInput

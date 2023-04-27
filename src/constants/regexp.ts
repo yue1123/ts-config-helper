@@ -17,3 +17,6 @@ export const letterReg = /[a-zA-Z]/
  * @example "strict": true ==match==> strict
  */
 export const propertyLineReg = /"([a-zA-Z]+)"\s*:/
+
+
+export const dotReg = /\./g

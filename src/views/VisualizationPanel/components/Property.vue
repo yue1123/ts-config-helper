@@ -22,7 +22,8 @@ import {
   NTooltip,
   useMessage
 } from 'naive-ui'
-import { h, watchEffect, watchPostEffect } from 'vue'
+import { dotReg } from '@constants'
+import { h, nextTick, watch } from 'vue'
 import MarkdownDesc from './MarkdownDesc.vue'
 // props type
 export interface Props {
@@ -75,11 +76,11 @@ function handleArrayDataItemCheck(value: string[], property: Options) {
   }
   store.rawConfig[property.flatKeys] = _value
 }
-// 点击锚点或相关属性滚动到视口中
+// 点击锚点或相关属性左侧复选框滚动到视口中
 function handleScrollToTargetOptions(property: Options, relatedKey?: string) {
   const key = relatedKey
     ? [...property.parentKeys, relatedKey].join('\\.')
-    : property.flatKeys.replace('.', '\\.')
+    : property.flatKeys.replace(dotReg, '\\.')
   const targetOptionEl: HTMLElement | null = document.querySelector(`#J_Options_Container #${key}`)
   const collapseKey = property.parentKeys.join('.')
   const hasKey = runtimeStore.collapseExpandedNames.includes(collapseKey)
@@ -98,22 +99,27 @@ function handleScrollToTargetOptions(property: Options, relatedKey?: string) {
 }
 
 // 递归组件,只需要第一次渲染监听
+// 聚焦 key改变,可视面板滚动到视口
 if (props.level === 1) {
   // 锚点
-  watchEffect(() => {
-    const key = runtimeStore.currentCurserLineFlatKey
-    if (key) {
-      const targetOptionEl: HTMLElement | null = document.querySelector(
-        `#visualization-container #${key.replace('.', '\\.')}`
-      )
-      if (targetOptionEl) {
-        setTimeout(() => {
-          targetOptionEl.focus()
-          targetOptionEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
-        })
-      }
+  watch(
+    () => runtimeStore.currentCurserLineFlatKey,
+    (newKey) => {
+      nextTick(() => {
+        if (newKey) {
+          const targetOptionEl: HTMLElement | null = document.querySelector(
+            `#visualization-container #${newKey.replace(dotReg, '\\.')}`
+          )
+          if (targetOptionEl) {
+            setTimeout(() => {
+              targetOptionEl.focus()
+              targetOptionEl.scrollIntoView({ behavior: 'smooth', block: 'center' })
+            })
+          }
+        }
+      })
     }
-  })
+  )
 }
 </script>
 

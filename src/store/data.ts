@@ -18,10 +18,6 @@ const dataStore = defineStore(
   DATA_CACHE,
   () => {
     const userSetting = useSettingStore()
-
-    const config = ref<string>('')
-    const selectedKeys = ref<string[]>([])
-    const rawConfig = ref<Record<string, any>>({})
     // FIXME: tab 之间的 value 会连带
     const configList = ref<ConfigItemState[]>([
       {
@@ -31,7 +27,11 @@ const dataStore = defineStore(
         rawConfig: {}
       }
     ])
-    const currentConfigName = ref<string>(configList.value[0].name)
+    const config = ref<string>('')
+    const selectedKeys = ref<string[]>([])
+    const rawConfig = ref<Record<string, any>>({})
+    const currentConfigName = ref<string>()
+    const currentConfigIndex = ref<number>(0)
     // 预览配置
     const previewConfig = computed(() => {
       // let editorValue: Record<string, any> | null = parse(config.value)
@@ -137,12 +137,21 @@ const dataStore = defineStore(
         rawConfig.value = {}
       }
     }
+    const init = () => {
+      const first = deepClone(configList.value[currentConfigIndex.value])
+      config.value = first.config
+      selectedKeys.value = first.selectedKeys
+      rawConfig.value = first.rawConfig
+      currentConfigName.value = first.name
+    }
+    init()
     return {
       config,
       selectedKeys,
       rawConfig,
       previewConfig,
       currentConfigName,
+      currentConfigIndex,
       configList,
       addConfigTab,
       renameConfigTab,
