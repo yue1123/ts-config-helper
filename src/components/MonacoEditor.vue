@@ -73,8 +73,12 @@ const init = () => {
       const selection = editor.getSelection()
       if (selection && Math.abs(selection.startLineNumber - selection.endLineNumber) !== 0) return
       const lineNumber: number = e.position.lineNumber
-      var lineContent = editor!.getModel()!.getLineContent(lineNumber)
-      emit('cursorLineChange', lineContent, editor.getValue())
+      const model = editor.getModel()
+      if (!model) return
+      const allLineContent = model.getLinesContent()
+      const cursorLineContent = model.getLineContent(lineNumber)
+      const cursorBeforeLineContent = allLineContent.slice(0, lineNumber).join('')
+      emit('cursorLineChange', { cursorBeforeLineContent, cursorLineContent })
     }, 200)
   )
   // // 绑定“Ctrl+Z”键为撤销操作

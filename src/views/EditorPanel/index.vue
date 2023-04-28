@@ -38,8 +38,11 @@ const editorOptions = computed(() => {
     }
   }
 })
-function handleCursorLineChange(lineContent: string, json: string) {
-  runtimeStore.currentCurserLineFlatKey = getParentKeyByNestedPropertyLineContent(json, lineContent)
+function handleCursorLineChange({
+  cursorBeforeLineContent,
+  cursorLineContent
+}: Record<string, string>) {
+  runtimeStore.currentCurserLineFlatKey = getParentKeyByNestedPropertyLineContent(cursorBeforeLineContent, cursorLineContent)
 }
 defineExpose({
   handleResize: handleResize
@@ -48,7 +51,7 @@ onMounted(() => useEventListener(self, 'resize', handleResize))
 </script>
 
 <template>
-  <NLayoutContent>
+  <NLayoutContent class="min-w-[200px] overflow-hidden">
     <MonacoEditor
       ref="monacoEditor"
       :model-value="dataStore.previewConfig"
