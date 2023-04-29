@@ -1,6 +1,6 @@
 import { resolve, dirname, join } from 'node:path'
 import { defineConfig } from 'vite'
-import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA, type VitePWAOptions } from 'vite-plugin-pwa'
 import { spaLoading } from 'vite-plugin-spa-loading'
 import vue from '@vitejs/plugin-vue'
 import { visualizer } from 'rollup-plugin-visualizer'
@@ -8,10 +8,38 @@ import { visualizer } from 'rollup-plugin-visualizer'
 // import { fileURLToPath } from 'url'
 // import importToCDN from 'vite-plugin-cdn-import'
 
+const pwaOptions: Partial<VitePWAOptions> = {
+  mode: 'production',
+  base: '/',
+  includeAssets: ['favicon.png'],
+  manifest: {
+    name: 'Ts Config Helper',
+    short_name: 'Ts Configer',
+    theme_color: '#63e2b7',
+    icons: [
+      {
+        src: 'pwa-128x128.png',
+        sizes: '128x128',
+        type: 'image/png'
+      },
+      {
+        src: 'pwa-256x256.png',
+        sizes: '256x256',
+        type: 'image/png'
+      },
+      {
+        src: 'pwa-512x512.png',
+        sizes: '512x512',
+        type: 'image/png'
+      }
+    ]
+  }
+}
+
 export default defineConfig({
   plugins: [
     vue(),
-    VitePWA(),
+    VitePWA(pwaOptions),
     spaLoading('svg', {
       debounce: 100,
       path: './src/assets/loading.svg',
@@ -19,7 +47,7 @@ export default defineConfig({
       tipText: 'Please stand by, source is loading...',
       cssPath: './src/styles/loading.css',
       error: {
-        tip: '🎉 New version assets updated! Try force refresh to load updating.',
+        tip: 'New version assets unload! Try force refresh to load updating.',
         detail: false,
         handler(err) {
           // const search = window.location.search
@@ -27,17 +55,17 @@ export default defineConfig({
           // if (reloadNum < 3) location.reload()
         }
       }
-    }),
-    visualizer({
-      emitFile: true,
-      open: true,
-      openOptions: {
-        app: {
-          name: 'chrome'
-        }
-      },
-      filename: 'stats.html'
     })
+    // visualizer({
+    //   emitFile: true,
+    //   open: true,
+    //   openOptions: {
+    //     app: {
+    //       name: 'chrome'
+    //     }
+    //   },
+    //   filename: 'stats.html'
+    // }) as any
     // vueI18n.vite({
     //   /* options */
     //   // locale messages resourece pre-compile option

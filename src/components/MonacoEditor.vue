@@ -7,7 +7,7 @@ import { onBeforeUnmount, onMounted, ref, watch, defineExpose, nextTick } from '
 import { debounce } from '@utils'
 import useDataStore from '../store/data'
 import * as monaco from 'monaco-editor'
-import json5 from 'json5'
+// import json5 from 'json5'
 export interface EditorOptions {
   theme: 'darkTheme' | 'lightTheme'
 }
