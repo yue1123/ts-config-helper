@@ -48,6 +48,7 @@ specifiers:
   typescript: ~4.8.4
   vite: ^4.3.1
   vite-plugin-cdn-import: ^0.3.5
+  vite-plugin-env-parse: ^1.0.2
   vite-plugin-pwa: ^0.14.4
   vite-plugin-spa-loading: ^1.2.2
   vitest: ^0.29.1
@@ -110,6 +111,7 @@ devDependencies:
   typescript: 4.8.4
   vite: 4.3.1_42abj3udvfahcdsqq6v3bsr26e
   vite-plugin-cdn-import: 0.3.5
+  vite-plugin-env-parse: 1.0.2_vite@4.3.1
   vite-plugin-spa-loading: 1.2.2_vite@4.3.1
   vitest: 0.29.1_jsdom@21.1.0+sass@1.60.0
   vue-tsc: 1.2.0_typescript@4.8.4
@@ -5679,6 +5681,14 @@ packages:
       rollup-plugin-external-globals: 0.6.1
     transitivePeerDependencies:
       - rollup
+    dev: true
+
+  /vite-plugin-env-parse/1.0.2_vite@4.3.1:
+    resolution: {integrity: sha512-VEDDTXeOLPAc1VhPDVfoxsFwI/og501km4zfHmA+Ats/iGygSe11//7+4Qm7lLU1/AnCDVfpCHklGTbIPEytog==}
+    peerDependencies:
+      vite: '*'
+    dependencies:
+      vite: 4.3.1_42abj3udvfahcdsqq6v3bsr26e
     dev: true
 
   /vite-plugin-pwa/0.14.4_vite@4.3.1:

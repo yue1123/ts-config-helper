@@ -77,7 +77,7 @@ const init = () => {
       if (!model) return
       const allLineContent = model.getLinesContent()
       const cursorLineContent = model.getLineContent(lineNumber)
-      const cursorBeforeLineContent = allLineContent.slice(0, lineNumber).join('')
+      const cursorBeforeLineContent = allLineContent.slice(0, lineNumber - 1).join('')
       emit('cursorLineChange', { cursorBeforeLineContent, cursorLineContent })
     }, 200)
   )

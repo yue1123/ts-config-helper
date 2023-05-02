@@ -7,9 +7,11 @@ import { visualizer } from 'rollup-plugin-visualizer'
 import vueI18n from '@intlify/unplugin-vue-i18n'
 import { fileURLToPath } from 'url'
 // import importToCDN from 'vite-plugin-cdn-import'
+import { envParse } from 'vite-plugin-env-parse'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
+  // console.log(env)
   const pwaOptions: Partial<VitePWAOptions> = {
     mode: 'production',
     base: '/',
@@ -52,10 +54,9 @@ export default defineConfig(({ mode }) => {
       }
     }),
     vueI18n.vite({
-      /* options */
-      // locale messages resourece pre-compile option
       include: resolve(dirname(fileURLToPath(import.meta.url)), './src/i18n/modules/**')
-    })
+    }),
+    envParse()
   ]
   if (env.VITE_APP_VISUALIZER_ENABLE === 'true') {
     plugins.push(

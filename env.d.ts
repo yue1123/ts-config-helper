@@ -1,7 +1,9 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  VITE_APP_SHOULD_CATCH_DATA: string
+  // Auto generate by env parse
+  VITE_APP_SHOULD_CATCH_DATA: boolean
+  VITE_APP_VISUALIZER_ENABLE: boolean
 }
 declare module '*.json' {
   type json = string
