@@ -14,7 +14,7 @@ const themeStore = useThemeStore()
 const settingStore = useSettingStore()
 const runtimeStore = useRuntimeStore()
 const monacoEditor = ref<typeof MonacoEditor>()
-const { allOptionsFlatKeysMap, leafNodeKeyMap } = await useSchemaData()
+const { allOptionsFlatKeysMap } = await useSchemaData()
 // user paste or input code
 function handleChange(value: string) {
   dataStore.dispatchConfigWithJsonString(value, allOptionsFlatKeysMap)
@@ -42,7 +42,15 @@ function handleCursorLineChange({
   cursorBeforeLineContent,
   cursorLineContent
 }: Record<string, string>) {
-  runtimeStore.currentCurserLineFlatKey = getParentKeyByNestedPropertyLineContent(cursorBeforeLineContent, cursorLineContent)
+  const keys = getParentKeyByNestedPropertyLineContent(cursorBeforeLineContent, cursorLineContent)
+  if (keys) {
+    const res = keys.reduce<string[]>((allKeys, currentKey) => {
+      if (allOptionsFlatKeysMap.get(allKeys.join('.'))) return allKeys
+      allKeys.push(currentKey)
+      return allKeys
+    }, [])
+    runtimeStore.currentCurserLineFlatKey = res.join('.')
+  }
 }
 defineExpose({
   handleResize: handleResize

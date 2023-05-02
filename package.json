@@ -68,6 +68,7 @@
     "typescript": "~4.8.4",
     "vite": "^4.3.1",
     "vite-plugin-cdn-import": "^0.3.5",
+    "vite-plugin-env-parse": "^1.0.2",
     "vite-plugin-spa-loading": "^1.2.2",
     "vitest": "^0.29.1",
     "vue-tsc": "^1.2.0"
