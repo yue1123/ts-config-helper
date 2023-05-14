@@ -25,6 +25,7 @@ import {
 import { dotReg } from '@constants'
 import { h, nextTick, watch } from 'vue'
 import MarkdownDesc from './MarkdownDesc.vue'
+import ExtendsAutoComplete from './ExtendsAutoComplete.vue'
 // props type
 export interface Props {
   definition: Options[]
@@ -97,7 +98,6 @@ function handleScrollToTargetOptions(property: Options, relatedKey?: string) {
     )
   }
 }
-
 // 递归组件,只需要第一次渲染监听
 // 聚焦 key改变,可视面板滚动到视口
 if (props.level === 1) {
@@ -238,6 +238,9 @@ export default {
         </template>
         <template key="number" v-else-if="getInputType(property) === 'number'">
           <NInputNumber v-model:value="store.rawConfig[property.flatKeys]" />
+        </template>
+        <template key="extendsProperty" v-else-if="property.key === 'extends'">
+          <ExtendsAutoComplete />
         </template>
         <template
           key="arrayButConvertWhenSingle"

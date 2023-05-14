@@ -9,11 +9,7 @@ import { useI18n } from 'vue-i18n'
 const loadLink = (libName: string) =>
   `https://cdn.jsdelivr.net/npm/@tsconfig/${libName}@latest/tsconfig.json`
 
-const renderIcon = (icon: string) => {
-  return () => {
-    return h(Icon, { icon })
-  }
-}
+export const renderIcon = (icon: string) => () => h(Icon, { icon })
 const configJsonCache = new Map<string, string>()
 export const configLibIcon: Record<string, string> = {
   'create-react-app': 'vscode-icons:file-type-reactjs',
@@ -51,136 +47,164 @@ export function useBaseTsConfig() {
   const baseTsConfigLibOptions: DropdownOption[] = [
     {
       label: 'create-react-app',
-      key: 'create-react-app',
+      key: '@tsconfig/create-react-app',
+      value: '@tsconfig/create-react-app',
       icon: renderIcon(configLibIcon['create-react-app'])
     },
     {
       label: 'cypress',
-      key: 'cypress',
+      key: '@tsconfig/cypress',
+      value: '@tsconfig/cypress',
       icon: renderIcon(configLibIcon['cypress'])
     },
     {
       label: 'deno',
-      key: 'deno',
+      key: '@tsconfig/deno',
+      value: '@tsconfig/deno',
       icon: renderIcon(configLibIcon['deno'])
     },
     {
       label: 'docusaurus',
-      key: 'docusaurus',
+      key: '@tsconfig/docusaurus',
+      value: '@tsconfig/docusaurus',
       icon: renderIcon(configLibIcon['docusaurus'])
     },
     {
       label: 'ember',
-      key: 'ember',
+      key: '@tsconfig/ember',
+      value: '@tsconfig/ember',
       icon: renderIcon(configLibIcon['ember'])
     },
     {
       label: 'esm',
-      key: 'esm',
+      key: '@tsconfig/esm',
+      value: '@tsconfig/esm',
       icon: renderIcon(configLibIcon['esm'])
     },
     {
       label: 'next',
-      key: 'next',
+      key: '@tsconfig/next',
+      value: '@tsconfig/next',
       icon: renderIcon(configLibIcon['next'])
     },
     {
       label: 'node',
-      key: 'node',
+      key: '@tsconfig/node',
+      value: '@tsconfig/node',
       icon: renderIcon(configLibIcon['node']),
       children: [
         {
-          key: 'node-lts',
+          key: '@tsconfig/node-lts',
+          value: '@tsconfig/node-lts',
           label: 'node-lts'
         },
         {
-          key: 'node10',
+          key: '@tsconfig/node10',
+          value: '@tsconfig/node10',
           label: 'node10'
         },
         {
-          key: 'node12',
+          key: '@tsconfig/node12',
+          value: '@tsconfig/node12',
           label: 'node12'
         },
         {
-          key: 'node14',
+          key: '@tsconfig/node14',
+          value: '@tsconfig/node14',
           label: 'node14'
         },
         {
-          key: 'node16',
+          key: '@tsconfig/node16',
+          value: '@tsconfig/node16',
           label: 'node16'
         },
         {
-          key: 'node17',
+          key: '@tsconfig/node17',
+          value: '@tsconfig/node17',
           label: 'node17'
         },
         {
-          key: 'node18',
+          key: '@tsconfig/node18',
+          value: '@tsconfig/node18',
           label: 'node18'
         }
       ]
     },
     {
-      key: 'nuxt',
+      key: '@tsconfig/nuxt',
+      value: '@tsconfig/nuxt',
       label: 'nuxt',
       icon: renderIcon(configLibIcon['nuxt'])
     },
     {
-      key: 'react-native',
+      key: '@tsconfig/react-native',
+      value: '@tsconfig/react-native',
       label: 'react-native',
       icon: renderIcon(configLibIcon['react-native'])
     },
     {
-      key: 'recommended',
+      key: '@tsconfig/recommended',
+      value: '@tsconfig/recommended',
       label: 'recommended',
       icon: renderIcon(configLibIcon['recommended'])
     },
     {
-      key: 'remix',
+      key: '@tsconfig/remix',
+      value: '@tsconfig/remix',
       label: 'remix',
       icon: renderIcon(configLibIcon['remix'])
     },
     {
-      key: 'strictest',
+      key: '@tsconfig/strictest',
+      value: '@tsconfig/strictest',
       label: 'strictest',
       icon: renderIcon(configLibIcon['strictest'])
     },
     {
-      key: 'svelte',
+      key: '@tsconfig/svelte',
+      value: '@tsconfig/svelte',
       label: 'svelte',
       icon: renderIcon(configLibIcon['svelte'])
     },
     {
-      key: 'taro',
+      key: '@tsconfig/taro',
+      value: '@tsconfig/taro',
       label: 'taro',
       icon: renderIcon(configLibIcon['taro'])
     },
     {
-      key: 'vite-react',
+      key: '@tsconfig/vite-react',
+      value: '@tsconfig/vite-react',
       label: 'vite-react',
       icon: renderIcon(configLibIcon['vite-react'])
     },
-    {
-      key: 'vue',
-      label: 'vue (is coming)',
-      icon: renderIcon(configLibIcon['vue']),
-      disabled: true,
-      children: [
-        {
-          key: 'vue-node',
-          label: 'vue-node'
-        },
-        {
-          key: 'vue-web',
-          label: 'vue-web'
-        },
-        {
-          key: 'vue-common',
-          label: 'vue-common'
-        }
-      ]
-    },
+    // {
+    //   key: 'vue',
+    // value: 'vue',
+    //   label: 'vue (is coming)',
+    //   icon: renderIcon(configLibIcon['vue']),
+    //   disabled: true,
+    //   children: [
+    //     {
+    //       key: 'vue-node',
+    // value: 'vue-node',
+    //       label: 'vue-node'
+    //     },
+    //     {
+    //       key: 'vue-web',
+    // value: 'vue-web',
+    //       label: 'vue-web'
+    //     },
+    //     {
+    //       key: 'vue-common',
+    // value: 'vue-common',
+    //       label: 'vue-common'
+    //     }
+    //   ]
+    // },
     {
       key: 'more',
+      value: 'more',
       type: 'render',
       render() {
         return h(
