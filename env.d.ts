@@ -1,8 +1,14 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-  // Auto generate by env parse
+  // Auto generate by env-parse
+  /**
+   * 控制 app store 数据是否缓存
+   */
   VITE_APP_SHOULD_CATCH_DATA: boolean
+  /**
+   * 是否开启打包分析
+   */
   VITE_APP_VISUALIZER_ENABLE: boolean
 }
 declare module '*.json' {
