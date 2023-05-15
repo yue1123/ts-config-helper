@@ -240,7 +240,14 @@ export default {
           <NInputNumber v-model:value="store.rawConfig[property.flatKeys]" />
         </template>
         <template key="extendsProperty" v-else-if="property.key === 'extends'">
-          <ExtendsAutoComplete />
+          <ExtendsAutoComplete
+            :value="
+              typeof store.rawConfig[property.flatKeys] === 'string'
+                ? [store.rawConfig[property.flatKeys]]
+                : store.rawConfig[property.flatKeys]
+            "
+            @update:value="(event: any) => handleTagsChange(event, property)"
+          />
         </template>
         <template
           key="arrayButConvertWhenSingle"
