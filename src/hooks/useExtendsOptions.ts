@@ -13,22 +13,37 @@ export function useExtendsOptions() {
         key: name,
         label: name,
         value: name,
-        icon: icon ? renderIcon(icon) : null
+        icon: icon ? renderIcon(icon) : renderIcon('mdi:code-json')
       })
       return options
     }, [])
+
     return [
       {
         type: 'group',
         key: 'user config',
         label: 'user tab config',
-        children: tabConfigList
+        children: tabConfigList.filter((item) => item.label !== data.currentConfigName)
       },
       {
         type: 'group',
         key: '@tsconfig',
         label: '@tsconfig',
-        children: baseTsConfigLibOptions.slice(0, -1)
+        children: baseTsConfigLibOptions
+          .slice(0, -1)
+          .reduce<AutoCompleteOption[]>((total, current) => {
+            if (current.children) {
+              total.push(
+                ...(current.children.map((item) => {
+                  item.icon = current.icon
+                  return item
+                }) as any)
+              )
+            } else {
+              total.push(current as any)
+            }
+            return total
+          }, [])
       }
     ]
   })

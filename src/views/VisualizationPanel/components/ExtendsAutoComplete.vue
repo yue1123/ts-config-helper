@@ -2,24 +2,24 @@
 import { NSelect, NButton, type SelectOption } from 'naive-ui'
 import { useExtendsOptions } from '@hooks'
 import { h, ref, type VNode, type VNodeChild } from 'vue'
-const extendsOptions = useExtendsOptions()
-const value = ref()
-const renderLabel = (option: SelectOption): VNodeChild => {
-  const icon = option.icon as () => VNode
 
+const props = defineProps(['value'])
+const emits = defineEmits(['update:value'])
+const extendsOptions = useExtendsOptions()
+const value = ref(props.value || [])
+const renderLabel = (option: SelectOption): VNodeChild => {
+  if (option.type === 'group') return option.label as string
+  const icon = option.icon as () => VNode
   return [
-    h(
-      'div',
-      {
-        class: 'flex space-x-4'
-      },
-      { default: icon }
-    ),
-    option.label as string
+    h('div', { class: 'flex space-x-2 items-center' }, [
+      icon && icon(),
+      h('span', null, option.key as string)
+    ])
   ]
 }
-
-console.log(extendsOptions)
+function handleUpdateValue() {
+  emits('update:value', value)
+}
 </script>
 
 <template>
@@ -31,6 +31,8 @@ console.log(extendsOptions)
     filterable
     multiple
     tag
+    class="extends-select"
+    @update:value="handleUpdateValue"
   >
     <template #action>
       <NButton
