@@ -89,7 +89,8 @@ const dataStore = defineStore(
     function removeConfigTab(name: string) {
       let index = configList.value.findIndex((item) => item.name === name)
       if (configList.value[index].name === currentConfigName.value) {
-        currentConfigName.value = configList.value[index === 0 ? index + 1 : index + 1].name
+        const currentIndex = index === configList.value.length - 1 ? index - 1 : index + 1
+        currentConfigName.value = configList.value[currentIndex].name
       }
       configList.value.splice(index, 1)
     }

@@ -7,7 +7,7 @@ import useSettingStore from '@store/setting'
 import { useI18n } from 'vue-i18n'
 
 const loadLink = (libName: string) =>
-  `https://cdn.jsdelivr.net/npm/@tsconfig/${libName}@latest/tsconfig.json`
+  `https://cdn.jsdelivr.net/npm/${libName}@latest/tsconfig.json`
 
 export const renderIcon = (icon: string) => () => h(Icon, { icon })
 const configJsonCache = new Map<string, string>()
@@ -40,7 +40,7 @@ export const configLibIcon: Record<string, string> = {
 export function useBaseTsConfig() {
   /**
    * @link https://github.com/tsconfig/bases
-   * @link loadLink https://cdn.jsdelivr.net/npm/@tsconfig/{liblabel}@latest/tsconfig.json
+   * @link loadLink https://cdn.jsdelivr.net/npm/{liblabel}@latest/tsconfig.json
    */
   const { t } = useI18n()
   const settingStore = useSettingStore()
