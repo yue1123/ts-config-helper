@@ -90,7 +90,7 @@ watch(
     >
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <Icon icon="bi:ui-checks-grid" />
+          <span class="flex-shrink-0"><Icon icon="bi:ui-checks-grid" /></span>
           <span>{{ filterLabelMap[activeFilter] }}</span>
         </div>
         <div class="flex items-center">
@@ -138,7 +138,7 @@ watch(
                 </template>
               </NButton>
             </template>
-            {{ isExpand ? $t('sidebar.expandConfig') : $t('sidebar.collapseConfig') }}
+            {{ isExpand ? $t('sidebar.collapseConfig') : $t('sidebar.expandConfig') }}
           </NTooltip>
         </div>
       </div>

@@ -150,7 +150,7 @@ export default {
             </NButton>
             <div class="flex items-center keys">
               <template v-for="(key, index) in property.parentKeys" :key="index">
-                <NH4 style="color: #bbb; --n-margin: 0">{{ key }}</NH4>
+                <NH4 style="color: #999; --n-margin: 0">{{ key }}</NH4>
                 <span> . </span>
               </template>
               <NH3 style="--n-margin: 0">{{ property.key }}</NH3>
@@ -184,10 +184,10 @@ export default {
             />
           </Suspense>
         </div>
-        <div class="mb-1 text-gray-400" v-if="property.default !== undefined">
+        <div class="mb-1 text-gray-500" v-if="property.default !== undefined">
           {{ $t('default') }}: {{ property.default }}
         </div>
-        <div v-if="settingStore.showDescription" class="mb-2 text-gray-400">
+        <div v-if="settingStore.showDescription" class="mb-2 text-gray-500">
           {{ descriptionMap[currentLang][property.flatKeys]?.message }}
         </div>
         <template key="array" v-if="getInputType(property) === 'array'">
@@ -211,7 +211,7 @@ export default {
         </template>
         <template key="boolean" v-else-if="getInputType(property) === 'boolean'">
           <div type="boolean" class="boolean_property-container">
-            <NSwitch v-model:value="store.rawConfig[property.flatKeys]" />
+            <NSwitch size="small" v-model:value="store.rawConfig[property.flatKeys]" />
           </div>
         </template>
         <template key="string" v-else-if="getInputType(property) === 'string'">

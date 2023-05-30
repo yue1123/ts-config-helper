@@ -55,8 +55,8 @@ function handleChangeTab(index: number) {
         ></NInput>
       </div>
       <div v-else class="flex items-center space-x-2">
-        <template v-if="configLibIcon[item.name]">
-          <Icon width="14" :icon="configLibIcon[item.name]" />
+        <template v-if="configLibIcon[item.name.replace('@tsconfig/', '')]">
+          <Icon width="14" :icon="configLibIcon[item.name.replace('@tsconfig/', '')]" />
         </template>
         <template v-else>
           <Icon width="14" icon="mdi:code-json" />
