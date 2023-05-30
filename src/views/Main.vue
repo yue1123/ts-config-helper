@@ -36,7 +36,7 @@ useSchemaData().finally(() => {
     <Header @showAbout="showGuideModal" />
     <NLayout style="height: calc(100vh - 64px)">
       <Splitpanes @resize="handleResize" :dblClickSplitter="false">
-        <Pane role="left-side-container" min-size="10" size="20">
+        <Pane role="left-side-container" min-size="12" size="20">
           <Suspense>
             <SidePanel />
             <template #fallback>
