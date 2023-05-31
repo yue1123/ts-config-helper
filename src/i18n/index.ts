@@ -1,7 +1,6 @@
 import { nextTick, ref } from 'vue'
 import { createI18n } from 'vue-i18n'
 import { SUPPORT_LOCALES } from '@constants'
-import useSettingStore from '@stores/setting'
 import zh from '@i18n/modules/zh.json'
 
 type LocaleMessageSchema = typeof zh
@@ -24,8 +23,6 @@ export async function setupI18n() {
 export async function setI18nLanguage(locale: SUPPORT_LOCALES) {
   try {
     await loadLocaleMessages(locale)
-    const setting = useSettingStore()
-    if (setting.lang !== locale) setting.lang = locale
     currentLang.value = locale
     if (i18n.mode === 'legacy') {
       i18n.global.locale = locale
