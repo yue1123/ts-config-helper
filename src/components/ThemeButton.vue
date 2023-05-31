@@ -18,7 +18,7 @@
 <script lang="ts" setup>
 import { BIconSunFill, BIconMoonFill } from 'bootstrap-icons-vue'
 import { NButton, NTooltip } from 'naive-ui'
-import useStore from '../store/theme'
+import useStore from '../stores/theme'
 
 const store = useStore()
 

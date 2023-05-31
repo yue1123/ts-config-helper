@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import useDataStore, { type ConfigItemState } from '@store/data'
+import useDataStore, { type ConfigItemState } from '@stores/data'
 import { NTab, NTabs, NButton, NInput } from 'naive-ui'
 import { ref, shallowRef } from 'vue'
 import { Icon } from '@iconify/vue'

@@ -47,7 +47,7 @@ export default defineConfig(({ mode }) => {
       debounce: 100,
       path: './src/assets/loading.svg',
       devEnable: true,
-      tipText: 'Please stand by, source is loading...',
+      tipText: '',
       cssPath: './src/styles/loading.css',
       error: {
         tip: 'New version assets unload! Try force refresh to load updating.',
@@ -95,7 +95,7 @@ export default defineConfig(({ mode }) => {
         '@i18n': join(__dirname, 'src/i18n/'),
         '@utils': join(__dirname, 'src/utils/'),
         '@router': join(__dirname, 'src/router/'),
-        '@store': join(__dirname, 'src/store/'),
+        '@stores': join(__dirname, 'src/stores/'),
         '@api': join(__dirname, 'src/api/'),
         '@modules': join(__dirname, 'src/modules/'),
         '@styles': join(__dirname, 'src/styles/'),

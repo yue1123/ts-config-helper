@@ -1,8 +1,8 @@
 <script lang="ts" setup>
 import { NSpace, NInput, NButton, NScrollbar, NDropdown, NTooltip } from 'naive-ui'
 import { useSchemaDataWithFilter, useOptionsFilterOptions, useBaseTsConfig } from '@hooks'
-import useRuntimeStore from '@store/runtime'
-import useDataStore from '@store/data'
+import useRuntimeStore from '@stores/runtime'
+import useDataStore from '@stores/data'
 import { debounce } from '@utils'
 import OptionsCheckbox from './components/OptionsCheckbox/index.vue'
 import { BIconBookmarkStar, BIconFunnel } from 'bootstrap-icons-vue'

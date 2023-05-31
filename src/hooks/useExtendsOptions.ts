@@ -1,6 +1,6 @@
 import { useBaseTsConfig, configLibIcon, renderIcon } from './useBaseTsConfig'
 import type { AutoCompleteOption } from 'naive-ui'
-import useDataStore from '@store/data'
+import useDataStore from '@stores/data'
 import { computed, watchEffect } from 'vue'
 export function useExtendsOptions() {
   const { baseTsConfigLibOptions } = useBaseTsConfig()
