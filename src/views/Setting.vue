@@ -10,7 +10,7 @@ import {
   NModal,
   NButton
 } from 'naive-ui'
-import { computed, reactive, ref } from 'vue'
+import { computed, ref } from 'vue'
 import useSettingStore, { DEFAULT_SETTING } from '@stores/setting'
 import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
 import { currentLang } from '@i18n'
@@ -28,15 +28,7 @@ const lang = computed(() => {
     }
   })
 })
-function resetDefaultSetting() {
-  settingCopy.value = deepClone(DEFAULT_SETTING)
-}
-function handleSelectLanguage(lang: SUPPORT_LOCALES) {
-  settingCopy.value.lang = lang
-}
-function save() {
-  settingStore.$state = deepClone(settingCopy.value)
-}
+
 defineExpose({
   show: () => {
     showSetting.value = true
@@ -46,6 +38,15 @@ defineExpose({
   },
   save
 })
+function resetDefaultSetting() {
+  settingCopy.value = deepClone(DEFAULT_SETTING)
+}
+function handleSelectLanguage(lang: SUPPORT_LOCALES) {
+  settingCopy.value.lang = lang
+}
+function save() {
+  settingStore.$state = deepClone(settingCopy.value)
+}
 function handleSaveSetting(saveAndClose: boolean = false) {
   showSetting.value = !saveAndClose
   save()

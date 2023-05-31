@@ -27,8 +27,6 @@ export const DEFAULT_SETTING = {
   lang: SUPPORT_LOCALES['zh']
 }
 
-// loadLocaleMessages
-
 export default defineStore(
   SETTING_STORAGE,
   () => {
@@ -41,9 +39,10 @@ export default defineStore(
     })
     const showDescription = ref<boolean>(true)
     const lang = ref<SUPPORT_LOCALES>(SUPPORT_LOCALES[getBrowserLang()])
+    
     watch(
       () => lang.value,
-      (newLang: SUPPORT_LOCALES) => setI18nLanguage(newLang)
+      (newLang) => setI18nLanguage(newLang)
     )
 
     return { editor, showDescription, lang }
