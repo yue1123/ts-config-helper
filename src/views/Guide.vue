@@ -2,7 +2,7 @@
 import { NSpace, NModal, NButton, NTag, NText, NA, NH1 } from 'naive-ui'
 import { ref, nextTick } from 'vue'
 import Version from '@components/Version.vue'
-import useGuide from '@store/guide'
+import useGuide from '@stores/guide'
 import confetti from 'canvas-confetti'
 const guideStore = useGuide()
 const showGuide = ref(false)

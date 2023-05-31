@@ -5,7 +5,7 @@
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref, watch, defineExpose, nextTick } from 'vue'
 import { debounce } from '@utils'
-import useDataStore from '../store/data'
+import useDataStore from '../stores/data'
 import * as monaco from 'monaco-editor'
 // import json5 from 'json5'
 export interface EditorOptions {

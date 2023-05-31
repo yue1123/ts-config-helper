@@ -3,7 +3,7 @@ import { useMessage, NButton, type DropdownOption } from 'naive-ui'
 import { Icon } from '@iconify/vue'
 import { request } from '@utils'
 import json5 from 'json5'
-import useSettingStore from '@store/setting'
+import useSettingStore from '@stores/setting'
 import { useI18n } from 'vue-i18n'
 
 const loadLink = (libName: string) =>

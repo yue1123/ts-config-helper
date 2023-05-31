@@ -11,7 +11,7 @@ import {
   NButton
 } from 'naive-ui'
 import { computed, reactive, ref } from 'vue'
-import useSettingStore, { DEFAULT_SETTING } from '@store/setting'
+import useSettingStore, { DEFAULT_SETTING } from '@stores/setting'
 import { SUPPORT_LOCALES, SUPPORT_LOCALES_LABEL } from '@constants'
 import { currentLang } from '@i18n'
 import { deepClone } from '@utils'

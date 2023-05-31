@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import MonacoEditor from '@components/MonacoEditor.vue'
 import { useEventListener, useSchemaData } from '@hooks'
-import useDataStore from '@store/data'
+import useDataStore from '@stores/data'
 import { debounce, getParentKeyByNestedPropertyLineContent } from '@utils'
 
 import { NLayoutContent } from 'naive-ui'
 import { computed, onMounted, ref } from 'vue'
-import useThemeStore from '@store/theme'
-import useSettingStore from '@store/setting'
-import useRuntimeStore from '@store/runtime'
+import useThemeStore from '@stores/theme'
+import useSettingStore from '@stores/setting'
+import useRuntimeStore from '@stores/runtime'
 const dataStore = useDataStore()
 const themeStore = useThemeStore()
 const settingStore = useSettingStore()

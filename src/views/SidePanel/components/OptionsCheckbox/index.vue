@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { NCheckboxGroup } from 'naive-ui'
 import type { Options } from '@types'
-import useStore from '@store/data'
+import useStore from '@stores/data'
 import { deletePropertyByPath } from '@utils'
 import OptionsCheckbox from './OptionsCheckbox.vue'
 export interface Props {

@@ -1,7 +1,7 @@
 import { nextTick, ref } from 'vue'
 import { createI18n } from 'vue-i18n'
 import { SUPPORT_LOCALES } from '@constants'
-import useSettingStore from '@store/setting'
+import useSettingStore from '@stores/setting'
 import zh from '@i18n/modules/zh.json'
 
 type LocaleMessageSchema = typeof zh

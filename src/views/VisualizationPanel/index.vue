@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useSchemaData } from '@hooks'
-import useStore from '@store/data'
+import useStore from '@stores/data'
 import { NLayoutContent, NScrollbar } from 'naive-ui'
 import Property from './components/Property.vue'
 import Empty from './components/Empty.vue'
