@@ -12,7 +12,7 @@ export function useExtendsOptions() {
       options.push({
         key: name,
         label: name,
-        value: name,
+        value: `./${name}`,
         icon: icon ? renderIcon(icon) : renderIcon('mdi:code-json')
       })
       return options
@@ -21,8 +21,8 @@ export function useExtendsOptions() {
     return [
       {
         type: 'group',
-        key: 'user config',
-        label: 'user tab config',
+        key: 'User config',
+        label: 'User tab config',
         children: tabConfigList.filter((item) => item.label !== data.currentConfigName)
       },
       {
