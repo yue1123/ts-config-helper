@@ -136,7 +136,7 @@ export default {
         class="mb-4 property-item"
         :class="{ 'focus-key': property.flatKeys === runtimeStore.currentCurserLineFlatKey }"
       >
-        <div class="flex items-center space-x-4">
+        <div class="flex items-center space-x-2">
           <div class="flex items-center justify-start space-x-1" :id="property.flatKeys">
             <NButton
               class="hash-btn"
@@ -184,10 +184,10 @@ export default {
             />
           </Suspense>
         </div>
-        <div class="mb-1 text-gray-500" v-if="property.default !== undefined">
+        <div class="mb-1 text-[#dadada] opacity-50 text-sm" v-if="property.default !== undefined">
           {{ $t('default') }}: {{ property.default }}
         </div>
-        <div v-if="settingStore.showDescription" class="mb-2 text-gray-500">
+        <div v-if="settingStore.showDescription" class="mb-2 text-[#dadada] opacity-50 text-sm">
           {{ descriptionMap[currentLang][property.flatKeys]?.message }}
         </div>
         <template key="array" v-if="getInputType(property) === 'array'">
@@ -279,7 +279,7 @@ export default {
   border: 2px solid transparent;
 }
 .property-item.focus-key .hash-btn {
-  border: 2px solid #ffdc34;
+  border: 2px solid #886a1a;
   border-radius: 4px;
 }
 </style>

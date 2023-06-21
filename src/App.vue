@@ -1,10 +1,29 @@
 <script lang="ts" setup>
-import { shallowRef, watchEffect } from 'vue'
-import { NConfigProvider, NMessageProvider, darkTheme, lightTheme } from 'naive-ui'
+import { computed, shallowRef, watchEffect } from 'vue'
+import {
+  NConfigProvider,
+  NMessageProvider,
+  darkTheme,
+  lightTheme,
+  type GlobalThemeOverrides
+} from 'naive-ui'
 import useThemeStore from '@stores/theme'
 import Main from '@views/Main.vue'
-const currentTheme = shallowRef(darkTheme)
+
 const themeStore = useThemeStore()
+const overrideDarkTheme = computed<GlobalThemeOverrides>(() => {
+  const bg = themeStore.isDark ? '#101010' : '#fff'
+  return {
+    common: {
+      bodyColor: bg
+    },
+    Layout: {
+      headerColor: bg
+    }
+  }
+})
+
+const currentTheme = shallowRef(darkTheme)
 
 watchEffect(() => {
   currentTheme.value = themeStore.isDark ? darkTheme : lightTheme
@@ -17,7 +36,7 @@ watchEffect(() => {
 </script>
 
 <template>
-  <NConfigProvider :theme="currentTheme">
+  <NConfigProvider :theme="currentTheme" :theme-overrides="overrideDarkTheme">
     <NMessageProvider>
       <Main />
     </NMessageProvider>

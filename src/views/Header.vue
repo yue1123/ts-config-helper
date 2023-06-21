@@ -7,7 +7,8 @@ import useThemeStore from '@stores/theme'
 import Setting from '@views/Setting.vue'
 import { useClipboard } from '@vueuse/core'
 import { BIconClipboardCheck, BIconClipboard, BIconGear, BIconGithub } from 'bootstrap-icons-vue'
-import Version from '@components/Version.vue'
+// import Version from '@components/Version.vue'
+import { Icon } from '@iconify/vue'
 import darkLogo from '../assets/logo.png'
 import lightLogo from '../assets/logo-light.png'
 const store = useStore()
@@ -33,7 +34,12 @@ function handleLogoClick() {
   <NLayoutHeader class="sticky top-0 h-16 py-4 px-6" bordered>
     <div class="flex justify-between items-center h-full">
       <div class="flex items-center gap-x-2">
-        <NTooltip placement="bottom-start" :style="{ maxWidth: '500px' }" trigger="hover">
+        <NTooltip
+          placement="bottom-start"
+          :style="{ maxWidth: '500px' }"
+          trigger="hover"
+          :showArrow="false"
+        >
           <template #trigger>
             <div
               @click="handleLogoClick"
@@ -44,12 +50,12 @@ function handleLogoClick() {
           </template>
           {{ $t('site.about') }}
         </NTooltip>
-        <Version />
+        <!-- <Version /> -->
       </div>
-      <NSpace role="functional-btn" class="buttons-container">
-        <NTooltip v-if="isSupported" placement="bottom" trigger="hover">
+      <div role="functional-btn" class="buttons-container flex gap-6">
+        <NTooltip v-if="isSupported" placement="bottom" trigger="hover" :showArrow="false">
           <template #trigger>
-            <NButton @click="handleCopy" strong quaternary>
+            <NButton text @click="handleCopy" strong>
               <template #icon>
                 <BIconClipboard v-if="!copied" />
                 <BIconClipboardCheck v-else />
@@ -59,24 +65,24 @@ function handleLogoClick() {
           <span v-if="!copied">{{ $t('nav.copyToClipboard') }}</span>
           <span v-else>{{ $t('nav.copied') }}</span>
         </NTooltip>
-        <NTooltip placement="bottom" trigger="hover">
+        <NTooltip placement="bottom" trigger="hover" :showArrow="false">
+          <template #trigger>
+            <NButton text @click="handleShowSetting" strong>
+              <template #icon> <Icon icon="bi:sliders2" /> </template
+            ></NButton>
+          </template>
+          <span>{{ $t('nav.setting') }}</span>
+        </NTooltip>
+        <NTooltip placement="bottom" trigger="hover" :showArrow="false">
           <template #trigger>
             <ThemeButton />
           </template>
           <span>{{ $t('nav.theme') }}</span>
         </NTooltip>
-        <NTooltip placement="bottom" trigger="hover">
-          <template #trigger>
-            <NButton @click="handleShowSetting" strong quaternary>
-              <template #icon> <BIconGear /> </template
-            ></NButton>
-          </template>
-          <span>{{ $t('nav.setting') }}</span>
-        </NTooltip>
-        <NTooltip placement="bottom" trigger="hover">
+        <NTooltip placement="bottom" trigger="hover" :showArrow="false">
           <template #trigger>
             <NButton
-              quaternary
+              text
               tag="a"
               href="https://github.com/yue1123/ts-config-helper"
               target="_blank"
@@ -89,7 +95,7 @@ function handleLogoClick() {
           </template>
           <span>{{ $t('nav.github') }}</span>
         </NTooltip>
-      </NSpace>
+      </div>
     </div>
   </NLayoutHeader>
   <Setting ref="setting" />

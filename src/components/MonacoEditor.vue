@@ -31,7 +31,7 @@ const init = () => {
     inherit: true,
     rules: [],
     colors: {
-      'editor.background': '#101014'
+      'editor.background': '#101010'
     }
   })
   monaco.editor.defineTheme('lightTheme', {

@@ -131,7 +131,7 @@ export default {
   .checked-box-item {
     &:hover,
     &:focus-within {
-      background: var(--n-scrollbar-color);
+      background: #2a2a2a;
     }
   }
 }
