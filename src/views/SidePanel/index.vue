@@ -90,19 +90,19 @@ watch(
     >
       <div class="flex items-center justify-between">
         <div class="flex items-center space-x-2">
-          <span class="flex-shrink-0"><Icon icon="bi:ui-checks-grid" /></span>
+          <span class="flex-shrink-0 leading-[0]"><Icon icon="bi:ui-checks-grid" /></span>
           <span>{{ filterLabelMap[activeFilter] }}</span>
         </div>
-        <div class="flex items-center">
+        <div class="flex items-center gap-4">
           <NDropdown
             placement="bottom-end"
             trigger="click"
             @select="getConfigJson"
             :options="baseTsConfigLibOptions"
           >
-            <NTooltip placement="bottom" trigger="hover">
+            <NTooltip placement="bottom" trigger="hover" :showArrow="false">
               <template #trigger>
-                <NButton :loading="isLoading" quaternary size="small">
+                <NButton text :loading="isLoading" size="small">
                   <template #icon>
                     <BIconBookmarkStar />
                   </template>
@@ -118,9 +118,9 @@ watch(
             trigger="click"
             :options="filterOptions"
           >
-            <NTooltip placement="bottom" trigger="hover">
+            <NTooltip placement="bottom" trigger="hover" :showArrow="false">
               <template #trigger>
-                <NButton quaternary size="small">
+                <NButton text size="small">
                   <template #icon>
                     <BIconFunnel />
                   </template>
@@ -129,9 +129,9 @@ watch(
               {{ $t('sidebar.configFilter') }}
             </NTooltip>
           </NDropdown>
-          <NTooltip placement="bottom" trigger="hover">
+          <NTooltip placement="bottom" trigger="hover" :showArrow="false">
             <template #trigger>
-              <NButton @click="handleCollapseConfigOptions" quaternary size="small">
+              <NButton @click="handleCollapseConfigOptions" text size="small">
                 <template #icon>
                   <Icon v-if="isExpand" icon="quill:expand" />
                   <Icon v-else icon="quill:collapse" />

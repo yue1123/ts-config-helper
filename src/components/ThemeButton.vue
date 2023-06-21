@@ -1,5 +1,5 @@
 <template>
-  <NButton @click="handleChangeTheme" quaternary>
+  <NButton text @click="handleChangeTheme">
     <template #icon>
       <span class="theme-icon" style="--animation-time: 0.6s">
         <transition
@@ -16,8 +16,8 @@
 </template>
 
 <script lang="ts" setup>
-import { BIconSunFill, BIconMoonFill } from 'bootstrap-icons-vue'
-import { NButton, NTooltip } from 'naive-ui'
+import { BIconMoonFill, BIconSunFill } from 'bootstrap-icons-vue'
+import { NButton } from 'naive-ui'
 import useStore from '../stores/theme'
 
 const store = useStore()

@@ -73,9 +73,9 @@ function handleSkip() {
     :closable="false"
     :close-on-esc="false"
   >
-    <template #header>
+    <!-- <template #header>
       <img src="../assets/guideCover.svg" alt="" />
-    </template>
+    </template> -->
     <div class="content">
       <NH1 class="m-0 pb-2">TS Config Helper</NH1>
       <div class="space-x-2">
