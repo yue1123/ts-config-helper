@@ -16,8 +16,8 @@ export async function usePropertyRemoteMarkdown() {
       isLoading.value = false
       return Promise.reject(null)
     }
-    const currentLangMarkdownUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website-Localizations@1.0.0-alpha.1/docs/tsconfig/${currentLang.value}/options/${property}.md`
-    const fallbackDescUrl = `https://cdn.jsdelivr.net/gh/yue1123/TypeScript-Website@1.0.0-alpha.1/packages/tsconfig-reference/copy/en/options/${property}.md`
+    const currentLangMarkdownUrl = `https://cdn.jsdelivr.net/gh/microsoft/TypeScript-Website-Localizations@HEAD/docs/tsconfig/${currentLang.value}/options/${property}.md`
+    const fallbackDescUrl = `https://cdn.jsdelivr.net/gh/microsoft/TypeScript-Website@HEAD/packages/tsconfig-reference/copy/en/options/${property}.md`
     isLoading.value = true
     return new Promise<string>((resolve, reject) => {
       request(currentLangMarkdownUrl)
