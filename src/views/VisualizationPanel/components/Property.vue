@@ -184,10 +184,16 @@ export default {
             />
           </Suspense>
         </div>
-        <div class="mb-1 text-[#dadada] opacity-50 text-sm" v-if="property.default !== undefined">
+        <div
+          class="property_default-value mb-1 text-sm"
+          v-if="property.default !== undefined"
+        >
           {{ $t('default') }}: {{ property.default }}
         </div>
-        <div v-if="settingStore.showDescription" class="mb-2 text-[#dadada] opacity-50 text-sm">
+        <div
+          v-if="settingStore.showDescription"
+          class="property_desc mb-2 text-sm"
+        >
           {{ descriptionMap[currentLang][property.flatKeys]?.message }}
         </div>
         <template key="array" v-if="getInputType(property) === 'array'">
@@ -281,5 +287,17 @@ export default {
 .property-item.focus-key .hash-btn {
   border: 2px solid #886a1a;
   border-radius: 4px;
+}
+.dark {
+  .property_default-value,
+  .property_desc {
+    @apply text-[#dadada] opacity-50;
+  }
+}
+.light {
+  .property_default-value,
+  .property_desc {
+    @apply opacity-50;
+  }
 }
 </style>
