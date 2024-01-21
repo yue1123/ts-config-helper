@@ -5,11 +5,15 @@ import {
   tsConfigSite,
   tsConfigSiteRef
 } from '@constants'
-
+import { twoSlasher } from './plugins/twoslash'
+// import Shikiji from 'markdown-it-shikiji'
+// import { transformerTwoslash } from 'vitepress-plugin-twoslash'
+// const md = MarkdownIt()
+// import { transformerTwoSlash } from 'shikiji-twoslash'
 export async function createMarkdownRenderer() {
   const [{ default: markdownIt }, { default: hljs }, { default: javascript }, { default: json }] =
     await Promise.all([
-      import(/* webpackChunkName: 'markdown-it' */ 'markdown-it'),
+      import('markdown-it'),
       import('highlight.js/lib/core'),
       import('highlight.js/lib/languages/javascript'),
       import('highlight.js/lib/languages/json')
@@ -36,6 +40,17 @@ export async function createMarkdownRenderer() {
       return ''
     }
   })
+
+  // md.use(
+  //   await Shikiji({
+  //     themes: {
+  //       light: 'vitesse-light',
+  //       dark: 'vitesse-dark'
+  //     },
+  //     transformers: [transformerTwoSlash()]
+  //   })
+  // )
+  md.use(twoSlasher)
 
   return (content: string) => {
     content = content

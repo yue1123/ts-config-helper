@@ -15,6 +15,7 @@ declare module '*.json' {
   type json = string
   export default json
 }
+
 declare module 'splitpanes' {
   import { Component } from 'vue'
   export const Splitpanes: Component

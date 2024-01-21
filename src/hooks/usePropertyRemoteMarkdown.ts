@@ -1,6 +1,6 @@
 import { ref } from 'vue'
 import { currentLang } from '@i18n'
-import { createMarkdownRenderer } from '@modules/markdown'
+import { createMarkdownRenderer } from '@modules/markdown-it'
 import { request } from '@utils'
 
 const cache = new Map()
@@ -11,8 +11,10 @@ export async function usePropertyRemoteMarkdown() {
   const get = (property: string) => {
     const catchKey = `${currentLang.value}:${property}`
     const res = cache.get(catchKey) || cache.get(property)
-    if (res) return Promise.resolve((data.value = res))
-    else if (res === null) {
+    if (res) {
+      data.value = mdRender(res)
+      return Promise.resolve(data.value)
+    } else if (res === null) {
       isLoading.value = false
       return Promise.reject(null)
     }
@@ -29,8 +31,8 @@ export async function usePropertyRemoteMarkdown() {
           }
         })
         .then((res) => {
-          data.value = mdRender(res!)
-          cache.set(catchKey, data.value)
+          data.value = mdRender(res)
+          cache.set(catchKey, res)
           resolve(data.value)
         })
         .catch((errResponse) => {

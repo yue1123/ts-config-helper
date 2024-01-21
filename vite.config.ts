@@ -9,7 +9,7 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import { fileURLToPath } from 'url'
 // import importToCDN from 'vite-plugin-cdn-import'
 import { envParse } from 'vite-plugin-env-parse'
-
+console.log(join(resolve(__dirname, './src/'), '/'))
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
   // console.log(env)
@@ -46,7 +46,7 @@ export default defineConfig(({ mode }) => {
     spaLoading('svg', {
       debounce: 100,
       path: './src/assets/loading.svg',
-      devEnable: true,
+      devEnable: false,
       tipText: '',
       cssPath: './src/styles/loading.css',
       error: {
@@ -86,7 +86,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: {
-        '@': resolve(__dirname, './src/'),
+        '@': resolve(__dirname, './src/'), 
         '@themeVars': resolve(__dirname, './src/styles/theme.module.scss'),
         '@layout': resolve(__dirname, './src/layout'),
         '@views': resolve(__dirname, './src/views'),
