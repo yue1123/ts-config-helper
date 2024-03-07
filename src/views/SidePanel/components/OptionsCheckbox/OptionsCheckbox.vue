@@ -65,7 +65,7 @@ export default {
           <NCheckbox
             :id="options.flatKeys"
             size="large"
-            class="flex-1 w-full"
+            class="flex-1 w-0"
             :value="options.flatKeys"
           >
             <div
